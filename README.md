@@ -9,10 +9,12 @@ Podział odpowiada folderom z Dysku Google („drugi rok JULIA / 1 semestr”):
 | Przedmiot | Stan |
 |---|---|
 | Psychologia osobowości | 11 tematów: notatki, 164 fiszki, 62 pytania quizowe |
-| Metodologia badań i statystyka | w przygotowaniu |
+| Metodologia badań i statystyka | 9 tematów: notatki, 138 fiszek, 142 pytania (w tym wszystkie 100 pytań ze statystyki z kluczem) |
 | Wprowadzenie do diagnostyki psychologicznej | w przygotowaniu |
 | Diagnoza sprawności poznawczych | w przygotowaniu |
 | Podstawy pomocy psychologicznej | w przygotowaniu |
+
+Cała aplikacja jest w różowej kolorystyce (jasny i ciemny motyw).
 
 ## Funkcje
 
@@ -37,6 +39,8 @@ index.html            strona
 style.css             wygląd (jasny i ciemny motyw)
 app.js                logika: nawigacja, fiszki, quiz, zapis postępów
 data/osobowosc.js     treść: psychologia osobowości
+data/metodologia.js   treść: metodologia i statystyka
+data/metodologia-statystyka100.js   100 pytań ze statystyki (wygenerowane z PDF-ów z kluczem)
 data/pozostale.js     pozostałe przedmioty (szkielet)
 ```
 
@@ -54,4 +58,8 @@ Każdy temat w `data/*.js` ma postać:
 }
 ```
 
-`a` to numer poprawnej odpowiedzi, liczony od 0.
+`a` to numer poprawnej odpowiedzi, liczony od 0. Opcjonalne `src` to źródło pytania (widoczne po odpowiedzi).
+
+## Dodawanie nowych materiałów
+
+Nowe pliki najlepiej wrzucać do odpowiedniego folderu przedmiotu na Dysku („drugi rok JULIA / 1 semestr / …”) i napisać Claude'owi, do którego przedmiotu należą. Treść zostanie opracowana i dopisana do pliku przedmiotu w `data/`.

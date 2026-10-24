@@ -7,7 +7,7 @@ window.SUBJECTS.push({
   name: "Psychologia osobowości",
   short: "Osobowość",
   icon: "🧠",
-  color: "#7c5cff",
+  color: "#d6336c",
   sources: [
     "psychologia-osobowości-egzamin.pdf (79 pytań egzaminacyjnych)",
     "Psychologia osobowości – wykłady.pdf",

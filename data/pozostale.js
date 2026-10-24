@@ -3,33 +3,11 @@
 window.SUBJECTS = window.SUBJECTS || [];
 window.SUBJECTS.push(
   {
-    id: "metodologia",
-    name: "Metodologia badań i statystyka",
-    short: "Metodologia",
-    icon: "📊",
-    color: "#0e9f6e",
-    sources: [
-      "Wykłady 01–09 (Organizacja, Proces badawczy, Zmienne, Hipotezy, Opis statystyczny, Analiza korelacji, Porównywanie średnich, Two-way ANOVA)",
-      "100 pytań do – Metodologia.pdf",
-      "Statystyka100Pytań.pdf + odpowiedzi",
-      "Procedury badawcze.pdf, Raport.pdf, Literatura.pdf"
-    ],
-    topics: [
-      { id: "proces", title: "Proces badawczy" },
-      { id: "zmienne", title: "Zmienne" },
-      { id: "hipotezy", title: "Hipotezy" },
-      { id: "opis", title: "Opis statystyczny" },
-      { id: "korelacja", title: "Analiza korelacji" },
-      { id: "srednie", title: "Porównywanie średnich" },
-      { id: "anova", title: "Dwuczynnikowa analiza wariancji" }
-    ]
-  },
-  {
     id: "diagnostyka",
     name: "Wprowadzenie do diagnostyki psychologicznej",
     short: "Diagnostyka",
     icon: "🔍",
-    color: "#e0457b",
+    color: "#c2255c",
     sources: [
       "Prezentacje 1–9 (docx) i slajdy diagnostyka 1–8 (pptx)",
       "Pytania egzamin.pdf",
@@ -45,7 +23,7 @@ window.SUBJECTS.push(
     name: "Diagnoza sprawności poznawczych",
     short: "Sprawności poznawcze",
     icon: "🧩",
-    color: "#f59e0b",
+    color: "#f06595",
     sources: [
       "pracka: Etyka diagnosty.pdf, Etyka_notatka_pelna.pdf",
       "falewicz: (folder pusty)"
@@ -59,7 +37,7 @@ window.SUBJECTS.push(
     name: "Podstawy pomocy psychologicznej",
     short: "Pomoc psychologiczna",
     icon: "🤝",
-    color: "#2b8cd6",
+    color: "#d6336c",
     sources: [
       "Notatka_Rozmowa_diagnostyczna.pdf"
     ],

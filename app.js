@@ -10,6 +10,7 @@
   const MASTERED_BOX = 3;
   const SESSION_ALL_CARDS = 20;
   const SESSION_ALL_QUIZ = 15;
+  const FIXED_ORDER = /\bodpowied(zi|ź) [A-D]\b|wszystkie|żadna z|powyższ/i;
 
   // ---------- pamięć postępów (localStorage) ----------
   function loadStore() {
@@ -385,8 +386,10 @@
     let qs = shuffle(subjectQuiz(subject, topicId));
     if (!topicId) qs = qs.slice(0, SESSION_ALL_QUIZ);
     qs = qs.map((q) => {
-      const order = shuffle(q.o.map((_, i) => i));
-      return Object.assign({}, q, { order });
+      // opcje odwołujące się do innych („Odpowiedzi A i B…”, „Wszystkie…”) wymagają stałej kolejności
+      const fixed = q.o.some((o) => FIXED_ORDER.test(o));
+      const idx = q.o.map((_, i) => i);
+      return Object.assign({}, q, { order: fixed ? idx : shuffle(idx) });
     });
     session = { type: "quiz", subject, topicId, qs, pos: 0, chosen: null, score: 0 };
     renderQuiz();
@@ -417,14 +420,14 @@
     }
     const q = s.qs[s.pos];
     const answered = s.chosen !== null;
-    const opts = q.order.map((i) => {
+    const opts = q.order.map((i, pos) => {
       let cls = "option";
       if (answered) {
         if (i === q.a) cls += " correct";
         else if (i === s.chosen) cls += " wrong";
         else cls += " dim";
       }
-      return `<button class="${cls}" data-action="answer" data-i="${i}" ${answered ? "disabled" : ""}>${esc(q.o[i])}</button>`;
+      return `<button class="${cls}" data-action="answer" data-i="${i}" ${answered ? "disabled" : ""}><span class="opt-letter">${"ABCDEF"[pos]}</span><span>${esc(q.o[i])}</span></button>`;
     }).join("");
     app.innerHTML = `
       <div class="session-top">
@@ -439,6 +442,7 @@
         ${answered ? `
           <div class="explain ${s.chosen === q.a ? "ok" : "no"}">
             <strong>${s.chosen === q.a ? "Dobrze!" : "Niestety nie."}</strong> ${esc(q.e || "")}
+            ${q.src ? `<div class="src">Źródło: ${esc(q.src)}</div>` : ""}
           </div>
           <button class="btn primary big" style="--accent:${s.subject.color}" data-action="next-q">${s.pos + 1 < s.qs.length ? "Dalej ›" : "Zobacz wynik"}</button>` : ""}
       </div>`;
