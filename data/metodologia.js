@@ -5,6 +5,104 @@ window.SUBJECTS = window.SUBJECTS || [];
 (function () {
   const STAT = window.METODOLOGIA_QUIZ || {};
   // Pytania z „100 pytań do – Metodologia” (plik bez klucza): odpowiedzi opracowane na podstawie wykładów
+  // „!Lista narzędzi badawczych.xlsx” (ćwiczenia)
+  const NARZEDZIA = [
+    ["3D-WS", "Mądrość"],
+    ["ACL", "Lista przymiotnikowa – zakazane w raporcie"],
+    ["AIS", "Akceptacja choroby"],
+    ["AS", "Skala autentyczności"],
+    ["ATTARI-12-PL", "Postawa wobec AI"],
+    ["AUDIT", "Uzależnienie od alkoholu"],
+    ["BDI-II", "Objawy depresji"],
+    ["BFAS", "Uzależnienie od Facebooka"],
+    ["BHI-12", "Nadzieja podstawowa"],
+    ["BHI-R", "Nadzieja podstawowa"],
+    ["BRS", "Prężność psychiczna"],
+    ["BWAS", "Binge-watching"],
+    ["CISS", "Style radzenia sobie ze stresem – zakazane w raporcie"],
+    ["COPE", "Strategie radzenia sobie ze stresem – zakazane w raporcie"],
+    ["CRPQ", "Praktyki religijne"],
+    ["Delta", "Umiejscowienie kontroli"],
+    ["DIDS", "Skala wymiarów rozwoju tożsamości"],
+    ["DS14", "Osobowość typu D"],
+    ["DUDIT", "Uzależnienie od narkotyków"],
+    ["EAS-D", "Temperament"],
+    ["EAT-26", "Zaburzenia odżywiania"],
+    ["EDI", "Zaburzenia odżywiania"],
+    ["EPQ-R", "Kwestionariusz osobowości Eysencka"],
+    ["FCZ-KT", "Temperament"],
+    ["FOMOs", "Lęk przed pominięciem"],
+    ["GCBS", "Myślenie konspiracyjne"],
+    ["GQ-6", "Wdzięczność"],
+    ["GSES", "Poczucie własnej skuteczności"],
+    ["INTE", "Inteligencja emocjonalna"],
+    ["IPIP-BFM-20", "Wielka Piątka – zakazane w raporcie"],
+    ["IVE", "Impulsywność"],
+    ["IZR", "Inwentarz Życia Religijnego"],
+    ["KA", "Asertywność"],
+    ["KANH III", "Myślenie twórcze"],
+    ["KDB", "Kwestionariusz doświadczania bezpieczeństwa"],
+    ["KKS", "Kompetencje społeczne"],
+    ["KNS", "Nadzieja na sukces"],
+    ["KOP-26", "Prężność psychiczna"],
+    ["KP", "Kwestionariusz perfekcjonizmu"],
+    ["KPS", "Kwestionariusz Poczucia Stresu"],
+    ["KPS", "Perfekcjonizm w sporcie"],
+    ["KSD", "Kwestionariusz Sfery Duchowej"],
+    ["KSP", "Kwestionariusz Stylów Przywiązania – zakazane w raporcie"],
+    ["KSS", "Satysfakcja seksualna"],
+    ["Kwestionariusz Agresji Buss-Perry", "Agresja"],
+    ["KZI", "Kwestionariusz zaangażowania interpersonalnego"],
+    ["MACH IV", "Makiawelizm"],
+    ["miniCOPE", "Strategie radzenia sobie ze stresem"],
+    ["MLQ", "Sens życia"],
+    ["MMPI-2", "Wielowymiarowy Inwentarz Osobowości"],
+    ["MSEI", "Samoocena"],
+    ["MSPSS", "Spostrzegane wsparcie społeczne"],
+    ["NARQ", "Narcyzm"],
+    ["NEO-FFI", "Wielka Piątka – zakazane w raporcie"],
+    ["NEO-PI-R", "Inwentarz osobowości"],
+    ["NPI", "Osobowość narcystyczna"],
+    ["PD", "Ciemna Triada"],
+    ["PDED", "Zaangażowanie religijne"],
+    ["PIUQ-18", "Problemowe korzystanie z Internetu"],
+    ["PoDIRS-6", "Wzajemność pośrednia"],
+    ["PPS", "Prokrastynacja"],
+    ["PPS-10", "Poczucie stresu"],
+    ["PUI", "Problematyczne używanie internetu"],
+    ["PWB", "Dobrostan psychiczny"],
+    ["RCSS", "Pocieszenie i napięcie religijne"],
+    ["RISB", "Test niedokończonych zdań"],
+    ["RSZ", "Religijny system znaczeń"],
+    ["R-UCLA", "Poczucie samotności"],
+    ["SD-36", "Skala duchowości"],
+    ["SE", "Skala empatii Perth"],
+    ["SES", "Samoocena – zakazane w raporcie"],
+    ["Skala P", "Orientacja pozytywna"],
+    ["SLiFŚ", "Skala lęku i fascynacji śmiercią"],
+    ["SMFS", "Zmęczenie mediami społecznościowymi"],
+    ["SOC", "Ocena własnego ciała"],
+    ["SOC29", "Poczucie koherencji"],
+    ["SOS", "Orientacja na smartfon"],
+    ["SPD", "Skala poszukiwania doznań"],
+    ["SPIND", "Pozytywny i negatywny nastrój"],
+    ["SPN", "Skala podatności na nudę"],
+    ["SRS", "Samoregulacja"],
+    ["SS", "Skala samotności De Jong"],
+    ["SSIE", "Empatia"],
+    ["SSS", "Skrócona skala samoregulacji"],
+    ["STAI", "Lęk – zakazane w raporcie"],
+    ["STD", "Skala transcendencji duchowej"],
+    ["SWLS", "Satysfakcja z życia – zakazane w raporcie"],
+    ["Test Fagerströma", "Uzależnienie od nikotyny"],
+    ["TRIM-12", "Zemsta i przebaczenie"],
+    ["UPPS-P", "Impulsywność"],
+    ["WKT", "Wielowymiarowy Kwestionariusz Tożsamości"],
+    ["YFAS 2.0", "Nawyki żywieniowe"],
+    ["YSQ", "Schematy Younga"],
+    ["ZSWZ", "Skala wpływu zdarzeń"],
+    ["ZTPI", "Perspektywa temporalna"]
+  ];
   const M = (n, q, o, a, e) => ({ q, o, a, e, src: `100 pytań do metodologii, nr ${n} (odpowiedź wg wykładów – plik nie ma klucza)` });
 
   window.SUBJECTS.push({
@@ -17,7 +115,10 @@ window.SUBJECTS = window.SUBJECTS || [];
       "Wykłady 01–09: Organizacja, Proces badawczy, Zmienne, Hipotezy, Opis statystyczny, Analiza korelacji, Porównywanie średnich (2 części), Dwuczynnikowa ANOVA",
       "Procedury badawcze.pdf",
       "100 pytań do – Metodologia.pdf (bez klucza)",
-      "Statystyka100Pytań.pdf + OdpowiedziStatystyka100pytań.pdf (100 pytań z kluczem – wszystkie są w quizach)"
+      "Statystyka100Pytań.pdf + OdpowiedziStatystyka100pytań.pdf (100 pytań z kluczem – wszystkie są w quizach)",
+      "ćwiczenia: 0 – Zajęcia organizacyjne, 1 – Etapy procesu badawczego, 2 – Standardy edytorskie APA (pptx)",
+      "ćwiczenia: !Kryteria – semestr zimowy.pdf, !Lista narzędzi badawczych.xlsx",
+      "ćwiczenia: APA-7.pdf (Skimina i in., 2022 – odczytane do rozdziału o tabelach), Wybrane reguły spolszczonego APA 7.pdf"
     ],
     topics: [
       // ------------------------------------------------------------------
@@ -53,7 +154,7 @@ window.SUBJECTS = window.SUBJECTS || [];
       // ------------------------------------------------------------------
       {
         id: "raport",
-        title: "Raport z badań wg APA 7",
+        title: "Raport z badań wg APA 7 (wykład)",
         notes: `
 ## Struktura raportu
 - Strona tytułowa
@@ -104,6 +205,284 @@ window.SUBJECTS = window.SUBJECTS || [];
           M(9, "Podstawowym celem badań psychologicznych NIE jest:", ["Scharakteryzowanie badanej populacji oraz wyjaśnienie badanych mechanizmów", "Zrozumienie znaczenia wybranych zmiennych dla kształtowania badanego mechanizmu", "Wyjaśnienie zależności między badanymi zmiennymi w danej populacji", "Odpowiedź na pytanie badawcze i/lub weryfikacja hipotez badawczych"], 3, "Wykład: celem badania nigdy nie jest „odpowiedź na pytanie” ani „weryfikacja hipotezy”."),
           { q: "Jak powinien być zatytułowany ostatni rozdział ze spisem źródeł w raporcie APA?", o: ["Bibliografia", "Literatura", "Źródła internetowe", "Przypisy"], a: 1, e: "Wykład 02: „Literatura (UWAGA: NIE BIBLIOGRAFIA!)”." },
           { q: "Które sformułowanie celu badania jest poprawne?", o: ["Celem badania jest sprawdzenie, czy kobiety są bardziej empatyczne", "Celem badania jest ocena różnic w empatii między kobietami a mężczyznami", "Celem badania jest potwierdzenie hipotezy o empatii", "Celem badania jest odpowiedź na pytanie o empatię"], a: 1, e: "Poprawne cele: scharakteryzowanie, ocena różnic, określenie związku." }
+        ]
+      },
+      // ------------------------------------------------------------------
+      {
+        id: "cwiczenia",
+        title: "Ćwiczenia: zaliczenie, kryteria raportu, etapy badania",
+        notes: `
+Ćwiczenia prowadzi **dr Wojciech Rodzeń**. Jego wymagania częściowo różnią się od wykładu (dr Karol Karasiewicz) – w raporcie na ćwiczenia obowiązują zasady z tej notatki.
+
+## Warunki zaliczenia ćwiczeń
+- **Obecność** – maks. **2 nieobecności nieusprawiedliwione**; wszystkie nieobecności razem ≤ **40%** zajęć; nie ma odrabiania. Zwolnienie pokazać najpóźniej na ostatnich zajęciach w danym miesiącu.
+- **Akceptacja pomysłu projektu** (zmienne, narzędzia).
+- **Raport z badań** – część teoretyczna i metodologiczna; samodzielnie, w parach lub w grupach 3-osobowych.
+- Termin: **do 18.01.2027**, poprawkowy: **do 28.01.2027**. Wysyłka na wojciech.rodzen@usz.edu.pl w **dwóch plikach: .docx i PDF**, podpisanych tylko **numerami albumów**.
+
+## Obowiązkowe elementy raportu
+- Wstęp / Wprowadzenie
+- **Rozdziały dla każdej zmiennej** („Zmienna X”, „Zmienna Y”…)
+- **Przegląd badań** (co najmniej 3 badania)
+- **Przedmiot i cel badania** (także **cel praktyczny**!)
+- **Problemy i hipotezy** – co najmniej **3 hipotezy: korelacyjna, regresji wielokrotnej i różnicowa**
+- **Narzędzia** – co najmniej **3 wystandaryzowane** narzędzia psychometryczne
+- **Operacjonalizacja zmiennych** – **tabela + jej opis**
+- **Literatura cytowana**
+- Format APA 7 z wyjątkami: **interlinia 1,5** (zamiast 2) i tekst **wyjustowany** (zamiast do lewej).
+
+## Lista testów zakazanych
+KSP (style przywiązania), NEO-FFI / IPIP-20 (Wielka Piątka), CISS / COPE (radzenie sobie ze stresem), STAI (lęk), ACL (lista przymiotnikowa), SES (samoocena), SWLS (satysfakcja z życia) oraz **wszystkie narzędzia do pomiaru funkcji wykonawczych**.
+
+## Kryteria oceny raportu (odejmowane punkty, start: 100)
+| Błąd | Punkty |
+|---|---|
+| **Słowo „wpływ” w badaniu nieeksperymentalnym** | **−100** |
+| Brak wymaganego rozdziału | −50 |
+| Brak tabeli z operacjonalizacją / brak jej opisu | −20 / −20 |
+| Mniej niż 3 badania w przeglądzie badań | −15 |
+| Błędna kolejność zmiennych (metoda lejka) | −10 |
+| Brak wprowadzenia do rozdziału (start od tabeli lub punktów) | −10 |
+| Brak elementu operacjonalizacji | −8 |
+| Brak przejścia między rozdziałami | −6 |
+| Brak źródła przy definicji / przy wnioskach empirycznych | −5 / −5 |
+| Brak współczesnego źródła (sprzed 2020 r.) | −5 |
+| Wymienianie elementów (poza pytaniami i hipotezami) | −5 |
+| Brak zmiennej w operacjonalizacji | −4 |
+| Błędny przedmiot / cel badań / brak celu praktycznego | −3 / −3 / −3 |
+| Błędne pytanie / hipoteza badawcza | −2 / −2 |
+| Brak elementu w opisie narzędzia | −2 |
+| Błędy APA: cytowanie, śródtytuły, numeracja stron, tabela | −2 każdy |
+| Brak pozycji w literaturze, błędy zapisu tekstu, bibliografii, liczb, element ankiety | −1 każdy |
+
+**Oceny:** 5,0 – 91–100 pkt · 4,5 – 81–90 · 4,0 – 71–80 · 3,5 – 61–70 · 3,0 – 51–60 · 2,0 – 0–50.
+
+## Etapy procesu badawczego (Brzeziński)
+- **Problem badawczy i hipoteza** – pytanie o związek zmiennych X i Y; hipoteza to bezpośrednia odpowiedź na pytanie.
+- **Obraz przestrzeni zmiennych** – uporządkowanie, jak zmienne współwystępują i na siebie oddziałują (ułatwia dobór analiz).
+- **Operacjonalizacja** – przełożenie zmiennych na język obserwacyjny: **skala pomiarowa, typ zmiennej, wskaźnik**.
+- **Model badawczy** – eksperymentalny (manipulacja, „wpływ”) albo korelacyjny / regresyjny (bez manipulacji; regresja = predykcja, nie przyczynowość).
+- **Dobór próby** – losowy (każdy ma równą szansę; reprezentatywność), celowy (np. kula śnieżna), celowo-losowy.
+- **Model statystyczny** – eksperyment: t Studenta, ANOVA, MANOVA; badanie korelacyjne: korelacja, regresja.
+- **Akceptacja lub odrzucenie hipotezy** – wyniki hipotezy **wspierają**; brak wsparcia to też wartościowy wynik.
+- **Ocena, interpretacja, generalizacja** – ograniczenia, znaczenie psychologiczne, zasięg wniosków.
+
+## Oznaczanie istotności
+jedna gwiazdka: p < 0,05 · dwie gwiazdki: p < 0,01 · trzy gwiazdki: p < 0,001 · brak gwiazdek: wynik nieistotny.
+
+## Różnice: wykład vs ćwiczenia
+| | Wykład (Karasiewicz) | Ćwiczenia (Rodzeń) |
+|---|---|---|
+| Cel praktyczny | w pracy studenckiej „bez sensu” | **wymagany** (−3 pkt za brak) |
+| Interlinia, wyrównanie | APA: 2, do lewej | **1,5, wyjustowany** |
+| Hipotezy | 3–5 | **min. 3: korelacyjna, regresji wielokrotnej, różnicowa** |
+| „Wpływ” | unikać | **−100 pkt** w badaniu nieeksperymentalnym |
+
+## Lista dozwolonych narzędzi badawczych
+| Skrót | Co mierzy |
+|---|---|
+` + NARZEDZIA.map(([s, n]) => `| ${s} | ${n} |`).join("\n") + `
+`,
+        flashcards: [
+          ["Termin oddania raportu na ćwiczenia", "Do 18.01.2027 (poprawka do 28.01.2027); pliki .docx i PDF podpisane numerami albumów."],
+          ["Ile nieobecności na ćwiczeniach?", "Maks. 2 nieusprawiedliwione; wszystkie razem do 40% zajęć; bez odrabiania."],
+          ["Ile i jakich hipotez wymaga raport na ćwiczenia?", "Co najmniej 3: korelacyjną, regresji wielokrotnej i różnicową."],
+          ["Ile narzędzi musi być w raporcie?", "Co najmniej 3 wystandaryzowane narzędzia psychometryczne."],
+          ["Za co odejmuje się aż 100 punktów?", "Za użycie słowa „wpływ” w badaniu nieeksperymentalnym."],
+          ["Ile punktów kosztuje brak wymaganego rozdziału?", "50 punktów."],
+          ["Ile badań musi być w przeglądzie badań?", "Co najmniej 3 (inaczej −15 pkt); potrzebne też źródła z 2020 r. lub nowsze."],
+          ["Wyjątki od APA na ćwiczeniach", "Interlinia 1,5 zamiast 2 i tekst wyjustowany zamiast do lewej."],
+          ["Testy zakazane w raporcie", "KSP, NEO-FFI/IPIP-20, CISS/COPE, STAI, ACL, SES, SWLS i wszystkie testy funkcji wykonawczych."],
+          ["Ile punktów na ocenę 4,0 z raportu?", "71–80 (5,0: 91–100; 3,0: 51–60; poniżej 51 – 2,0)."],
+          ["Czego wymaga tabela operacjonalizacji?", "Musi być w raporcie i musi mieć opis (brak każdego: −20 pkt)."],
+          ["8 etapów procesu badawczego (Brzeziński)", "Problem i hipoteza → obraz przestrzeni zmiennych → operacjonalizacja → model badawczy → dobór próby → model statystyczny → akceptacja/odrzucenie hipotezy → ocena, interpretacja i generalizacja."],
+          ["Obraz przestrzeni zmiennych", "Uporządkowany model tego, jak badane zmienne współwystępują i oddziałują na siebie."],
+          ["3 elementy operacjonalizacji (ćwiczenia)", "Skala pomiarowa, typ (funkcja) zmiennej, wskaźnik zmiennej."],
+          ["Korelacja vs regresja (ćwiczenia)", "Korelacja – współwystępowanie bez kierunku. Regresja – kierunek predykcji/wyjaśniania, ale nie przyczynowość."],
+          ["Co oznaczają gwiazdki przy wynikach?", "* p < 0,05; ** p < 0,01; *** p < 0,001."],
+          ["Cel praktyczny: wykład vs ćwiczenia", "Wykład: w pracy studenckiej bez sensu. Ćwiczenia: wymagany (−3 pkt za brak)."],
+          ["Co mierzy SWLS?", "Satysfakcję z życia."],
+          ["Co mierzy STAI?", "Lęk (stan i cechę)."],
+          ["Co mierzy CISS / COPE?", "Style i strategie radzenia sobie ze stresem."],
+          ["Co mierzy SES?", "Samoocenę (Rosenberg)."],
+          ["Co mierzy GSES?", "Poczucie własnej skuteczności."],
+          ["Co mierzy MSPSS?", "Spostrzegane wsparcie społeczne."],
+          ["Co mierzy BDI-II?", "Objawy depresji."],
+          ["Co mierzy R-UCLA?", "Poczucie samotności."],
+          ["Co mierzy SOC29?", "Poczucie koherencji."],
+          ["Co mierzy ZTPI?", "Perspektywę temporalną (Zimbardo)."],
+          ["Co mierzy NPI / NARQ?", "Narcyzm."]
+        ],
+        quiz: [
+          { q: "Za co w raporcie na ćwiczenia odejmuje się najwięcej punktów?", o: ["brak wymaganego rozdziału", "słowo „wpływ” w badaniu nieeksperymentalnym", "mniej niż 3 badania w przeglądzie", "brak tabeli operacjonalizacji"], a: 1, e: "„Wpływ” w badaniu nieeksperymentalnym to −100 pkt – praktycznie niezaliczenie.", src: "!Kryteria – semestr zimowy.pdf" },
+          { q: "Jakie hipotezy muszą się znaleźć w raporcie na ćwiczenia?", o: ["dowolne 2", "co najmniej 3: korelacyjna, regresji wielokrotnej i różnicowa", "3–5 hipotez kierunkowych", "tylko hipoteza zerowa i alternatywna"], a: 1, e: "Wymóg dr. Rodzenia.", src: "0 – Zajęcia organizacyjne.pptx" },
+          { q: "Które narzędzie jest na liście zakazanych w raporcie?", o: ["GSES", "SWLS", "MSPSS", "BRS"], a: 1, e: "Zakazane: KSP, NEO-FFI/IPIP-20, CISS/COPE, STAI, ACL, SES, SWLS i testy funkcji wykonawczych.", src: "0 – Zajęcia organizacyjne.pptx" },
+          { q: "Jak sformatować raport na ćwiczenia?", o: ["dokładnie według APA 7", "APA 7, ale interlinia 1,5 i tekst wyjustowany", "dowolnie", "APA 6"], a: 1, e: "Dwa wyjątki od APA 7 na ćwiczeniach.", src: "0 – Zajęcia organizacyjne.pptx" },
+          { q: "Ile punktów trzeba zdobyć z raportu na ocenę 3,5?", o: ["51–60", "61–70", "71–80", "81–90"], a: 1, e: "3,0: 51–60, 3,5: 61–70, 4,0: 71–80, 4,5: 81–90, 5,0: 91–100.", src: "!Kryteria – semestr zimowy.pdf" },
+          { q: "Który etap procesu badawczego polega na uporządkowaniu, jak zmienne współwystępują i na siebie oddziałują?", o: ["operacjonalizacja", "określenie obrazu przestrzeni zmiennych", "wybór modelu statystycznego", "generalizacja"], a: 1, e: "Obraz przestrzeni zmiennych – 2. etap według Brzezińskiego.", src: "1 – Etapy procesu badawczego.pptx" },
+          { q: "Jakie modele statystyczne są typowe dla badań korelacyjnych?", o: ["test t i ANOVA", "korelacja i regresja", "MANOVA", "test Z"], a: 1, e: "Eksperyment: t, ANOVA, MANOVA; badanie korelacyjne: korelacja i regresja.", src: "1 – Etapy procesu badawczego.pptx" },
+          { q: "Wynik oznaczony ** oznacza:", o: ["p < 0,05", "p < 0,01", "p < 0,001", "wynik nieistotny"], a: 1, e: "* p < 0,05; ** p < 0,01; *** p < 0,001.", src: "1 – Etapy procesu badawczego.pptx" },
+          { q: "Ile badań musi zawierać przegląd badań w raporcie?", o: ["co najmniej 1", "co najmniej 3", "co najmniej 10", "nie ma wymogu"], a: 1, e: "Mniej niż trzy badania = −15 pkt.", src: "!Kryteria – semestr zimowy.pdf" }
+        ]
+      },
+      // ------------------------------------------------------------------
+      {
+        id: "apa",
+        title: "Standardy edytorskie APA 7 w szczegółach",
+        notes: `
+Na podstawie: Skimina, Harasimczuk i Cieciuch (2022) oraz prezentacji dr. Rodzenia. W Polsce stosujemy **spolszczony styl APA**. Inne style: harwardzki (nauki ścisłe), Chicago (historia), MLA (literatura).
+
+## Formatowanie całej pracy
+- **Times New Roman 12**, **interlinia 2** (na ćwiczeniach 1,5), marginesy 2,5 cm.
+- Tekst **do lewej** (na ćwiczeniach wyjustowany), **wcięcie** akapitu = 1 tabulator (bez wcięcia: streszczenie, cytat 40+ słów, bibliografia).
+- **Numer strony w prawym górnym rogu** (od strony tytułowej). Śródtytuły **nienumerowane**.
+- Bez pustych wierszy przed i po śródtytule. Od nowej strony: streszczenie, wprowadzenie, bibliografia, załączniki.
+- **Twarda spacja** (Ctrl+Shift+Spacja) po pojedynczych literach na końcu linii („w”, „i”, „z”).
+
+## Śródtytuły – 5 stopni (wszystkie pogrubione)
+| Stopień | Wygląd |
+|---|---|
+| 1 | wyśrodkowany, pogrubiony (tytuł pracy, Metoda, Wyniki, Dyskusja) |
+| 2 | do lewej, pogrubiony |
+| 3 | do lewej, pogrubiony, kursywa |
+| 4 | wcięty, pogrubiony, z kropką – tekst w tym samym wierszu |
+| 5 | wcięty, pogrubiony, kursywa, z kropką – tekst w tym samym wierszu |
+
+## Cytowanie – kiedy?
+Zawsze przy: **definicjach, teoriach, wynikach badań, opisie narzędzi, danych statystycznych, dosłownych cytatach**. Brak cytowania = podajesz tekst jako własny.
+
+## Odsyłacze w tekście
+| Autorzy | Zapis |
+|---|---|
+| 1 | Kowalski (2015) / (Kowalski, 2015) |
+| 2 | Kowalski i Nowak (2015) – **zawsze oba nazwiska, spójnik „i”** (nie &) |
+| 3+ | Kowalski i in. (2015) – **od pierwszego cytowania** |
+
+- Kilka prac w nawiasie: **alfabetycznie**, oddzielone **średnikiem**: (Aronson, 2003; Freud, 1930; Kowalski i in., 2022).
+- Ten sam autor i rok: 2015a, 2015b (kolejność alfabetyczna tytułów).
+- **Cytowanie pośrednie** („za:”) – rzadko, tylko gdy oryginał jest niedostępny (stary, obcy język): (Freud, 1922, za: Kowalski, 2015). W bibliografii tylko źródło, z którego korzystałaś.
+- Ponowne odwołanie w tym samym akapicie z nazwiskiem w tekście – rok tylko za pierwszym razem.
+- „zob. też:” – przed mniej ważnymi pracami w nawiasie.
+
+## Cytat dosłowny
+- **< 40 słów** – w cudzysłowie „…” + numer strony: (Kowalski, 2015, s. 15); bez stron – akapit: (Nowak, 2020, akapit 3).
+- **≥ 40 słów** – osobny, wcięty blok **bez cudzysłowu**.
+- Własne wtrącenia – **[nawias kwadratowy]**, pominięcie fragmentu – **[…]**.
+
+## Interpunkcja i kreski
+- **Dywiz** (-) bez spacji: czarno-biały. **Półpauza** (–): myślnik ze spacjami i zakresy bez spacji: s. 10–21, lata 2011–2022. **Minus** (−) dla wartości ujemnych.
+- Nawiasy okrągłe: odsyłacze, skrótowce przy pierwszym użyciu, (a), (b), (c), statystyki, stopnie swobody: t(75) = 2,19; F(2, 116) = 3,71.
+- Nawias w nawiasie → **kwadratowy**. Przedziały ufności: 95% CI **[0,040; 0,068]**.
+- **Średnik** oddziela liczby dziesiętne; wokół **ukośnika** nie ma spacji.
+- **Skrótowiec**: najpierw pełna nazwa, potem (SKRÓT) i konsekwentnie dalej; nie w tytułach tabel.
+
+## Wielkie i małe litery, kursywa
+- Małą literą: nazwy zmiennych (ekstrawersja), „w tabeli 2”, „na rysunku 4”, grupy (grupa kontrolna), nazwy teorii (wyjątki: Wielka Piątka, Ciemna Triada).
+- Tytuły: wielka litera **tylko w pierwszym słowie** (i nazwach własnych); w tytułach czasopism – w każdym słowie (Roczniki Psychologiczne).
+- Nazwa kwestionariusza – **kursywą**, skrótowiec – bez kursywy: *Kwestionariusz typów emocjonalności* (KTE).
+- **Kursywa**: tytuły, symbole statystyczne (M, SD, r, p, t, F, N, n, d Cohena), wartości skali „od 1 (*nigdy*) do 7 (*zawsze*)”, nowy termin przy pierwszym użyciu, numer rocznika w bibliografii.
+- **Bez kursywy**: litery greckie, skrótowce, a priori, status quo, de facto.
+
+## Liczby
+- **Cyframi**: od 10 wzwyż, przed jednostką (3 cm), procenty, wiek, czas, wyniki, punkty na skali, „w tabeli 3”.
+- **Słowami**: zero–dziewięć oraz liczba na początku zdania; ułamki zwykłe (jedna trzecia).
+- Rzymskie tylko zwyczajowo: błąd II rodzaju. Duże liczby: 25 000 (od 5 cyfr), ale 1000, 5000.
+- **Przecinek dziesiętny i zero przed nim zawsze**: p = 0,028; r = 0,45; d Cohena = 0,60.
+
+## Zaokrąglanie i zapis statystyk
+- **r, proporcje, t, F, χ²** – **2 miejsca** po przecinku.
+- **M i SD** wyników kwestionariuszy – **1 miejsce**.
+- **p** – dokładnie, 2–3 miejsca (p = 0,042); mniejsze: **p < 0,001**.
+- Spacje wokół znaków: M = 32, p < 0,05.
+- ≤ 3 liczby – w zdaniu; 4–20 – tabela; > 20 – wykres.
+- W tekście pełne nazwy („średnie były wysokie”), symbole tylko przy wartościach. Parametry populacji – litery greckie, estymatory – łacińskie kursywą.
+- % tylko po liczbie (18%); inaczej słowo „procent”.
+
+## Wyliczenia
+- W zdaniu: **(a), (b), (c)**.
+- Lista numerowana – dla pełnych zdań (np. problemy badawcze).
+- Punktory – gdy elementy nie są zdaniami; po ostatnim kropka.
+- Uwaga: na ćwiczeniach wymienianie elementów (poza pytaniami i hipotezami) kosztuje −5 pkt!
+
+## Tabele i rysunki
+- Numeracja arabska wg kolejności w tekście; w załącznikach: tabela A1.
+- **Tabela 1** (pogrubione) → w nowym wierszu **tytuł kursywą**; bez kropek.
+- Tylko **linie poziome** (góra, pod nagłówkiem, dół). Nagłówki i liczby wyśrodkowane, tekst do lewej.
+- **Adnotacje** pod tabelą: ogólna (*Uwaga.* skróty i symbole), szczegółowa (indeksy a, b, c), prawdopodobieństwa (* p < 0,05…).
+- Rysunek: **Rysunek 1** pogrubione, opis kursywą; źródło, np. „opracowanie własne.”; czcionka bezszeryfowa w środku rysunku.
+- Tabela i rysunek opisane w tekście; po akapicie, w którym są wspomniane.
+
+## Bibliografia (Literatura)
+- **Wcięcie od drugiej linijki**, kolejność alfabetyczna.
+- **Książka:** Nazwisko, I. (rok). Tytuł książki. Wydawnictwo.
+- **Rozdział:** Nazwisko, I. (rok). Tytuł rozdziału. W: I. Nazwisko (red.), Tytuł książki (s. 15–30). Wydawnictwo.
+- **Artykuł:** Nazwisko, I. (rok). Tytuł artykułu. Tytuł Czasopisma, rocznik(zeszyt), 15–30. https://doi.org/…
+- Kursywą piszemy: tytuł książki, tytuł czasopisma i numer rocznika.
+- APA 7 vs APA 6: **bez miasta wydania**, do **20 autorów**, zawsze numer zeszytu, **DOI jako link**, „i in.” od pierwszego cytowania.
+
+## Styl pisania
+- Język faktów, bez ocen, epitetów, pytań retorycznych i stylu potocznego.
+- **Bezosobowo**, czas dokonany: „Badanie zostało przeprowadzone…”.
+- **Liczba** (policzalne: liczba osób) vs **ilość** (niepoliczalne: ilość czekolady).
+- „iż” zamiast „że”; **bez przecinka przed „a”** w tytule pracy („Samoocena a lęk…”).
+- Bez „Po pierwsze…, po drugie…”; zdania maks. 3–4 linijki; więcej artykułów niż książek.
+- **Metoda lejka**: kolejność rozdziałów – najpierw zmienna wyjaśniana / zależna (Y), potem wyjaśniające (X); na końcu przegląd badań łączący zmienne.
+- **Fuga** – zdania i akapity łączące wątki (płynne przejścia między rozdziałami).
+
+> Na pamięć: 2 autorów – „i” za każdym razem · 3+ – „i in.” od razu · p = 0,042 (zero i przecinek) · t i F – 2 miejsca, M i SD – 1 miejsce.
+`,
+        flashcards: [
+          ["Podstawowe formatowanie wg APA 7", "Times New Roman 12, interlinia 2, marginesy 2,5 cm, tekst do lewej, wcięcia akapitów, numer strony w prawym górnym rogu."],
+          ["Czy numeruje się śródtytuły w APA?", "Nie (wyjątki mogą wprowadzać wydawnictwa i prace dyplomowe)."],
+          ["Śródtytuł 1. stopnia", "Wyśrodkowany, pogrubiony (np. tytuł pracy, Metoda, Wyniki)."],
+          ["Śródtytuł 3. stopnia", "Do lewej, pogrubiony i kursywą."],
+          ["Śródtytuły 4. i 5. stopnia", "Wcięte, pogrubione (5. także kursywą), zakończone kropką; tekst w tym samym wierszu."],
+          ["Kiedy trzeba cytować?", "Definicje, teorie, wyniki badań, opisy narzędzi, dane statystyczne, dosłowne cytaty."],
+          ["Cytowanie pracy dwóch autorów", "Za każdym razem oba nazwiska ze spójnikiem „i”: (Kowalski i Nowak, 2015)."],
+          ["Cytowanie pracy trzech lub więcej autorów", "Pierwszy autor + „i in.” już od pierwszego cytowania: (Kowalski i in., 2015)."],
+          ["Kolejność kilku prac w jednym nawiasie", "Alfabetycznie, oddzielone średnikami."],
+          ["Cytowanie pośrednie", "(Freud, 1922, za: Kowalski, 2015); rzadko; w bibliografii tylko źródło wtórne."],
+          ["Cytat dosłowny poniżej 40 słów", "W cudzysłowie, z numerem strony: (Kowalski, 2015, s. 15)."],
+          ["Cytat dosłowny od 40 słów", "Osobny, wcięty blok bez cudzysłowu."],
+          ["Jak zaznaczyć pominięcie fragmentu cytatu?", "Wielokropkiem w nawiasie kwadratowym […]."],
+          ["Dywiz, półpauza, minus", "Dywiz (-) w złożeniach (czarno-biały); półpauza (–) jako myślnik i w zakresach (s. 10–21); minus (−) dla wartości ujemnych."],
+          ["Jak zapisać przedział ufności?", "W nawiasie kwadratowym ze średnikiem: 95% CI [0,040; 0,068]."],
+          ["Jak zapisać stopnie swobody?", "W nawiasie okrągłym: t(75) = 2,19; F(2, 116) = 3,71."],
+          ["Co piszemy kursywą?", "Tytuły, nazwy kwestionariuszy, symbole statystyczne (M, SD, r, p, N), wartości skali, nowe terminy."],
+          ["Czego nie piszemy kursywą?", "Liter greckich, skrótowców, wyrażeń a priori, status quo, de facto."],
+          ["Kiedy liczby zapisujemy cyframi?", "Od 10 wzwyż, przed jednostką, procenty, wiek, czas, wyniki, punkty na skali."],
+          ["Kiedy liczby zapisujemy słowami?", "Zero–dziewięć oraz na początku zdania; ułamki zwykłe."],
+          ["Do ilu miejsc zaokrąglamy r, t, F?", "Do dwóch miejsc po przecinku."],
+          ["Do ilu miejsc zaokrąglamy M i SD z kwestionariuszy?", "Do jednego miejsca po przecinku."],
+          ["Jak zapisać bardzo małe p?", "p < 0,001; większe dokładnie, np. p = 0,042."],
+          ["Zero przed przecinkiem w polskim APA", "Zawsze, także dla r i p (p = 0,028)."],
+          ["Ile liczb – tekst, tabela, wykres?", "Do 3 – zdanie; 4–20 – tabela; ponad 20 – wykres."],
+          ["Jak opisać tabelę wg APA?", "„Tabela 1” pogrubione, pod spodem tytuł kursywą, bez kropek; tylko linie poziome; adnotacje pod tabelą."],
+          ["Trzy rodzaje adnotacji pod tabelą", "Ogólna, szczegółowa (indeksy a, b, c) i prawdopodobieństwa (gwiazdki)."],
+          ["Zapis książki w bibliografii", "Nazwisko, I. (rok). Tytuł książki. Wydawnictwo."],
+          ["Zapis artykułu w bibliografii", "Nazwisko, I. (rok). Tytuł artykułu. Tytuł Czasopisma, rocznik(zeszyt), strony. DOI jako link."],
+          ["Zmiany w bibliografii APA 7 vs APA 6", "Bez miasta wydania, do 20 autorów, zawsze numer zeszytu, DOI jako link."],
+          ["Liczba czy ilość?", "Liczba – rzeczowniki policzalne (liczba osób); ilość – niepoliczalne (ilość czekolady)."],
+          ["Przecinek przed „a” w tytule pracy?", "Nie: „Samoocena a lęk przed ekspozycją społeczną”."],
+          ["W jakiej formie pisać raport?", "Bezosobowo, w czasie dokonanym („Badanie zostało przeprowadzone…”)."],
+          ["Kolejność opisu zmiennych (metoda lejka)", "Najpierw zmienna zależna/wyjaśniana, potem wyjaśniające; na końcu przegląd badań."],
+          ["Czym jest fuga w tekście naukowym?", "Łącznikiem treści – przejściem logicznie łączącym kolejne wątki i rozdziały."]
+        ],
+        quiz: [
+          { q: "Jak poprawnie zacytować po raz pierwszy pracę trzech autorów (Kowalski, Nowak, Wiśniewska, 2020)?", o: ["(Kowalski, Nowak i Wiśniewska, 2020)", "(Kowalski i in., 2020)", "(Kowalski et al., 2020)", "(Kowalski, Nowak, Wiśniewska, 2020)"], a: 1, e: "W APA 7 „i in.” stosuje się od pierwszego cytowania.", src: "Wybrane reguły spolszczonego APA 7" },
+          { q: "Jak zapisać w tekście pracę dwóch autorów w nawiasie?", o: ["(Kowalski & Nowak, 2015)", "(Kowalski i Nowak, 2015)", "(Kowalski i in., 2015)", "(Kowalski, Nowak 2015)"], a: 1, e: "W polskim APA zawsze spójnik „i”, także w nawiasie.", src: "APA-7.pdf (Skimina i in., 2022)" },
+          { q: "Który zapis wartości p jest poprawny?", o: ["p = .042", "p = 0,042", "p=0.042", "p = 0,0420"], a: 1, e: "Przecinek dziesiętny, zero przed przecinkiem i spacje wokół znaku.", src: "APA-7.pdf (Skimina i in., 2022)" },
+          { q: "Jak zapisać p = 0,0003?", o: ["p = 0,0003", "p < 0,001", "p = 0,000", "p < 0,05"], a: 1, e: "Wartości mniejsze niż 0,001 zapisuje się jako p < 0,001.", src: "Wybrane reguły spolszczonego APA 7" },
+          { q: "Do ilu miejsc po przecinku zaokrągla się statystyki t i F?", o: ["jednego", "dwóch", "trzech", "czterech"], a: 1, e: "r, proporcje, t, F i χ² – dwa miejsca; M i SD z kwestionariuszy – jedno.", src: "Wybrane reguły spolszczonego APA 7" },
+          { q: "Cytat dosłowny liczący 55 słów należy:", o: ["ująć w cudzysłów w tekście", "wydzielić jako wcięty blok bez cudzysłowu", "zapisać kursywą", "umieścić w przypisie"], a: 1, e: "Cytaty od 40 słów – osobny blok, bez cudzysłowu.", src: "Wybrane reguły spolszczonego APA 7" },
+          { q: "Jak zapisać zakres stron?", o: ["s. 10-21 (dywiz)", "s. 10–21 (półpauza)", "s. 10 − 21 (minus)", "s. 10 / 21"], a: 1, e: "Zakresy zapisuje się półpauzą bez spacji.", src: "Wybrane reguły spolszczonego APA 7" },
+          { q: "Który element NIE jest pisany kursywą?", o: ["symbol M", "tytuł książki", "skrótowiec kwestionariusza (np. KTE)", "wartości skali, np. (nigdy)"], a: 2, e: "Skrótowce i litery greckie piszemy prostym krojem.", src: "Wybrane reguły spolszczonego APA 7" },
+          { q: "Ile liczb powinna zawierać informacja, by najpierw rozważyć tabelę?", o: ["1–3", "4–20", "ponad 20", "zawsze tabela"], a: 1, e: "Do 3 – w zdaniu, 4–20 – tabela, ponad 20 – wykres.", src: "Wybrane reguły spolszczonego APA 7" },
+          { q: "Jak wygląda podpis tabeli w APA 7?", o: ["Tabela 1. Tytuł tabeli.", "„Tabela 1” pogrubione, w nowej linii tytuł kursywą, bez kropek", "Tytuł pod tabelą zwykłą czcionką", "TABELA I – tytuł"], a: 1, e: "Numer pogrubiony, tytuł kursywą w kolejnym wierszu, bez kropek.", src: "2 – Standardy edytorskie APA.pptx" },
+          { q: "Która zmiana dotyczy bibliografii w APA 7 względem APA 6?", o: ["podaje się miasto wydania", "nie podaje się miasta wydania, a DOI zapisuje się jako link", "nie podaje się roku", "autorów zapisuje się wielkimi literami"], a: 1, e: "APA 7: bez miasta, do 20 autorów, DOI jako URL.", src: "Wybrane reguły spolszczonego APA 7" },
+          { q: "Który tytuł pracy jest zapisany poprawnie?", o: ["Samoocena, a lęk przed ekspozycją społeczną", "Samoocena a lęk przed ekspozycją społeczną", "Samoocena A Lęk Przed Ekspozycją Społeczną", "„Samoocena a lęk przed ekspozycją społeczną”"], a: 1, e: "Bez przecinka przed „a”, wielka litera tylko na początku.", src: "2 – Standardy edytorskie APA.pptx" },
+          { q: "„Ilość” czy „liczba” osób badanych?", o: ["ilość osób", "liczba osób", "obie formy są poprawne", "zależy od kontekstu"], a: 1, e: "Liczba – policzalne; ilość – niepoliczalne (ilość czekolady).", src: "2 – Standardy edytorskie APA.pptx" },
+          { q: "W jakiej kolejności opisywać zmienne w części teoretycznej badania eksperymentalnego?", o: ["najpierw niezależne, potem zależną", "najpierw zależną, potem niezależne", "alfabetycznie", "dowolnie"], a: 1, e: "Metoda lejka: od zmiennej zależnej/wyjaśnianej do wyjaśniających (za błąd: −10 pkt).", src: "2 – Standardy edytorskie APA.pptx" }
         ]
       },
       // ------------------------------------------------------------------

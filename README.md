@@ -9,7 +9,7 @@ Podział odpowiada folderom z Dysku Google („drugi rok JULIA / 1 semestr”):
 | Przedmiot | Stan |
 |---|---|
 | Psychologia osobowości | 11 tematów: notatki, 164 fiszki, 62 pytania quizowe |
-| Metodologia badań i statystyka | 9 tematów: notatki, 138 fiszek, 142 pytania (w tym wszystkie 100 pytań ze statystyki z kluczem) |
+| Metodologia badań i statystyka | 11 tematów (wykład + ćwiczenia): notatki, 201 fiszek, 165 pytań (w tym wszystkie 100 pytań ze statystyki z kluczem) |
 | Wprowadzenie do diagnostyki psychologicznej | w przygotowaniu |
 | Diagnoza sprawności poznawczych | w przygotowaniu |
 | Podstawy pomocy psychologicznej | w przygotowaniu |
