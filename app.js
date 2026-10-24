@@ -17,9 +17,9 @@
     try {
       const raw = localStorage.getItem(STORE_KEY);
       const data = raw ? JSON.parse(raw) : {};
-      return { cards: data.cards || {}, quiz: data.quiz || {} };
+      return { cards: data.cards || {}, quiz: data.quiz || {}, exams: data.exams || {} };
     } catch (e) {
-      return { cards: {}, quiz: {} };
+      return { cards: {}, quiz: {}, exams: {} };
     }
   }
   let store = loadStore();
@@ -161,6 +161,33 @@
     return subject.id + "/" + (topicId || "all");
   }
 
+  // ---------- daty egzaminów ----------
+  // data zapisana jako "RRRR-MM-DD"; liczymy pełne dni kalendarzowe w czasie lokalnym
+  function daysUntil(isoDate) {
+    const [y, m, d] = isoDate.split("-").map(Number);
+    const today = new Date();
+    const t0 = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    return Math.round((new Date(y, m - 1, d) - t0) / DAY);
+  }
+  function countdownText(days) {
+    if (days < 0) return "egzamin już był";
+    if (days === 0) return "egzamin dziś! 🍀";
+    if (days === 1) return "egzamin jutro";
+    return `egzamin za ${days} ${plural(days, "dzień", "dni", "dni")}`;
+  }
+  function formatDate(isoDate) {
+    const [y, m, d] = isoDate.split("-").map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString("pl-PL", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+  }
+  function examInfo(subject) {
+    const date = store.exams[subject.id];
+    return date ? { date, days: daysUntil(date) } : null;
+  }
+  function toLearn(subject) {
+    const cards = subjectCards(subject);
+    return cards.filter((c) => !((store.cards[c.key] || {}).box >= MASTERED_BOX)).length;
+  }
+
   // ---------- widoki ----------
   function progressBar(pct, color) {
     return `<div class="bar"><div class="bar-fill" style="width:${pct}%;background:${color}"></div></div>`;
@@ -168,15 +195,23 @@
 
   function viewHome() {
     document.title = "Drugi rok – nauka";
+    const upcoming = SUBJECTS
+      .map((s) => ({ s, exam: examInfo(s) }))
+      .filter((x) => x.exam && x.exam.days >= 0)
+      .sort((a, b) => a.exam.days - b.exam.days);
+    const next = upcoming[0];
     const cards = SUBJECTS.map((s) => {
       const fc = subjectCards(s);
       const ready = hasContent(s);
       const pct = mastery(fc);
       const due = dueCount(fc);
+      const exam = examInfo(s);
+      const isNext = next && next.s === s;
       return `
-        <a class="subject-card${ready ? "" : " soon"}" href="#/s/${s.id}" style="--accent:${s.color}">
+        <a class="subject-card${ready ? "" : " soon"}${isNext ? " next-exam" : ""}" href="#/s/${s.id}" style="--accent:${s.color}">
           <div class="subject-icon">${s.icon}</div>
           <div class="subject-body">
+            ${exam ? `<div class="exam-chip${exam.days < 0 ? " past" : exam.days <= 7 ? " soon" : ""}">⏳ ${countdownText(exam.days)}</div>` : ""}
             <div class="subject-name">${esc(s.name)}</div>
             <div class="subject-meta">${ready
               ? `${s.topics.length} ${plural(s.topics.length, "temat", "tematy", "tematów")} · ${fc.length} ${plural(fc.length, "fiszka", "fiszki", "fiszek")}`
@@ -190,7 +225,45 @@
         <h1>Drugi rok · 1 semestr</h1>
         <p>Wybierz przedmiot. Postępy zapisują się na tym urządzeniu.</p>
       </header>
+      ${next ? `
+      <a class="exam-banner" href="#/s/${next.s.id}" style="--accent:${next.s.color}">
+        <div class="exam-banner-days">${next.exam.days === 0 ? "DZIŚ" : next.exam.days}<span>${next.exam.days === 0 ? "" : plural(next.exam.days, "dzień", "dni", "dni")}</span></div>
+        <div>
+          <div class="exam-banner-label">Najbliższy egzamin</div>
+          <div class="exam-banner-name">${next.s.icon} ${esc(next.s.name)}</div>
+          <div class="exam-banner-meta">${formatDate(next.exam.date)} · do opanowania: ${toLearn(next.s)} ${plural(toLearn(next.s), "fiszka", "fiszki", "fiszek")}</div>
+        </div>
+      </a>` : ""}
       <div class="subject-grid">${cards}</div>`;
+  }
+
+  function examPanel(subject) {
+    const exam = examInfo(subject);
+    const input = `<input type="date" class="exam-input" data-action="exam-date" value="${exam ? exam.date : ""}" aria-label="Data egzaminu">`;
+    if (!exam) {
+      return `
+      <div class="exam-panel empty-exam" style="--accent:${subject.color}">
+        <div class="exam-panel-text">
+          <strong>📅 Kiedy masz egzamin?</strong>
+          <span>Wybierz datę, a aplikacja zacznie odliczać dni.</span>
+        </div>
+        <label class="btn exam-pick">Ustaw datę egzaminu${input}</label>
+      </div>`;
+    }
+    const left = toLearn(subject);
+    return `
+      <div class="exam-panel${exam.days < 0 ? " past" : ""}" style="--accent:${subject.color}">
+        <div class="exam-days">${exam.days < 0 ? "✓" : exam.days === 0 ? "DZIŚ" : exam.days}${exam.days > 0 ? `<span>${plural(exam.days, "dzień", "dni", "dni")}</span>` : ""}</div>
+        <div class="exam-panel-text">
+          <strong>${countdownText(exam.days)}</strong>
+          <span>${formatDate(exam.date)}</span>
+          ${exam.days >= 0 && hasContent(subject) ? `<span>${left ? `Do opanowania: ${left} ${plural(left, "fiszka", "fiszki", "fiszek")}${exam.days > 0 ? ` – to ok. ${Math.ceil(left / exam.days)} dziennie` : ""}` : "Wszystkie fiszki opanowane! 🎉"}</span>` : ""}
+        </div>
+        <div class="exam-actions">
+          <label class="btn small">Zmień datę${input}</label>
+          <button class="btn small ghost" data-action="exam-clear">Usuń</button>
+        </div>
+      </div>`;
   }
 
   function viewSubject(subject) {
@@ -224,6 +297,7 @@
           ${ready ? `<p>Opanowane fiszki: ${mastery(allCards)}%${best ? ` · najlepszy quiz z całości: ${best.best}%` : ""}</p>` : ""}
         </div>
       </header>
+      ${examPanel(subject)}
       ${ready ? `
       <div class="actions">
         <a class="btn primary" style="--accent:${subject.color}" href="#/s/${subject.id}/fiszki">🃏 Fiszki z całości</a>
@@ -449,8 +523,32 @@
   }
 
   // ---------- zdarzenia ----------
+  // data egzaminu (widok przedmiotu)
+  function currentSubject() {
+    const parts = location.hash.replace(/^#\/?/, "").split("/");
+    return parts[0] === "s" ? getSubject(parts[1]) : null;
+  }
+  app.addEventListener("change", (ev) => {
+    if (!ev.target.matches('[data-action="exam-date"]')) return;
+    const subject = currentSubject();
+    if (!subject) return;
+    if (ev.target.value) store.exams[subject.id] = ev.target.value;
+    else delete store.exams[subject.id];
+    saveStore();
+    viewSubject(subject);
+  });
+
   app.addEventListener("click", (ev) => {
     const el = ev.target.closest("[data-action]");
+    if (el && el.dataset.action === "exam-clear") {
+      const subject = currentSubject();
+      if (subject && confirm("Usunąć datę egzaminu z przedmiotu „" + subject.short + "”?")) {
+        delete store.exams[subject.id];
+        saveStore();
+        viewSubject(subject);
+      }
+      return;
+    }
     if (!el || !session) return;
     const action = el.dataset.action;
     if (action === "flip" && !session.flipped) {

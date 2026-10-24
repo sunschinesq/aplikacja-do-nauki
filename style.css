@@ -327,3 +327,85 @@ th { background: color-mix(in srgb, var(--accent) 10%, transparent); }
   h1 { font-size: 2rem; }
   .fc-q { font-size: 1.5rem; }
 }
+
+/* ---------- odliczanie do egzaminu ---------- */
+.exam-banner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 18px;
+  padding: 18px 20px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 65%, #ff8fb8));
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+.exam-banner-days {
+  flex: none;
+  min-width: 78px;
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.exam-banner-days span, .exam-days span { display: block; font-size: .85rem; font-weight: 600; margin-top: 4px; }
+.exam-banner-label { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; opacity: .9; }
+.exam-banner-name { font-weight: 700; font-size: 1.15rem; margin: 2px 0; }
+.exam-banner-meta { font-size: .9rem; opacity: .95; }
+
+.exam-chip {
+  display: inline-block;
+  font-size: .8rem;
+  font-weight: 650;
+  padding: 3px 10px;
+  border-radius: 99px;
+  margin-bottom: 6px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent);
+}
+.exam-chip.soon { background: var(--accent); color: #fff; }
+.exam-chip.past { background: var(--border); color: var(--muted); }
+.subject-card.next-exam { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 35%, transparent), var(--shadow); }
+
+.exam-panel {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0 0 18px;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--accent) 9%, var(--surface));
+}
+.exam-panel.past { opacity: .75; }
+.exam-days {
+  flex: none;
+  min-width: 70px;
+  padding: 10px 6px;
+  border-radius: 14px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  background: var(--accent);
+  color: #fff;
+}
+.exam-panel-text { flex: 1; min-width: 180px; display: flex; flex-direction: column; gap: 2px; }
+.exam-panel-text span { color: var(--muted); font-size: .92rem; }
+.exam-actions { display: flex; gap: 8px; }
+.btn.small { min-height: 40px; padding: 6px 14px; font-size: .92rem; }
+.btn.ghost { background: transparent; }
+.exam-pick, .exam-actions label { position: relative; overflow: hidden; }
+.exam-pick { background: var(--accent); color: #fff; border-color: transparent; }
+/* niewidoczne pole daty na całym przycisku – dotknięcie otwiera kalendarz iPada */
+.exam-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}

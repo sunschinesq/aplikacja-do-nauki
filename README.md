@@ -21,7 +21,8 @@ Cała aplikacja jest w różowej kolorystyce (jasny i ciemny motyw).
 - **Notatki** – przejrzyste opracowanie każdego tematu (tabele, listy, „Na pamięć”).
 - **Fiszki** – dotknij karty, żeby zobaczyć odpowiedź, i oceń się: „Umiem” albo „Nie umiem”. Działa system pudełek (Leitnera): fiszki, których nie umiesz, wracają częściej.
 - **Quiz** – pytania jednokrotnego wyboru z wyjaśnieniem i zapisem najlepszego wyniku.
-- **Postępy** zapisują się w przeglądarce na tym urządzeniu (localStorage). Wyczyszczenie danych Safari je kasuje.
+- **Odliczanie do egzaminu** – w każdym przedmiocie przycisk „Ustaw datę egzaminu” (kalendarz iPada). Na stronie głównej pojawia się baner z najbliższym egzaminem, a przy przedmiotach licznik dni. Aplikacja podpowiada też, ile fiszek zostało do opanowania i ile to dziennie. Datę można zmienić lub usunąć w każdej chwili.
+- **Postępy** zapisują się w przeglądarce na tym urządzeniu (localStorage) – razem z datami egzaminów. Wyczyszczenie danych Safari je kasuje.
 
 ## Uruchomienie na iPadzie (GitHub Pages)
 
