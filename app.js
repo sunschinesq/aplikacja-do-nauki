@@ -200,7 +200,9 @@
       .filter((x) => x.exam && x.exam.days >= 0)
       .sort((a, b) => a.exam.days - b.exam.days);
     const next = upcoming[0];
-    const cards = SUBJECTS.map((s) => {
+    // przedmioty z nadchodzącym egzaminem na górze (od najbliższego), reszta w stałej kolejności
+    const ordered = upcoming.map((x) => x.s).concat(SUBJECTS.filter((s) => !upcoming.some((x) => x.s === s)));
+    const cards = ordered.map((s) => {
       const fc = subjectCards(s);
       const ready = hasContent(s);
       const pct = mastery(fc);
@@ -225,16 +227,48 @@
         <h1>Drugi rok · 1 semestr</h1>
         <p>Wybierz przedmiot. Postępy zapisują się na tym urządzeniu.</p>
       </header>
-      ${next ? `
-      <a class="exam-banner" href="#/s/${next.s.id}" style="--accent:${next.s.color}">
-        <div class="exam-banner-days">${next.exam.days === 0 ? "DZIŚ" : next.exam.days}<span>${next.exam.days === 0 ? "" : plural(next.exam.days, "dzień", "dni", "dni")}</span></div>
-        <div>
-          <div class="exam-banner-label">Najbliższy egzamin</div>
-          <div class="exam-banner-name">${next.s.icon} ${esc(next.s.name)}</div>
-          <div class="exam-banner-meta">${formatDate(next.exam.date)} · do opanowania: ${toLearn(next.s)} ${plural(toLearn(next.s), "fiszka", "fiszki", "fiszek")}</div>
-        </div>
-      </a>` : ""}
+      ${next ? examSpotlight(next.s, next.exam, upcoming.slice(1)) : `
+      <div class="exam-hint">📅 Ustaw daty egzaminów w przedmiotach, a tutaj pojawi się odliczanie do najbliższego.</div>`}
       <div class="subject-grid">${cards}</div>`;
+  }
+
+  // wyróżnienie najbliższego egzaminu na stronie głównej
+  function examSpotlight(s, exam, others) {
+    const fc = subjectCards(s);
+    const pct = mastery(fc);
+    const left = toLearn(s);
+    const due = dueCount(fc);
+    const urgency = exam.days <= 3 ? " urgent" : exam.days <= 7 ? " soon" : "";
+    const perDay = exam.days > 0 && left ? Math.ceil(left / exam.days) : 0;
+    let tip;
+    if (!left) tip = "Wszystkie fiszki opanowane – zrób jeszcze quiz z całości! 🎉";
+    else if (exam.days === 0) tip = "Powodzenia! Przejrzyj notatki i najtrudniejsze fiszki. 🍀";
+    else tip = `Plan: ok. ${perDay} ${plural(perDay, "fiszka", "fiszki", "fiszek")} dziennie${due ? ` · do powtórki dziś: ${due}` : ""}`;
+    return `
+      <section class="spotlight${urgency}" style="--accent:${s.color}">
+        <div class="spotlight-top">
+          <div class="spotlight-days">${exam.days === 0 ? "DZIŚ" : exam.days}${exam.days ? `<span>${plural(exam.days, "dzień", "dni", "dni")}</span>` : ""}</div>
+          <div class="spotlight-info">
+            <div class="spotlight-label">⏳ Najbliższy egzamin${exam.days <= 7 && exam.days > 0 ? " – już niedługo!" : ""}</div>
+            <a class="spotlight-name" href="#/s/${s.id}">${s.icon} ${esc(s.name)}</a>
+            <div class="spotlight-date">${formatDate(exam.date)}</div>
+          </div>
+        </div>
+        <div class="spotlight-progress">
+          <div class="spotlight-progress-row"><span>Opanowane fiszki: <strong>${pct}%</strong></span><span>zostało: ${left}</span></div>
+          <div class="bar"><div class="bar-fill" style="width:${pct}%;background:#fff"></div></div>
+          <div class="spotlight-tip">${tip}</div>
+        </div>
+        <div class="spotlight-actions">
+          <a class="btn spotlight-btn" href="#/s/${s.id}/fiszki">🃏 Ucz się teraz</a>
+          <a class="btn spotlight-btn ghost" href="#/s/${s.id}/quiz">✅ Quiz z całości</a>
+        </div>
+        ${others.length ? `
+        <div class="spotlight-next">
+          <span>Kolejne egzaminy:</span>
+          ${others.map((x) => `<a href="#/s/${x.s.id}">${x.s.icon} ${esc(x.s.short)} – ${x.exam.days === 1 ? "jutro" : `za ${x.exam.days} ${plural(x.exam.days, "dzień", "dni", "dni")}`}</a>`).join("")}
+        </div>` : ""}
+      </section>`;
   }
 
   function examPanel(subject) {

@@ -329,29 +329,7 @@ th { background: color-mix(in srgb, var(--accent) 10%, transparent); }
 }
 
 /* ---------- odliczanie do egzaminu ---------- */
-.exam-banner {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  margin-top: 18px;
-  padding: 18px 20px;
-  border-radius: var(--radius);
-  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 65%, #ff8fb8));
-  color: #fff;
-  box-shadow: var(--shadow);
-}
-.exam-banner-days {
-  flex: none;
-  min-width: 78px;
-  text-align: center;
-  font-size: 2.4rem;
-  font-weight: 800;
-  line-height: 1;
-}
-.exam-banner-days span, .exam-days span { display: block; font-size: .85rem; font-weight: 600; margin-top: 4px; }
-.exam-banner-label { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; opacity: .9; }
-.exam-banner-name { font-weight: 700; font-size: 1.15rem; margin: 2px 0; }
-.exam-banner-meta { font-size: .9rem; opacity: .95; }
+.exam-days span { display: block; font-size: .85rem; font-weight: 600; margin-top: 4px; }
 
 .exam-chip {
   display: inline-block;
@@ -408,4 +386,69 @@ th { background: color-mix(in srgb, var(--accent) 10%, transparent); }
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
+}
+
+/* wyróżnienie najbliższego egzaminu na stronie głównej */
+.spotlight {
+  margin-top: 18px;
+  padding: 22px;
+  border-radius: 22px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255, 255, 255, .25), transparent 45%),
+    linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 60%, #ff9ec4));
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.spotlight.soon { animation: glow 2.8s ease-in-out infinite; }
+.spotlight.urgent { animation: glow 1.6s ease-in-out infinite; }
+@keyframes glow {
+  0%, 100% { box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 35%, transparent); }
+  50% { box-shadow: 0 10px 42px color-mix(in srgb, var(--accent) 70%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) { .spotlight.soon, .spotlight.urgent { animation: none; } }
+.spotlight-top { display: flex; align-items: center; gap: 18px; }
+.spotlight-days {
+  flex: none;
+  min-width: 96px;
+  padding: 12px 8px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .2);
+  text-align: center;
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.spotlight-days span { display: block; font-size: .9rem; font-weight: 600; margin-top: 4px; }
+.spotlight-label { font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; opacity: .95; }
+.spotlight-name { display: block; font-size: 1.35rem; font-weight: 800; line-height: 1.25; margin: 4px 0 2px; color: #fff; }
+.spotlight-date { opacity: .92; font-size: .95rem; }
+.spotlight-progress { margin-top: 16px; }
+.spotlight-progress-row { display: flex; justify-content: space-between; font-size: .92rem; }
+.spotlight .bar { background: rgba(255, 255, 255, .3); height: 10px; }
+.spotlight-tip { margin-top: 8px; font-size: .92rem; opacity: .95; }
+.spotlight-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.spotlight-btn { background: #fff; color: var(--accent); border-color: transparent; }
+.spotlight-btn.ghost { background: rgba(255, 255, 255, .18); color: #fff; border: 1px solid rgba(255, 255, 255, .6); }
+.spotlight-next {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, .35);
+  font-size: .9rem;
+}
+.spotlight-next a { padding: 4px 12px; border-radius: 99px; background: rgba(255, 255, 255, .2); color: #fff; font-weight: 600; }
+.exam-hint {
+  margin-top: 18px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px dashed var(--border);
+  color: var(--muted);
+  font-size: .92rem;
+}
+@media (max-width: 520px) {
+  .spotlight-days { min-width: 80px; font-size: 2.3rem; }
+  .spotlight-name { font-size: 1.15rem; }
 }
