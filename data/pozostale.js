@@ -3,22 +3,6 @@
 window.SUBJECTS = window.SUBJECTS || [];
 window.SUBJECTS.push(
   {
-    id: "diagnostyka",
-    name: "Wprowadzenie do diagnostyki psychologicznej",
-    short: "Diagnostyka",
-    icon: "🔍",
-    color: "#c2255c",
-    sources: [
-      "Prezentacje 1–9 (docx) i slajdy diagnostyka 1–8 (pptx)",
-      "Pytania egzamin.pdf",
-      "Stemplewska-Żakowicz – Diagnoza psychologiczna"
-    ],
-    topics: [
-      { id: "pytania", title: "Pytania egzaminacyjne" },
-      { id: "wyklady", title: "Wykłady 1–9" }
-    ]
-  },
-  {
     id: "poznawcze",
     name: "Diagnoza sprawności poznawczych",
     short: "Sprawności poznawcze",
