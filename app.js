@@ -13,14 +13,20 @@
   const FIXED_ORDER = /\bodpowied(zi|ź) [A-D]\b|wszystkie|żadna z|powyższ/i;
 
   // ---------- pamięć postępów (localStorage) ----------
+  const STORE_DEFAULTS = () => ({
+    cards: {}, quiz: {}, exams: {}, lastBackup: null, pets: 0,
+    days: {}, goal: 20, bestStreak: 0, marks: {}, open: {}, tries: {}
+  });
   function loadStore() {
+    const store = STORE_DEFAULTS();
     try {
       const raw = localStorage.getItem(STORE_KEY);
       const data = raw ? JSON.parse(raw) : {};
-      return { cards: data.cards || {}, quiz: data.quiz || {}, exams: data.exams || {}, lastBackup: data.lastBackup || null, pets: data.pets || 0 };
+      Object.keys(store).forEach((k) => { if (data[k] !== undefined && data[k] !== null) store[k] = data[k]; });
     } catch (e) {
-      return { cards: {}, quiz: {}, exams: {}, lastBackup: null, pets: 0 };
+      /* uszkodzone dane – zaczynamy od zera */
     }
+    return store;
   }
   let store = loadStore();
   function saveStore() {
@@ -64,7 +70,8 @@
   }
 
   // Minimalny markdown: ## nagłówki, listy (2 poziomy), tabele |, cytaty >, akapity
-  function md(text) {
+  // bm = przedrostek klucza zakładki ("przedmiot/temat/"); wtedy przy nagłówkach ## jest gwiazdka
+  function md(text, bm) {
     const lines = text.replace(/^\n+|\s+$/g, "").split("\n");
     let html = "";
     let i = 0;
@@ -72,7 +79,16 @@
       const line = lines[i];
       if (!line.trim()) { i++; continue; }
       if (line.startsWith("### ")) { html += `<h4>${inline(line.slice(4))}</h4>`; i++; continue; }
-      if (line.startsWith("## ")) { html += `<h3>${inline(line.slice(3))}</h3>`; i++; continue; }
+      if (line.startsWith("## ")) {
+        const title = line.slice(3).trim();
+        if (bm) {
+          const h = "h-" + hash(title);
+          const on = !!store.marks[bm + h];
+          html += `<h3 class="sec-h" id="${h}"><span>${inline(title)}</span><button class="bm-btn${on ? " on" : ""}" data-action="bookmark" data-key="${bm + h}" data-title="${esc(title)}" aria-label="${on ? "Usuń zakładkę" : "Dodaj zakładkę"}">${on ? "★" : "☆"}</button></h3>`;
+        } else html += `<h3>${inline(title)}</h3>`;
+        i++;
+        continue;
+      }
       if (line.startsWith("> ")) {
         html += `<div class="callout">${inline(line.slice(2))}</div>`;
         i++;
@@ -188,6 +204,71 @@
     return cards.filter((c) => !((store.cards[c.key] || {}).box >= MASTERED_BOX)).length;
   }
 
+  // ---------- dzienny cel i seria dni ----------
+  // store.days["RRRR-MM-DD"] = { n: odpowiedzi, ok: dobre, m: nowo opanowane fiszki, g: cel tego dnia, s: { przedmiot: odpowiedzi } }
+  const GOALS = [10, 20, 30, 50, 80, 100];
+  function dayKey(d = new Date()) {
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  }
+  function shiftDay(key, delta) {
+    const [y, m, d] = key.split("-").map(Number);
+    return dayKey(new Date(y, m - 1, d + delta));
+  }
+  function dayStats(key) {
+    return store.days[key] || { n: 0, ok: 0, m: 0, s: {} };
+  }
+  function goalMet(key) {
+    const d = store.days[key];
+    return !!d && d.n >= (d.g || store.goal);
+  }
+  // seria trwa, jeśli cel był zrobiony wczoraj (dziś jeszcze jest czas)
+  function currentStreak() {
+    let key = dayKey();
+    if (!goalMet(key)) key = shiftDay(key, -1);
+    let n = 0;
+    while (goalMet(key)) { n++; key = shiftDay(key, -1); }
+    return n;
+  }
+  function bestStreak() {
+    return Math.max(store.bestStreak, currentStreak());
+  }
+  // zapisuje każdą odpowiedź; zwraca true, gdy właśnie został osiągnięty cel dnia
+  function logAnswer(subject, ok, mastered) {
+    const key = dayKey();
+    const d = store.days[key] = store.days[key] || { n: 0, ok: 0, m: 0, s: {} };
+    d.g = store.goal;
+    const before = d.n >= d.g;
+    d.n++;
+    if (ok) d.ok++;
+    if (mastered) d.m++;
+    d.s[subject.id] = (d.s[subject.id] || 0) + 1;
+    store.bestStreak = Math.max(store.bestStreak, currentStreak());
+    saveStore();
+    return !before && d.n >= d.g;
+  }
+
+  // ---------- notatki: sekcje (## nagłówki) ----------
+  function noteSections(topic) {
+    const out = [];
+    let cur = null;
+    (topic.notes || "").split("\n").forEach((line) => {
+      if (line.startsWith("## ")) {
+        cur = { title: line.slice(3).trim(), body: "" };
+        cur.h = "h-" + hash(cur.title);
+        out.push(cur);
+      } else if (cur) cur.body += line + "\n";
+    });
+    return out;
+  }
+  // tekst bez znaczników markdown (do wyszukiwania i sprawdzania odpowiedzi)
+  function plain(s) {
+    return String(s).replace(/\*\*|(^|\s)\*|\*(\s|$)/g, "$1$2").replace(/^\s*(#{2,3} |> |- )/gm, "").replace(/\|/g, " ").replace(/\s+/g, " ").trim();
+  }
+  // porównywanie bez wielkości liter i polskich znaków; wynik ma tę samą długość co tekst
+  function fold(s) {
+    return String(s).split("").map((c) => (c.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "") || c)[0]).join("").replace(/ł/g, "l");
+  }
+
   // ---------- widoki ----------
   // szary kotek idzie po pasku od pozycji „from” do „pct” (animacja w animateCats)
   const CAT_SVG = `<svg viewBox="0 0 40 28" aria-hidden="true">
@@ -228,6 +309,55 @@
   }
   new MutationObserver(animateCats).observe(app, { childList: true });
 
+  // ---------- kotek, który reaguje ----------
+  // w nauce siedzi obok szary kotek i w chmurce chwali albo pociesza
+  const BUDDY_COLOR = { fur: "#9d9da4", dark: "#7d7d84", belly: "#c9c9ce", stripes: true };
+  const SAYS = {
+    cards: ["Hej! Lecimy z fiszkami 🐾", "Jestem obok. Dotknij kartę, kiedy będziesz gotowa 💗", "Miau! Krótka seria i już będzie lepiej ✨"],
+    quiz: ["Quiz? Trzymam kciuki… znaczy łapki 🐾", "Czytaj spokojnie każdą odpowiedź – dasz radę! 💪", "Miau! Sprawdźmy, co już siedzi w głowie ✨"],
+    open: ["Napisz, co pamiętasz – nawet kilka słów się liczy ✍️", "Odpowiadaj jak na egzaminie: pojęcia + przykład 🐾", "Nie musi być idealnie. Ważne, żeby spróbować 💗"],
+    good: ["Brawo! 🎉", "Super, dokładnie tak! ✨", "Mrrr, jaka mądra! 😻", "Pięknie! 💖", "Tak trzymać! 🐾", "Głowa pracuje! 🧠✨"],
+    bad: ["Nic nie szkodzi – ta wróci i następnym razem pójdzie lepiej 💗", "Błąd to też nauka: mózg właśnie to zapamiętuje 🧠", "Spokojnie, nikt nie umie wszystkiego od razu 🐾", "Nie przejmuj się, jestem obok 💕", "Dobrze, że to wyszło teraz, a nie na egzaminie 😺"],
+    badMany: ["Trudny kawałek? Zajrzyj do notatki – to żaden wstyd 📖💗", "Weź łyk wody i głęboki oddech. Dasz radę! 🌷", "Wolniej też się liczy. Jestem z Ciebie dumna 🐾", "Może krótka przerwa? Pogłaszcz kotka i wracamy 😽"],
+    partial: ["Częściowo to też postęp! 🌱", "Już blisko – jeszcze raz przeczytaj wzór 💗", "Dobry początek, dopisz pojęcia z wzoru ✨"],
+    goal: ["Cel na dziś zrobiony! 🎉 Jestem dumna!", "Mamy to! Dzisiejszy cel osiągnięty 🏆", "Cel dnia zaliczony – możesz być z siebie dumna 💖"]
+  };
+  const pickOne = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  function buddy(text, mood, fresh) {
+    return `<div class="buddy${mood ? " " + mood : ""}${fresh ? " fresh" : ""}" aria-live="polite">
+      <span class="buddy-cat">${petCatSvg(BUDDY_COLOR)}</span>
+      <span class="buddy-bubble">${text}</span>
+    </div>`;
+  }
+  function sessionBuddy(s) {
+    const html = buddy(s.say || "", s.mood, s.sayFresh);
+    s.sayFresh = false;
+    return html;
+  }
+  function say(s, text, mood) {
+    s.say = text;
+    s.mood = mood || "";
+    s.sayFresh = true;
+  }
+  // grade: 2 = dobrze, 1 = częściowo, 0 = źle
+  function react(s, grade, goalReached) {
+    s.inRowOk = grade === 2 ? (s.inRowOk || 0) + 1 : 0;
+    s.inRowBad = grade === 0 ? (s.inRowBad || 0) + 1 : 0;
+    if (goalReached) return say(s, pickOne(SAYS.goal), "happy");
+    if (grade === 2) {
+      if (s.inRowOk >= 3 && s.inRowOk % 3 === 0) return say(s, `${s.inRowOk} z rzędu! Jesteś w formie 🔥`, "happy");
+      return say(s, pickOne(SAYS.good), "happy");
+    }
+    if (grade === 1) return say(s, pickOne(SAYS.partial), "comfort");
+    say(s, pickOne(s.inRowBad >= 3 ? SAYS.badMany : SAYS.bad), "comfort");
+  }
+  function endSay(pct) {
+    if (pct >= 90) return ["Wow! Prawie wszystko! Jestem z Ciebie dumna 😻", "happy"];
+    if (pct >= 70) return ["Bardzo dobrze! Jeszcze trochę i będzie komplet 💪", "happy"];
+    if (pct >= 50) return ["Połowa już jest! Powtórz te trudniejsze, a pójdzie w górę 🌱", "comfort"];
+    return ["Ten temat jest trudny, ale każda seria coś zostawia w głowie. Zajrzyj do notatki i spróbuj jeszcze raz – jestem obok 💗", "comfort"];
+  }
+
   function viewHome() {
     document.title = "Drugi rok – nauka";
     const upcoming = SUBJECTS
@@ -262,11 +392,41 @@
         <h1>Drugi rok · 1 semestr</h1>
         <p>Wybierz przedmiot. Postępy zapisują się na tym urządzeniu.</p>
       </header>
+      <a class="search-link" href="#/szukaj">🔍 <span>Szukaj w notatkach, fiszkach i quizach…</span></a>
+      ${todayCard()}
       ${next ? examSpotlight(next.s, next.exam, upcoming.slice(1)) : `
       <div class="exam-hint">📅 Ustaw daty egzaminów w przedmiotach, a tutaj pojawi się odliczanie do najbliższego.</div>`}
       <div class="subject-grid">${cards}</div>
       <a class="backup-link${backupOverdue() ? " overdue" : ""}" href="#/kopia">💾 Kopia zapasowa postępów · ${lastBackupText()}${backupOverdue() ? (store.lastBackup ? " – czas na nową kopię!" : " – zrób pierwszą!") : ""}</a>
       ${store.pets ? `<p class="pet-count">🐾 Pogłaskane kotki: ${store.pets}</p>` : ""}`;
+  }
+
+
+  // dzienny cel i seria na stronie głównej
+  function todayCard() {
+    const d = dayStats(dayKey());
+    const goal = store.goal;
+    const pct = Math.min(100, Math.round((d.n / goal) * 100));
+    const met = d.n >= goal;
+    const streak = currentStreak();
+    const marks = Object.keys(store.marks).length;
+    let text;
+    if (met) text = d.n >= goal * 2 ? "Podwójny cel! Ale z Ciebie mistrzyni 😻" : "Cel na dziś zrobiony! Teraz już tylko dla przyjemności 💖";
+    else if (!d.n) text = streak ? `Seria ${streak} ${plural(streak, "dzień", "dni", "dni")} czeka na dzisiejszy cel – nie daj jej zgasnąć 🔥` : `Miau! ${goal} odpowiedzi i cel na dziś zrobiony 🐾`;
+    else text = `Jeszcze ${goal - d.n} – dasz radę! 💪`;
+    return `
+      <section class="today${met ? " met" : ""}">
+        <div class="ring" style="--p:${pct}" role="img" aria-label="Dziś ${d.n} z ${goal} odpowiedzi"><span>${d.n}<small>/${goal}</small></span></div>
+        <div class="today-info">
+          <strong>${met ? "Cel na dziś ✓" : "Cel na dziś"}</strong>
+          <span>🔥 Seria: <b>${streak}</b> ${plural(streak, "dzień", "dni", "dni")}${bestStreak() > streak ? ` · rekord: ${bestStreak()}` : ""}</span>
+          <div class="today-links">
+            <a href="#/statystyki">📊 Statystyki tygodnia</a>
+            <a href="#/zakladki">⭐ Zakładki${marks ? ` (${marks})` : ""}</a>
+          </div>
+        </div>
+        ${buddy(text, met ? "happy" : "")}
+      </section>`;
   }
 
   // wyróżnienie najbliższego egzaminu na stronie głównej
@@ -373,6 +533,8 @@
       <div class="actions">
         <a class="btn primary" style="--accent:${subject.color}" href="#/s/${subject.id}/fiszki">🃏 Fiszki z całości</a>
         <a class="btn" href="#/s/${subject.id}/quiz">✅ Quiz z całości</a>
+        ${openQuestions(subject).length ? `<a class="btn" href="#/s/${subject.id}/otwarte">✍️ Pytania otwarte</a>` : ""}
+        ${subject.exam ? `<a class="btn" href="#/s/${subject.id}/egzamin">📝 Próbny egzamin</a>` : ""}
       </div>` : `
       <div class="empty">
         <p><strong>Ten przedmiot jest w przygotowaniu.</strong></p>
@@ -386,7 +548,7 @@
       </details>`;
   }
 
-  function viewTopic(subject, topic, tab) {
+  function viewTopic(subject, topic, tab, anchor) {
     document.title = topic.title + " – nauka";
     const fc = topicCards(subject, topic);
     const quiz = topic.quiz || [];
@@ -399,11 +561,14 @@
     const base = `#/s/${subject.id}/t/${topic.id}`;
     let body = "";
     if (tab === "notatka") {
-      body = topic.notes ? `<article class="notes">${md(topic.notes)}</article>` : `<div class="empty">Brak notatki.</div>`;
+      body = topic.notes
+        ? `<p class="bm-hint">☆ Dotknij gwiazdki przy nagłówku, żeby dodać zakładkę.</p><article class="notes">${md(topic.notes, `${subject.id}/${topic.id}/`)}</article>`
+        : `<div class="empty">Brak notatki.</div>`;
       body += `
         <div class="actions bottom">
           ${fc.length ? `<a class="btn primary" style="--accent:${subject.color}" href="#/s/${subject.id}/fiszki/${topic.id}">Ucz się z fiszek</a>` : ""}
           ${quiz.length ? `<a class="btn" href="#/s/${subject.id}/quiz/${topic.id}">Sprawdź się w quizie</a>` : ""}
+          ${openQuestions(subject, topic.id).length ? `<a class="btn" href="#/s/${subject.id}/otwarte/${topic.id}">✍️ Pytania otwarte</a>` : ""}
         </div>`;
     } else if (tab === "fiszki") {
       const due = dueCount(fc);
@@ -435,6 +600,15 @@
       </nav>
       ${body}`;
     window.scrollTo(0, 0);
+    // przejście do sekcji (z zakładki albo wyszukiwania) – po przewinięciu strony na górę w obsłudze hashchange
+    const target = anchor && document.getElementById(anchor);
+    if (target) {
+      setTimeout(() => {
+        target.scrollIntoView({ block: "start" });
+        window.scrollBy(0, -80);
+        target.classList.add("flash");
+      }, 30);
+    }
   }
 
   // ---------- fiszki ----------
@@ -466,6 +640,7 @@
       type: "cards", subject, topicId, queue, pos: 0, flipped: false,
       known: 0, unknown: 0, total: queue.length, retried: new Set()
     };
+    say(session, pickOne(SAYS.cards));
     renderCard();
   }
 
@@ -480,6 +655,7 @@
           <h2>Koniec serii!</h2>
           <p>Umiem: <strong>${s.known}</strong> · Do powtórki: <strong>${s.unknown}</strong></p>
           <p>Opanowane w tym zakresie: <strong>${mastery(subjectCards(s.subject, s.topicId))}%</strong></p>
+          ${buddy(...endSay(Math.round((s.known / Math.max(1, s.known + s.unknown)) * 100)), true)}
           <div class="actions center">
             <button class="btn primary" style="--accent:${s.subject.color}" data-action="restart-cards">Jeszcze raz</button>
             <a class="btn" href="${back}">Wróć</a>
@@ -506,7 +682,8 @@
       <div class="grade">
         <button class="btn bad" data-action="grade" data-ok="0">✗ Nie umiem</button>
         <button class="btn good" data-action="grade" data-ok="1">✓ Umiem</button>
-      </div>` : ""}`;
+      </div>` : ""}
+      ${sessionBuddy(s)}`;
   }
 
   function gradeCard(ok) {
@@ -528,6 +705,7 @@
     }
     store.cards[c.key] = { box, due: Date.now() + INTERVALS[box] * DAY };
     saveStore();
+    react(s, ok ? 2 : 0, logAnswer(s.subject, ok, prev.box < MASTERED_BOX && box >= MASTERED_BOX));
     s.pos++;
     s.flipped = false;
     renderCard();
@@ -544,6 +722,7 @@
       return Object.assign({}, q, { order: fixed ? idx : shuffle(idx) });
     });
     session = { type: "quiz", subject, topicId, qs, pos: 0, chosen: null, score: 0 };
+    say(session, pickOne(SAYS.quiz));
     renderQuiz();
   }
 
@@ -563,6 +742,7 @@
           <div class="done-emoji">${pct >= 70 ? "🎉" : "📚"}</div>
           <h2>Wynik: ${s.score} / ${s.qs.length} (${pct}%)</h2>
           <p>${msg}</p>
+          ${buddy(...endSay(pct), true)}
           <div class="actions center">
             <button class="btn primary" style="--accent:${s.subject.color}" data-action="restart-quiz">Jeszcze raz</button>
             <a class="btn" href="${back}">Wróć</a>
@@ -597,12 +777,427 @@
             ${q.src ? `<div class="src">Źródło: ${esc(q.src)}</div>` : ""}
           </div>
           <button class="btn primary big" style="--accent:${s.subject.color}" data-action="next-q">${s.pos + 1 < s.qs.length ? "Dalej ›" : "Zobacz wynik"}</button>` : ""}
+      </div>
+      ${sessionBuddy(s)}`;
+  }
+
+  // ---------- pytania otwarte (w stylu egzaminu) ----------
+  // z każdej sekcji notatki (## nagłówek) powstaje pytanie „Omów: …”, a wzorcową odpowiedzią jest treść sekcji;
+  // temat może też mieć własne pytania: open: [{ q: "pytanie", a: "wzorcowa odpowiedź (markdown)" }]
+  const OPEN_SESSION = 10;
+  const OPEN_SKIP = /zaliczeni|kryteria oceny|^lista |różnice: wykład|rozbieżności|na pamięć|^definicje$|^zakończenie$/i;
+  function keyTerms(text) {
+    const seen = new Set();
+    const out = [];
+    (text.match(/\*\*(.+?)\*\*/g) || []).forEach((m) => {
+      const t = m.slice(2, -2).replace(/[:.,;]+$/, "").trim();
+      const k = fold(t);
+      if (t.length < 3 || t.length > 40 || t.split(/\s+/).length > 4 || /^\d/.test(t) || seen.has(k)) return;
+      seen.add(k);
+      out.push(t);
+    });
+    return out.slice(0, 10);
+  }
+  // pojęcie „użyte”, jeśli w odpowiedzi jest początek każdego jego słowa (odmiana przez przypadki)
+  function termUsed(term, answer) {
+    const words = fold(term).split(/[^a-z0-9]+/).filter((w) => w.length >= 3);
+    if (!words.length) return answer.includes(fold(term));
+    return words.every((w) => answer.includes(w.slice(0, Math.max(3, Math.min(5, w.length - 1)))));
+  }
+  function openQuestions(subject, topicId) {
+    const topics = topicId ? subject.topics.filter((t) => t.id === topicId) : subject.topics;
+    return topics.flatMap((t) => {
+      const own = (t.open || []).map((o) => ({ q: o.q, a: o.a }));
+      const auto = noteSections(t)
+        .filter((sec) => !OPEN_SKIP.test(sec.title) && plain(sec.body).length > 120)
+        .map((sec) => ({ q: /\?$/.test(sec.title) ? sec.title : `Omów: ${sec.title}`, a: sec.body, h: sec.h }));
+      return own.concat(auto).map((o) => Object.assign(o, {
+        key: subject.id + ":o:" + hash(o.q), topic: t.title, tid: t.id, terms: keyTerms(o.a)
+      }));
+    });
+  }
+  function startOpen(subject, topicId) {
+    const all = openQuestions(subject, topicId);
+    // najpierw te jeszcze nieprzerobione albo oznaczone jako „nie umiałam”
+    const qs = shuffle(all).sort((a, b) => (store.open[a.key] === undefined ? -1 : store.open[a.key]) - (store.open[b.key] === undefined ? -1 : store.open[b.key])).slice(0, OPEN_SESSION);
+    session = { type: "open", subject, topicId, qs, pos: 0, shown: false, answer: "", grades: [0, 0, 0] };
+    say(session, pickOne(SAYS.open));
+    renderOpen();
+  }
+  function renderOpen() {
+    const s = session;
+    const back = s.topicId ? `#/s/${s.subject.id}/t/${s.topicId}` : `#/s/${s.subject.id}`;
+    if (s.pos >= s.qs.length) {
+      const pct = Math.round(((s.grades[2] + s.grades[1] / 2) / Math.max(1, s.qs.length)) * 100);
+      app.innerHTML = `
+        <a class="back" href="${back}">‹ Wróć</a>
+        <div class="done">
+          <div class="done-emoji">✍️</div>
+          <h2>Koniec pytań otwartych!</h2>
+          <p>Umiałam: <strong>${s.grades[2]}</strong> · Częściowo: <strong>${s.grades[1]}</strong> · Nie umiałam: <strong>${s.grades[0]}</strong></p>
+          ${buddy(...endSay(pct), true)}
+          <div class="actions center">
+            <button class="btn primary" style="--accent:${s.subject.color}" data-action="restart-open">Kolejne pytania</button>
+            <a class="btn" href="${back}">Wróć</a>
+          </div>
+        </div>`;
+      return;
+    }
+    const q = s.qs[s.pos];
+    let answerPart;
+    if (!s.shown) {
+      answerPart = `
+        <textarea class="open-answer" placeholder="Napisz swoją odpowiedź (albo odpowiedz w myślach i od razu sprawdź)…" rows="7">${esc(s.answer)}</textarea>
+        <button class="btn primary big" style="--accent:${s.subject.color}" data-action="open-show">Pokaż wzorcową odpowiedź</button>`;
+    } else {
+      const ans = fold(s.answer);
+      const terms = s.answer.trim() && q.terms.length ? `
+        <div class="terms">
+          <div class="terms-head">Kluczowe pojęcia w Twojej odpowiedzi: <strong>${q.terms.filter((t) => termUsed(t, ans)).length} / ${q.terms.length}</strong></div>
+          ${q.terms.map((t) => `<span class="term ${termUsed(t, ans) ? "yes" : "no"}">${termUsed(t, ans) ? "✓" : "✗"} ${esc(t)}</span>`).join("")}
+        </div>` : q.terms.length ? `
+        <div class="terms">
+          <div class="terms-head">Pojęcia, które warto użyć:</div>
+          ${q.terms.map((t) => `<span class="term">${esc(t)}</span>`).join("")}
+        </div>` : "";
+      answerPart = `
+        ${s.answer.trim() ? `<div class="my-answer"><div class="label">Twoja odpowiedź</div>${esc(s.answer).replace(/\n/g, "<br>")}</div>` : ""}
+        ${terms}
+        <div class="model-answer notes"><div class="label">Wzorcowa odpowiedź (z notatki)</div>${md(q.a)}</div>
+        <div class="grade three">
+          <button class="btn bad" data-action="open-grade" data-g="0">✗ Nie umiałam</button>
+          <button class="btn mid" data-action="open-grade" data-g="1">≈ Częściowo</button>
+          <button class="btn good" data-action="open-grade" data-g="2">✓ Umiałam</button>
+        </div>`;
+    }
+    app.innerHTML = `
+      <div class="session-top">
+        <a class="back" href="${back}">‹ Zakończ</a>
+        <span class="counter">${s.pos + 1} / ${s.qs.length}</span>
+      </div>
+      ${sessionBar(s, Math.round((s.pos / s.qs.length) * 100))}
+      <div class="quiz-card open-card" style="--accent:${s.subject.color}">
+        <div class="fc-topic">${esc(q.topic)}${store.open[q.key] !== undefined ? ` · ostatnio: ${["nie umiałam", "częściowo", "umiałam"][store.open[q.key]]}` : ""}</div>
+        <div class="quiz-q">${esc(q.q)}</div>
+        ${answerPart}
+      </div>
+      ${sessionBuddy(s)}`;
+  }
+
+  // ---------- próbny egzamin ----------
+  // przedmiot z polem exam: { questions, minutes, pass } – losowe pytania z całego quizu, na czas, wynik dopiero na końcu
+  let examTimer = null;
+  function viewExamIntro(subject) {
+    document.title = "Próbny egzamin – " + subject.short;
+    const ex = subject.exam;
+    const tries = (store.tries[subject.id] || []).slice().reverse();
+    const best = tries.reduce((m, t) => Math.max(m, t.score), 0);
+    app.innerHTML = `
+      <a class="back" href="#/s/${subject.id}">‹ ${esc(subject.short)}</a>
+      <h1>📝 Próbny egzamin</h1>
+      <p class="muted">${subject.icon} ${esc(subject.name)}</p>
+      <div class="panel exam-rules" style="--accent:${subject.color}">
+        <div class="rule"><b>${ex.questions}</b><span>pytań</span></div>
+        <div class="rule"><b>${ex.minutes}</b><span>minut</span></div>
+        <div class="rule"><b>${ex.pass}</b><span>do zaliczenia</span></div>
+      </div>
+      <p>Pytania są losowane z ${subjectQuiz(subject).length} pytań z całego przedmiotu. Jak na prawdziwym egzaminie: odpowiedzi możesz zmieniać i wracać do pytań, a wynik i poprawne odpowiedzi zobaczysz dopiero po oddaniu. Po ${ex.minutes} minutach egzamin kończy się sam.</p>
+      <button class="btn primary big" style="--accent:${subject.color}" data-action="exam-start">Rozpocznij egzamin</button>
+      ${tries.length ? `
+      <h2>Twoje podejścia${best ? ` · najlepszy wynik: ${best}/${ex.questions}` : ""}</h2>
+      <div class="tries">
+        ${tries.slice(0, 10).map((t) => `
+          <div class="try ${t.score >= ex.pass ? "pass" : "fail"}">
+            <span>${new Date(t.at).toLocaleDateString("pl-PL", { day: "numeric", month: "short" })}, ${new Date(t.at).toLocaleTimeString("pl-PL", { hour: "2-digit", minute: "2-digit" })}</span>
+            <strong>${t.score}/${t.total}</strong>
+            <span>${t.score >= ex.pass ? "✓ zaliczony" : "✗ niezaliczony"} · ${Math.ceil(t.secs / 60)} min</span>
+          </div>`).join("")}
+      </div>` : ""}`;
+  }
+  function startExam(subject) {
+    const ex = subject.exam;
+    const qs = shuffle(subjectQuiz(subject)).slice(0, ex.questions).map((q) => {
+      const fixed = q.o.some((o) => FIXED_ORDER.test(o));
+      const idx = q.o.map((_, i) => i);
+      return Object.assign({}, q, { order: fixed ? idx : shuffle(idx) });
+    });
+    session = { type: "exam", subject, qs, pos: 0, answers: qs.map(() => null), started: Date.now(), end: Date.now() + ex.minutes * 60000, finished: false };
+    clearInterval(examTimer);
+    examTimer = setInterval(tickExam, 1000);
+    renderExam();
+  }
+  function timeLeftText(ms) {
+    const sec = Math.max(0, Math.ceil(ms / 1000));
+    return Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0");
+  }
+  function tickExam() {
+    const s = session;
+    if (!s || s.type !== "exam" || s.finished) return clearInterval(examTimer);
+    const left = s.end - Date.now();
+    if (left <= 0) return finishExam();
+    const el = document.querySelector(".exam-timer");
+    if (el) {
+      el.textContent = "⏱ " + timeLeftText(left);
+      el.classList.toggle("low", left < 5 * 60000);
+    }
+  }
+  function renderExam() {
+    const s = session;
+    const q = s.qs[s.pos];
+    const done = s.answers.filter((a) => a !== null).length;
+    app.innerHTML = `
+      <div class="session-top">
+        <button class="back linkish" data-action="exam-quit">‹ Przerwij</button>
+        <span class="exam-timer${s.end - Date.now() < 5 * 60000 ? " low" : ""}">⏱ ${timeLeftText(s.end - Date.now())}</span>
+      </div>
+      <div class="exam-grid" style="--accent:${s.subject.color}">
+        ${s.qs.map((_, i) => `<button class="eg${s.answers[i] !== null ? " done" : ""}${i === s.pos ? " cur" : ""}" data-action="exam-go" data-to="${i}">${i + 1}</button>`).join("")}
+      </div>
+      <div class="quiz-card" style="--accent:${s.subject.color}">
+        <div class="fc-topic">Pytanie ${s.pos + 1} z ${s.qs.length} · odpowiedzi: ${done}/${s.qs.length}</div>
+        <div class="quiz-q">${esc(q.q)}</div>
+        <div class="options">
+          ${q.order.map((i, pos) => `<button class="option${s.answers[s.pos] === i ? " picked" : ""}" data-action="exam-pick" data-i="${i}"><span class="opt-letter">${"ABCDEF"[pos]}</span><span>${esc(q.o[i])}</span></button>`).join("")}
+        </div>
+        <div class="exam-nav">
+          <button class="btn" data-action="exam-go" data-to="${s.pos - 1}" ${s.pos ? "" : "disabled"}>‹ Poprzednie</button>
+          ${s.pos + 1 < s.qs.length
+            ? `<button class="btn primary" style="--accent:${s.subject.color}" data-action="exam-go" data-to="${s.pos + 1}">Następne ›</button>`
+            : `<button class="btn primary" style="--accent:${s.subject.color}" data-action="exam-finish">Oddaj egzamin</button>`}
+        </div>
+      </div>
+      <button class="btn big ghost-finish" data-action="exam-finish">Oddaj egzamin (${done}/${s.qs.length})</button>`;
+  }
+  function finishExam() {
+    const s = session;
+    if (!s || s.type !== "exam" || s.finished) return;
+    s.finished = true;
+    clearInterval(examTimer);
+    const ex = s.subject.exam;
+    const score = s.qs.filter((q, i) => s.answers[i] === q.a).length;
+    const secs = Math.round((Math.min(Date.now(), s.end) - s.started) / 1000);
+    const passed = score >= ex.pass;
+    const tries = store.tries[s.subject.id] = store.tries[s.subject.id] || [];
+    tries.push({ at: new Date().toISOString(), score, total: s.qs.length, secs });
+    if (tries.length > 30) tries.splice(0, tries.length - 30);
+    let goal = false;
+    s.qs.forEach((q, i) => { if (s.answers[i] !== null && logAnswer(s.subject, s.answers[i] === q.a, false)) goal = true; });
+    saveStore();
+    const timeUp = Date.now() >= s.end;
+    const [text, mood] = passed
+      ? [score >= ex.questions - 3 ? "Zdany śpiewająco! Jestem z Ciebie taka dumna 😻🎉" : "Zdany! Na prawdziwym egzaminie też tak będzie 💪🎉", "happy"]
+      : [score >= ex.pass - 3 ? `Zabrakło tylko ${ex.pass - score} ${plural(ex.pass - score, "punktu", "punktów", "punktów")}! Przejrzyj błędy i spróbuj jeszcze raz – jesteś blisko 💗` : "Tym razem się nie udało, ale po to jest próbny egzamin. Zobacz poniżej, co powtórzyć – jestem z Tobą 🐾", "comfort"];
+    const review = s.qs.map((q, i) => ({ q, i, mine: s.answers[i] })).filter((x) => x.mine !== x.q.a);
+    app.innerHTML = `
+      <a class="back" href="#/s/${s.subject.id}/egzamin" data-action="exam-intro">‹ Wróć</a>
+      <div class="done exam-result ${passed ? "pass" : "fail"}">
+        <div class="done-emoji">${passed ? "🎓" : "📚"}</div>
+        <h2>${score} / ${s.qs.length} – ${passed ? "ZALICZONY" : "NIEZALICZONY"}</h2>
+        <p>Próg: ${ex.pass} · czas: ${Math.floor(secs / 60)} min ${secs % 60} s${timeUp ? " (koniec czasu)" : ""}</p>
+        ${buddy(goal ? `${text} A przy okazji: cel dnia zrobiony! 🏆` : text, mood, true)}
+        <div class="actions center">
+          <button class="btn primary" style="--accent:${s.subject.color}" data-action="exam-start">Nowy egzamin</button>
+          <a class="btn" href="#/s/${s.subject.id}">Wróć do przedmiotu</a>
+        </div>
+      </div>
+      ${review.length ? `<h2>Do powtórki (${review.length})</h2>
+      <div class="review">
+        ${review.map(({ q, i, mine }) => `
+          <div class="review-item">
+            <div class="fc-topic">Pytanie ${i + 1} · ${esc(q.topic)}</div>
+            <div class="review-q">${esc(q.q)}</div>
+            ${mine === null ? `<div class="review-mine none">Bez odpowiedzi</div>` : `<div class="review-mine">✗ ${esc(q.o[mine])}</div>`}
+            <div class="review-ok">✓ ${esc(q.o[q.a])}</div>
+            ${q.e ? `<div class="review-e">${esc(q.e)}</div>` : ""}
+          </div>`).join("")}
+      </div>` : ""}`;
+    window.scrollTo(0, 0);
+  }
+
+  // ---------- wyszukiwarka ----------
+  let lastQuery = "";
+  function viewSearch() {
+    document.title = "Szukaj – nauka";
+    app.innerHTML = `
+      <a class="back" href="#/">‹ Przedmioty</a>
+      <h1>🔍 Szukaj</h1>
+      <input type="search" class="search-input" data-action="search" value="${esc(lastQuery)}" placeholder="np. mechanizmy obronne, ANOVA, Rogers…" autocomplete="off" enterkeyhint="search">
+      <div id="search-results"></div>`;
+    const input = app.querySelector(".search-input");
+    renderResults(lastQuery);
+    setTimeout(() => input.focus(), 50);
+  }
+  // fragment tekstu wokół trafienia z podświetleniem
+  function snippet(text, words, size = 70) {
+    const f = fold(text);
+    const first = Math.min(...words.map((w) => f.indexOf(w)).filter((i) => i >= 0));
+    const start = Math.max(0, first - size);
+    const end = Math.min(text.length, first + size * 2);
+    const part = text.slice(start, end);
+    const fp = f.slice(start, end);
+    const marks = new Array(part.length).fill(false);
+    words.forEach((w) => {
+      let i = fp.indexOf(w);
+      while (i >= 0) { for (let k = i; k < i + w.length; k++) marks[k] = true; i = fp.indexOf(w, i + w.length); }
+    });
+    let html = "", open = false;
+    for (let k = 0; k < part.length; k++) {
+      if (marks[k] !== open) { html += marks[k] ? "<mark>" : "</mark>"; open = marks[k]; }
+      html += esc(part[k]);
+    }
+    if (open) html += "</mark>";
+    return (start ? "…" : "") + html + (end < text.length ? "…" : "");
+  }
+  function renderResults(query) {
+    lastQuery = query;
+    const box = document.getElementById("search-results");
+    if (!box) return;
+    // dłuższe słowa skracamy o końcówkę, żeby znaleźć inne formy („obronne” → „obronny”)
+    const words = fold(query).split(/\s+/).filter((w) => w.length >= 2).map((w) => (w.length >= 5 ? w.slice(0, Math.max(4, w.length - 2)) : w));
+    if (!words.length) {
+      box.innerHTML = `<p class="muted">Wpisz co najmniej 2 litery. Szukam w notatkach, fiszkach i pytaniach ze wszystkich przedmiotów (wielkość liter i polskie znaki nie mają znaczenia).</p>`;
+      return;
+    }
+    const hit = (text) => { const f = fold(text); return words.every((w) => f.includes(w)); };
+    const notes = [], cards = [], quiz = [];
+    SUBJECTS.forEach((sub) => sub.topics.forEach((t) => {
+      noteSections(t).forEach((sec) => {
+        const text = plain(sec.title + " " + sec.body);
+        if (hit(text)) notes.push({ sub, t, sec, text });
+      });
+      (t.flashcards || []).forEach(([q, a]) => { if (hit(q + " " + a)) cards.push({ sub, t, q, a }); });
+      (t.quiz || []).forEach((q) => { if (hit(q.q + " " + q.o[q.a])) quiz.push({ sub, t, q }); });
+    }));
+    const LIMIT = 40;
+    const where = (sub, t, extra) => `<div class="res-where">${sub.icon} ${esc(sub.short)} · ${esc(t.title)}${extra ? ` › ${esc(extra)}` : ""}</div>`;
+    const group = (title, list, item) => list.length ? `
+      <h2>${title} <span class="muted">(${list.length})</span></h2>
+      <div class="results">${list.slice(0, LIMIT).map(item).join("")}</div>
+      ${list.length > LIMIT ? `<p class="muted">…i jeszcze ${list.length - LIMIT}. Doprecyzuj wyszukiwanie.</p>` : ""}` : "";
+    const total = notes.length + cards.length + quiz.length;
+    box.innerHTML = !total ? `<div class="empty">Nic nie znalazłam dla „${esc(query)}”. Spróbuj innego słowa albo krótszej formy (np. „obron” zamiast „obronnych”).</div>` :
+      group("📖 Notatki", notes, (r) => `<a class="result" href="#/s/${r.sub.id}/t/${r.t.id}/notatka/${r.sec.h}">${where(r.sub, r.t, r.sec.title)}<div class="res-text">${snippet(r.text, words)}</div></a>`) +
+      group("🃏 Fiszki", cards, (r) => `<a class="result" href="#/s/${r.sub.id}/t/${r.t.id}/fiszki">${where(r.sub, r.t)}<div class="res-q">${snippet(r.q, words, 200)}</div><div class="res-text">${snippet(r.a, words, 90)}</div></a>`) +
+      group("✅ Pytania z quizów", quiz, (r) => `<a class="result" href="#/s/${r.sub.id}/t/${r.t.id}/quiz">${where(r.sub, r.t)}<div class="res-q">${snippet(r.q.q, words, 200)}</div><div class="res-text">✓ ${snippet(r.q.o[r.q.a], words, 90)}</div></a>`);
+  }
+
+  // ---------- zakładki ----------
+  function viewMarks() {
+    document.title = "Zakładki – nauka";
+    const items = Object.entries(store.marks).map(([key, m]) => {
+      const [sid, tid, h] = key.split("/");
+      const sub = getSubject(sid);
+      const t = sub && sub.topics.find((x) => x.id === tid);
+      return t ? { key, m, sub, t, h } : null;
+    }).filter(Boolean);
+    const bySubject = SUBJECTS.map((sub) => ({ sub, list: items.filter((x) => x.sub === sub).sort((a, b) => b.m.at - a.m.at) })).filter((g) => g.list.length);
+    app.innerHTML = `
+      <a class="back" href="#/">‹ Przedmioty</a>
+      <h1>⭐ Zakładki</h1>
+      ${!items.length ? `<div class="empty"><p><strong>Nie masz jeszcze zakładek.</strong></p><p>W notatce dotknij ☆ przy nagłówku sekcji, a pojawi się tutaj – np. trudne fragmenty do powtórki przed egzaminem.</p></div>` :
+      bySubject.map(({ sub, list }) => `
+        <h2>${sub.icon} ${esc(sub.short)}</h2>
+        <div class="results">
+          ${list.map((x) => `
+            <div class="mark-row" style="--accent:${sub.color}">
+              <a class="result" href="#/s/${sub.id}/t/${x.t.id}/notatka/${x.h}">
+                <div class="res-where">${esc(x.t.title)}</div>
+                <div class="res-q">★ ${esc(x.m.t)}</div>
+              </a>
+              <button class="mark-del" data-action="bookmark-del" data-key="${x.key}" aria-label="Usuń zakładkę">✕</button>
+            </div>`).join("")}
+        </div>`).join("")}`;
+  }
+
+  // ---------- statystyki tygodnia ----------
+  const WEEKDAYS = ["nd", "pn", "wt", "śr", "cz", "pt", "sb"];
+  function dayLabel(key, long) {
+    const [y, m, d] = key.split("-").map(Number);
+    const date = new Date(y, m - 1, d);
+    return long ? date.toLocaleDateString("pl-PL", { weekday: "long", day: "numeric", month: "long" }) : WEEKDAYS[date.getDay()];
+  }
+  function dayDetail(key) {
+    const d = dayStats(key);
+    const label = key === dayKey() ? "Dziś" : dayLabel(key, true).replace(/^./, (c) => c.toUpperCase());
+    if (!d.n) return `<strong>${label}:</strong> bez nauki.`;
+    const subs = Object.entries(d.s).sort((a, b) => b[1] - a[1]).map(([id, n]) => { const sub = getSubject(id); return sub ? `${sub.icon} ${esc(sub.short)}: ${n}` : ""; }).filter(Boolean).join(" · ");
+    return `<strong>${label}:</strong> ${d.n} ${plural(d.n, "odpowiedź", "odpowiedzi", "odpowiedzi")}, ${Math.round((d.ok / d.n) * 100)}% dobrych${d.m ? `, ${d.m} ${plural(d.m, "nowo opanowana fiszka", "nowo opanowane fiszki", "nowo opanowanych fiszek")}` : ""}${goalMet(key) ? " · cel ✓" : ""}<br><span class="muted">${subs}</span>`;
+  }
+  function viewStats() {
+    document.title = "Statystyki – nauka";
+    const today = dayKey();
+    const week = [6, 5, 4, 3, 2, 1, 0].map((n) => shiftDay(today, -n));
+    const prevWeek = week.map((k) => shiftDay(k, -7));
+    const sum = (keys, f) => keys.reduce((acc, k) => acc + (dayStats(k)[f] || 0), 0);
+    const n = sum(week, "n"), ok = sum(week, "ok"), m = sum(week, "m"), prevN = sum(prevWeek, "n");
+    const goalDays = week.filter(goalMet).length;
+    const max = Math.max(store.goal, ...week.map((k) => dayStats(k).n)) * 1.15;
+    const streak = currentStreak();
+    const perSubject = SUBJECTS.map((sub) => ({ sub, n: week.reduce((acc, k) => acc + (dayStats(k).s[sub.id] || 0), 0) })).filter((x) => x.n).sort((a, b) => b.n - a.n);
+    const subMax = perSubject.length ? perSubject[0].n : 1;
+    let trend = "";
+    if (prevN && n) {
+      const diff = Math.round(((n - prevN) / prevN) * 100);
+      trend = diff >= 0 ? `▲ ${diff}% więcej niż w poprzednim tygodniu` : `▼ ${-diff}% mniej niż w poprzednim tygodniu`;
+    } else if (n && !prevN) trend = "Pierwszy tydzień nauki w aplikacji 🌱";
+    let text;
+    if (!n) text = "W tym tygodniu jeszcze nic – ale od dziś możemy to zmienić! 🐾";
+    else if (goalDays >= 5) text = `Cel zrobiony przez ${goalDays} dni na 7 – jesteś niesamowita! 😻`;
+    else if (goalDays >= 1) text = `Cel osiągnięty ${goalDays} ${plural(goalDays, "raz", "razy", "razy")} w tym tygodniu. Każdy dzień się liczy 💗`;
+    else text = "Już coś jest! Spróbuj dobić do celu choć raz w tym tygodniu 🌱";
+    app.innerHTML = `
+      <a class="back" href="#/">‹ Przedmioty</a>
+      <h1>📊 Statystyki tygodnia</h1>
+      <p class="muted">Ostatnie 7 dni · ${dayLabel(week[0], true)} – dziś</p>
+      <div class="tiles">
+        <div class="tile"><b>${n}</b><span>${plural(n, "odpowiedź", "odpowiedzi", "odpowiedzi")}</span></div>
+        <div class="tile"><b>${n ? Math.round((ok / n) * 100) + "%" : "–"}</b><span>dobrych odpowiedzi</span></div>
+        <div class="tile"><b>${m}</b><span>nowo opanowanych fiszek</span></div>
+        <div class="tile"><b>${goalDays}/7</b><span>dni z celem</span></div>
+        <div class="tile"><b>🔥 ${streak}</b><span>seria (rekord: ${bestStreak()})</span></div>
+      </div>
+      ${trend ? `<p class="trend">${trend}</p>` : ""}
+      <div class="panel chart-panel">
+        <div class="chart-title">Odpowiedzi dziennie</div>
+        <div class="week-chart" role="img" aria-label="Odpowiedzi w ostatnich 7 dniach: ${week.map((k) => `${dayLabel(k)} ${dayStats(k).n}`).join(", ")}">
+          <div class="wc-goal" style="bottom:${(store.goal / max) * 100}%"><span>cel ${store.goal}</span></div>
+          ${week.map((k) => {
+            const v = dayStats(k).n;
+            return `<button class="wc-col${goalMet(k) ? " met" : ""}${k === today ? " sel" : ""}" data-action="stat-day" data-day="${k}" aria-label="${dayLabel(k, true)}: ${v}">
+              <span class="wc-val">${v || ""}</span>
+              <span class="wc-bar" style="height:${(v / max) * 100}%"></span>
+            </button>`;
+          }).join("")}
+        </div>
+        <div class="wc-labels">${week.map((k) => `<span${k === today ? ' class="today-l"' : ""}>${k === today ? "dziś" : dayLabel(k)}</span>`).join("")}</div>
+        <div class="wc-legend"><span><i class="lg met"></i>cel osiągnięty</span><span><i class="lg"></i>poniżej celu</span><span><i class="lg goal"></i>dzienny cel</span></div>
+        <div class="wc-detail" id="wc-detail">${dayDetail(today)}</div>
+      </div>
+      ${buddy(text, goalDays ? "happy" : "")}
+      ${perSubject.length ? `
+      <h2>Przedmioty w tym tygodniu</h2>
+      <div class="panel subj-bars">
+        ${perSubject.map(({ sub, n: v }) => `
+          <div class="sb-row">
+            <span class="sb-name">${sub.icon} ${esc(sub.short)}</span>
+            <span class="sb-track"><span class="sb-fill" style="width:${(v / subMax) * 100}%;background:${sub.color}"></span></span>
+            <span class="sb-val">${v}</span>
+          </div>`).join("")}
+      </div>` : ""}
+      <h2>🎯 Dzienny cel</h2>
+      <div class="panel">
+        <p>Ile odpowiedzi dziennie (fiszki, quizy, pytania otwarte, egzamin)?</p>
+        <div class="goal-pick">
+          ${GOALS.map((g) => `<button class="btn${g === store.goal ? " primary" : ""}" data-action="set-goal" data-goal="${g}">${g}</button>`).join("")}
+        </div>
+        <p class="muted small-note">Seria dni rośnie za każdy dzień z osiągniętym celem. Jeśli dziś jeszcze nie zrobiłaś celu, seria z poprzednich dni nadal trwa do północy.</p>
       </div>`;
   }
 
   // ---------- zdarzenia ----------
   // ---------- kopia zapasowa ----------
   const BACKUP_APP = "nauka-drugi-rok";
+  const BACKUP_FIELDS = ["cards", "quiz", "exams", "pets", "days", "goal", "bestStreak", "marks", "open", "tries"];
 
   function hasProgress() {
     return Object.keys(store.cards).length + Object.keys(store.quiz).length + Object.keys(store.exams).length > 0;
@@ -650,7 +1245,7 @@
 
   async function exportBackup() {
     const now = new Date();
-    const payload = { app: BACKUP_APP, version: 1, created: now.toISOString(), data: { cards: store.cards, quiz: store.quiz, exams: store.exams, pets: store.pets } };
+    const payload = { app: BACKUP_APP, version: 1, created: now.toISOString(), data: BACKUP_FIELDS.reduce((o, k) => Object.assign(o, { [k]: store[k] }), {}) };
     const stamp = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0");
     const name = `nauka-kopia-${stamp}.json`;
     const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
@@ -696,10 +1291,10 @@
       const when = new Date(payload.created).toLocaleString("pl-PL", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" });
       const ok = confirm(`Wczytać kopię z ${when}?\n\nW kopii: ${summary(data)}.\n\nObecne postępy w aplikacji zostaną zastąpione.`);
       if (!ok) return viewBackup({ type: "info", text: "Wczytywanie anulowane – nic nie zostało zmienione." });
-      store.cards = data.cards || {};
-      store.quiz = data.quiz || {};
-      store.exams = data.exams || {};
-      store.pets = Math.max(store.pets, Number(data.pets) || 0);
+      const fresh = STORE_DEFAULTS();
+      const pets = store.pets;
+      BACKUP_FIELDS.forEach((k) => { store[k] = data[k] !== undefined && data[k] !== null ? data[k] : fresh[k]; });
+      store.pets = Math.max(pets, Number(data.pets) || 0);
       store.lastBackup = payload.created;
       saveStore();
       viewBackup({ type: "ok", text: `✅ Postępy wczytane z kopii z ${when}.` });
@@ -727,8 +1322,58 @@
     viewSubject(subject);
   });
 
+  app.addEventListener("input", (ev) => {
+    if (ev.target.matches('[data-action="search"]')) renderResults(ev.target.value);
+  });
+
   app.addEventListener("click", (ev) => {
     const el = ev.target.closest("[data-action]");
+    const act = el && el.dataset.action;
+    if (act === "bookmark") {
+      const key = el.dataset.key;
+      if (store.marks[key]) delete store.marks[key];
+      else store.marks[key] = { t: el.dataset.title, at: Date.now() };
+      saveStore();
+      const on = !!store.marks[key];
+      el.classList.toggle("on", on);
+      el.textContent = on ? "★" : "☆";
+      el.setAttribute("aria-label", on ? "Usuń zakładkę" : "Dodaj zakładkę");
+      return;
+    }
+    if (act === "bookmark-del") {
+      delete store.marks[el.dataset.key];
+      saveStore();
+      viewMarks();
+      return;
+    }
+    if (act === "set-goal") {
+      store.goal = Number(el.dataset.goal);
+      const d = store.days[dayKey()];
+      if (d) d.g = store.goal;
+      store.bestStreak = Math.max(store.bestStreak, currentStreak());
+      saveStore();
+      viewStats();
+      return;
+    }
+    if (act === "stat-day") {
+      app.querySelectorAll(".wc-col.sel").forEach((c) => c.classList.remove("sel"));
+      el.classList.add("sel");
+      document.getElementById("wc-detail").innerHTML = dayDetail(el.dataset.day);
+      return;
+    }
+    // wynik egzaminu ma ten sam adres co ekran startowy, więc przechodzimy bez zmiany hash
+    if (act === "exam-intro") {
+      ev.preventDefault();
+      session = null;
+      viewExamIntro(currentSubject());
+      window.scrollTo(0, 0);
+      return;
+    }
+    if (act === "exam-start") {
+      const subject = currentSubject();
+      if (subject && subject.exam) startExam(subject);
+      return;
+    }
     if (el && el.dataset.action === "backup-export") {
       exportBackup();
       return;
@@ -753,7 +1398,9 @@
       startFlashcards(session.subject, session.topicId);
     } else if (action === "answer" && session.chosen === null) {
       session.chosen = Number(el.dataset.i);
-      if (session.chosen === session.qs[session.pos].a) session.score++;
+      const ok = session.chosen === session.qs[session.pos].a;
+      if (ok) session.score++;
+      react(session, ok ? 2 : 0, logAnswer(session.subject, ok, false));
       renderQuiz();
     } else if (action === "next-q") {
       session.pos++;
@@ -762,6 +1409,42 @@
       window.scrollTo(0, 0);
     } else if (action === "restart-quiz") {
       startQuiz(session.subject, session.topicId);
+    } else if (action === "open-show") {
+      const ta = app.querySelector(".open-answer");
+      session.answer = ta ? ta.value : "";
+      session.shown = true;
+      renderOpen();
+    } else if (action === "open-grade") {
+      const g = Number(el.dataset.g);
+      const q = session.qs[session.pos];
+      store.open[q.key] = g;
+      session.grades[g]++;
+      react(session, g, logAnswer(session.subject, g === 2, false));
+      session.pos++;
+      session.shown = false;
+      session.answer = "";
+      renderOpen();
+      window.scrollTo(0, 0);
+    } else if (action === "restart-open") {
+      startOpen(session.subject, session.topicId);
+    } else if (session.type === "exam" && !session.finished) {
+      if (action === "exam-pick") {
+        session.answers[session.pos] = Number(el.dataset.i);
+        renderExam();
+      } else if (action === "exam-go") {
+        const to = Number(el.dataset.to);
+        if (to >= 0 && to < session.qs.length) { session.pos = to; renderExam(); window.scrollTo(0, 0); }
+      } else if (action === "exam-finish") {
+        const empty = session.answers.filter((a) => a === null).length;
+        if (!empty || confirm(`Bez odpowiedzi: ${empty} ${plural(empty, "pytanie", "pytania", "pytań")}. Oddać egzamin?`)) finishExam();
+      } else if (action === "exam-quit") {
+        if (confirm("Przerwać egzamin? To podejście nie zostanie zapisane.")) {
+          clearInterval(examTimer);
+          const subject = session.subject;
+          session = null;
+          viewExamIntro(subject);
+        }
+      }
     }
   });
 
@@ -781,8 +1464,12 @@
   // ---------- routing ----------
   function route() {
     session = null;
+    clearInterval(examTimer);
     const parts = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
     if (parts[0] === "kopia") return viewBackup();
+    if (parts[0] === "szukaj") return viewSearch();
+    if (parts[0] === "zakladki") return viewMarks();
+    if (parts[0] === "statystyki") return viewStats();
     if (parts[0] !== "s") return viewHome();
     const subject = getSubject(parts[1]);
     if (!subject) return viewHome();
@@ -791,12 +1478,17 @@
     if (sub === "t") {
       const topic = subject.topics.find((t) => t.id === parts[3]);
       if (!topic) return viewSubject(subject);
-      return viewTopic(subject, topic, parts[4]);
+      return viewTopic(subject, topic, parts[4], parts[5]);
     }
     if (sub === "fiszki") {
       if (!subjectCards(subject, parts[3]).length) return viewSubject(subject);
       return startFlashcards(subject, parts[3]);
     }
+    if (sub === "otwarte") {
+      if (!openQuestions(subject, parts[3]).length) return viewSubject(subject);
+      return startOpen(subject, parts[3]);
+    }
+    if (sub === "egzamin" && subject.exam && subjectQuiz(subject).length) return viewExamIntro(subject);
     if (sub === "quiz") {
       if (!subjectQuiz(subject, parts[3]).length) return viewSubject(subject);
       return startQuiz(subject, parts[3]);
@@ -804,8 +1496,6 @@
     viewSubject(subject);
   }
 
-  window.addEventListener("hashchange", () => { route(); window.scrollTo(0, 0); });
-  route();
 
   // ---------- kotki do głaskania ----------
   // co jakiś czas zza krawędzi ekranu wygląda kotek w losowym kolorze; dotknięcie = głaskanie, potem kotek znika
@@ -922,4 +1612,7 @@
   window.addEventListener("online", updateOnline);
   window.addEventListener("offline", updateOnline);
   updateOnline();
+  // ---------- start ----------
+  window.addEventListener("hashchange", () => { route(); window.scrollTo(0, 0); });
+  route();
 })();

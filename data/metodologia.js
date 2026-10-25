@@ -111,6 +111,8 @@ window.SUBJECTS = window.SUBJECTS || [];
     short: "Metodologia",
     icon: "📊",
     color: "#e64980",
+    // egzamin z wykładu: 30 pytań w 30 minut, zaliczenie od 16 poprawnych
+    exam: { questions: 30, minutes: 30, pass: 16 },
     sources: [
       "Wykłady 01–09: Organizacja, Proces badawczy, Zmienne, Hipotezy, Opis statystyczny, Analiza korelacji, Porównywanie średnich (2 części), Dwuczynnikowa ANOVA",
       "Procedury badawcze.pdf",

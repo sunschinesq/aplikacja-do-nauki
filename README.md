@@ -21,10 +21,17 @@ Cała aplikacja jest w różowej kolorystyce (jasny i ciemny motyw).
 - **Notatki** – przejrzyste opracowanie każdego tematu (tabele, listy, „Na pamięć”).
 - **Fiszki** – dotknij karty, żeby zobaczyć odpowiedź, i oceń się: „Umiem” albo „Nie umiem”. Działa system pudełek (Leitnera): fiszki, których nie umiesz, wracają częściej.
 - **Quiz** – pytania jednokrotnego wyboru z wyjaśnieniem i zapisem najlepszego wyniku.
+- **Dzienny cel i seria dni** – na stronie głównej kółko „Cel na dziś” (domyślnie 20 odpowiedzi: fiszki, quizy, pytania otwarte, egzamin) i 🔥 seria dni z osiągniętym celem (plus rekord). Cel można zmienić w statystykach (10–100).
+- **Statystyki tygodnia** – ostatnie 7 dni: wykres odpowiedzi dziennie z linią celu (dotknij słupka, żeby zobaczyć szczegóły dnia), skuteczność, nowo opanowane fiszki, dni z celem, porównanie z poprzednim tygodniem i podział na przedmioty.
+- **Szukaj** – jedno pole na stronie głównej przeszukuje notatki, fiszki i pytania ze wszystkich przedmiotów (bez znaczenia wielkość liter, polskie znaki i końcówki). Wynik z notatki przenosi od razu do właściwej sekcji.
+- **Zakładki w notatkach** – gwiazdka ☆ przy każdym nagłówku sekcji. Lista zakładek (⭐ na stronie głównej) prowadzi prosto do zaznaczonego fragmentu.
+- **Pytania otwarte w stylu egzaminu** – „Omów: …” dla każdej sekcji notatek (seria 10 pytań z przedmiotu albo z tematu). Piszesz odpowiedź, a aplikacja pokazuje, które kluczowe pojęcia z notatki udało się użyć, wzorcową odpowiedź i ocenę: umiałam / częściowo / nie umiałam. Najpierw trafiają pytania nieprzerobione i te, z którymi było trudno. Temat może mieć też własne pytania w polu `open`.
+- **Próbny egzamin z metodologii** – 30 losowych pytań, 30 minut, zaliczenie od 16 – jak na prawdziwym egzaminie. Można zmieniać odpowiedzi i skakać między pytaniami, wynik i błędy z wyjaśnieniami pojawiają się po oddaniu (albo po końcu czasu). Historia podejść zapisuje się w aplikacji. Inny przedmiot dostanie egzamin po dopisaniu `exam: { questions, minutes, pass }` w jego pliku.
+- **Kotek, który reaguje** – w fiszkach, quizach i pytaniach otwartych obok siedzi szary kotek z chmurką: chwali za dobre odpowiedzi (i serie „3 z rzędu!”), pociesza przy błędach – a gdy nie wychodzi kilka razy pod rząd, podpowiada notatkę albo przerwę. Na koniec serii komentuje wynik.
 - **Kotek na paskach postępu** – szary kotek przechodzi po każdym pasku do Twojego wyniku (w fiszkach i quizie idzie dalej po każdej odpowiedzi), a w spoczynku macha ogonkiem i mruga.
 - **Kotki do głaskania** – co jakiś czas (mniej więcej co 1–2 minuty) zza krawędzi ekranu wygląda kotek w losowym kolorze: szary, rudy, czarny, biały, kremowy, szylkretowy, bury albo liliowy. Dotknij go, żeby go pogłaskać: zmruży oczka, zamruczy, puści serduszka i zniknie. Jeśli go nie pogłaszczesz, sam odejdzie po kilku sekundach. Liczba pogłaskanych kotków jest na dole strony głównej (i w kopii zapasowej).
 - **Odliczanie do egzaminu** – w każdym przedmiocie przycisk „Ustaw datę egzaminu” (kalendarz iPada). Na stronie głównej najbliższy egzamin jest wyróżniony dużą kartą (licznik dni, postęp, plan fiszek na dzień, przyciski „Ucz się teraz” i „Quiz”, lista kolejnych egzaminów), a przedmioty z egzaminami są na górze listy, od najbliższego. Aplikacja podpowiada też, ile fiszek zostało do opanowania i ile to dziennie. Datę można zmienić lub usunąć w każdej chwili.
-- **Postępy** zapisują się w przeglądarce na tym urządzeniu (localStorage) – razem z datami egzaminów. Odświeżanie strony ich nie kasuje; znikają tylko po wyczyszczeniu danych Safari, w trybie prywatnym albo (w zwykłej karcie Safari) po ok. 7 dniach bez otwierania strony.
+- **Postępy** zapisują się w przeglądarce na tym urządzeniu (localStorage) – razem z datami egzaminów, celem, statystykami, zakładkami i podejściami do egzaminu (wszystko to trafia też do kopii zapasowej). Odświeżanie strony ich nie kasuje; znikają tylko po wyczyszczeniu danych Safari, w trybie prywatnym albo (w zwykłej karcie Safari) po ok. 7 dniach bez otwierania strony.
 - **Tryb offline** – po pierwszym otwarciu z internetem aplikacja zapisuje swoje pliki na urządzeniu (`sw.js`) i działa też bez sieci (na dole pojawia się wtedy plakietka „Brak internetu”). Z internetem zawsze pobiera najnowszą wersję, więc aktualizacje przychodzą same – najpóźniej przy kolejnym otwarciu.
 - **Kopia zapasowa** – link na dole strony głównej. „Zapisz kopię” tworzy plik `nauka-kopia-RRRR-MM-DD.json` (na iPadzie: Zachowaj w Plikach → iCloud Drive), „Wybierz plik kopii” przywraca z niego wszystkie postępy. Gdy kopia jest starsza niż 7 dni, link przypomina o nowej.
 
@@ -64,7 +71,8 @@ Każdy temat w `data/*.js` ma postać:
   title: "Psychoanaliza klasyczna (Freud)",
   notes: `## Nagłówek\n- punkt\n> Na pamięć: ...`,
   flashcards: [["pytanie", "odpowiedź"]],
-  quiz: [{ q: "pytanie", o: ["A", "B", "C"], a: 1, e: "wyjaśnienie" }]
+  quiz: [{ q: "pytanie", o: ["A", "B", "C"], a: 1, e: "wyjaśnienie" }],
+  open: [{ q: "pytanie otwarte (opcjonalnie)", a: "wzorcowa odpowiedź" }]
 }
 ```
 
