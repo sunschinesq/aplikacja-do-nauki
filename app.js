@@ -17,9 +17,9 @@
     try {
       const raw = localStorage.getItem(STORE_KEY);
       const data = raw ? JSON.parse(raw) : {};
-      return { cards: data.cards || {}, quiz: data.quiz || {}, exams: data.exams || {} };
+      return { cards: data.cards || {}, quiz: data.quiz || {}, exams: data.exams || {}, lastBackup: data.lastBackup || null };
     } catch (e) {
-      return { cards: {}, quiz: {}, exams: {} };
+      return { cards: {}, quiz: {}, exams: {}, lastBackup: null };
     }
   }
   let store = loadStore();
@@ -229,7 +229,8 @@
       </header>
       ${next ? examSpotlight(next.s, next.exam, upcoming.slice(1)) : `
       <div class="exam-hint">📅 Ustaw daty egzaminów w przedmiotach, a tutaj pojawi się odliczanie do najbliższego.</div>`}
-      <div class="subject-grid">${cards}</div>`;
+      <div class="subject-grid">${cards}</div>
+      <a class="backup-link${backupOverdue() ? " overdue" : ""}" href="#/kopia">💾 Kopia zapasowa postępów · ${lastBackupText()}${backupOverdue() ? (store.lastBackup ? " – czas na nową kopię!" : " – zrób pierwszą!") : ""}</a>`;
   }
 
   // wyróżnienie najbliższego egzaminu na stronie głównej
@@ -557,12 +558,122 @@
   }
 
   // ---------- zdarzenia ----------
+  // ---------- kopia zapasowa ----------
+  const BACKUP_APP = "nauka-drugi-rok";
+
+  function hasProgress() {
+    return Object.keys(store.cards).length + Object.keys(store.quiz).length + Object.keys(store.exams).length > 0;
+  }
+  function lastBackupText() {
+    if (!store.lastBackup) return "jeszcze nie zrobiona";
+    const days = Math.round((Date.now() - new Date(store.lastBackup).getTime()) / DAY);
+    return days < 1 ? "ostatnia: dziś" : days === 1 ? "ostatnia: wczoraj" : `ostatnia: ${days} dni temu`;
+  }
+  function backupOverdue() {
+    if (!hasProgress()) return false;
+    return !store.lastBackup || Date.now() - new Date(store.lastBackup).getTime() > 7 * DAY;
+  }
+  function summary(data) {
+    const cards = Object.keys(data.cards || {}).length;
+    const known = Object.values(data.cards || {}).filter((c) => c.box >= MASTERED_BOX).length;
+    const quizzes = Object.keys(data.quiz || {}).length;
+    const exams = Object.keys(data.exams || {}).length;
+    return `${cards} ${plural(cards, "przerobiona fiszka", "przerobione fiszki", "przerobionych fiszek")} (opanowane: ${known}), ` +
+      `${quizzes} ${plural(quizzes, "wynik quizu", "wyniki quizów", "wyników quizów")}, ` +
+      `${exams} ${plural(exams, "data egzaminu", "daty egzaminów", "dat egzaminów")}`;
+  }
+
+  function viewBackup(message) {
+    document.title = "Kopia zapasowa – nauka";
+    app.innerHTML = `
+      <a class="back" href="#/">‹ Przedmioty</a>
+      <h1>💾 Kopia zapasowa</h1>
+      <p class="muted">Postępy są zapisane tylko w Safari na tym iPadzie. Kopia w pliku chroni je przed wyczyszczeniem danych przeglądarki i pozwala przenieść je na inne urządzenie.</p>
+      ${message ? `<div class="backup-msg ${message.type}">${message.text}</div>` : ""}
+      <div class="panel backup-panel">
+        <h3>Zapisz postępy do pliku</h3>
+        <p>Teraz w aplikacji: <strong>${summary(store)}</strong>.</p>
+        <p class="muted">Ostatnia kopia: ${store.lastBackup ? new Date(store.lastBackup).toLocaleString("pl-PL", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "jeszcze nie zrobiona"}.</p>
+        <button class="btn primary big" data-action="backup-export">⬇️ Zapisz kopię</button>
+        <p class="muted small-note">Na iPadzie wybierz „Zachowaj w Plikach” i np. folder iCloud Drive – wtedy kopia przetrwa nawet zmianę urządzenia. Najlepiej robić ją raz w tygodniu.</p>
+      </div>
+      <div class="panel backup-panel">
+        <h3>Wczytaj postępy z pliku</h3>
+        <p class="muted">Wybierz wcześniej zapisany plik <em>nauka-kopia-….json</em>. Obecne postępy w aplikacji zostaną zastąpione postępami z kopii.</p>
+        <label class="btn big backup-pick">⬆️ Wybierz plik kopii<input type="file" accept=".json,application/json" data-action="backup-import" class="file-input"></label>
+      </div>`;
+    window.scrollTo(0, 0);
+  }
+
+  async function exportBackup() {
+    const now = new Date();
+    const payload = { app: BACKUP_APP, version: 1, created: now.toISOString(), data: { cards: store.cards, quiz: store.quiz, exams: store.exams } };
+    const stamp = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0");
+    const name = `nauka-kopia-${stamp}.json`;
+    const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
+    let done = false;
+    // iPad: arkusz udostępniania pozwala od razu zapisać plik w Plikach / iCloud Drive
+    try {
+      const file = new File([blob], name, { type: "application/json" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: "Kopia postępów – nauka" });
+        done = true;
+      }
+    } catch (e) {
+      if (e && e.name === "AbortError") return viewBackup({ type: "info", text: "Zapisywanie anulowane – kopia nie została zrobiona." });
+    }
+    if (!done) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    }
+    store.lastBackup = now.toISOString();
+    saveStore();
+    viewBackup({ type: "ok", text: `✅ Kopia zapisana jako <strong>${name}</strong>.` });
+  }
+
+  function importBackup(file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      let payload;
+      try {
+        payload = JSON.parse(reader.result);
+      } catch (e) {
+        return viewBackup({ type: "err", text: "To nie jest plik kopii – nie udało się go odczytać." });
+      }
+      const data = payload && payload.app === BACKUP_APP && payload.data;
+      if (!data || typeof data.cards !== "object" || typeof data.quiz !== "object") {
+        return viewBackup({ type: "err", text: "Ten plik nie jest kopią z tej aplikacji." });
+      }
+      const when = new Date(payload.created).toLocaleString("pl-PL", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" });
+      const ok = confirm(`Wczytać kopię z ${when}?\n\nW kopii: ${summary(data)}.\n\nObecne postępy w aplikacji zostaną zastąpione.`);
+      if (!ok) return viewBackup({ type: "info", text: "Wczytywanie anulowane – nic nie zostało zmienione." });
+      store.cards = data.cards || {};
+      store.quiz = data.quiz || {};
+      store.exams = data.exams || {};
+      store.lastBackup = payload.created;
+      saveStore();
+      viewBackup({ type: "ok", text: `✅ Postępy wczytane z kopii z ${when}.` });
+    };
+    reader.onerror = () => viewBackup({ type: "err", text: "Nie udało się odczytać pliku." });
+    reader.readAsText(file);
+  }
+
   // data egzaminu (widok przedmiotu)
   function currentSubject() {
     const parts = location.hash.replace(/^#\/?/, "").split("/");
     return parts[0] === "s" ? getSubject(parts[1]) : null;
   }
   app.addEventListener("change", (ev) => {
+    if (ev.target.matches('[data-action="backup-import"]')) {
+      if (ev.target.files && ev.target.files[0]) importBackup(ev.target.files[0]);
+      return;
+    }
     if (!ev.target.matches('[data-action="exam-date"]')) return;
     const subject = currentSubject();
     if (!subject) return;
@@ -574,6 +685,10 @@
 
   app.addEventListener("click", (ev) => {
     const el = ev.target.closest("[data-action]");
+    if (el && el.dataset.action === "backup-export") {
+      exportBackup();
+      return;
+    }
     if (el && el.dataset.action === "exam-clear") {
       const subject = currentSubject();
       if (subject && confirm("Usunąć datę egzaminu z przedmiotu „" + subject.short + "”?")) {
@@ -623,6 +738,7 @@
   function route() {
     session = null;
     const parts = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
+    if (parts[0] === "kopia") return viewBackup();
     if (parts[0] !== "s") return viewHome();
     const subject = getSubject(parts[1]);
     if (!subject) return viewHome();
