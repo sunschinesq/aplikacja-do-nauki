@@ -189,9 +189,44 @@
   }
 
   // ---------- widoki ----------
-  function progressBar(pct, color) {
-    return `<div class="bar"><div class="bar-fill" style="width:${pct}%;background:${color}"></div></div>`;
+  // szary kotek idzie po pasku od pozycji „from” do „pct” (animacja w animateCats)
+  const CAT_SVG = `<svg viewBox="0 0 40 28" aria-hidden="true">
+    <path class="cat-tail" d="M9 15 C3 13 2 6 6 3" stroke="#8b8b92" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect class="cat-leg leg-a" x="10" y="18" width="3.2" height="8" rx="1.6" fill="#7d7d84"/>
+    <rect class="cat-leg leg-b" x="14.5" y="18" width="3.2" height="8" rx="1.6" fill="#7d7d84"/>
+    <rect class="cat-leg leg-b" x="21.5" y="18" width="3.2" height="8" rx="1.6" fill="#7d7d84"/>
+    <rect class="cat-leg leg-a" x="26" y="18" width="3.2" height="8" rx="1.6" fill="#7d7d84"/>
+    <ellipse cx="19" cy="16" rx="11.5" ry="6.5" fill="#9d9da4"/>
+    <path d="M14 10.5 q1.5 3 0 5.5 M18.5 9.6 q1.5 3 0 6 M23 10 q1.3 2.8 0 5.6" stroke="#85858c" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+    <path d="M25.6 7.6 L27 1.6 L30 6.2 Z M30.6 5.8 L33.8 1.6 L34.8 7.4 Z" fill="#9d9da4"/>
+    <path d="M27 6 L27.6 3.6 L28.8 5.6 Z M32 5.4 L33.4 3.6 L33.8 6.2 Z" fill="#f7a8c4"/>
+    <circle cx="30.5" cy="11" r="6" fill="#9d9da4"/>
+    <ellipse class="cat-eye" cx="32.6" cy="10.2" rx="1" ry="1.1" fill="#2c2c30"/>
+    <circle cx="35.9" cy="12.2" r="0.9" fill="#f37aa6"/>
+    <path d="M34.5 13.6 L39 13 M34.5 14.4 L39 15" stroke="#6f6f76" stroke-width=".5"/>
+  </svg>`;
+  function progressBar(pct, color, from = 0) {
+    return `<div class="bar-wrap">
+      <span class="cat" style="left:${from}%;transform:translateX(-${from}%)" data-to="${pct}">${CAT_SVG}</span>
+      <div class="bar"><div class="bar-fill" style="width:${pct}%;background:${color}"></div></div>
+    </div>`;
   }
+  function animateCats() {
+    document.querySelectorAll(".cat[data-to]").forEach((cat) => {
+      const to = Number(cat.dataset.to);
+      delete cat.dataset.to;
+      if (to === parseFloat(cat.style.left)) return;
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        cat.classList.add("walking");
+        cat.style.left = to + "%";
+        cat.style.transform = `translateX(-${to}%)`;
+        const stop = () => cat.classList.remove("walking");
+        cat.addEventListener("transitionend", stop, { once: true });
+        setTimeout(stop, 1600);
+      }));
+    });
+  }
+  new MutationObserver(animateCats).observe(app, { childList: true });
 
   function viewHome() {
     document.title = "Drugi rok – nauka";
@@ -257,7 +292,7 @@
         </div>
         <div class="spotlight-progress">
           <div class="spotlight-progress-row"><span>Opanowane fiszki: <strong>${pct}%</strong></span><span>zostało: ${left}</span></div>
-          <div class="bar"><div class="bar-fill" style="width:${pct}%;background:#fff"></div></div>
+          ${progressBar(pct, "#fff")}
           <div class="spotlight-tip">${tip}</div>
         </div>
         <div class="spotlight-actions">
@@ -404,6 +439,13 @@
   // ---------- fiszki ----------
   let session = null;
 
+  // w trakcie sesji kotek przechodzi od poprzedniej pozycji do nowej
+  function sessionBar(s, pct) {
+    const from = s.catPct === undefined ? 0 : s.catPct;
+    s.catPct = pct;
+    return progressBar(pct, s.subject.color, from);
+  }
+
   function startFlashcards(subject, topicId) {
     const cards = subjectCards(subject, topicId);
     const now = Date.now();
@@ -451,7 +493,7 @@
         <a class="back" href="${back}">‹ Zakończ</a>
         <span class="counter">${Math.min(s.pos + 1, s.queue.length)} / ${s.queue.length}</span>
       </div>
-      ${progressBar(Math.round((s.pos / s.queue.length) * 100), s.subject.color)}
+      ${sessionBar(s, Math.round((s.pos / s.queue.length) * 100))}
       <div class="flashcard${s.flipped ? " flipped" : ""}" data-action="flip" style="--accent:${s.subject.color}">
         <div class="fc-topic">${esc(c.topic)} · <span class="dot box${box}"></span>${box ? `pudełko ${box}/5` : "nowa"}</div>
         <div class="fc-q">${esc(c.q)}</div>
@@ -543,7 +585,7 @@
         <a class="back" href="${back}">‹ Zakończ</a>
         <span class="counter">${s.pos + 1} / ${s.qs.length} · wynik ${s.score}</span>
       </div>
-      ${progressBar(Math.round((s.pos / s.qs.length) * 100), s.subject.color)}
+      ${sessionBar(s, Math.round((s.pos / s.qs.length) * 100))}
       <div class="quiz-card">
         <div class="fc-topic">${esc(q.topic)}</div>
         <div class="quiz-q">${esc(q.q)}</div>
