@@ -23,6 +23,7 @@ Cała aplikacja jest w różowej kolorystyce (jasny i ciemny motyw).
 - **Quiz** – pytania jednokrotnego wyboru z wyjaśnieniem i zapisem najlepszego wyniku.
 - **Odliczanie do egzaminu** – w każdym przedmiocie przycisk „Ustaw datę egzaminu” (kalendarz iPada). Na stronie głównej najbliższy egzamin jest wyróżniony dużą kartą (licznik dni, postęp, plan fiszek na dzień, przyciski „Ucz się teraz” i „Quiz”, lista kolejnych egzaminów), a przedmioty z egzaminami są na górze listy, od najbliższego. Aplikacja podpowiada też, ile fiszek zostało do opanowania i ile to dziennie. Datę można zmienić lub usunąć w każdej chwili.
 - **Postępy** zapisują się w przeglądarce na tym urządzeniu (localStorage) – razem z datami egzaminów. Odświeżanie strony ich nie kasuje; znikają tylko po wyczyszczeniu danych Safari, w trybie prywatnym albo (w zwykłej karcie Safari) po ok. 7 dniach bez otwierania strony.
+- **Tryb offline** – po pierwszym otwarciu z internetem aplikacja zapisuje swoje pliki na urządzeniu (`sw.js`) i działa też bez sieci (na dole pojawia się wtedy plakietka „Brak internetu”). Z internetem zawsze pobiera najnowszą wersję, więc aktualizacje przychodzą same – najpóźniej przy kolejnym otwarciu.
 - **Kopia zapasowa** – link na dole strony głównej. „Zapisz kopię” tworzy plik `nauka-kopia-RRRR-MM-DD.json` (na iPadzie: Zachowaj w Plikach → iCloud Drive), „Wybierz plik kopii” przywraca z niego wszystkie postępy. Gdy kopia jest starsza niż 7 dni, link przypomina o nowej.
 
 ## Uruchomienie na iPadzie (GitHub Pages)
@@ -46,7 +47,10 @@ data/metodologia-statystyka100.js   100 pytań ze statystyki (wygenerowane z PDF
 data/diagnostyka.js   treść: wprowadzenie do diagnostyki psychologicznej
 data/poznawcze.js     treść: diagnoza sprawności poznawczych
 data/pomoc.js         treść: podstawy pomocy psychologicznej
+sw.js                 tryb offline (lista plików zapisywanych na urządzeniu)
 ```
+
+Nowy plik z treścią trzeba dopisać w `index.html` i na liście `FILES` w `sw.js`.
 
 ### Jak dodać treść do przedmiotu
 

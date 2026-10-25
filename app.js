@@ -762,4 +762,22 @@
 
   window.addEventListener("hashchange", () => { route(); window.scrollTo(0, 0); });
   route();
+
+  // ---------- tryb offline ----------
+  // service worker zapisuje pliki aplikacji, żeby działała bez internetu (tylko przez http/https)
+  if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch(() => { /* bez trybu offline aplikacja działa normalnie */ });
+    });
+  }
+  const offlineBadge = document.createElement("div");
+  offlineBadge.className = "offline-badge";
+  offlineBadge.textContent = "📴 Brak internetu – działasz na wersji zapisanej na iPadzie";
+  document.body.appendChild(offlineBadge);
+  function updateOnline() {
+    offlineBadge.classList.toggle("show", !navigator.onLine);
+  }
+  window.addEventListener("online", updateOnline);
+  window.addEventListener("offline", updateOnline);
+  updateOnline();
 })();

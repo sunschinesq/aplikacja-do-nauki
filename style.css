@@ -480,3 +480,24 @@ th { background: color-mix(in srgb, var(--accent) 10%, transparent); }
 .backup-msg.ok { background: color-mix(in srgb, var(--good) 14%, transparent); }
 .backup-msg.err { background: color-mix(in srgb, var(--bad) 12%, transparent); }
 .backup-msg.info { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+
+/* ---------- tryb offline ---------- */
+.offline-badge {
+  position: fixed;
+  left: 50%;
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  transform: translate(-50%, 150%);
+  z-index: 20;
+  max-width: calc(100% - 32px);
+  padding: 10px 16px;
+  border-radius: 99px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: .88rem;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .2);
+  transition: transform .3s ease;
+  pointer-events: none;
+}
+.offline-badge.show { transform: translate(-50%, 0); }
