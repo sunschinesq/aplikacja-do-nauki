@@ -7,6 +7,8 @@ window.SUBJECTS.push({
   short: "Sprawności poznawcze",
   icon: "🧩",
   color: "#f06595",
+  // format egzaminu orientacyjny – zmień, gdy poznasz zasady
+  exam: { questions: 20, minutes: 20, pass: 11, note: "Format orientacyjny (20 pytań, 20 minut, próg 11) – nie znam dokładnych zasad egzaminu." },
   sources: [
     "pracka: Etyka diagnosty.pdf – prezentacja dr Joanny Prackiej „Zagadnienia etyczne dot. procesu diagnozy psychologicznej”",
     "pracka: Etyka_notatka_pelna.pdf – Brzeziński, Chyrowicz, Toeplitz, Toeplitz-Winiewska (2019), Etyka zawodu psychologa, rozdz. 6, 12, 14",

@@ -15,9 +15,11 @@ const FILES = [
   "icon-180.png",
   "icon-512.png",
   "data/osobowosc.js",
+  "data/osobowosc-zagadnienia.js",
   "data/metodologia-statystyka100.js",
   "data/metodologia.js",
   "data/diagnostyka.js",
+  "data/diagnostyka-zagadnienia.js",
   "data/poznawcze.js",
   "data/pomoc.js"
 ];

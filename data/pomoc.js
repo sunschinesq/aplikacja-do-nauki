@@ -7,6 +7,8 @@ window.SUBJECTS.push({
   short: "Pomoc psychologiczna",
   icon: "🤝",
   color: "#d6336c",
+  // format egzaminu orientacyjny – zmień, gdy poznasz zasady
+  exam: { questions: 15, minutes: 15, pass: 8, note: "Format orientacyjny (15 pytań, 15 minut, próg 8) – nie znam dokładnych zasad zaliczenia." },
   sources: [
     "Notatka_Rozmowa_diagnostyczna.pdf – na podstawie: A. Suchańska, Rozmowa i obserwacja w diagnozie psychologicznej (rozdz. 2–4) oraz H. Grzegołowska-Klarkowska, T. Szustrowa, Swobodne techniki diagnostyczne (rozdz. 2–3)"
   ],

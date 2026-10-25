@@ -8,6 +8,9 @@ window.SUBJECTS.push({
   short: "Diagnostyka",
   icon: "🔍",
   color: "#c2255c",
+  // formaty egzaminów orientacyjne – zmień, gdy poznasz zasady
+  exam: { questions: 30, minutes: 30, pass: 16, note: "Format orientacyjny (30 pytań, 30 minut, próg 16) – nie znam dokładnych zasad egzaminu." },
+  openExam: { questions: 4, minutes: 30, note: "Pytania z listy „Pytania egzamin” (spisanej przez studentów po egzaminie u dr Kulik). Liczba pytań i czas są orientacyjne." },
   sources: [
     "Pytania egzamin.pdf (lista pytań i zagadnień z poprzednich lat)",
     "Prezentacja 1–9.docx (notatki z wykładów)",

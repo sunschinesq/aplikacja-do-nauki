@@ -8,6 +8,9 @@ window.SUBJECTS.push({
   short: "Osobowość",
   icon: "🧠",
   color: "#d6336c",
+  // formaty egzaminów orientacyjne – zmień, gdy poznasz zasady
+  exam: { questions: 30, minutes: 30, pass: 16, note: "Format orientacyjny (30 pytań, 30 minut, próg 16) – nie znam dokładnych zasad egzaminu." },
+  openExam: { questions: 3, minutes: 45, note: "Pytania z listy zagadnień egzaminacyjnych (psychologia-osobowości-egzamin.pdf). Liczba pytań i czas są orientacyjne." },
   sources: [
     "psychologia-osobowości-egzamin.pdf (79 pytań egzaminacyjnych)",
     "Psychologia osobowości – wykłady.pdf",
