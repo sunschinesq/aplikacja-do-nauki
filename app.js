@@ -17,9 +17,9 @@
     try {
       const raw = localStorage.getItem(STORE_KEY);
       const data = raw ? JSON.parse(raw) : {};
-      return { cards: data.cards || {}, quiz: data.quiz || {}, exams: data.exams || {}, lastBackup: data.lastBackup || null };
+      return { cards: data.cards || {}, quiz: data.quiz || {}, exams: data.exams || {}, lastBackup: data.lastBackup || null, pets: data.pets || 0 };
     } catch (e) {
-      return { cards: {}, quiz: {}, exams: {}, lastBackup: null };
+      return { cards: {}, quiz: {}, exams: {}, lastBackup: null, pets: 0 };
     }
   }
   let store = loadStore();
@@ -265,7 +265,8 @@
       ${next ? examSpotlight(next.s, next.exam, upcoming.slice(1)) : `
       <div class="exam-hint">📅 Ustaw daty egzaminów w przedmiotach, a tutaj pojawi się odliczanie do najbliższego.</div>`}
       <div class="subject-grid">${cards}</div>
-      <a class="backup-link${backupOverdue() ? " overdue" : ""}" href="#/kopia">💾 Kopia zapasowa postępów · ${lastBackupText()}${backupOverdue() ? (store.lastBackup ? " – czas na nową kopię!" : " – zrób pierwszą!") : ""}</a>`;
+      <a class="backup-link${backupOverdue() ? " overdue" : ""}" href="#/kopia">💾 Kopia zapasowa postępów · ${lastBackupText()}${backupOverdue() ? (store.lastBackup ? " – czas na nową kopię!" : " – zrób pierwszą!") : ""}</a>
+      ${store.pets ? `<p class="pet-count">🐾 Pogłaskane kotki: ${store.pets}</p>` : ""}`;
   }
 
   // wyróżnienie najbliższego egzaminu na stronie głównej
@@ -649,7 +650,7 @@
 
   async function exportBackup() {
     const now = new Date();
-    const payload = { app: BACKUP_APP, version: 1, created: now.toISOString(), data: { cards: store.cards, quiz: store.quiz, exams: store.exams } };
+    const payload = { app: BACKUP_APP, version: 1, created: now.toISOString(), data: { cards: store.cards, quiz: store.quiz, exams: store.exams, pets: store.pets } };
     const stamp = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0");
     const name = `nauka-kopia-${stamp}.json`;
     const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
@@ -698,6 +699,7 @@
       store.cards = data.cards || {};
       store.quiz = data.quiz || {};
       store.exams = data.exams || {};
+      store.pets = Math.max(store.pets, Number(data.pets) || 0);
       store.lastBackup = payload.created;
       saveStore();
       viewBackup({ type: "ok", text: `✅ Postępy wczytane z kopii z ${when}.` });
@@ -804,6 +806,104 @@
 
   window.addEventListener("hashchange", () => { route(); window.scrollTo(0, 0); });
   route();
+
+  // ---------- kotki do głaskania ----------
+  // co jakiś czas zza krawędzi ekranu wygląda kotek w losowym kolorze; dotknięcie = głaskanie, potem kotek znika
+  const CAT_COLORS = [
+    { name: "szary", fur: "#9d9da4", dark: "#7d7d84", belly: "#c9c9ce", stripes: true },
+    { name: "rudy", fur: "#f0a04b", dark: "#d27f2c", belly: "#fbd9a8", stripes: true },
+    { name: "czarny", fur: "#3a3238", dark: "#241e23", belly: "#4c434a", eyes: "#f2c94c" },
+    { name: "biały", fur: "#fbf7f4", dark: "#e3dcd8", belly: "#ffffff", eyes: "#6bb6e8" },
+    { name: "kremowy", fur: "#f3dcb8", dark: "#dfc092", belly: "#fbf0dd" },
+    { name: "szylkretowy", fur: "#fbf7f4", dark: "#e3dcd8", belly: "#ffffff", patches: ["#f0a04b", "#3a3238"] },
+    { name: "bury", fur: "#a07b5a", dark: "#7a5a3e", belly: "#d6bc9e", stripes: true },
+    { name: "liliowy", fur: "#c7b3c9", dark: "#a892ab", belly: "#e6dbe7" }
+  ];
+  function petCatSvg(c) {
+    const eyes = c.eyes || "#7cc26b";
+    const stripes = c.stripes ? `<path d="M30 20 q2 4 0 7 M36 18 q1.5 4.5 0 8 M42 20 q-2 4 0 7" stroke="${c.dark}" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <path d="M16 46 q4 1 6 -2 M48 46 q-4 1 -6 -2" stroke="${c.dark}" stroke-width="1.8" fill="none" stroke-linecap="round"/>` : "";
+    const patches = c.patches ? `<ellipse cx="26" cy="20" rx="7" ry="6" fill="${c.patches[0]}"/>
+      <ellipse cx="45" cy="25" rx="5" ry="4.5" fill="${c.patches[1]}"/>
+      <ellipse cx="22" cy="54" rx="7" ry="6" fill="${c.patches[1]}"/>
+      <ellipse cx="45" cy="56" rx="6" ry="5" fill="${c.patches[0]}"/>` : "";
+    return `<svg viewBox="0 0 72 76" aria-hidden="true">
+      <path class="pet-tail" d="M54 66 C68 64 70 50 63 44" stroke="${c.dark}" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <ellipse cx="36" cy="58" rx="20" ry="17" fill="${c.fur}"/>
+      <ellipse cx="36" cy="62" rx="10" ry="12" fill="${c.belly}"/>
+      <path d="M14 20 L17 2 L29 12 Z M58 20 L55 2 L43 12 Z" fill="${c.fur}" stroke="${c.dark}" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M17.5 15 L19 7 L25 12 Z M54.5 15 L53 7 L47 12 Z" fill="#f7a8c4"/>
+      <ellipse cx="36" cy="27" rx="22" ry="18" fill="${c.fur}"/>
+      ${patches}${stripes}
+      <g class="pet-eyes-open">
+        <ellipse cx="27" cy="26" rx="4" ry="4.6" fill="${eyes}"/><ellipse cx="45" cy="26" rx="4" ry="4.6" fill="${eyes}"/>
+        <ellipse cx="27" cy="26.4" rx="1.6" ry="3.6" fill="#1d1a1c"/><ellipse cx="45" cy="26.4" rx="1.6" ry="3.6" fill="#1d1a1c"/>
+        <circle cx="28.4" cy="24.4" r="1" fill="#fff"/><circle cx="46.4" cy="24.4" r="1" fill="#fff"/>
+      </g>
+      <path class="pet-eyes-happy" d="M23 27 q4 -5 8 0 M41 27 q4 -5 8 0" stroke="#1d1a1c" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M33.6 32 h4.8 l-2.4 2.8 Z" fill="#f37aa6"/>
+      <path d="M36 34.8 q-1.5 3 -4.5 2 M36 34.8 q1.5 3 4.5 2" stroke="#1d1a1c" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+      <ellipse class="pet-blush" cx="21" cy="33" rx="3.4" ry="2" fill="#f7a8c4"/><ellipse class="pet-blush" cx="51" cy="33" rx="3.4" ry="2" fill="#f7a8c4"/>
+      <path d="M22 33 L8 31 M22 35 L8 37 M50 33 L64 31 M50 35 L64 37" stroke="${c.dark}" stroke-width=".8"/>
+      <ellipse cx="27" cy="73" rx="7" ry="4" fill="${c.fur}" stroke="${c.dark}" stroke-width=".8"/>
+      <ellipse cx="45" cy="73" rx="7" ry="4" fill="${c.fur}" stroke="${c.dark}" stroke-width=".8"/>
+    </svg>`;
+  }
+  const PET_FIRST_MS = [15000, 40000];
+  const PET_EVERY_MS = [45000, 120000];
+  const PET_STAY_MS = 9000;
+  const PET_SIDES = ["bottom", "bottom", "left", "right"];
+  const PET_WORDS = ["mrrr ❤️", "mrau! 💕", "prrr… 💗", "miau ❤️", "jeszcze! 💞"];
+  let petTimer = null;
+  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  const between = ([a, b]) => a + Math.random() * (b - a);
+  function schedulePetCat(range) {
+    clearTimeout(petTimer);
+    petTimer = setTimeout(spawnPetCat, between(range));
+  }
+  function spawnPetCat() {
+    // nie przeszkadzaj, gdy karta jest w tle albo kotek już jest
+    if (document.hidden || document.querySelector(".pet-cat")) return schedulePetCat(PET_EVERY_MS);
+    const color = pick(CAT_COLORS);
+    const side = pick(PET_SIDES);
+    const cat = document.createElement("button");
+    cat.type = "button";
+    cat.className = `pet-cat side-${side}`;
+    cat.setAttribute("aria-label", `Kotek (${color.name}) – pogłaszcz go`);
+    cat.innerHTML = `<span class="pet-body">${petCatSvg(color)}</span>`;
+    // pozycja wzdłuż krawędzi (z dala od rogów)
+    if (side === "bottom") cat.style.left = `${Math.round(between([8, 82]))}%`;
+    else cat.style.top = `${Math.round(between([25, 70]))}%`;
+    document.body.appendChild(cat);
+    requestAnimationFrame(() => requestAnimationFrame(() => cat.classList.add("in")));
+    const leave = setTimeout(() => hidePetCat(cat), PET_STAY_MS);
+    cat.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      if (cat.classList.contains("petted")) return;
+      clearTimeout(leave);
+      cat.classList.add("petted");
+      store.pets = (store.pets || 0) + 1;
+      saveStore();
+      // serduszka i dymek osobno (kotek z boku jest obrócony, a napis ma być prosto)
+      const r = cat.getBoundingClientRect();
+      const pop = document.createElement("div");
+      pop.className = "pet-pop";
+      pop.style.left = `${Math.min(Math.max(r.left + r.width / 2, 70), innerWidth - 70)}px`;
+      pop.style.top = `${Math.min(Math.max(r.top + r.height / 2, 60), innerHeight - 90)}px`;
+      pop.innerHTML = `<span class="pet-bubble">${pick(PET_WORDS)}</span>` +
+        [0, 1, 2, 3, 4].map((i) => `<span class="pet-heart" style="--dx:${Math.round(between([-45, 45]))}px;animation-delay:${i * 0.12}s">${pick(["❤️", "💕", "💗", "💖"])}</span>`).join("");
+      document.body.appendChild(pop);
+      setTimeout(() => pop.remove(), 1900);
+      setTimeout(() => hidePetCat(cat), 1500);
+    });
+    schedulePetCat(PET_EVERY_MS);
+  }
+  function hidePetCat(cat) {
+    cat.classList.remove("in");
+    cat.classList.add("out");
+    setTimeout(() => cat.remove(), 700);
+  }
+  schedulePetCat(PET_FIRST_MS);
 
   // ---------- tryb offline ----------
   // service worker zapisuje pliki aplikacji, żeby działała bez internetu (tylko przez http/https)
