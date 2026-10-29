@@ -8,7 +8,7 @@ Podział odpowiada folderom z Dysku Google („drugi rok JULIA / 1 semestr”):
 
 | Przedmiot | Stan |
 |---|---|
-| Psychologia osobowości | 11 tematów: notatki, 188 fiszek, 73 pytania quizowe, 79 prawdziwych zagadnień egzaminacyjnych z odpowiedziami |
+| Psychologia osobowości | 12 tematów (w tym marzenia senne z ćwiczeń): notatki, 212 fiszek, 85 pytań quizowych, 79 prawdziwych zagadnień egzaminacyjnych z odpowiedziami |
 | Metodologia badań i statystyka | 11 tematów (wykład + ćwiczenia): notatki, 201 fiszek, 165 pytań (w tym wszystkie 100 pytań ze statystyki z kluczem) |
 | Wprowadzenie do diagnostyki psychologicznej | 10 tematów (9 wykładów + słowniczek): notatki, 182 fiszki, 66 pytań, 51 zagadnień z listy pytań egzaminacyjnych |
 | Diagnoza sprawności poznawczych | 8 tematów (etyka diagnozy, testy, trafność i SEM, adaptacja): notatki, 86 fiszek, 36 pytań |

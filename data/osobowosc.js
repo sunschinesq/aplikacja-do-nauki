@@ -15,7 +15,8 @@ window.SUBJECTS.push({
     "psychologia-osobowości-egzamin.pdf (79 pytań egzaminacyjnych)",
     "Psychologia osobowości – wykłady.pdf",
     "to coś na kolosa osobowość.pdf",
-    "Jung_Adler_Sullivan_Erikson_notatka.pdf"
+    "Jung_Adler_Sullivan_Erikson_notatka.pdf",
+    "ćwiczenia: Freud_marzenia_senne.pdf"
   ],
   topics: [
     // ------------------------------------------------------------------
@@ -184,6 +185,129 @@ Metoda kliniczna; analiza **wzorców** zachowania (nie pojedynczych epizodów), 
       ]
     },
     // ------------------------------------------------------------------
+    {
+      id: "marzenia-senne",
+      title: "Freud: marzenia senne i symbolika snów (ćwiczenia)",
+      notes: `
+Ćwiczenia z psychologii osobowości. Źródło: Z. Freud, *Objaśnianie marzeń sennych* (Die Traumdeutung, 1899/1900).
+
+| Część | O co chodzi | Hasła |
+|---|---|---|
+| Założenie | po co śnimy | spełnienie życzenia, via regia, strażnik snu |
+| Dwie warstwy | co widzimy vs co to znaczy | treść jawna, treść utajona, cenzura |
+| Praca snu | jak sen się „przebiera” | zagęszczenie, przesunięcie, obrazowanie, opracowanie wtórne |
+| Symbolika | stałe symbole | symbole uniwersalne, głównie seksualne |
+| Metoda | jak interpretować | wolne skojarzenia, opór, odrzucenie senników |
+
+## Główne założenie
+- Każdy sen jest **(zamaskowanym) spełnieniem życzenia** – najczęściej pragnień **wypartych**, sięgających dzieciństwa.
+- Sen to **„królewska droga do nieświadomości”** (**via regia**) – najlepszy dostęp do tego, co wyparte.
+- Sen powstaje z **konfliktu** między wypartymi pragnieniami (**id**) a **cenzurą psychiczną** (ego i superego).
+
+## Dwie warstwy marzenia sennego
+- **Treść jawna (manifestna)** – to, co pamiętasz po przebudzeniu: fabuła, obrazy, dialogi, odczucia; forma zniekształcona i „bezpieczna” dla świadomości.
+- **Treść utajona (latentna)** – prawdziwe, ukryte znaczenie snu: nieświadome impulsy, wyparte życzenia (najczęściej seksualne lub agresywne), konflikty z dzieciństwa, lęki.
+- **Cenzura psychiczna** nie dopuszcza treści utajonej wprost, bo wywołałaby silny lęk i przerwała sen.
+- Dlatego sen to **„strażnik snu”** – rozładowuje napięcie w zawoalowany sposób (**zastępcze spełnienie życzenia**) i chroni przed wybudzeniem.
+- Przykład: śnisz, że koleżanka gubi klucze i nie może wejść do kawiarni (treść jawna). W skojarzeniach wychodzi złość, że to ją pochwalił szef, i życzenie, żeby jej się nie udało (treść utajona).
+
+## Praca marzenia sennego (Traumarbeit)
+Mechanizmy, które przekształcają surową treść utajoną w znośną treść jawną.
+
+| Mechanizm | Co robi | Przykład |
+|---|---|---|
+| **Zagęszczenie** (kondensacja, Verdichtung) | wiele myśli, osób lub motywów łączy się w jeden element snu | postać ma oczy taty, płaszcz wykładowcy i głos sąsiada |
+| **Przesunięcie** (Verschiebung) | akcent emocjonalny przechodzi z elementu ważnego na błahy | sen o zakupach, a najsilniejsze emocje budzi mijany w tle szpital |
+| **Obrazowanie** (plastyczna reprezentacja, wzgląd na przedstawialność) | abstrakcyjne myśli zamieniają się w konkretne obrazy | „nie nadążam za życiem” = ucieczka przed odjeżdżającym autobusem |
+| **Opracowanie wtórne** (sekundäre Bearbeitung) | tuż przed przebudzeniem i przy opowiadaniu umysł skleja fragmenty w logiczną historię | dodajesz „i dlatego poszłam…”, choć we śnie tego nie było |
+
+- **Zagęszczenie** i **przesunięcie** to główne mechanizmy **procesu pierwotnego** (sposobu działania nieświadomości).
+
+## Symbolika snów
+Freud kładł nacisk na indywidualny kontekst śniącego, ale wyróżniał też **symbole uniwersalne** (zakorzenione w kulturze, języku i mitach), których używa cenzura.
+
+| Co oznacza | Typowe symbole |
+|---|---|
+| męskie narządy płciowe | przedmioty podłużne, ostre (noże, miecze, parasole, laski, broń); unoszące się (balony, samoloty); kran, fontanna |
+| żeńskie narządy płciowe | przestrzenie zamknięte, pojemniki (pudełka, skrzynie, pokoje, jaskinie, kieszenie, szafy, statki); brama, wejście |
+| akt seksualny | czynności rytmiczne: wchodzenie po schodach, jazda konna, latanie, przechodzenie przez ciasne przejścia |
+| kastracja, lęk kastracyjny | ścinanie włosów, **wypadanie zębów**, obcinanie gałęzi, dekapitacja |
+| ciało i rodzina | dom = ciało; król i królowa = rodzice |
+| śmierć | podróż, wyjazd pociągiem, odejście w dal |
+
+## Metoda: wolne skojarzenia
+- Freud **odrzucał senniki** jako sztywne i nienaukowe – sam symbol nie wystarcza do interpretacji.
+- **Wolne skojarzenia**: sen dzieli się na elementy; śniący mówi wszystko, co przychodzi mu na myśl przy każdym z nich, bez oceniania; analityk obserwuje **opory**, pauzy i powtarzające się motywy.
+- Nie mylić z Jungiem: u Freuda liczą się **skojarzenia konkretnej osoby**, a symbole są tylko uzupełnieniem; archetypy i nieświadomość zbiorowa to pojęcia Junga.
+
+## Analiza snu krok po kroku
+- Zapisz sen zaraz po przebudzeniu (treść jawna).
+- Podziel go na elementy: osoby, miejsca, przedmioty, słowa, emocje.
+- Do każdego elementu wolne skojarzenia.
+- Szukaj **resztek dziennych** – co z ostatnich dni trafiło do snu.
+- Odkręć pracę snu: zagęszczenie? przesunięcie? obrazowanie?
+- Zwróć uwagę na **opór** – urwane skojarzenia, pustka, zażenowanie.
+- Dopiero teraz symbole uniwersalne.
+- Odpowiedz: jakie **życzenie** spełnia ten sen? To treść utajona.
+
+> Na pamięć: sen = zamaskowane spełnienie życzenia · jawna vs utajona · praca snu: zagęszczenie, przesunięcie, obrazowanie, opracowanie wtórne · wolne skojarzenia, nie senniki · kolejność: elementy → skojarzenia → resztki dzienne → praca snu → opór → symbole → życzenie.
+`,
+      flashcards: [
+        ["Czym jest sen według Freuda?", "Zamaskowanym spełnieniem (najczęściej wypartego) życzenia."],
+        ["Via regia", "„Królewska droga do nieświadomości” – tak Freud nazwał marzenia senne."],
+        ["Z jakiego konfliktu powstaje sen?", "Między wypartymi pragnieniami id a cenzurą psychiczną (ego i superego)."],
+        ["Treść jawna snu", "To, co pamiętamy po przebudzeniu: fabuła, obrazy, dialogi – forma zniekształcona i bezpieczna."],
+        ["Treść utajona snu", "Ukryte znaczenie: wyparte życzenia, impulsy, konflikty z dzieciństwa, lęki."],
+        ["Dlaczego sen to „strażnik snu”?", "Rozładowuje napięcie w zawoalowany sposób i chroni przed wybudzeniem."],
+        ["Rola cenzury psychicznej we śnie", "Nie dopuszcza treści utajonej wprost, bo wywołałaby lęk i przerwała sen."],
+        ["Praca snu (Traumarbeit)", "Mechanizmy przekształcające treść utajoną w znośną treść jawną."],
+        ["Zagęszczenie (kondensacja)", "Wiele myśli, osób lub motywów łączy się w jeden element snu."],
+        ["Przesunięcie", "Akcent emocjonalny przechodzi z elementu ważnego na błahy."],
+        ["Obrazowanie (plastyczna reprezentacja)", "Abstrakcyjne myśli zamieniają się w konkretne obrazy."],
+        ["Opracowanie wtórne", "Sklejanie chaotycznych fragmentów w logiczną historię – przed przebudzeniem i przy opowiadaniu snu."],
+        ["Mechanizmy procesu pierwotnego w pracy snu", "Zagęszczenie i przesunięcie."],
+        ["Wypadanie zębów we śnie (Freud)", "Symbol kastracji / lęku kastracyjnego."],
+        ["Symbole żeńskie we śnie", "Przestrzenie zamknięte i pojemniki: pudełka, pokoje, jaskinie, szafy, brama."],
+        ["Symbole aktu seksualnego", "Czynności rytmiczne: wchodzenie po schodach, jazda konna, latanie."],
+        ["Dom, król i królowa we śnie", "Dom = ciało; król i królowa = rodzice."],
+        ["Podróż we śnie", "Symbol śmierci."],
+        ["Dlaczego Freud odrzucał senniki?", "Są sztywne i nienaukowe – sam symbol nie wystarcza, liczą się skojarzenia śniącego."],
+        ["Metoda wolnych skojarzeń", "Śniący mówi wszystko, co przychodzi mu na myśl przy każdym elemencie snu, bez oceniania."],
+        ["Resztki dzienne", "Materiał z ostatnich dni, który trafia do snu."],
+        ["Kiedy sięga się po symbole uniwersalne?", "Dopiero gdy skojarzenia nic nie dają – symbole to uzupełnienie."],
+        ["Freud a Jung w analizie snów", "Freud: skojarzenia konkretnej osoby; archetypy i nieświadomość zbiorowa to Jung."],
+        ["Rok wydania „Objaśniania marzeń sennych”", "1899/1900 (Die Traumdeutung)."]
+      ],
+      pairs: [
+        ["Via regia", "królewska droga do nieświadomości"], ["Treść jawna", "to, co pamiętamy po przebudzeniu"], ["Treść utajona", "ukryte znaczenie snu"],
+        ["Strażnik snu", "chroni przed wybudzeniem"], ["Cenzura psychiczna", "nie dopuszcza treści utajonej wprost"], ["Zagęszczenie", "wiele motywów w jednym elemencie"],
+        ["Przesunięcie", "emocje na błahym elemencie"], ["Obrazowanie", "myśli zamienione w obrazy"], ["Opracowanie wtórne", "sklejanie snu w logiczną historię"],
+        ["Wypadanie zębów", "lęk kastracyjny"], ["Wchodzenie po schodach", "akt seksualny"], ["Dom we śnie", "ciało"], ["Król i królowa", "rodzice"], ["Podróż we śnie", "śmierć"],
+        ["Senniki", "Freud je odrzucał"], ["Resztki dzienne", "materiał z ostatnich dni"], ["Wolne skojarzenia", "mówienie wszystkiego, bez oceniania"], ["Die Traumdeutung", "1899/1900"]
+      ],
+      open: [
+        { q: "Czym różni się treść jawna snu od treści utajonej?", a: "- **Treść jawna (manifestna)** – to, co pamiętamy po przebudzeniu: fabuła, obrazy, dialogi; forma zniekształcona i bezpieczna dla świadomości.\n- **Treść utajona (latentna)** – prawdziwe znaczenie: wyparte życzenia (najczęściej seksualne lub agresywne), impulsy, konflikty z dzieciństwa, lęki.\n- Między nimi działa **cenzura psychiczna** i **praca snu**, która przekształca treść utajoną w jawną." },
+        { q: "Dlaczego Freud nazywał sen „strażnikiem snu”?", a: "- Treść utajona dopuszczona wprost wywołałaby silny **lęk** i przerwała sen.\n- Sen rozładowuje napięcie w **zawoalowany** sposób – **zastępcze spełnienie życzenia** – i dzięki temu **chroni przed wybudzeniem**." },
+        { q: "Omów mechanizmy pracy snu.", a: "- **Zagęszczenie** – wiele myśli, osób lub motywów łączy się w jeden element (postać z oczami taty i głosem sąsiada).\n- **Przesunięcie** – akcent emocjonalny przechodzi z elementu ważnego na błahy.\n- **Obrazowanie** – abstrakcyjne myśli stają się konkretnymi obrazami.\n- **Opracowanie wtórne** – przed przebudzeniem i przy opowiadaniu snu umysł skleja fragmenty w logiczną historię.\n- Zagęszczenie i przesunięcie to główne mechanizmy **procesu pierwotnego**." },
+        { q: "Czym różni się zagęszczenie od przesunięcia?", a: "- **Zagęszczenie** łączy wiele elementów w jeden (kondensacja treści).\n- **Przesunięcie** przenosi ładunek emocjonalny z elementu ważnego na nieistotny – centralna scena jest obojętna, a ważne pragnienie to drobiazg w tle." },
+        { q: "Opisz metodę wolnych skojarzeń i kolejność analizy snu.", a: "- Freud **odrzucał senniki**; podstawą są **wolne skojarzenia** śniącego.\n- Kolejność: zapis snu (treść jawna) → podział na **elementy** → **skojarzenia** do każdego → **resztki dzienne** → odkręcenie **pracy snu** → analiza **oporu** (urwane skojarzenia, pustka) → dopiero potem **symbole uniwersalne** → jakie **życzenie** spełnia sen (treść utajona)." },
+        { q: "Jaką rolę odgrywają symbole uniwersalne w analizie snów według Freuda?", a: "- Freud wyróżniał stałe **symbole uniwersalne** (głównie seksualne), zakorzenione w kulturze, języku i mitach; używa ich **cenzura**.\n- Przykłady: przedmioty podłużne – męskie narządy, pojemniki i pokoje – żeńskie, schody i jazda konna – akt seksualny, **wypadanie zębów – lęk kastracyjny**, dom – ciało, król i królowa – rodzice, podróż – śmierć.\n- Są tylko **uzupełnieniem** – sięga się po nie, gdy skojarzenia nic nie dają." }
+      ],
+      quiz: [
+        { q: "Według Freuda każdy sen jest:", o: ["przypadkowym zapisem wrażeń", "zamaskowanym spełnieniem życzenia", "przekazem archetypów", "przetwarzaniem informacji z dnia"], a: 1, e: "Sen = (zamaskowane) spełnienie wypartego życzenia." },
+        { q: "„Królewska droga do nieświadomości” to:", o: ["hipnoza", "marzenia senne", "czynności pomyłkowe", "test Rorschacha"], a: 1, e: "Via regia – tak Freud nazwał sny." },
+        { q: "Postać we śnie ma oczy taty, płaszcz wykładowcy i głos sąsiada. To:", o: ["przesunięcie", "zagęszczenie", "obrazowanie", "opracowanie wtórne"], a: 1, e: "Zagęszczenie – wiele elementów w jednym." },
+        { q: "Sen dotyczy zakupów, a najsilniejsze emocje budzi mijany w tle szpital. To:", o: ["zagęszczenie", "przesunięcie", "opracowanie wtórne", "projekcja"], a: 1, e: "Przesunięcie akcentu emocjonalnego na element błahy." },
+        { q: "Myśl „nie nadążam za życiem” pojawia się we śnie jako ucieczka przed autobusem. To:", o: ["obrazowanie", "zagęszczenie", "regresja", "sublimacja"], a: 0, e: "Obrazowanie – abstrakcja zamieniona w obraz." },
+        { q: "Sklejanie fragmentów snu w logiczną historię przy jego opowiadaniu to:", o: ["przesunięcie", "zagęszczenie", "opracowanie wtórne", "cenzura"], a: 2, e: "Opracowanie wtórne." },
+        { q: "Wypadanie zębów we śnie Freud wiązał z:", o: ["lękiem przed śmiercią", "lękiem kastracyjnym", "pragnieniem władzy", "aktem seksualnym"], a: 1, e: "Symbol kastracji / lęku kastracyjnego." },
+        { q: "Podróż lub wyjazd pociągiem we śnie symbolizuje według Freuda:", o: ["akt seksualny", "rodziców", "śmierć", "ciało"], a: 2, e: "Podróż = śmierć." },
+        { q: "Jaki był stosunek Freuda do senników?", o: ["opierał na nich interpretację", "odrzucał je jako sztywne i nienaukowe", "stworzył własny sennik", "uznawał je tylko w snach dzieci"], a: 1, e: "Liczą się skojarzenia śniącego, a symbole są uzupełnieniem." },
+        { q: "Kiedy w analizie snu sięga się po symbole uniwersalne?", o: ["na samym początku", "zamiast skojarzeń", "dopiero gdy skojarzenia nic nie dają", "nigdy"], a: 2, e: "Symbole to drugi trop – po skojarzeniach, resztkach dziennych i analizie oporu." },
+        { q: "Główne mechanizmy procesu pierwotnego w pracy snu to:", o: ["obrazowanie i opracowanie wtórne", "zagęszczenie i przesunięcie", "wyparcie i projekcja", "cenzura i opór"], a: 1, e: "Zagęszczenie i przesunięcie." },
+        { q: "Archetypy i nieświadomość zbiorowa w interpretacji snów to pojęcia:", o: ["Freuda", "Junga", "Adlera", "Kleina"], a: 1, e: "U Freuda liczą się skojarzenia konkretnej osoby." }
+      ]
+    },
     {
       id: "neopsychoanaliza",
       title: "Neopsychoanaliza: Jung, Adler, Sullivan, Erikson, Horney, Murray",

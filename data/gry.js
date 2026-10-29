@@ -2,7 +2,7 @@
 // Pozostałe gry (prawda/fałsz, memory, wisielec, luki, wyzwanie dnia, pojedynek) biorą treść z fiszek, notatek i quizów.
 window.GAME_AUTHORS = {
   osobowosc: [
-    ["model strukturalny: id, ego, superego", "Freud"], ["model topograficzny psychiki", "Freud"], ["fazy rozwoju psychoseksualnego", "Freud"], ["kateksja", "Freud"], ["determinizm psychiczny", "Freud"],
+    ["model strukturalny: id, ego, superego", "Freud"], ["model topograficzny psychiki", "Freud"], ["fazy rozwoju psychoseksualnego", "Freud"], ["kateksja", "Freud"], ["sen jako „królewska droga do nieświadomości”", "Freud"], ["praca snu: zagęszczenie i przesunięcie", "Freud"], ["determinizm psychiczny", "Freud"],
     ["nieświadomość zbiorowa i archetypy", "Jung"], ["persona i cień", "Jung"], ["anima i animus", "Jung"], ["indywiduacja", "Jung"], ["introwersja i ekstrawersja jako postawy", "Jung"],
     ["poczucie niższości i kompensacja", "Adler"], ["styl życia", "Adler"], ["fikcyjna celowość", "Adler"], ["twórcze Ja", "Adler"], ["konstelacja rodzinna i kolejność urodzeń", "Adler"],
     ["system Ja: dobre Ja, złe Ja, nie-Ja", "Sullivan"], ["personifikacje i dynamizmy", "Sullivan"], ["chumship – przyjaciel tej samej płci", "Sullivan"], ["tryby: prototaksyczny, parataksyczny, syntaksyczny", "Sullivan"],
@@ -56,6 +56,7 @@ window.GAME_SEQUENCES = {
     { title: "Epoki rozwojowe Sullivana", items: ["niemowlęctwo", "dzieciństwo", "wiek młodzieńczy (szkolny)", "wczesna adolescencja (chumship)", "właściwa adolescencja", "późna adolescencja i dojrzałość"] },
     { title: "Cykl doświadczenia (Perls, Zinker)", items: ["doznanie pobudzenia", "formowanie się figury", "mobilizacja", "działanie", "kontakt", "wycofanie"] },
     { title: "Regulacja motywacji – od najmniej autonomicznej (Deci i Ryan)", items: ["regulacja zewnętrzna", "introjekcja", "identyfikacja", "integracja", "motywacja wewnętrzna"] },
+    { title: "Analiza snu krok po kroku (Freud)", items: ["zapis snu (treść jawna)", "podział na elementy", "wolne skojarzenia", "resztki dzienne", "odkręcenie pracy snu", "analiza oporu", "symbole uniwersalne", "życzenie (treść utajona)"] },
     { title: "Model topograficzny – od powierzchni (Freud)", items: ["świadomość", "przedświadomość", "nieświadomość"] },
     { title: "Fazy internalizacji (Kernberg)", items: ["relacja z obiektem częściowym", "integracja reprezentacji self i obiektu", "stabilne struktury osobowości"] }
   ],

@@ -2,6 +2,14 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29h",
+    date: "29 października 2026",
+    items: [
+      "🌙 Nowy temat w psychologii osobowości: „Freud: marzenia senne i symbolika snów (ćwiczenia)” – z Twojego pliku z Dysku.",
+      "📖 Notatka (treść jawna i utajona, praca snu, symbole, wolne skojarzenia, analiza krok po kroku), 24 fiszki, 12 pytań w quizie, 6 pytań otwartych i 18 par do gier – w tym nowa sekwencja „Analiza snu krok po kroku” w grze „Ułóż po kolei”."
+    ]
+  },
+  {
     v: "2026-10-29g",
     date: "29 października 2026",
     items: [
