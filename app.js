@@ -584,7 +584,8 @@
     const tabs = [
       ["notatka", "📖 Notatka"],
       ["fiszki", `🃏 Fiszki (${fc.length})`],
-      ["quiz", `✅ Quiz (${quiz.length})`]
+      ["quiz", `✅ Quiz (${quiz.length})`],
+      ["gry", "🎮 Gry"]
     ];
     const base = `#/s/${subject.id}/t/${topic.id}`;
     let body = "";
@@ -1912,32 +1913,59 @@
   const AUTHORS = window.GAME_AUTHORS || {};
   const SEQUENCES = window.GAME_SEQUENCES || {};
   let gameTimer = null;
+  // gry działają dla całego przedmiotu albo dla jednego tematu (tid)
+  let gameTopic;
+  const topicText = (sub, tid) => fold(sub.topics.filter((t) => !tid || t.id === tid).map((t) => (t.notes || "") + " " + (t.flashcards || []).map((f) => f.join(" ")).join(" ")).join(" "));
+  // autorzy przypisani do tematu, jeśli ich nazwisko pada w notatce lub fiszkach tematu
+  function authorsFor(sub, tid) {
+    const list = AUTHORS[sub.id] || [];
+    if (!tid) return list;
+    const text = topicText(sub, tid);
+    return list.filter(([, author]) => author.split(/ i |, /).some((a) => text.includes(fold(a.split(" ").pop()).slice(0, 6))));
+  }
+  // sekwencje tematu: większość elementów występuje w jego notatce
+  function seqsFor(sub, tid) {
+    const list = SEQUENCES[sub.id] || [];
+    if (!tid) return list;
+    const text = topicText(sub, tid);
+    return list.filter((sq) => sq.items.filter((it) => text.includes(fold(it.replace(/[„”"()]/g, "")).split(" ")[0].slice(0, 6))).length >= Math.ceil(sq.items.length * 0.7));
+  }
   const GAMES = [
-    { kind: "pary", icon: "🧩", name: "Gra w pary", desc: "Połącz pojęcia z odpowiedziami na czas.", ok: (sub) => matchCards(sub).length >= 4, href: (sub) => `#/s/${sub.id}/pary` },
-    { kind: "kto", icon: "🗣️", name: "Kto to powiedział?", desc: "Pojęcie lub teoria – wybierz autora.", ok: (sub) => (AUTHORS[sub.id] || []).length >= 4 },
-    { kind: "pf", icon: "⚡", name: "Prawda czy fałsz", desc: "60 sekund – jak najwięcej trafnych odpowiedzi.", ok: (sub) => matchCards(sub).length >= 6 },
-    { kind: "kolejnosc", icon: "🔢", name: "Ułóż po kolei", desc: "Stadia, etapy i fazy we właściwej kolejności.", ok: (sub) => (SEQUENCES[sub.id] || []).length > 0 },
-    { kind: "memory", icon: "🃏", name: "Memory", desc: "Odkrywaj karty i szukaj par pojęcie–definicja.", ok: (sub) => matchCards(sub).length >= 8 },
-    { kind: "wisielec", icon: "🐟", name: "Wisielec", desc: "Zgadnij pojęcie po literach – kotek pilnuje rybek.", ok: (sub) => hangWords(sub).length >= 3 },
-    { kind: "pojedynek", icon: "⚔️", name: "Pojedynek z kotkiem", desc: "Kto zdobędzie więcej punktów w quizie?", ok: (sub) => subjectQuiz(sub).length >= 10 },
-    { kind: "luki", icon: "✏️", name: "Uzupełnij lukę", desc: "Zdanie z notatki bez słowa kluczowego.", ok: (sub) => gapItems(sub).length >= 4 }
+    { kind: "pary", icon: "🧩", name: "Gra w pary", desc: "Połącz pojęcia z odpowiedziami na czas.", ok: (sub, tid) => matchCards(sub, tid).length >= 4, href: (sub, tid) => `#/s/${sub.id}/pary${tid ? "/" + tid : ""}` },
+    { kind: "kto", icon: "🗣️", name: "Kto to powiedział?", desc: "Pojęcie lub teoria – wybierz autora.", ok: (sub, tid) => authorsFor(sub, tid).length >= 3 && new Set((AUTHORS[sub.id] || []).map((x) => x[1])).size >= 4 },
+    { kind: "pf", icon: "⚡", name: "Prawda czy fałsz", desc: "60 sekund – jak najwięcej trafnych odpowiedzi.", ok: (sub, tid) => matchCards(sub, tid).length >= 6 },
+    { kind: "kolejnosc", icon: "🔢", name: "Ułóż po kolei", desc: "Stadia, etapy i fazy we właściwej kolejności.", ok: (sub, tid) => seqsFor(sub, tid).length > 0 },
+    { kind: "memory", icon: "🃏", name: "Memory", desc: "Odkrywaj karty i szukaj par pojęcie–definicja.", ok: (sub, tid) => matchCards(sub, tid).length >= 6 },
+    { kind: "wisielec", icon: "🐟", name: "Wisielec", desc: "Zgadnij pojęcie po literach – kotek pilnuje rybek.", ok: (sub, tid) => hangWords(sub, tid).length >= 3 },
+    { kind: "pojedynek", icon: "⚔️", name: "Pojedynek z kotkiem", desc: "Kto zdobędzie więcej punktów w quizie?", ok: (sub, tid) => subjectQuiz(sub, tid).length >= 5 },
+    { kind: "luki", icon: "✏️", name: "Uzupełnij lukę", desc: "Zdanie z notatki bez słowa kluczowego.", ok: (sub, tid) => gapItems(sub, tid).length >= 4 }
   ];
-  function viewGames(subject) {
-    document.title = "Gry – " + subject.short;
+  const scopeKey = (s) => s.subject.id + (s.topicId ? "/" + s.topicId : "");
+  function viewGames(subject, tid) {
+    const topic = tid && subject.topics.find((t) => t.id === tid);
+    document.title = "Gry – " + (topic ? topic.title : subject.short);
     const best = store.games;
+    const key = subject.id + (tid ? "/" + tid : "");
+    const withGames = subject.topics.filter((t) => GAMES.some((g) => g.ok(subject, t.id)));
     app.innerHTML = `
-      <a class="back" href="#/s/${subject.id}">‹ ${esc(subject.short)}</a>
-      <h1>🎮 Gry: ${esc(subject.short)}</h1>
-      <a class="game-tile challenge" href="#/wyzwanie"><span class="game-icon">🐾</span><span><strong>Kotkowe wyzwanie dnia</strong><span>5 pytań ze wszystkich przedmiotów · seria: ${store.challenge.streak || 0} · 🐟 ${store.challenge.treats || 0}</span></span></a>
+      <a class="back" href="${topic ? `#/s/${subject.id}/t/${tid}` : `#/s/${subject.id}`}">‹ ${esc(topic ? topic.title : subject.short)}</a>
+      <h1>🎮 Gry${topic ? "" : `: ${esc(subject.short)}`}</h1>
+      ${topic ? `<p class="muted">Temat: <strong>${esc(topic.title)}</strong></p>` : ""}
+      <div class="scope-row" style="--accent:${subject.color}">
+        <span class="muted">Zakres:</span>
+        <a class="scope${tid ? "" : " on"}" href="#/s/${subject.id}/gry">Cały przedmiot</a>
+        ${withGames.map((t) => `<a class="scope${t.id === tid ? " on" : ""}" href="#/s/${subject.id}/t/${t.id}/gry">${esc(t.title.length > 34 ? t.title.slice(0, 32) + "…" : t.title)}</a>`).join("")}
+      </div>
       <div class="game-grid" style="--accent:${subject.color}">
-        ${GAMES.filter((g) => g.ok(subject)).map((g) => {
+        ${GAMES.filter((g) => g.ok(subject, tid)).map((g) => {
           let rec = "";
-          if (g.kind === "pf" && (best.tf || {})[subject.id]) rec = `rekord: ${best.tf[subject.id]}`;
-          if (g.kind === "memory" && (best.memory || {})[subject.id]) rec = `rekord: ${best.memory[subject.id]} ruchów`;
-          if (g.kind === "pary" && (best.best || {})[subject.id + "/all"]) rec = `rekord: ${best.best[subject.id + "/all"]} s`;
-          return `<a class="game-tile" href="${g.href ? g.href(subject) : `#/s/${subject.id}/gra/${g.kind}`}"><span class="game-icon">${g.icon}</span><span><strong>${g.name}</strong><span>${g.desc}${rec ? ` · ${rec}` : ""}</span></span></a>`;
+          if (g.kind === "pf" && (best.tf || {})[key]) rec = `rekord: ${best.tf[key]}`;
+          if (g.kind === "memory" && (best.memory || {})[key]) rec = `rekord: ${best.memory[key]} ruchów`;
+          if (g.kind === "pary" && (best.best || {})[subject.id + "/" + (tid || "all")]) rec = `rekord: ${best.best[subject.id + "/" + (tid || "all")]} s`;
+          return `<a class="game-tile" href="${g.href ? g.href(subject, tid) : `#/s/${subject.id}/gra/${g.kind}${tid ? "/" + tid : ""}`}"><span class="game-icon">${g.icon}</span><span><strong>${g.name}</strong><span>${g.desc}${rec ? ` · ${rec}` : ""}</span></span></a>`;
         }).join("")}
-      </div>`;
+      </div>
+      ${tid ? "" : `<a class="game-tile challenge" href="#/wyzwanie"><span class="game-icon">🐾</span><span><strong>Kotkowe wyzwanie dnia</strong><span>5 pytań ze wszystkich przedmiotów · seria: ${store.challenge.streak || 0} · 🐟 ${store.challenge.treats || 0}</span></span></a>`}`;
   }
   function viewGamesAll() {
     document.title = "Gry – nauka";
@@ -1946,9 +1974,11 @@
       <h1>🎮 Gry</h1>
       <a class="game-tile challenge" href="#/wyzwanie"><span class="game-icon">🐾</span><span><strong>Kotkowe wyzwanie dnia</strong><span>5 pytań ze wszystkich przedmiotów · seria: ${store.challenge.streak || 0} ${plural(store.challenge.streak || 0, "dzień", "dni", "dni")} · 🐟 ${store.challenge.treats || 0}${store.challenge.last === dayKey() ? " · dzisiaj zrobione ✓" : ""}</span></span></a>
       <h2>Wybierz przedmiot</h2>
-      <div class="game-grid">${SUBJECTS.filter(hasContent).map((sub) => `<a class="game-tile" href="#/s/${sub.id}/gry" style="--accent:${sub.color}"><span class="game-icon">${sub.icon}</span><span><strong>${esc(sub.name)}</strong><span>${GAMES.filter((g) => g.ok(sub)).length} gier</span></span></a>`).join("")}</div>`;
+      <p class="muted">W przedmiocie wybierzesz cały materiał albo konkretny temat (dział). Gry tematu są też w zakładce „🎮 Gry” przy każdej notatce.</p>
+      <div class="game-grid">${SUBJECTS.filter(hasContent).map((sub) => `<a class="game-tile" href="#/s/${sub.id}/gry" style="--accent:${sub.color}"><span class="game-icon">${sub.icon}</span><span><strong>${esc(sub.name)}</strong><span>${GAMES.filter((g) => g.ok(sub)).length} gier · ${sub.topics.length} ${plural(sub.topics.length, "temat", "tematy", "tematów")}</span></span></a>`).join("")}</div>`;
   }
-  function startGame(subject, kind) {
+  function startGame(subject, kind, tid) {
+    gameTopic = tid || undefined;
     if (kind === "kto") return startWho(subject);
     if (kind === "pf") return startTF(subject);
     if (kind === "kolejnosc") return startOrder(subject);
@@ -1956,15 +1986,15 @@
     if (kind === "wisielec") return startHang(subject);
     if (kind === "pojedynek") return startDuel(subject);
     if (kind === "luki") return startGap(subject);
-    viewGames(subject);
+    viewGames(subject, tid);
   }
   function gameBack(s) {
-    return s.kind === "wyzwanie" ? "#/gry" : `#/s/${s.subject.id}/gry`;
+    return s.kind === "wyzwanie" ? "#/gry" : s.topicId ? `#/s/${s.subject.id}/t/${s.topicId}/gry` : `#/s/${s.subject.id}/gry`;
   }
 
   // --- wspólny silnik pytań (Kto to powiedział?, Uzupełnij lukę, Pojedynek, Wyzwanie dnia) ---
   function startMC(subject, kind, label, qs, hello) {
-    session = { type: "mc", kind, subject, label, qs, pos: 0, chosen: null, score: 0, cat: 0, catPick: null };
+    session = { type: "mc", kind, subject, topicId: kind === "wyzwanie" ? undefined : gameTopic, label, qs, pos: 0, chosen: null, score: 0, cat: 0, catPick: null };
     say(session, hello);
     renderMC();
   }
@@ -2074,8 +2104,8 @@
 
   // --- Kto to powiedział? ---
   function startWho(subject) {
-    const list = AUTHORS[subject.id] || [];
-    const all = [...new Set(list.map((x) => x[1]))];
+    const list = authorsFor(subject, gameTopic);
+    const all = [...new Set((AUTHORS[subject.id] || []).map((x) => x[1]))];
     const qs = shuffle(list).slice(0, 10).map(([concept, author]) => ({
       q: `„${concept}” – kto jest autorem?`, ...mcOptions(author, all), e: `${concept} → ${author}.`
     }));
@@ -2083,9 +2113,9 @@
   }
 
   // --- Uzupełnij lukę (zdania z notatek z pogrubionym słowem kluczowym) ---
-  function gapItems(subject) {
+  function gapItems(subject, tid) {
     const out = [];
-    subject.topics.forEach((t) => {
+    subject.topics.filter((t) => !tid || t.id === tid).forEach((t) => {
       const items = [];
       (t.notes || "").split("\n").forEach((line) => {
         if (/^\s*\|/.test(line) || /^#/.test(line)) return;
@@ -2105,8 +2135,8 @@
     return out;
   }
   function startGap(subject) {
-    const items = gapItems(subject);
-    const all = items.map((x) => x.term);
+    const items = gapItems(subject, gameTopic);
+    const all = gapItems(subject).map((x) => x.term);
     const qs = shuffle(items).slice(0, 10).map((it) => {
       const idx = it.text.indexOf(it.term);
       const html = esc(it.text.slice(0, idx)) + `<span class="gap-blank">_____</span>` + esc(it.text.slice(idx + it.term.length));
@@ -2118,7 +2148,7 @@
 
   // --- Pojedynek z kotkiem ---
   function startDuel(subject) {
-    const qs = shuffle(subjectQuiz(subject)).slice(0, 10).map((q) => {
+    const qs = shuffle(subjectQuiz(subject, gameTopic)).slice(0, 10).map((q) => {
       const fixed = q.o.some((o) => FIXED_ORDER.test(o));
       const order = fixed ? q.o.map((_, i) => i) : shuffle(q.o.map((_, i) => i));
       return { q: q.q, o: order.map((i) => q.o[i]), a: order.indexOf(q.a), e: q.e, cat: `⚔️ ${q.topic}` };
@@ -2153,7 +2183,7 @@
   // --- Prawda czy fałsz (60 s) ---
   function startTF(subject) {
     clearInterval(gameTimer);
-    session = { type: "tf", kind: "pf", subject, cards: matchCards(subject), score: 0, wrong: 0, end: Date.now() + 60000, last: null, item: null, started: false };
+    session = { type: "tf", kind: "pf", subject, topicId: gameTopic, cards: matchCards(subject, gameTopic), score: 0, wrong: 0, end: Date.now() + 60000, last: null, item: null, started: false };
     nextTF();
     say(session, "Prawda czy fałsz? Masz 60 sekund – licznik rusza po pierwszej odpowiedzi ⚡");
     renderTF();
@@ -2173,11 +2203,11 @@
     const s = session;
     const back = gameBack(s);
     if (s.over) {
-      const prev = (store.games.tf || {})[s.subject.id] || 0;
+      const prev = (store.games.tf || {})[scopeKey(s)] || 0;
       if (!s.saved) {
         s.saved = true;
         store.games.tf = store.games.tf || {};
-        if (s.score > prev) store.games.tf[s.subject.id] = s.score;
+        if (s.score > prev) store.games.tf[scopeKey(s)] = s.score;
         saveStore();
       }
       const record = s.score > prev;
@@ -2241,8 +2271,8 @@
 
   // --- Ułóż po kolei (dotykaj elementy w dobrej kolejności) ---
   function startOrder(subject) {
-    const seqs = shuffle(SEQUENCES[subject.id] || []).slice(0, 3);
-    session = { type: "order", kind: "kolejnosc", subject, seqs, idx: 0, done: [], wrong: 0, total: 0, bad: null };
+    const seqs = shuffle(seqsFor(subject, gameTopic)).slice(0, 3);
+    session = { type: "order", kind: "kolejnosc", subject, topicId: gameTopic, seqs, idx: 0, done: [], wrong: 0, total: 0, bad: null };
     say(session, "Dotykaj elementy po kolei – od pierwszego do ostatniego 🔢");
     prepOrder();
     renderOrder();
@@ -2306,9 +2336,9 @@
   // --- Memory (4×4: 8 par) ---
   function startMemory(subject) {
     const seen = new Set();
-    const pairs = shuffle(matchCards(subject)).filter((c) => { const k = fold(c.a); if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 8);
+    const pairs = shuffle(matchCards(subject, gameTopic)).filter((c) => { const k = fold(c.a); if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 8);
     const cards = shuffle(pairs.flatMap((c, i) => [{ p: i, t: c.q, side: "q" }, { p: i, t: c.a, side: "a" }]));
-    session = { type: "memory", kind: "memory", subject, cards, open: [], matched: new Set(), moves: 0, started: Date.now(), lock: false };
+    session = { type: "memory", kind: "memory", subject, topicId: gameTopic, cards, open: [], matched: new Set(), moves: 0, started: Date.now(), lock: false };
     say(session, "Odkrywaj po dwie karty i szukaj par: pojęcie + definicja 🃏");
     renderMemory();
   }
@@ -2317,11 +2347,11 @@
     const back = gameBack(s);
     if (s.matched.size === s.cards.length / 2) {
       const secs = Math.round((Date.now() - s.started) / 1000);
-      const prev = (store.games.memory || {})[s.subject.id];
+      const prev = (store.games.memory || {})[scopeKey(s)];
       if (!s.saved) {
         s.saved = true;
         store.games.memory = store.games.memory || {};
-        if (!prev || s.moves < prev) store.games.memory[s.subject.id] = s.moves;
+        if (!prev || s.moves < prev) store.games.memory[scopeKey(s)] = s.moves;
         saveStore();
       }
       app.innerHTML = `
@@ -2376,9 +2406,9 @@
 
   // --- Wisielec (zgadnij pojęcie; kotek zjada rybkę za każdą pomyłkę) ---
   const PL_LETTERS = "AĄBCĆDEĘFGHIJKLŁMNŃOÓPQRSŚTUVWXYZŹŻ".split("");
-  function hangWords(subject) {
+  function hangWords(subject, tid) {
     const seen = new Set();
-    return matchCards(subject).filter((c) => {
+    return matchCards(subject, tid).filter((c) => {
       const w = c.q.trim();
       if (!/^[A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż][A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż -]{2,21}$/.test(w) || w.split(" ").length > 3) return false;
       // podpowiedź nie może zdradzać hasła
@@ -2388,8 +2418,8 @@
     });
   }
   function startHang(subject) {
-    const words = shuffle(hangWords(subject)).slice(0, 5);
-    session = { type: "hang", kind: "wisielec", subject, words, idx: 0, won: 0, lost: 0 };
+    const words = shuffle(hangWords(subject, gameTopic)).slice(0, 5);
+    session = { type: "hang", kind: "wisielec", subject, topicId: gameTopic, words, idx: 0, won: 0, lost: 0 };
     say(session, "Zgadnij pojęcie po literach. Uważaj na moje rybki! 🐟");
     prepHang();
     renderHang();
@@ -3056,7 +3086,7 @@
       renderMC();
       window.scrollTo(0, 0);
     } else if (action === "restart-game") {
-      startGame(session.subject, session.kind);
+      startGame(session.subject, session.kind, session.topicId);
     } else if (action === "tf-answer" && session.type === "tf") {
       answerTF(el.dataset.v === "1");
     } else if (action === "ord-pick" && session.type === "order") {
@@ -3155,6 +3185,7 @@
     if (sub === "t") {
       const topic = subject.topics.find((t) => t.id === parts[3]);
       if (!topic) return viewSubject(subject);
+      if (parts[4] === "gry") return viewGames(subject, topic.id);
       return viewTopic(subject, topic, parts[4], parts[5]);
     }
     if (sub === "fiszki") {
@@ -3168,7 +3199,7 @@
     }
     if (sub === "zadania" && subject.statex) return startStatex(subject);
     if (sub === "gry") return viewGames(subject);
-    if (sub === "gra" && GAMES.some((g) => g.kind === parts[3] && g.ok(subject))) return startGame(subject, parts[3]);
+    if (sub === "gra" && GAMES.some((g) => g.kind === parts[3] && g.ok(subject, parts[4]))) return startGame(subject, parts[3], parts[4]);
     if (sub === "zagadnienia" && realQuestions(subject, parts[3]).length) return startOpen(subject, parts[3], true);
     if (sub === "egzamin-pisemny" && subject.openExam && realQuestions(subject).length >= subject.openExam.questions) return viewOpenExamIntro(subject);
     if (sub === "otwarte") {

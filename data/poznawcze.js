@@ -61,6 +61,18 @@ Państwo przekazuje takim zawodom część uprawnień, więc ograniczenia etyczn
         ["Warunki wpisu na listę psychologów (2001)", "Dyplom magistra psychologii, pełna zdolność do czynności prawnych, znajomość języka polskiego, staż."],
         ["Nowa ustawa o zawodzie psychologa (wg notatki)", "Z 23 stycznia 2026 r.; samorząd i rejestr; większość przepisów od maja 2028 r."]
       ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Zawód zaufania publicznego", "Konstytucja RP, art. 17"],
+        ["Zawód regulowany", "pojęcie z prawa UE"],
+        ["Pierwsza ustawa o zawodzie psychologa", "8 czerwca 2001 r."],
+        ["Art. 12 ustawy", "zgoda klienta"],
+        ["Art. 13 ustawy", "informacja o celu, przebiegu, wynikach"],
+        ["Art. 14 ustawy", "tajemnica bez ograniczeń czasowych"],
+        ["Najłagodniejsza kara dyscyplinarna", "upomnienie"],
+        ["Najsurowsza kara dyscyplinarna", "skreślenie z listy"],
+        ["Nowa ustawa (wg notatki)", "23 stycznia 2026 r., samorząd i rejestr"]
+      ],
       quiz: [
         { q: "Pojęcie „zawód zaufania publicznego” pochodzi z:", o: ["prawa UE", "Konstytucji RP, art. 17", "Kodeksu karnego", "Kodeksu Etyczno-Zawodowego PTP"], a: 1, e: "To pojęcie tylko polskie, konstytucyjne." },
         { q: "Który artykuł ustawy z 2001 r. dotyczy tajemnicy zawodowej?", o: ["art. 4", "art. 12", "art. 13", "art. 14"], a: 3, e: "Art. 12 – zgoda, art. 13 – informacja, art. 14 – tajemnica." },
@@ -478,6 +490,17 @@ Drwal ostrzega przed „bałwochwalczym” podejściem do retranslacji – liczy
         ["5 kryteriów równoważności (Drwal)", "Fasadowa, psychometryczna, funkcjonalna, wierność tłumaczenia, wierność rekonstrukcji."],
         ["Skutek złej adaptacji testu", "Stronniczość testu → błędna diagnoza → postępowanie nieetyczne."],
         ["Przykład nadużycia w adaptacji w Polsce", "Skala Wechslera z 1939 r. z normami amerykańskimi; WISKAD-MMPI z normami z USA."]
+      ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Test wolny od kultury", "utopia"],
+        ["Pseudoadaptacja", "tylko tłumaczenie, obce normy"],
+        ["Emic", "specyficzne dla danej kultury"],
+        ["Etic", "wspólne dla kultur"],
+        ["Tłumaczenie wsteczne", "A → B, potem B → A"],
+        ["Skutek złej adaptacji", "stronniczość testu"],
+        ["Autor kryteriów równoważności", "Drwal"],
+        ["Nadużycie: WISKAD-MMPI", "normy z USA"]
       ],
       quiz: [
         { q: "Elementy specyficzne dla danej kultury to:", o: ["etic", "emic", "culture-free", "back translation"], a: 1, e: "Emic – miejscowe; etic – wspólne." },

@@ -2,6 +2,14 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29e",
+    date: "29 października 2026",
+    items: [
+      "🎮 Gry do konkretnych tematów (działów)! W każdej notatce jest nowa zakładka „🎮 Gry”, a w grach przedmiotu wybierasz zakres: cały przedmiot albo jeden temat.",
+      "🧩 Nowe krótkie pary do gier w kilku tematach (m.in. metody badań, teorie cech, psychologia pozytywna, koncepcje poznawcze i narracyjne), żeby każdy temat miał kilka gier."
+    ]
+  },
+  {
     v: "2026-10-29d",
     date: "29 października 2026",
     items: [

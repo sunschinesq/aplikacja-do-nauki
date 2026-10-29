@@ -66,6 +66,20 @@ Bada, co sprawia, że różne procesy psychiczne, dyspozycje i funkcje tworzą w
         ["Główna wada metody klinicznej", "Nie pozwala empirycznie sprawdzić trafności spostrzeżeń; subiektywna interpretacja; małe próby."],
         ["Wymień cele psychologii osobowości", "Integracja wiedzy, modele osobowości umożliwiające przewidywanie, programy psychoedukacyjne i profilaktyczne, podstawy terapii, rozwój metod badawczych."]
       ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Osobowość wg behawioryzmu", "zespół nawyków"],
+        ["Osobowość wg teorii cech", "zespół cech"],
+        ["Osobowość wg humanistów", "całość doświadczania siebie"],
+        ["Podejście dedukcyjne", "od teorii do hipotez"],
+        ["Podejście indukcyjne", "od faktów do uogólnień"],
+        ["Metoda kliniczna", "dogłębne badanie pojedynczych osób"],
+        ["Metoda korelacyjna", "duże próby, kwestionariusze, związki cech"],
+        ["Metoda eksperymentalna", "manipulacja zmiennymi, przyczynowość"],
+        ["Wada metody korelacyjnej", "współwystępowanie, nie przyczyny"],
+        ["Wada metody eksperymentalnej", "sztuczna sytuacja laboratoryjna"],
+        ["Wada metody klinicznej", "subiektywna interpretacja, małe próby"]
+      ],
       quiz: [
         { q: "Która metoda pozwala ustalić związki przyczynowo-skutkowe?", o: ["Kliniczna", "Korelacyjna", "Eksperymentalna", "Introspekcyjna"], a: 2, e: "Tylko eksperyment manipuluje zmiennymi, więc może wskazać przyczynę." },
         { q: "Metoda korelacyjna jest typowa dla:", o: ["psychoanalizy", "teorii cech", "psychologii humanistycznej", "teorii relacji z obiektem"], a: 1, e: "Teorie cech opierają się na kwestionariuszach i analizie statystycznej dużych prób." },
@@ -622,6 +636,23 @@ Wersja leksykalna (Goldberg): surgencja, ugodowość, sumienność, stabilność
         ["Sumienność w Wielkiej Piątce", "Stopień zorganizowania, wytrwałości i motywacji w działaniu ukierunkowanym na cel."],
         ["Ugodowość w Wielkiej Piątce", "Jakość relacji z innymi: od współczucia do antagonizmu."]
       ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Osobowość wg Allporta", "dynamiczna organizacja systemów psychofizycznych"],
+        ["Proprium", "Allportowskie „Ja” – świadome dążenia"],
+        ["Cecha kardynalna", "jedna dominująca"],
+        ["Cechy centralne", "kilka wyraźnych"],
+        ["Cechy wtórne", "najliczniejsze, ujawniają się rzadko"],
+        ["Autonomia funkcjonalna", "motyw usamodzielnia się od źródła"],
+        ["Cechy powierzchniowe", "obserwowalne"],
+        ["Cechy źródłowe", "ukryte, 16 czynników (16PF)"],
+        ["Ergi", "biologiczne popędy"],
+        ["Sentymenty", "wyuczone, społeczno-kulturowe"],
+        ["PEN (Eysenck)", "psychotyczność, ekstrawersja, neurotyczność"],
+        ["Ekstrawertyk wg Eysencka", "szuka silnej stymulacji"],
+        ["Sumienność", "zorganizowanie i wytrwałość"],
+        ["Ugodowość", "od współczucia do antagonizmu"]
+      ],
       quiz: [
         { q: "Cecha, która przejawia się niemal w każdym zachowaniu człowieka (Allport), to cecha:", o: ["centralna", "kardynalna", "wtórna", "źródłowa"], a: 1, e: "Kardynalna = dominująca." },
         { q: "Test 16PF opracował:", o: ["Eysenck", "Allport", "Cattell", "Costa i McCrae"], a: 2, e: "Cattell – 16 cech źródłowych." },
@@ -744,6 +775,19 @@ Wersja leksykalna (Goldberg): surgencja, ugodowość, sumienność, stabilność
         ["Wola sensu (Frankl)", "Pierwotna, wrodzona potrzeba odnalezienia sensu."],
         ["Wymiary człowieka wg Frankla", "Somatyczny, psychiczny i duchowy (noetyczny)."]
       ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["3 rodzaje szczęśliwego życia", "przyjemne, zaangażowane, znaczące"],
+        ["Geny a szczęście", "ok. 50%"],
+        ["Intencjonalna aktywność a szczęście", "ok. 40%"],
+        ["Okoliczności a szczęście", "ok. 10%"],
+        ["Wyuczona bezradność", "„nic nie zależy ode mnie”"],
+        ["Pesymistyczny styl wyjaśniania", "trwały, ogólny, wewnętrzny"],
+        ["Tematy egzystencjalne", "śmierć, samotność, wolność, sens"],
+        ["Wina egzystencjalna", "zaprzepaszczone szanse rozwoju"],
+        ["Wola sensu", "wrodzona potrzeba sensu (Frankl)"],
+        ["Wymiar noetyczny", "duchowy wymiar człowieka"]
+      ],
       quiz: [
         { q: "Optymista tłumaczy porażki jako:", o: ["trwałe i ogólne", "chwilowe i ograniczone", "wewnętrzne i trwałe", "niezależne od niczego"], a: 1, e: "Optymista: porażki chwilowe, o ograniczonym zasięgu, zewnętrzne." },
         { q: "Logoterapię stworzył:", o: ["Seligman", "Frankl", "Rogers", "May"], a: 1, e: "Viktor Frankl." },
@@ -817,6 +861,22 @@ Planowanie i wybór działań · koordynacja i integracja działań · samokontr
         ["Wewnętrzne vs zewnętrzne umiejscowienie kontroli", "Wewnętrzne – efekty zależą ode mnie. Zewnętrzne – od innych, okoliczności, szczęścia."],
         ["Podpis behawioralny (Mischel i Shoda)", "Charakterystyczny dla osoby wzorzec zachowania w określonej klasie sytuacji („jeśli… to…”)."],
         ["Główne funkcje osobowości", "Planowanie i wybór działań, koordynacja i integracja, samokontrola, funkcja obronna."]
+      ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Schemat poznawczy", "wiedza wyabstrahowana z doświadczeń"],
+        ["Prototyp", "najlepszy egzemplarz kategorii"],
+        ["Skrypt", "typowa sekwencja zachowań"],
+        ["Alternatywizm konstruktywny", "każdy interpretuje świat po swojemu"],
+        ["Konstrukt osobisty", "dwubiegunowy sposób rozróżniania"],
+        ["Konstrukty centralne", "rdzeniowe, oporne na zmiany"],
+        ["Lęk wg Kelly’ego", "zdarzenia poza zasięgiem konstruktów"],
+        ["Przestrzeń życiowa (Lewin)", "osoba + środowisko psychologiczne"],
+        ["System doświadczeniowy (Epstein)", "automatyczny, intuicyjny"],
+        ["System racjonalny (Epstein)", "świadomy, logiczny"],
+        ["Wewnętrzne umiejscowienie kontroli", "efekty zależą ode mnie"],
+        ["Zewnętrzne umiejscowienie kontroli", "efekty zależą od losu i innych"],
+        ["Podpis behawioralny", "wzorzec „jeśli… to…”"]
       ],
       quiz: [
         { q: "Pojęcie umiejscowienia kontroli wprowadził:", o: ["Kelly", "Rotter", "Bandura", "Epstein"], a: 1, e: "Julian Rotter – LOC." },
@@ -949,6 +1009,19 @@ Myślenie narracyjne opowiada o zmienności ludzkich **intencji, pragnień i cel
         ["Skrypt zaangażowania vs jądrowy", "Zaangażowania – oddanie celowi, przewaga uczuć pozytywnych. Jądrowy – ambiwalencja, źródło radości staje się zagrożeniem."],
         ["Dwa motywy wg Hermansa", "Umacnianie siebie i pragnienie kontaktu i jedności z innymi."],
         ["Dysocjacja wg Hermansa", "Pomijanie ważnych doświadczeń w systemie wartościowań lub brak uczuć, choć treść je sugeruje."]
+      ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Osobowość wg McAdamsa", "historia życia – tożsamość narracyjna"],
+        ["2 motywy w narracjach (McAdams)", "siła/władza oraz miłość/intymność"],
+        ["Skrypt generatywny", "troska o kolejne pokolenia"],
+        ["Scena (Tomkins)", "zapamiętane zdarzenie z emocją"],
+        ["Skrypt (Tomkins)", "reguły łączenia scen"],
+        ["Źródło motywacji wg Tomkinsa", "emocje (afekty)"],
+        ["Skrypt zaangażowania", "oddanie celowi, uczucia pozytywne"],
+        ["Skrypt jądrowy", "ambiwalencja – radość staje się zagrożeniem"],
+        ["2 motywy wg Hermansa", "umacnianie siebie i kontakt z innymi"],
+        ["Dysocjacja wg Hermansa", "pomijanie ważnych doświadczeń"]
       ],
       quiz: [
         { q: "Pojęcie skryptu jądrowego wprowadził:", o: ["McAdams", "Tomkins", "Hermans", "Kelly"], a: 1, e: "Silvan Tomkins – teoria skryptów." },

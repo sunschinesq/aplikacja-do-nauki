@@ -153,6 +153,15 @@ window.SUBJECTS = window.SUBJECTS || [];
           ["Dlaczego statystyka jest nauką służebną?", "Bo jej narzędzia są dopasowane do specyfiki zjawisk badanych przez naukę główną (np. psychologię)."],
           ["Czy w nauce można udowodnić teorię?", "Nie. Można tylko wykazać, że jest błędna (falsyfikacja); wyniki co najwyżej ją wspierają."]
         ],
+        // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+        pairs: [
+          ["Egzamin z metodologii", "30 pytań, 30 minut, próg 16"],
+          ["Metodologia", "reguły: jak, kogo, czym i gdzie badać"],
+          ["Badanie empiryczne", "usystematyzowana obserwacja i pomiar"],
+          ["Statystyka jako nauka służebna", "narzędzia dopasowane do nauki głównej"],
+          ["Falsyfikacja", "teorii nie da się udowodnić, można obalić"],
+          ["Wyniki zgodne z hipotezą", "co najwyżej ją wspierają"]
+        ],
         quiz: []
       },
       // ------------------------------------------------------------------
