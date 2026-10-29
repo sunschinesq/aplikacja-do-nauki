@@ -2,6 +2,15 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29l",
+    date: "29 października 2026",
+    items: [
+      "🎲 Każdy tekst kotka ma teraz taką samą szansę na wylosowanie – żadne się nie powtarzają częściej od innych.",
+      "😸 38 nowych, różnych tekstów: o metodologii („Plan badawczy na dziś: zmienna niezależna – Ty…”), statystyce („Wielkość efektu: d Cohena = ogromne 🤩”), pocieszające („Jedna słabsza odpowiedź to obserwacja odstająca, nie trend”) i czułe („Kocham Cię na skali ilorazowej…”).",
+      "✨ Twoje teksty dostały emotki 🥣🐟📚"
+    ]
+  },
+  {
     v: "2026-10-29k",
     date: "29 października 2026",
     items: ["😼 12 nowych tekstów kotka od Ciebie: kotek-motywator („Pusta miska sama na siebie nie zarobi…”), pocieszyciel („…to tylko faza inkubacji problemu”) i chwalipięta („Jesteś jak gołąb u Skinnera…”)."]

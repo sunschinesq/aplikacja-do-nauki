@@ -423,33 +423,86 @@
   ];
   // teksty od Julki: kotek-motywator, pocieszyciel i chwalipięta
   const JULKA_HELLO = [
-    "Pusta miska sama na siebie nie zarobi – to się w behawioryzmie nazywa prawo efektu, więc siadaj do książek.",
-    "Twoja hierarchia potrzeb Maslowa zaczyna się i kończy na pełnej misce, więc zalicz ten semestr.",
-    "Stosuję wobec Ciebie rozkład wzmocnień sporadycznych: pouczysz się pół godziny, to łaskawie dam się pogłaskać.",
-    "Dziś rolę Twojego superego przejmuję ja: koniec z prokrastynacją na telefonie, marsz do teorii.",
-    "Wyglądasz na ofiarę dysonansu poznawczego: wiesz, że musisz czytać, a i tak patrzysz na mnie – przestań, ja tu tylko leżę i pachnę.",
-    "Wyparcie tego materiału do nieświadomości nie sprawi, że zniknie; próbowałem tak z transporterem do weterynarza i nie działa."
+    "Pusta miska sama na siebie nie zarobi – to się w behawioryzmie nazywa prawo efektu, więc siadaj do książek 📚🥣",
+    "Twoja hierarchia potrzeb Maslowa zaczyna się i kończy na pełnej misce, więc zalicz ten semestr 🐟🎓",
+    "Stosuję wobec Ciebie rozkład wzmocnień sporadycznych: pouczysz się pół godziny, to łaskawie dam się pogłaskać 😼",
+    "Dziś rolę Twojego superego przejmuję ja: koniec z prokrastynacją na telefonie, marsz do teorii 📵📖",
+    "Wyglądasz na ofiarę dysonansu poznawczego: wiesz, że musisz czytać, a i tak patrzysz na mnie – przestań, ja tu tylko leżę i pachnę 😹",
+    "Wyparcie tego materiału do nieświadomości nie sprawi, że zniknie; próbowałem tak z transporterem do weterynarza i nie działa 🧳😾"
   ];
   const JULKA_COMFORT = [
-    "Spokojnie, to nie jest wyuczona bezradność, tylko faza inkubacji problemu – połóż się obok mnie i poczekaj na olśnienie.",
-    "Widzę, że kortyzol rośnie, dlatego włączam mruczenie: to najtańsza terapia poznawczo-behawioralna, na jaką Cię stać.",
-    "Nie panikuj, to tylko chwilowe przeciążenie pamięci roboczej – zrób reset systemu i podrap mnie za uchem.",
-    "Wyparcie tego materiału do nieświadomości nie sprawi, że zniknie; próbowałem tak z transporterem do weterynarza i nie działa."
+    "Spokojnie, to nie jest wyuczona bezradność, tylko faza inkubacji problemu – połóż się obok mnie i poczekaj na olśnienie 💡",
+    "Widzę, że kortyzol rośnie, dlatego włączam mruczenie: to najtańsza terapia poznawczo-behawioralna, na jaką Cię stać 😻",
+    "Nie panikuj, to tylko chwilowe przeciążenie pamięci roboczej – zrób reset systemu i podrap mnie za uchem 🧠🐾",
+    "Wyparcie tego materiału do nieświadomości nie sprawi, że zniknie; próbowałem tak z transporterem do weterynarza i nie działa 🧳😾"
   ];
   const JULKA_GOOD = [
-    "Brawo, krzywa uczenia się poszła w górę – teraz zrób transfer tej skuteczności na otwieranie saszetki.",
-    "Pełne wejście w stan flow, jestem dumny – w nagrodę możesz popatrzeć, jak śpię w Twoich notatkach.",
-    "Jesteś jak gołąb u Skinnera: dziobałaś ten podręcznik cały dzień i wreszcie zaskoczyło."
+    "Brawo, krzywa uczenia się poszła w górę – teraz zrób transfer tej skuteczności na otwieranie saszetki 📈",
+    "Pełne wejście w stan flow, jestem dumny – w nagrodę możesz popatrzeć, jak śpię w Twoich notatkach 😴📝",
+    "Jesteś jak gołąb u Skinnera: dziobałaś ten podręcznik cały dzień i wreszcie zaskoczyło 🐦✨"
   ];
-  SAYS.funHello = SAYS.funHello.concat(JULKA_HELLO, JULKA_HELLO);
-  SAYS.funGood = SAYS.funGood.concat(JULKA_GOOD, JULKA_GOOD);
-  SAYS.funBad = SAYS.funBad.concat(JULKA_COMFORT);
-  SAYS.funMany = SAYS.funMany.concat(JULKA_COMFORT, JULKA_COMFORT);
-  SAYS.love = SAYS.love.concat(JULKA_HELLO.slice(0, 4), JULKA_GOOD.slice(1, 2));
+  // kolejne teksty: metodologia, diagnostyka, statystyka i kocie życie
+  const MORE_HELLO = [
+    "Kontrakt diagnostyczny: Ty się uczysz, ja leżę na klawiaturze. Podpisz łapką 🐾",
+    "Plan badawczy na dziś: zmienna niezależna – Ty, zmienna zależna – moje zadowolenie 📊",
+    "Operacjonalizacja motywacji: liczba fiszek do pierwszej przekąski 🍪",
+    "Uprzedzam: obserwacja jest jawna i uczestnicząca. Patrzę na Ciebie 👀",
+    "Hipoteza kierunkowa: po tej sesji będziesz mądrzejsza. Sprawdzamy 📈",
+    "Świadoma zgoda: klikając dalej, zgadzasz się na moje mruczenie 📝😼",
+    "Najpierw lejek: od ogółu do szczegółu. Ogół – nauka, szczegół – potem rybka 🐟",
+    "Rozpoczynam wywiad swobodny: jak się dziś czujesz? Bo ja głodny 😹",
+    "Efekt świeżości: to, co powtórzysz na końcu, zostanie w głowie najdłużej 🧠",
+    "Krzywa zapominania Ebbinghausa nie śpi, więc ja też nie. Powtarzamy! 📈",
+    "Zgodnie z kodeksem etycznym nie będę Cię oceniać. Tylko trochę obserwować 👀",
+    "Plan na dziś: najpierw fiszki, potem drzemka. Kolejność nie z Maslowa, tylko z mojej piramidy 😸",
+    "Mój typ osobowości według Wielkiej Piątki: sumienność w spaniu – 10 stenów 😴",
+    "Warunki badania: cisza, światło, pełna uwaga. I kot na kolanach – to standard 🐾"
+  ];
+  const MORE_COMFORT = [
+    "Nawet najlepszy test ma błąd standardowy pomiaru. Ty też możesz mieć gorszą odpowiedź 💗",
+    "Jedna słabsza odpowiedź to obserwacja odstająca, nie trend 📊🐾",
+    "Regresja do średniej: po gorszej odpowiedzi zwykle przychodzi lepsza 📈",
+    "Moc testu rośnie z liczbą prób. Twoja też – próbuj dalej 💪",
+    "To nie porażka, tylko dane. A dane są cenne 📋💗",
+    "Pomyłka to informacja zwrotna: konkretna, realna i wcale nie taka straszna 💗",
+    "Nawet Pawłow zaczynał od psa, który nie wiedział, o co chodzi 🐶😹",
+    "Wiesz, kto nigdy się nie myli? Ten, kto nie próbuje. Ja na przykład – śpię 😴",
+    "W skali stenowej Twojej wytrwałości daję 10. Jedna odpowiedź to szczegół 🐾"
+  ];
+  const MORE_GOOD = [
+    "Ta odpowiedź ma wysoką trafność. I fasadową, i każdą inną 😻",
+    "Wielkość efektu: d Cohena = ogromne 🤩",
+    "Obalam hipotezę, że to było za trudne 💪",
+    "Rzetelność test–retest: za każdym razem tak samo świetnie ✨",
+    "Wynik istotny statystycznie i istotny dla mnie emocjonalnie 💗",
+    "Twój przedział ufności: od „super” do „genialnie” 📊",
+    "Status tożsamości: osiągnięta. Status wiedzy: też 🎓",
+    "Dopisuję do Twojej konceptualizacji przypadku: geniusz 📝",
+    "Ta odpowiedź przeszła ślepą recenzję – recenzent (ja) zachwycony 😼",
+    "Opanowane jak fiszka w piątym pudełku Leitnera 📦✨"
+  ];
+  const MORE_LOVE = [
+    "Moja teoria przywiązania jest prosta: Ty + kanapa + ja 🛋️💗",
+    "Jesteś moją bezpieczną bazą – wracam do Ciebie po każdej drzemce 🏠",
+    "Kocham Cię na skali ilorazowej – z prawdziwym zerem i bez górnej granicy 💞",
+    "Moja opinia psychologiczna o Tobie: wyjątkowa. Zalecenie: więcej głaskania kota 📝",
+    "Twoje uśmiechy to moje ulubione dane jakościowe 😻"
+  ];
+  SAYS.funHello = SAYS.funHello.concat(JULKA_HELLO, MORE_HELLO);
+  SAYS.funGood = SAYS.funGood.concat(JULKA_GOOD, MORE_GOOD);
+  SAYS.funBad = SAYS.funBad.concat(JULKA_COMFORT, MORE_COMFORT);
+  SAYS.funMany = SAYS.funMany.concat(JULKA_COMFORT, MORE_COMFORT.slice(0, 5));
+  SAYS.love = SAYS.love.concat(MORE_LOVE, JULKA_HELLO.slice(0, 4), JULKA_GOOD.slice(1, 2), [
+    "Jesteś moją dysponowaną myślą – wiem, że to bez sensu, ale i tak Cię uwielbiam 💗",
+    "Mój styl przywiązania do Ciebie: bezpieczny. Dopóki nie skończy się jedzenie 🐟😼"
+  ]);
   SAYS.funHello = SAYS.funHello.concat(SAYS.love);
   SAYS.funGood = SAYS.funGood.concat(SAYS.love.slice(0, 15));
+  // bez duplikatów – każdy tekst ma taką samą szansę
+  Object.keys(SAYS).forEach((k) => { SAYS[k] = [...new Set(SAYS[k])]; });
   // co jakiś czas zamiast zwykłego tekstu – żart z psychologii
-  const funOr = (plain, fun) => (Math.random() < 0.35 ? pickOne(fun) : pickOne(plain));
+  // losowanie z jednej wspólnej puli – każdy tekst (zwykły i zabawny) ma taką samą szansę
+  const funOr = (plain, fun) => pickOne([...new Set(plain.concat(fun))]);
   const pickOne = (arr) => arr[Math.floor(Math.random() * arr.length)];
   function buddy(text, mood, fresh) {
     return `<div class="buddy${mood ? " " + mood : ""}${fresh ? " fresh" : ""}" aria-live="polite">
@@ -2133,7 +2186,7 @@
   // --- wspólny silnik pytań (Kto to powiedział?, Uzupełnij lukę, Pojedynek, Wyzwanie dnia) ---
   function startMC(subject, kind, label, qs, hello) {
     session = { type: "mc", kind, subject, topicId: kind === "wyzwanie" ? undefined : gameTopic, label, qs, pos: 0, chosen: null, score: 0, cat: 0, catPick: null };
-    say(session, Math.random() < 0.3 ? pickOne(SAYS.funHello) : hello);
+    say(session, pickOne([hello].concat(SAYS.funHello)));
     renderMC();
   }
   function mcOptions(correct, pool, n = 3) {
@@ -2721,7 +2774,7 @@
       }[low.st.k];
     }
     if (low.v < 60) return pickOne([`Hej${you}! Jak tam nauka? 📚`, "Mrrr, dobrze, że jesteś 💗", `Ucz się dalej – zbieramy łapki na nowe ubranka 🐾`]);
-    return pickOne([`Jestem najszczęśliwszym kotkiem na świecie${you}! 😻`, "Mrrr… kocham to miejsce 💖", `Ale się dzisiaj postarałaś${you}! 🎉`, "Pogłaszcz mnie! 🐾", "Jesteś moją dysponowaną myślą – wiem, że to bez sensu, ale i tak Cię uwielbiam 💗", "Mój styl przywiązania do Ciebie: bezpieczny. Dopóki nie skończy się jedzenie 🐟😼", pickOne(SAYS.love), pickOne(SAYS.love), pickOne(SAYS.love)]);
+    return pickOne([`Jestem najszczęśliwszym kotkiem na świecie${you}! 😻`, "Mrrr… kocham to miejsce 💖", `Ale się dzisiaj postarałaś${you}! 🎉`, "Pogłaszcz mnie! 🐾", ].concat(SAYS.love));
   }
   function petLook() {
     const p = store.pet;
