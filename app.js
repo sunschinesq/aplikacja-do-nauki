@@ -17,7 +17,9 @@
     cards: {}, quiz: {}, exams: {}, lastBackup: null, pets: 0,
     days: {}, goal: 20, bestStreak: 0, marks: {}, open: {}, tries: {},
     cats: {}, birthday: null, focus: { sessions: 0, minutes: 0, days: {} }, games: { match: 0, best: {} },
-    statex: { n: 0, ok: 0 }, planDone: {}, challenge: { last: null, streak: 0, best: 0, treats: 0, days: {} }
+    statex: { n: 0, ok: 0 }, planDone: {}, challenge: { last: null, streak: 0, best: 0, treats: 0, days: {} },
+    profile: { name: "", catName: "", asked: false }, paws: 0, pawsTotal: 0,
+    pet: { food: 80, energy: 80, fun: 80, clean: 80, tick: 0, sleeping: false, look: "szary", owned: [], wear: { head: "", eyes: "", neck: "" }, bg: "pokoj" }
   });
   function loadStore() {
     const store = STORE_DEFAULTS();
@@ -26,7 +28,8 @@
       const data = raw ? JSON.parse(raw) : {};
       Object.keys(store).forEach((k) => { if (data[k] !== undefined && data[k] !== null) store[k] = data[k]; });
     } catch (e) {
-      /* uszkodzone dane – zaczynamy od zera */
+      // uszkodzone dane: zachowaj kopię, zanim cokolwiek je nadpisze
+      try { localStorage.setItem(STORE_KEY + "-kopia-uszkodzonych", localStorage.getItem(STORE_KEY) || ""); } catch (e2) { /* brak miejsca */ }
     }
     return store;
   }
@@ -245,9 +248,12 @@
     if (mastered) d.m++;
     d.s[subject.id] = (d.s[subject.id] || 0) + 1;
     store.bestStreak = Math.max(store.bestStreak, currentStreak());
+    const goalNow = !before && d.n >= d.g;
+    // łapki dla wirtualnego kotka: 2 za dobrą odpowiedź, 1 za próbę, 20 za cel dnia
+    addPaws((ok ? 2 : 1) + (goalNow ? 20 : 0));
     saveStore();
     checkCats();
-    return !before && d.n >= d.g;
+    return goalNow;
   }
 
   // ---------- notatki: sekcje (## nagłówki) ----------
@@ -337,8 +343,14 @@
     s.sayFresh = false;
     return html;
   }
+  // czasem kotek zwraca się po imieniu („Julka, brawo! 🎉”)
+  function withName(text) {
+    const name = store.profile && store.profile.name;
+    if (!name || Math.random() > 0.35 || /^\d/.test(text)) return text;
+    return `${esc(name)}, ${text.charAt(0).toLowerCase()}${text.slice(1)}`;
+  }
   function say(s, text, mood) {
-    s.say = text;
+    s.say = withName(text);
     s.mood = mood || "";
     s.sayFresh = true;
   }
@@ -393,7 +405,7 @@
     app.innerHTML = `
       <header class="hero">
         <h1>Drugi rok · 1 semestr</h1>
-        <p>Wybierz przedmiot. Postępy zapisują się na tym urządzeniu.</p>
+        <p>${store.profile.name ? `Cześć, ${esc(store.profile.name)}! 👋 ` : ""}Wybierz przedmiot. Postępy zapisują się na tym urządzeniu.</p>
       </header>
       <a class="search-link" href="#/szukaj">🔍 <span>Szukaj w notatkach, fiszkach i quizach…</span></a>
       ${todayCard()}
@@ -419,6 +431,7 @@
     if (met) text = d.n >= goal * 2 ? "Podwójny cel! Ale z Ciebie mistrzyni 😻" : "Cel na dziś zrobiony! Teraz już tylko dla przyjemności 💖";
     else if (!d.n) text = streak ? `Seria ${streak} ${plural(streak, "dzień", "dni", "dni")} czeka na dzisiejszy cel – nie daj jej zgasnąć 🔥` : `Miau! ${goal} odpowiedzi i cel na dziś zrobiony 🐾`;
     else text = `Jeszcze ${goal - d.n} – dasz radę! 💪`;
+    text = withName(text);
     return `
       <section class="today${met ? " met" : ""}">
         <div class="ring" style="--p:${pct}" role="img" aria-label="Dziś ${d.n} z ${goal} odpowiedzi"><span>${d.n}<small>/${goal}</small></span></div>
@@ -427,6 +440,7 @@
           <span>🔥 Seria: <b>${streak}</b> ${plural(streak, "dzień", "dni", "dni")}${bestStreak() > streak ? ` · rekord: ${bestStreak()}` : ""}</span>
           <div class="today-links">
             <a href="#/plan">📋 Plan na dziś${plan.length ? ` (${plan.filter((t) => t.done).length}/${plan.length})` : ""}</a>
+            <a href="#/kotek">🏠 ${esc(petName())}${petNeeds() ? " 🥺" : ""} · 🐾 ${store.paws || 0}</a>
             <a href="#/gry">🎮 Gry</a>
             <a href="#/skupienie">🍅 Skupienie</a>
             <a href="#/statystyki">📊 Statystyki</a>
@@ -1392,6 +1406,7 @@
       if (!skipped) {
         const key = dayKey();
         store.focus.sessions = (store.focus.sessions || 0) + 1;
+        addPaws(15);
         store.focus.minutes = (store.focus.minutes || 0) + f.work;
         store.focus.days[key] = (store.focus.days[key] || 0) + f.work;
         saveStore();
@@ -2033,6 +2048,7 @@
         c.last = today;
         c.days[today] = s.score;
         if (s.score === s.qs.length) c.treats = (c.treats || 0) + 1;
+        addPaws(s.score === s.qs.length ? 20 : 10);
         saveStore();
         checkCats();
         s.counted = true;
@@ -2444,10 +2460,274 @@
     renderHang();
   }
 
+  // ---------- wirtualny kotek (jak Pou) ----------
+  // łapki 🐾 zdobywa się nauką; kotka się karmi, kąpie, bawi i kładzie spać; w sklepie są ubranka i tła
+  function addPaws(n) {
+    store.paws = (store.paws || 0) + n;
+    store.pawsTotal = (store.pawsTotal || 0) + n;
+  }
+  const PET_STATS = [
+    { k: "food", icon: "🍗", name: "Najedzenie" },
+    { k: "energy", icon: "⚡", name: "Energia" },
+    { k: "fun", icon: "🎾", name: "Zabawa" },
+    { k: "clean", icon: "🛁", name: "Czystość" }
+  ];
+  const FOODS = [
+    { id: "karma", icon: "🥣", name: "Karma", price: 5, food: 15 },
+    { id: "mleko", icon: "🥛", name: "Mleczko", price: 8, food: 15, fun: 5 },
+    { id: "rybka", icon: "🐟", name: "Rybka", price: 12, food: 30 },
+    { id: "kurczak", icon: "🍗", name: "Kurczak", price: 18, food: 45 },
+    { id: "sushi", icon: "🍣", name: "Sushi", price: 25, food: 50, fun: 10 },
+    { id: "tort", icon: "🎂", name: "Torcik", price: 35, food: 60, fun: 25 }
+  ];
+  const SHOP = [
+    { id: "flower", slot: "head", name: "Kwiatek", price: 40 },
+    { id: "bow", slot: "head", name: "Kokardka", price: 40 },
+    { id: "beret", slot: "head", name: "Beret", price: 80 },
+    { id: "beanie", slot: "head", name: "Czapka z pomponem", price: 90 },
+    { id: "chef", slot: "head", name: "Czapka kucharza", price: 110 },
+    { id: "party", slot: "head", name: "Czapeczka urodzinowa", price: 70 },
+    { id: "witch", slot: "head", name: "Kapelusz czarodziejki", price: 150 },
+    { id: "tiara", slot: "head", name: "Diadem", price: 200 },
+    { id: "crown", slot: "head", name: "Korona", price: 300 },
+    { id: "glasses", slot: "eyes", name: "Okulary profesora", price: 60 },
+    { id: "sunglasses", slot: "eyes", name: "Okulary przeciwsłoneczne", price: 90 },
+    { id: "heartglasses", slot: "eyes", name: "Okulary serduszka", price: 120 },
+    { id: "bowtie", slot: "neck", name: "Muszka", price: 50 },
+    { id: "bell", slot: "neck", name: "Obroża z dzwoneczkiem", price: 70 },
+    { id: "scarf", slot: "neck", name: "Szalik", price: 90 },
+    { id: "pearls", slot: "neck", name: "Perły", price: 180 },
+    { id: "ogrod", slot: "bg", name: "Ogród", price: 100 },
+    { id: "plaza", slot: "bg", name: "Plaża", price: 150 },
+    { id: "sypialnia", slot: "bg", name: "Sypialnia", price: 120 },
+    { id: "kosmos", slot: "bg", name: "Kosmos", price: 250 }
+  ];
+  const SLOTS = { head: "🎩 Na głowę", eyes: "👓 Okulary", neck: "🎀 Na szyję", bg: "🖼️ Tło pokoju", look: "🐱 Wygląd kotka" };
+  const clamp = (x) => Math.max(0, Math.min(100, Math.round(x)));
+  // statystyki maleją z czasem (łagodnie); podczas snu energia rośnie
+  function petTick() {
+    const pet = store.pet;
+    const now = Date.now();
+    if (!pet.tick) { pet.tick = now; return; }
+    const h = Math.min(72, (now - pet.tick) / 3600000);
+    if (h < 0.01) return;
+    pet.food = clamp(pet.food - h * (pet.sleeping ? 2 : 4));
+    pet.fun = clamp(pet.fun - h * (pet.sleeping ? 1 : 3));
+    pet.clean = clamp(pet.clean - h * 2);
+    pet.energy = clamp(pet.energy + h * (pet.sleeping ? 18 : -3));
+    pet.tick = now;
+  }
+  // czy kotek czegoś potrzebuje (do znaczka na stronie głównej)
+  function petNeeds() {
+    petTick();
+    const p = store.pet;
+    return !p.sleeping && PET_STATS.some((st) => p[st.k] < 30);
+  }
+  function petName() {
+    return store.profile.catName || "Kotek";
+  }
+  function petMood() {
+    const p = store.pet;
+    const avg = (p.food + p.energy + p.fun + p.clean) / 4;
+    return avg >= 65 ? "happy" : avg >= 35 ? "" : "comfort";
+  }
+  function petSays() {
+    const p = store.pet;
+    const you = store.profile.name ? `, ${esc(store.profile.name)}` : "";
+    if (p.sleeping) return "Zzz… mrrr… 💤";
+    const low = PET_STATS.map((st) => ({ st, v: p[st.k] })).sort((a, b) => a.v - b.v)[0];
+    if (low.v < 30) {
+      return {
+        food: `Burczy mi w brzuszku${you}… nakarmisz mnie? 🥺`,
+        energy: `Oczka mi się kleją… położysz mnie spać${you}? 😴`,
+        fun: `Nudzi mi się${you}! Pobawimy się? 🎾`,
+        clean: `Coś mi się futerko pobrudziło… kąpiel? 🫧`
+      }[low.st.k];
+    }
+    if (low.v < 60) return pickOne([`Hej${you}! Jak tam nauka? 📚`, "Mrrr, dobrze, że jesteś 💗", `Ucz się dalej – zbieramy łapki na nowe ubranka 🐾`]);
+    return pickOne([`Jestem najszczęśliwszym kotkiem na świecie${you}! 😻`, "Mrrr… kocham to miejsce 💖", `Ale się dzisiaj postarałaś${you}! 🎉`, "Pogłaszcz mnie! 🐾"]);
+  }
+  function petLook() {
+    const p = store.pet;
+    const base = CATS.find((c) => c.id === p.look && (store.cats[c.id] || c.id === "szary")) || CATS[0];
+    const acc = [p.wear.neck, p.wear.eyes, p.wear.head].filter(Boolean);
+    return Object.assign({}, base, { acc });
+  }
+  function petLevel() {
+    return Math.floor(Math.sqrt((store.pawsTotal || 0) / 40)) + 1;
+  }
+  function viewPet(msg) {
+    petTick();
+    saveStore();
+    document.title = petName() + " – nauka";
+    const p = store.pet;
+    const look = petLook();
+    app.innerHTML = `
+      <a class="back" href="#/">‹ Przedmioty</a>
+      <div class="pet-top">
+        <h1>🏠 ${esc(petName())} <span class="pet-lvl">poziom ${petLevel()}</span></h1>
+        <span class="paws">🐾 ${store.paws || 0}</span>
+      </div>
+      <div class="pet-room bg-${p.bg}${p.sleeping ? " night" : ""}">
+        ${p.sleeping ? `<span class="room-moon">🌙</span>` : ""}
+        <button class="pet-big ${p.sleeping ? "sleeping" : petMood()}" data-action="pet-pet" aria-label="Pogłaszcz kotka">${petCatSvg(look)}${p.sleeping ? `<span class="zzz">z<b>z</b><i>z</i></span>` : ""}</button>
+        <span class="pet-bubble2">${msg || petSays()}</span>
+      </div>
+      <div class="pet-stats">
+        ${PET_STATS.map((st) => `<div class="pst"><span>${st.icon} ${st.name}</span><span class="pst-bar"><span style="width:${p[st.k]}%" class="${p[st.k] < 30 ? "low" : ""}"></span></span><b>${p[st.k]}%</b></div>`).join("")}
+      </div>
+      <div class="pet-actions">
+        ${p.sleeping ? `<button class="btn primary big-ish" data-action="pet-wake">☀️ Obudź ${esc(petName())}</button>` : `
+        <button class="btn" data-action="pet-tab" data-tab="food">🍗 Nakarm</button>
+        <button class="btn" data-action="pet-wash">🛁 Kąpiel</button>
+        <button class="btn" data-action="pet-play">🎾 Pobaw się</button>
+        <button class="btn" data-action="pet-sleep">💤 Spać</button>
+        <a class="btn" href="#/kotek/sklep">👗 Sklep i szafa</a>`}
+      </div>
+      <div id="pet-panel"></div>
+      <div class="panel pet-help">
+        <strong>Jak zdobywać łapki 🐾?</strong>
+        <ul>
+          <li>dobra odpowiedź (fiszki, quizy, gry, pytania otwarte) – 2 🐾, każda inna próba – 1 🐾</li>
+          <li>cel dnia – 20 🐾 · sesja skupienia – 15 🐾 · wyzwanie dnia – 10 🐾 (za 5/5 – 20 🐾)</li>
+          <li>pogłaskanie kotka, który zagląda na ekran – 1 🐾</li>
+        </ul>
+        <p class="muted small-note">Kotek robi się głodny i zmęczony powoli, a gdy śpi, odzyskuje energię. Nic złego mu się nie stanie, jeśli zajrzysz rzadziej – po prostu się stęskni 💗</p>
+        <button class="btn small ghost" data-action="profile-edit">✏️ Zmień imiona</button>
+      </div>`;
+  }
+  function petFoodPanel() {
+    const el = document.getElementById("pet-panel");
+    if (!el) return;
+    el.innerHTML = `<div class="panel food-panel"><strong>Co dziś podamy?</strong><div class="food-grid">${FOODS.map((f) => `
+      <button class="food" data-action="pet-feed" data-id="${f.id}" ${store.paws < f.price ? "disabled" : ""}>
+        <span class="food-icon">${f.icon}</span><span>${f.name}</span><span class="price">🐾 ${f.price}</span>
+      </button>`).join("")}</div>${store.paws < FOODS[0].price ? `<p class="muted small-note">Brakuje łapek – zrób kilka fiszek albo zagraj w grę, a wrócę po jedzonko 🐾</p>` : ""}</div>`;
+  }
+  function petAction(act, el) {
+    petTick();
+    const p = store.pet;
+    const n = petName();
+    let msg = "";
+    if (act === "pet-tab") return petFoodPanel();
+    if (act === "pet-feed") {
+      const f = FOODS.find((x) => x.id === el.dataset.id);
+      if (!f || store.paws < f.price) return;
+      if (p.food >= 98) msg = "Już nie zmieszczę ani kęska! 😹";
+      else {
+        store.paws -= f.price;
+        p.food = clamp(p.food + f.food);
+        if (f.fun) p.fun = clamp(p.fun + f.fun);
+        msg = pickOne([`Mniam! ${f.icon} Dziękuję!`, `Pycha! ${f.icon} Mrrr…`, `${f.icon} Najlepsze jedzonko na świecie! 😻`]);
+      }
+    } else if (act === "pet-wash") {
+      if (p.clean >= 95) msg = "Jestem już czyściutki! ✨";
+      else { p.clean = 100; p.fun = clamp(p.fun - 5); msg = pickOne(["Brrr, woda! …ale pachnę pięknie 🫧", "Plusk plusk! Lśnię jak nowy ✨"]); }
+    } else if (act === "pet-play") {
+      if (p.energy < 10) msg = "Za bardzo chce mi się spać na zabawę… 😴";
+      else { p.fun = clamp(p.fun + 20); p.energy = clamp(p.energy - 8); p.food = clamp(p.food - 3); msg = pickOne(["Hop! Złapałem wędkę! 🎣", "Kłębek włóczki to moja miłość 🧶", "Jeszcze raz, jeszcze raz! 🎾"]); }
+    } else if (act === "pet-sleep") {
+      p.sleeping = true;
+      msg = "Dobranoc… 🌙 Obudź mnie, kiedy wypoczynę.";
+    } else if (act === "pet-wake") {
+      p.sleeping = false;
+      msg = p.energy >= 80 ? "Dzień dobry! Wyspałem się jak król 👑" : "Mrr… jeszcze pięć minutek… no dobrze, wstaję 🥱";
+    } else if (act === "pet-pet") {
+      if (p.sleeping) msg = "Zzz… *mruczy przez sen* 💤";
+      else { p.fun = clamp(p.fun + 3); msg = pickOne(["Mrrrrr 💗", "Jeszcze, jeszcze! 😻", "Prrr… najlepsze głaskanie 💕"]); }
+      const big = app.querySelector(".pet-big");
+      if (big) { big.classList.remove("purr"); void big.offsetWidth; big.classList.add("purr"); }
+    }
+    saveStore();
+    viewPet(msg);
+  }
+  function viewShop() {
+    document.title = "Sklep – " + petName();
+    const p = store.pet;
+    const look = petLook();
+    const item = (it) => {
+      const owned = p.owned.includes(it.id);
+      const worn = it.slot === "bg" ? p.bg === it.id : p.wear[it.slot] === it.id;
+      const preview = it.slot === "bg" ? `<span class="shop-bg bg-${it.id}"></span>` : petCatSvg(Object.assign({}, look, { acc: [it.id] }));
+      return `<div class="shop-item${worn ? " worn" : ""}">
+        <span class="shop-img">${preview}</span>
+        <strong>${esc(it.name)}</strong>
+        ${owned ? `<button class="btn small${worn ? "" : " primary"}" data-action="shop-wear" data-id="${it.id}">${worn ? "Zdejmij" : "Załóż"}</button>` : `<button class="btn small" data-action="shop-buy" data-id="${it.id}" ${store.paws < it.price ? "disabled" : ""}>🐾 ${it.price}</button>`}
+      </div>`;
+    };
+    const looks = unlockedCats();
+    app.innerHTML = `
+      <a class="back" href="#/kotek">‹ ${esc(petName())}</a>
+      <div class="pet-top"><h1>👗 Sklep i szafa</h1><span class="paws">🐾 ${store.paws || 0}</span></div>
+      <div class="pet-room small bg-${p.bg}"><span class="pet-big">${petCatSvg(look)}</span></div>
+      ${["head", "eyes", "neck", "bg"].map((slot) => `
+        <h2>${SLOTS[slot]}</h2>
+        <div class="shop-grid">${slot === "bg" ? `<div class="shop-item${p.bg === "pokoj" ? " worn" : ""}"><span class="shop-img"><span class="shop-bg bg-pokoj"></span></span><strong>Różowy pokój</strong><button class="btn small${p.bg === "pokoj" ? "" : " primary"}" data-action="shop-wear" data-id="pokoj">${p.bg === "pokoj" ? "Ustawione" : "Ustaw"}</button></div>` : ""}${SHOP.filter((it) => it.slot === slot).map(item).join("")}</div>`).join("")}
+      <h2>${SLOTS.look}</h2>
+      <p class="muted">Za darmo – każdy kotek odblokowany w albumie 🐱 może być Twoim kotkiem.</p>
+      <div class="shop-grid">${looks.map((c) => `<div class="shop-item${p.look === c.id ? " worn" : ""}"><span class="shop-img">${petCatSvg(Object.assign({}, c, { acc: [] }))}</span><strong>${esc(c.name)}</strong><button class="btn small${p.look === c.id ? "" : " primary"}" data-action="shop-look" data-id="${c.id}">${p.look === c.id ? "Wybrany" : "Wybierz"}</button></div>`).join("")}</div>`;
+  }
+  function shopAction(act, id) {
+    const p = store.pet;
+    if (act === "shop-buy") {
+      const it = SHOP.find((x) => x.id === id);
+      if (!it || p.owned.includes(id) || store.paws < it.price) return;
+      store.paws -= it.price;
+      p.owned.push(id);
+      if (it.slot === "bg") p.bg = id; else p.wear[it.slot] = id;
+    } else if (act === "shop-wear") {
+      if (id === "pokoj") p.bg = "pokoj";
+      else {
+        const it = SHOP.find((x) => x.id === id);
+        if (!it || !p.owned.includes(id)) return;
+        if (it.slot === "bg") p.bg = p.bg === id ? "pokoj" : id;
+        else p.wear[it.slot] = p.wear[it.slot] === id ? "" : id;
+      }
+    } else if (act === "shop-look") {
+      p.look = id;
+    }
+    saveStore();
+    const y = window.scrollY;
+    viewShop();
+    window.scrollTo(0, y);
+  }
+  // pierwsze uruchomienie: jak masz na imię i jak nazwiesz kotka
+  function showProfile(after) {
+    const box = document.createElement("div");
+    box.className = "whatsnew show profile-box";
+    box.innerHTML = `
+      <div class="whatsnew-card" role="dialog" aria-label="Poznajmy się">
+        <div class="whatsnew-head">🐾 Poznajmy się!</div>
+        ${buddy("Miau! Zanim zaczniemy – jak mam się do Ciebie zwracać?", "happy", true)}
+        <label class="prof-label">Jak masz na imię? <span class="muted">(tak będę do Ciebie mówić, np. „Julka”)</span>
+          <input class="prof-input" id="prof-name" maxlength="20" value="${esc(store.profile.name || "")}" placeholder="Twoje imię">
+        </label>
+        <label class="prof-label">Jak nazwiesz swojego kotka? <span class="muted">(zamieszka w zakładce 🏠 Kotek)</span>
+          <input class="prof-input" id="prof-cat" maxlength="20" value="${esc(store.profile.catName || "")}" placeholder="np. Mruczek">
+        </label>
+        <button class="btn primary big" data-prof="ok">Gotowe 💖</button>
+        <button class="btn ghost big prof-later" data-prof="later">Może później</button>
+      </div>`;
+    document.body.appendChild(box);
+    box.addEventListener("click", (ev) => {
+      const b = ev.target.closest("[data-prof]");
+      if (!b) return;
+      if (b.dataset.prof === "ok") {
+        store.profile.name = box.querySelector("#prof-name").value.trim();
+        store.profile.catName = box.querySelector("#prof-cat").value.trim();
+      }
+      store.profile.asked = true;
+      saveStore();
+      box.remove();
+      route();
+      if (after) after();
+    });
+  }
+
   // ---------- zdarzenia ----------
   // ---------- kopia zapasowa ----------
   const BACKUP_APP = "nauka-drugi-rok";
-  const BACKUP_FIELDS = ["cards", "quiz", "exams", "pets", "days", "goal", "bestStreak", "marks", "open", "tries", "cats", "birthday", "focus", "games", "statex", "planDone", "challenge"];
+  const BACKUP_FIELDS = ["cards", "quiz", "exams", "pets", "days", "goal", "bestStreak", "marks", "open", "tries", "cats", "birthday", "focus", "games", "statex", "planDone", "challenge", "profile", "paws", "pawsTotal", "pet"];
 
   function hasProgress() {
     return Object.keys(store.cards).length + Object.keys(store.quiz).length + Object.keys(store.exams).length > 0;
@@ -2626,6 +2906,18 @@
       app.querySelectorAll(".wc-col.sel").forEach((c) => c.classList.remove("sel"));
       el.classList.add("sel");
       document.getElementById("wc-detail").innerHTML = dayDetail(el.dataset.day);
+      return;
+    }
+    if (act && act.startsWith("pet-")) {
+      petAction(act, el);
+      return;
+    }
+    if (act && act.startsWith("shop-")) {
+      shopAction(act, el.dataset.id);
+      return;
+    }
+    if (act === "profile-edit") {
+      showProfile();
       return;
     }
     if (act && act.startsWith("focus-")) {
@@ -2849,6 +3141,7 @@
     if (parts[0] === "plan") return viewPlan();
     if (parts[0] === "nowosci") return viewChanges();
     if (parts[0] === "gry") return viewGamesAll();
+    if (parts[0] === "kotek") return parts[1] === "sklep" ? viewShop() : viewPet();
     if (parts[0] === "wyzwanie") return startChallenge();
     if (parts[0] === "kopia") return viewBackup();
     if (parts[0] === "szukaj") return viewSearch();
@@ -2935,7 +3228,17 @@
     nightcap: `<path d="M15 14 Q32 -13 61 4 Q53 8 55 14 Z" fill="#5c7cfa"/><ellipse cx="35" cy="14" rx="21" ry="3.8" fill="#fff"/><circle cx="62" cy="5" r="4.2" fill="#fff"/><circle cx="30" cy="2" r="1.3" fill="#ffd43b"/><circle cx="42" cy="6" r="1.3" fill="#ffd43b"/><circle cx="48" cy="-1" r="1" fill="#ffd43b"/>`,
     crown: `<path d="M23 11 L25 -2 L30.5 5 L36 -6 L41.5 5 L47 -2 L49 11 Z" fill="#fcc419" stroke="#e67700" stroke-width="1" stroke-linejoin="round"/><circle cx="36" cy="5" r="1.8" fill="#e64980"/><circle cx="28" cy="7" r="1.2" fill="#4dabf7"/><circle cx="44" cy="7" r="1.2" fill="#4dabf7"/>`,
     bow: `<path d="M52 9 l-8 -5.5 v11 Z M52 9 l8 -5.5 v11 Z" fill="#e64980"/><circle cx="52" cy="9" r="2.4" fill="#c2255c"/>`,
-    heart: `<path d="M9 75 C-3 65 1 56 9 61 C17 56 21 65 9 75 Z" fill="#e64980"/>`
+    heart: `<path d="M9 75 C-3 65 1 56 9 61 C17 56 21 65 9 75 Z" fill="#e64980"/>`,
+    beret: `<ellipse cx="39" cy="8" rx="21" ry="7" fill="#c2255c" transform="rotate(-8 39 8)"/><circle cx="40" cy="0.5" r="2.4" fill="#c2255c"/>`,
+    beanie: `<path d="M15 15 Q36 -16 57 15 Z" fill="#4dabf7"/><path d="M22 8 v6 M29 3 v11 M36 1 v13 M43 3 v11 M50 8 v6" stroke="#339af0" stroke-width="1.6"/><rect x="14" y="11" width="44" height="6.5" rx="3.2" fill="#e7f5ff"/><circle cx="36" cy="-3.5" r="4.5" fill="#fff"/>`,
+    chef: `<path d="M23 13 h26 v-7 a6.5 6.5 0 0 0 -3 -12 a7.5 7.5 0 0 0 -10 -3.5 a7.5 7.5 0 0 0 -10 3.5 a6.5 6.5 0 0 0 -3 12 Z" fill="#fff" stroke="#ced4da" stroke-width="1"/><path d="M23 9 h26" stroke="#ced4da" stroke-width="1"/>`,
+    flower: `<g transform="translate(53 9)"><circle cx="0" cy="-4" r="3.2" fill="#f783ac"/><circle cx="3.8" cy="-1.2" r="3.2" fill="#f783ac"/><circle cx="2.4" cy="3.2" r="3.2" fill="#f783ac"/><circle cx="-2.4" cy="3.2" r="3.2" fill="#f783ac"/><circle cx="-3.8" cy="-1.2" r="3.2" fill="#f783ac"/><circle r="2.4" fill="#ffd43b"/></g>`,
+    tiara: `<path d="M24 11 L28 4 L32 8 L36 1 L40 8 L44 4 L48 11 Z" fill="#dee2e6" stroke="#adb5bd" stroke-width=".8" stroke-linejoin="round"/><circle cx="36" cy="3" r="1.6" fill="#da77f2"/><circle cx="28" cy="5.5" r="1" fill="#74c0fc"/><circle cx="44" cy="5.5" r="1" fill="#74c0fc"/>`,
+    sunglasses: `<g><rect x="19.5" y="21.5" width="15" height="10" rx="4" fill="#212529"/><rect x="37.5" y="21.5" width="15" height="10" rx="4" fill="#212529"/><path d="M34.5 25 h3 M19.5 24 L13 22 M52.5 24 L59 22" stroke="#212529" stroke-width="1.6"/><path d="M22 24 l4 -1.5" stroke="#fff" stroke-width="1" opacity=".6"/></g>`,
+    heartglasses: `<g fill="#f06595" stroke="#c2255c" stroke-width=".8" opacity=".92"><path d="M27 33 C17 26 20 19 27 23 C34 19 37 26 27 33 Z"/><path d="M45 33 C35 26 38 19 45 23 C52 19 55 26 45 33 Z"/></g><path d="M35 25 h2 M20 24 L13 22 M52 24 L59 22" stroke="#c2255c" stroke-width="1.4"/>`,
+    bowtie: `<path d="M36 45 l-9 -5.5 v11 Z M36 45 l9 -5.5 v11 Z" fill="#e64980"/><circle cx="36" cy="45" r="2.3" fill="#a61e4d"/>`,
+    bell: `<path d="M18 42 Q36 49.5 54 42" stroke="#e03131" stroke-width="3.5" fill="none" stroke-linecap="round"/><circle cx="36" cy="48.5" r="3.4" fill="#fcc419" stroke="#e67700" stroke-width=".8"/><path d="M34 49.5 h4" stroke="#e67700" stroke-width=".8"/>`,
+    pearls: `<g fill="#fff" stroke="#dee2e6" stroke-width=".6">${[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => { const t = i / 8; const x = 19 + 34 * t; const y = 42 + 6.5 * Math.sin(Math.PI * t); return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2"/>`; }).join("")}</g>`
   };
   function petCatSvg(c) {
     const eyes = c.eyes || "#7cc26b";
@@ -3115,6 +3418,7 @@
       clearTimeout(leave);
       cat.classList.add("petted");
       store.pets = (store.pets || 0) + 1;
+      addPaws(1);
       saveStore();
       checkCats();
       // serduszka i dymek osobno (kotek z boku jest obrócony, a napis ma być prosto)
@@ -3159,5 +3463,5 @@
   window.addEventListener("hashchange", () => { route(); window.scrollTo(0, 0); });
   checkCats();
   route();
-  setTimeout(showWhatsNew, 600);
+  setTimeout(() => (store.profile.asked ? showWhatsNew() : showProfile(showWhatsNew)), 600);
 })();

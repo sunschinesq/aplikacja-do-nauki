@@ -2,6 +2,16 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29d",
+    date: "29 października 2026",
+    items: [
+      "🏠 Twój własny kotek (jak Pou)! Karm go, kąp, baw się z nim i kładź spać – zakładka „🏠 Kotek” na stronie głównej.",
+      "🐾 Łapki za naukę: 2 za dobrą odpowiedź, 1 za każdą próbę, 20 za cel dnia, 15 za sesję skupienia, 10–20 za wyzwanie dnia.",
+      "👗 Sklep i szafa: czapki, okulary, muszki, perły, korona i tła pokoju (ogród, plaża, kosmos…). Wygląd kotka możesz wybrać spośród kotków z albumu.",
+      "👋 Aplikacja pyta, jak masz na imię i jak nazwiesz kotka – kotki zwracają się do Ciebie po imieniu."
+    ]
+  },
+  {
     v: "2026-10-29c",
     date: "29 października 2026",
     items: [

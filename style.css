@@ -1139,3 +1139,87 @@ mark.hit { background: color-mix(in srgb, var(--good) 24%, transparent); }
 .hk { min-height: 44px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); font-weight: 700; cursor: pointer; }
 .hk.hit { background: color-mix(in srgb, var(--good) 22%, transparent); }
 .hk.miss { opacity: .35; }
+
+/* ---------- wirtualny kotek ---------- */
+.pet-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.pet-top h1 { margin: 0; }
+.pet-lvl { font-size: .9rem; font-weight: 700; color: var(--muted); vertical-align: middle; }
+.paws { padding: 6px 14px; border-radius: 99px; background: var(--surface); border: 2px solid var(--accent); font-weight: 800; font-size: 1.1rem; }
+.pet-room {
+  position: relative;
+  height: 330px;
+  margin: 14px 0;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  transition: filter .4s ease;
+}
+.pet-room.small { height: 190px; }
+.pet-room.night { filter: brightness(.55) saturate(.8); }
+.room-moon { position: absolute; top: 16px; right: 22px; font-size: 2.2rem; filter: brightness(1.8); }
+.pet-big { position: relative; width: 190px; height: 200px; margin-bottom: 22px; padding: 0; border: 0; background: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.pet-room.small .pet-big { width: 120px; height: 126px; margin-bottom: 14px; }
+.pet-big svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.pet-big.happy .pet-eyes-open { opacity: 0; }
+.pet-big.happy .pet-eyes-happy, .pet-big.happy .pet-blush { opacity: 1; }
+.pet-big.sleeping .pet-eyes-open { opacity: 0; }
+.pet-big.sleeping .pet-eyes-sleep { opacity: 1; }
+.pet-big.sleeping svg { animation: breathe 3.2s ease-in-out infinite; transform-origin: 50% 100%; }
+.pet-big.purr svg { animation: buddy-hop .45s ease 2; transform-origin: 50% 100%; }
+.pet-big .zzz { right: 6px; top: 0; font-size: 1.4rem; color: #fff; }
+.pet-bubble2 {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 40px);
+  padding: 10px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .95);
+  color: #3b1026;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(59, 16, 38, .15);
+  animation: bubble-in .35s cubic-bezier(.3, 1.5, .5, 1);
+}
+/* tła pokoju */
+.bg-pokoj { background: linear-gradient(180deg, #ffe3ef 0 68%, #f7a8c4 68% 100%); }
+.bg-ogrod { background: linear-gradient(180deg, #a5d8ff 0 60%, #8ce99a 60% 100%); }
+.bg-plaza { background: linear-gradient(180deg, #74c0fc 0 45%, #4dabf7 45% 62%, #ffe8a3 62% 100%); }
+.bg-sypialnia { background: linear-gradient(180deg, #e5dbff 0 66%, #b197fc 66% 100%); }
+.bg-kosmos { background: radial-gradient(circle at 20% 25%, #fff 0 1.5px, transparent 2px), radial-gradient(circle at 70% 15%, #fff 0 1px, transparent 1.5px), radial-gradient(circle at 85% 45%, #fff 0 1.5px, transparent 2px), radial-gradient(circle at 40% 55%, #fff 0 1px, transparent 1.5px), linear-gradient(180deg, #1c1c4e 0 70%, #5f3dc4 70% 100%); }
+.pet-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px 18px; }
+.pst { display: grid; grid-template-columns: 120px 1fr 44px; align-items: center; gap: 8px; font-size: .92rem; }
+.pst b { text-align: right; font-variant-numeric: tabular-nums; }
+.pst-bar { height: 12px; border-radius: 99px; background: var(--bg-2); overflow: hidden; }
+.pst-bar span { display: block; height: 100%; border-radius: 99px; background: var(--accent); transition: width .4s ease; }
+.pst-bar span.low { background: #f59f00; }
+.pet-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.pet-actions .btn { flex: 1 1 130px; }
+.food-panel { margin-top: 14px; }
+.food-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; margin-top: 10px; }
+.food { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px 6px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg); cursor: pointer; }
+.food:disabled { opacity: .4; }
+.food-icon { font-size: 2rem; }
+.price { font-size: .82rem; font-weight: 700; color: var(--accent); }
+.pet-help { margin-top: 18px; }
+.pet-help ul { margin: 8px 0; padding-left: 20px; }
+/* sklep */
+.shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.shop-item { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 26px 10px 12px; border-radius: 16px; background: var(--surface); border: 1px solid var(--border); text-align: center; }
+.shop-item.worn { border: 2px solid var(--accent); }
+.shop-item strong { font-size: .9rem; }
+.shop-img { display: block; width: 76px; height: 80px; }
+.shop-img svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.shop-bg { display: block; width: 100%; height: 100%; border-radius: 12px; }
+/* imiona */
+.prof-label { display: block; margin-top: 14px; font-weight: 600; }
+.prof-input { display: block; width: 100%; margin-top: 6px; padding: 12px 14px; font: inherit; color: var(--text); background: var(--bg); border: 2px solid var(--border); border-radius: 12px; outline: none; }
+.prof-input:focus { border-color: var(--accent); }
+.prof-later { margin-top: 6px; border: 0; color: var(--muted); }
+@media (prefers-color-scheme: dark) {
+  .pet-room:not(.night) { filter: brightness(.85); }
+}
