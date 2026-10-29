@@ -195,6 +195,13 @@ Wszyscy wyszli od Freuda, ale przesunęli akcent z popędu seksualnego na sens, 
 - **Typy psychologiczne**: 2 postawy (ekstrawersja / introwersja) × 4 funkcje (myślenie ↔ uczucie; percepcja/doznanie ↔ intuicja) = 8 typów.
 - **Indywiduacja** – stawanie się całością przez integrację przeciwieństw; nasila się po półmetku życia (ok. 40 r.ż.).
 - Przyczynowość (przeszłość) + **teleologia** (cel w przyszłości).
+- Funkcje **racjonalne** (oceniające): myślenie, uczucie; **irracjonalne** (odbierające): percepcja/doznanie, intuicja.
+
+### Jung w schemacie: struktura – działanie – rozwój
+- **Struktura (psyche)**: świadome Ja (ego) · nieświadomość indywidualna z **kompleksami** · nieświadomość zbiorowa z **archetypami** (persona, cień, anima/animus, Jaźń).
+- **Działanie**: układ dynamiczny napędzany **energią psychiczną (libido)**; zasada **równoważności** (energia wycofana z jednego obszaru, np. świadomości, przenosi się do innego, np. do cienia) i **entropii** (dążenie do równowagi napięć); dynamikę wyznaczają też postawy i funkcje.
+- **Rozwój**: **teleologiczny** – kształtują nas nie tylko przeszłość, ale przede wszystkim dążenia; centralny proces to **indywiduacja** (integracja świadomości z nieświadomością, cienia, animy/animusa → samourzeczywistnienie wokół Jaźni).
+- **Etapy życia**: **dzieciństwo** – dominacja instynktów, brak ukształtowanego ego · **młodość i wczesna dorosłość** – umacnianie ego, ekspansja na zewnątrz, przystosowanie społeczne (rozwój **persony**) · **wiek średni** (punkt zwrotny ok. **35–40 r.ż.**) – zwrot ku wnętrzu, kryzys dotychczasowych wartości, intensywna indywiduacja i szukanie sensu.
 
 ## Alfred Adler – psychologia indywidualna
 - Człowiek to niepodzielna całość, działa **celowo** i jest istotą społeczną.
@@ -207,6 +214,16 @@ Wszyscy wyszli od Freuda, ale przesunęli akcent z popędu seksualnego na sens, 
 - 3 zadania życiowe: praca, przyjaźń/wspólnota, miłość.
 - **Kolejność urodzeń**: pierworodne („zdetronizowane”, odpowiedzialne), średnie (ambitne, rywalizujące), najmłodsze (rozpieszczane), jedynak (centrum uwagi).
 
+### Adler w schemacie: struktura – działanie – rozwój
+- **Struktura**: brak podziału na walczące struktury – człowiek to **niepodzielna całość**. Komponenty: **styl życia** (spójny wzorzec zachowań, przekonań, nawyków i celów z wczesnego dzieciństwa), **poczucie wspólnoty** (zainteresowanie społeczne – wrodzony potencjał empatii, współpracy, troski), **twórcze Ja** (creative self – aktywny czynnik przetwarzający wrodzone predyspozycje i doświadczenia w unikalny plan działania).
+- **Działanie**: **celowościowe (teleologiczne)** – motywują nas nie popędy z przeszłości, lecz subiektywne cele na przyszłość (**fikcyjna celowość**).
+  - **Poczucie niższości** – naturalny, uniwersalny stan wyjściowy (bezradność dziecka), główna siła napędowa.
+  - **Dążenie do wyższości / przezwyciężania** – kompensacja braków, mistrzostwo, kompetencja, doskonałość.
+  - **Kompensacja i nadkompensacja** – równoważenie słabości. Dążenie połączone z poczuciem wspólnoty → **zdrowie**; samolubne → **kompleks niższości lub wyższości (nerwica)**.
+- **Rozwój**: w kontekście społecznym i wczesnodziecięcym; **styl życia** formuje się do ok. **4–5 r.ż.** (pozycja w rodzinie, uwarunkowania fizyczne, atmosfera wychowawcza).
+  - **Konstelacja rodzinna**: **pierworodny** – „detronizacja”, silna potrzeba kontroli i władzy · **drugi/średni** – ciągła rywalizacja, nastawienie na wyścig i szybki rozwój · **najmłodszy** – ryzyko rozpieszczenia, brak samodzielności albo silna potrzeba przewyższenia wszystkich · **jedynak** – duże poczucie własnej wartości, trudność we współdzieleniu uwagi.
+  - Rozwój przez **3 zadania życiowe**: **praca, przyjaźń (relacje społeczne), miłość**.
+
 ## Harry Stack Sullivan – teoria interpersonalna
 - Osobowość to byt hipotetyczny; istnieje tylko w **relacjach interpersonalnych**.
 - Dwa dążenia: do **satysfakcji** (potrzeby) i do **bezpieczeństwa** (unikanie lęku).
@@ -215,6 +232,25 @@ Wszyscy wyszli od Freuda, ale przesunęli akcent z popędu seksualnego na sens, 
 - **Personifikacje** – wyobrażenia o sobie (dobre ja, złe ja, nie-ja) i innych; wspólne personifikacje = stereotypy.
 - Tryby doświadczania: **prototaksyczny** (surowy strumień doznań, niemowlę), **parataksyczny** (łączenie zdarzeń bez logiki, np. przesądy), **syntaksyczny** (symboliczny, logiczny, językowy).
 - Preadolescencja: **„chum”** – bliski przyjaciel tej samej płci, pierwsza intymność.
+
+### Sullivan w schemacie: struktura – działanie – rozwój
+- **Struktura**: osobowość = **względnie trwały układ powtarzających się sytuacji interpersonalnych** – nie istnieje w próżni, tylko w relacjach.
+  - **Dynamizmy** – najmniejsze jednostki zachowania; powtarzające się wzorce przekształcania energii (np. wrogości, pożądania).
+  - **Personifikacje** – obrazy siebie i innych z wcześniejszych relacji (np. „dobra matka”, „zła matka”).
+  - **System Ja** (self-system) – chroni przed lękiem i zabezpiecza poczucie bezpieczeństwa; dzieli doświadczenia na: **dobre Ja** (zachowania nagradzane i akceptowane przez znaczących innych), **złe Ja** (wywołujące dezaprobatę i umiarkowany lęk), **nie-Ja** (wyparte, traumatyczne aspekty wywołujące paraliżujący lęk).
+- **Działanie**: system **przetwarzania napięć** w relacjach.
+  - **Potrzeby** = napięcia somatyczne (fizjologiczne braki dążące do zaspokojenia).
+  - **Lęk** = napięcie interpersonalne z dezaprobaty ważnych osób, przenoszony **empatycznie od opiekuna**.
+  - **Operacje zabezpieczające** – mechanizmy obronne systemu Ja (np. **wybiórcza nieuwaga, dysocjacja**) redukujące lęk i chroniące stabilną personifikację siebie.
+  - **Tryby doświadczania**: prototaksyczny (chaotyczny, zmysłowy – niemowlęctwo) · parataksyczny (związki przyczynowe tam, gdzie ich nie ma; zniekształcone rzutowanie przeszłości na obecne relacje) · syntaksyczny (logiczny, symboliczny, oparty na wspólnie uzgodnionym znaczeniu słów).
+- **Rozwój**: sekwencyjny, zależy od rodzaju relacji na danym etapie – **epoki rozwojowe**:
+  - **Niemowlęctwo** – kontakt z matką przez karmienie; pierwsze personifikacje pod wpływem lęku opiekuna.
+  - **Dzieciństwo** – nauka mowy (przejście do trybu syntaksycznego), trening czystości, krystalizacja systemu Ja.
+  - **Wiek młodzieńczy (szkolny)** – grupa rówieśnicza, autorytety poza rodziną (nauczyciele), socjalizacja i rywalizacja.
+  - **Wczesna adolescencja (wiek przedmłodzieńczy)** – potrzeba bliskiego przyjaciela tej samej płci (**chumship**) – uczy szczerej empatii i bezinteresownej troski.
+  - **Właściwa adolescencja** – popęd seksualny, szukanie intymności z partnerem, oddzielenie potrzeby bliskości od pożądania.
+  - **Późna adolescencja i dojrzałość** – pełne wejście w role dorosłe, trwały repertuar dojrzałych relacji syntaksycznych bez zniekształceń parataksycznych.
+  - W części źródeł 7 epok (osobno późna adolescencja i dojrzałość) – w materiałach z zajęć: 6.
 
 ## Erik Erikson – psychospołeczna teoria rozwoju
 Rozwój trwa **całe życie**, zależy od społeczeństwa i kultury; ego jest silne i twórcze. Każde stadium ma **kryzys** (punkt zwrotny, nie katastrofę); dobre rozwiązanie daje **cnotę**.
@@ -229,6 +265,16 @@ Rozwój trwa **całe życie**, zależy od społeczeństwa i kultury; ego jest si
 | 6 | wczesna dorosłość | intymność vs izolacja | miłość |
 | 7 | wiek średni | generatywność vs stagnacja | troska |
 | 8 | starość | integralność vs rozpacz | mądrość |
+
+Inne nazwy kryzysów spotykane w materiałach: **zaufanie vs podstawowa nieufność**, autonomia vs wstyd i **niepewność**, inicjatywa vs poczucie winy (**wiek zabaw**, cnota: **zdecydowanie / celowość**), **przedsiębiorczość** vs poczucie niższości (wiek szkolny), tożsamość vs **pomieszanie tożsamości**, **bliskość** vs izolacja, **integralność ego** vs rozpacz.
+
+### Erikson w schemacie: struktura – działanie – rozwój
+- **Struktura**: model psychoanalityczny, ale w centrum **ego** – w przeciwieństwie do Freuda **autonomiczne, racjonalne i adaptacyjne**, a nie tylko bierny mediator między id a superego.
+  - **Ego cielesne** – świadomość własnego ciała, jego ograniczeń i możliwości.
+  - **Ideał ego** – obraz siebie w porównaniu z normami i ideałami społecznymi.
+  - **Tożsamość ego** – zintegrowany obraz siebie, poczucie ciągłości „ja” w czasie i przestrzeni oraz spójność z tym, jak postrzegają nas inni.
+- **Działanie**: osobowość to **system psychospołeczny** dążący do adaptacji i integracji z otoczeniem kulturowym; ego stale równoważy wewnętrzne potrzeby i wymagania społeczne.
+- **Rozwój**: **zasada epigenetyczna** – kolejne etapy wynikają z poprzednich, a każdy ma swój optymalny czas ujawnienia; trwa całe życie, 8 stadiów psychospołecznych, każde z kryzysem między dwiema tendencjami; pozytywne rozwiązanie daje **cnotę (siłę ego)**.
 
 **Statusy tożsamości (Marcia)**: osiągnięta (było poszukiwanie + jest zaangażowanie), moratorium (poszukiwanie trwa), przejęta (zaangażowanie bez poszukiwania), rozproszona (ani jedno, ani drugie).
 
@@ -276,7 +322,21 @@ Rozwój trwa **całe życie**, zależy od społeczeństwa i kultury; ego jest si
         ["Tożsamość przejęta", "Zaangażowanie w wartości (zwykle rodziców) bez wcześniejszego poszukiwania."],
         ["Lęk podstawowy (Horney)", "Poczucie izolacji i bezradności dziecka w świecie odbieranym jako wrogi."],
         ["3 postawy wobec ludzi (Horney)", "Ku ludziom, przeciw ludziom, od ludzi."],
-        ["Potrzeba i presja (Murray)", "Potrzeba – siła wewnętrzna organizująca działanie. Presja – jej zewnętrzny odpowiednik ze strony środowiska. Razem tworzą temat."]
+        ["Potrzeba i presja (Murray)", "Potrzeba – siła wewnętrzna organizująca działanie. Presja – jej zewnętrzny odpowiednik ze strony środowiska. Razem tworzą temat."],
+        ["Etapy życia wg Junga", "Dzieciństwo (instynkty, brak ukształtowanego ego) → młodość i wczesna dorosłość (umacnianie ego, rozwój persony) → wiek średni ok. 35–40 r.ż. (zwrot ku wnętrzu, indywiduacja, szukanie sensu)."],
+        ["Zasada równoważności (Jung)", "Energia psychiczna nie ginie – wycofana z jednego obszaru (np. świadomości) przenosi się do innego (np. do cienia)."],
+        ["Funkcje racjonalne i irracjonalne (Jung)", "Racjonalne: myślenie, uczucie. Irracjonalne: percepcja (doznanie), intuicja."],
+        ["Twórcze Ja (Adler)", "Aktywny, subiektywny czynnik osobowości, który przetwarza wrodzone predyspozycje i doświadczenia w unikalny plan działania."],
+        ["Fikcyjna celowość (Adler)", "Zachowanie motywują subiektywne cele na przyszłość, a nie popędy z przeszłości (działanie teleologiczne)."],
+        ["Kiedy dążenie do wyższości prowadzi do zdrowia, a kiedy do nerwicy? (Adler)", "Połączone z poczuciem wspólnoty → zdrowie; samolubne → kompleks niższości lub wyższości (nerwica)."],
+        ["Konstelacja rodzinna wg Adlera", "Pierworodny – detronizacja, potrzeba kontroli i władzy; drugi – rywalizacja, wyścig; najmłodszy – rozpieszczenie lub chęć przewyższenia wszystkich; jedynak – wysokie poczucie wartości, trudność we współdzieleniu uwagi."],
+        ["Definicja osobowości wg Sullivana", "Względnie trwały układ powtarzających się sytuacji interpersonalnych."],
+        ["Dobre Ja, złe Ja, nie-Ja (Sullivan)", "Dobre Ja – zachowania nagradzane; złe Ja – wywołujące dezaprobatę i umiarkowany lęk; nie-Ja – wyparte, traumatyczne, z paraliżującym lękiem."],
+        ["Operacje zabezpieczające (Sullivan)", "Mechanizmy obronne systemu Ja (np. wybiórcza nieuwaga, dysocjacja) redukujące lęk."],
+        ["Epoki rozwojowe Sullivana", "Niemowlęctwo → dzieciństwo → wiek młodzieńczy (szkolny) → wczesna adolescencja (chumship) → właściwa adolescencja → późna adolescencja i dojrzałość."],
+        ["Ego u Eriksona vs u Freuda", "U Eriksona ego jest autonomiczne, racjonalne i adaptacyjne, a nie tylko biernym mediatorem między id a superego."],
+        ["Ego cielesne, ideał ego, tożsamość ego (Erikson)", "Ego cielesne – świadomość ciała; ideał ego – obraz siebie wobec norm społecznych; tożsamość ego – zintegrowany obraz siebie i poczucie ciągłości „ja”."],
+        ["Zasada epigenetyczna (Erikson)", "Etapy rozwoju wynikają z poprzednich, a każdy ma swój optymalny czas ujawnienia."]
       ],
       quiz: [
         { q: "Archetypy znajdują się w:", o: ["ego", "nieświadomości osobistej", "nieświadomości zbiorowej", "superego"], a: 2, e: "Archetypy to treści nieświadomości zbiorowej; kompleksy – osobistej." },
@@ -287,7 +347,14 @@ Rozwój trwa **całe życie**, zależy od społeczeństwa i kultury; ego jest si
         { q: "Osoba, która poszukuje, ale jeszcze się nie zaangażowała, ma status tożsamości:", o: ["osiągnięty", "moratorium", "przejęty", "rozproszony"], a: 1, e: "Moratorium – poszukiwanie trwa, brak zaangażowania." },
         { q: "Styl życia według Adlera kształtuje się do ok.:", o: ["1 r.ż.", "4–5 r.ż.", "12 r.ż.", "40 r.ż."], a: 1, e: "Wcześnie – do ok. 4–5 roku życia." },
         { q: "Murray połączenie potrzeby i presji nazwał:", o: ["kompleksem", "tematem", "dynamizmem", "personifikacją"], a: 1, e: "Temat – badany Testem Apercepcji Tematycznej (TAT)." },
-        { q: "Kryzys „generatywność vs stagnacja” przypada na:", o: ["dorastanie", "wczesną dorosłość", "wiek średni", "starość"], a: 2, e: "Wiek średni → cnota troski." }
+        { q: "Kryzys „generatywność vs stagnacja” przypada na:", o: ["dorastanie", "wczesną dorosłość", "wiek średni", "starość"], a: 2, e: "Wiek średni → cnota troski." },
+        { q: "Punkt zwrotny życia według Junga (zwrot ku wnętrzu) przypada na ok.:", o: ["12–14 r.ż.", "20–25 r.ż.", "35–40 r.ż.", "60–65 r.ż."], a: 2, e: "Wiek średni – kryzys wartości i intensywna indywiduacja." },
+        { q: "Które funkcje Jung uznał za irracjonalne?", o: ["myślenie i uczucie", "percepcję i intuicję", "myślenie i intuicję", "uczucie i percepcję"], a: 1, e: "Racjonalne: myślenie, uczucie; irracjonalne: percepcja (doznanie), intuicja." },
+        { q: "Według Adlera samolubne dążenie do wyższości prowadzi do:", o: ["indywiduacji", "kompleksu niższości lub wyższości (nerwicy)", "generatywności", "sublimacji"], a: 1, e: "Zdrowe jest dążenie połączone z poczuciem wspólnoty." },
+        { q: "Czynnik, który według Adlera przetwarza predyspozycje i doświadczenia w unikalny plan działania, to:", o: ["persona", "twórcze Ja", "system Ja", "ideał ego"], a: 1, e: "Twórcze Ja (creative self)." },
+        { q: "Zachowania wywołujące paraliżujący lęk Sullivan przypisał do:", o: ["dobrego Ja", "złego Ja", "nie-Ja", "personifikacji matki"], a: 2, e: "Nie-Ja – wyparte, traumatyczne aspekty." },
+        { q: "Wybiórcza nieuwaga i dysocjacja to u Sullivana:", o: ["dynamizmy", "operacje zabezpieczające", "tryby doświadczania", "personifikacje"], a: 1, e: "Mechanizmy obronne systemu Ja redukujące lęk." },
+        { q: "Zasada epigenetyczna u Eriksona oznacza, że:", o: ["rozwój kończy się w adolescencji", "etapy wynikają z poprzednich i mają swój optymalny czas", "osobowość jest dziedziczona", "kryzysy można pominąć"], a: 1, e: "Kolejne stadia budują się na poprzednich, każde w swoim czasie." }
       ]
     },
     // ------------------------------------------------------------------
