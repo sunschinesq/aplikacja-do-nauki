@@ -2829,7 +2829,7 @@
   function petLook() {
     const p = store.pet;
     const base = CATS.find((c) => c.id === p.look && (store.cats[c.id] || c.id === "szary")) || CATS[0];
-    const own = base.keep ? base.acc : [];
+    const own = base.keep || base.fixed ? base.acc : [];
     const acc = own.concat([p.wear.body, p.wear.neck, p.wear.eyes, p.wear.head].filter(Boolean));
     return Object.assign({}, base, { acc, own });
   }
@@ -3232,7 +3232,7 @@
         <div class="shop-grid">${slot === "bg" ? `<div class="shop-item${p.bg === "pokoj" ? " worn" : ""}"><span class="shop-img"><span class="shop-bg bg-pokoj"></span></span><strong>Różowy pokój</strong><button class="btn small${p.bg === "pokoj" ? "" : " primary"}" data-action="shop-wear" data-id="pokoj">${p.bg === "pokoj" ? "Ustawione" : "Ustaw"}</button></div>` : ""}${SHOP.filter((it) => it.slot === slot).map(item).join("")}</div>`).join("")}
       <h2>${SLOTS.look}</h2>
       <p class="muted">Za darmo – każdy kotek odblokowany w albumie 🐱 może być Twoim kotkiem.</p>
-      <div class="shop-grid">${looks.map((c) => `<div class="shop-item${p.look === c.id ? " worn" : ""}"><span class="shop-img">${petCatSvg(Object.assign({}, c, { acc: c.keep ? c.acc : [] }))}</span><strong>${esc(c.name)}</strong><button class="btn small${p.look === c.id ? "" : " primary"}" data-action="shop-look" data-id="${c.id}">${p.look === c.id ? "Wybrany" : "Wybierz"}</button></div>`).join("")}</div>`;
+      <div class="shop-grid">${looks.map((c) => `<div class="shop-item${p.look === c.id ? " worn" : ""}"><span class="shop-img">${petCatSvg(Object.assign({}, c, { acc: c.keep || c.fixed ? c.acc : [] }))}</span><strong>${esc(c.name)}</strong><button class="btn small${p.look === c.id ? "" : " primary"}" data-action="shop-look" data-id="${c.id}">${p.look === c.id ? "Wybrany" : "Wybierz"}</button></div>`).join("")}</div>`;
   }
   function shopAction(act, id) {
     const p = store.pet;
@@ -3780,6 +3780,7 @@
     { id: "maslow", name: "Abraham Miaułow", fur: "#a07b5a", dark: "#7a5a3e", belly: "#d6bc9e", acc: ["mustache", "pyramid"], psych: true, how: "Koncepcje humanistyczne: quiz na 80% albo 8 opanowanych fiszek", test: (x) => x.topic("humanistyczne") },
     { id: "rogers", name: "Carl Mrogers", fur: "#f0a04b", dark: "#d27f2c", belly: "#fbd9a8", acc: ["sweater", "glasses"], psych: true, how: "Rogers (bezwarunkowa akceptacja 💗): 4 opanowane fiszki o Rogersie", test: (x) => x.know(/Rogers/, 4) },
     { id: "frankl", name: "Wiktor Frankot", fur: "#868e96", dark: "#5c636a", belly: "#ced4da", eyes: "#fab005", acc: ["thickglasses", "book"], psych: true, how: "Psychologia pozytywna i egzystencjalna: quiz na 80% albo 8 opanowanych fiszek", test: (x) => x.topic("pozytywna-egzystencjalna") },
+    { id: "tygrysas", name: "Tygrysas", fur: "#f08c00", dark: "#d9730d", belly: "#fff8f0", eyes: "#fab005", acc: ["tiger"], fixed: true, how: "250 odpowiedzi łącznie – rrrau! 🐯", test: (x) => x.answers >= 250 },
     { id: "cukierkowy", name: "Cukierek", fur: "#fcc2d7", dark: "#f783ac", belly: "#fff0f6", eyes: "#7048e8", how: "Seria 7 dni z celem", test: (x) => x.streak >= 7 },
     { id: "spioch", name: "Śpioch", fur: "#d0bfff", dark: "#b197fc", belly: "#f3f0ff", acc: ["nightcap"], how: "10 sesji skupienia", test: (x) => x.focus >= 10 },
     { id: "arbuzek", name: "Arbuzek", fur: "#8ce99a", dark: "#51cf66", belly: "#ff8787", eyes: "#212529", how: "Pogłaszcz 50 kotków", test: (x) => x.pets >= 50 },
@@ -3843,6 +3844,7 @@
     pyramid: `${[["#ff8787", 0], ["#ffc078", 1], ["#ffe066", 2], ["#8ce99a", 3], ["#74c0fc", 4]].map(([f, i]) => { const y0 = 54 + i * 4, y1 = y0 + 4, w0 = (i * 4) * 0.42, w1 = ((i + 1) * 4) * 0.42; return `<path d="M${(8 - w0).toFixed(2)} ${y0} H${(8 + w0).toFixed(2)} L${(8 + w1).toFixed(2)} ${y1} H${(8 - w1).toFixed(2)} Z" fill="${f}" stroke="#fff" stroke-width=".4"/>`; }).join("")}`,
     thickglasses: `<g fill="rgba(255,255,255,.2)" stroke="#212529" stroke-width="2.4"><rect x="20" y="20.5" width="13.5" height="11" rx="3"/><rect x="38.5" y="20.5" width="13.5" height="11" rx="3"/><path d="M33.5 25 Q36 23.5 38.5 25 M20 24 L14 22 M52 24 L58 22" fill="none"/></g>`,
     book: `<path d="M1.5 58 Q8 56 14.5 58.5 V73 Q8 70.5 1.5 72.5 Z" fill="#c92a2a" stroke="#862e1e" stroke-width=".6"/><path d="M3.5 59.4 Q8 58 12.5 60" stroke="#fff3bf" stroke-width=".6" fill="none"/><text x="8" y="66.5" text-anchor="middle" font-size="3.6" font-weight="700" fill="#fff3bf" font-family="Georgia, serif">SENS</text><ellipse cx="14.5" cy="65" rx="4" ry="3" fill="#868e96" stroke="#5c636a" stroke-width=".8"/>`,
+    tiger: `<g fill="#1d1a1c"><path d="M31 10.5 L33 18 L35 10 Z M37 10 L39 18 L41 10.5 Z M34.6 9.2 L36 15 L37.4 9.2 Z"/><path d="M14.5 22 L22 24.5 L14.6 26.4 Z M14.3 29 L21 30 L15 32.2 Z M57.5 22 L50 24.5 L57.4 26.4 Z M57.7 29 L51 30 L57 32.2 Z"/><path d="M17.5 50 Q22 52 24 55.5 Q20 54 17 54.5 Z M16.3 58 Q21.5 59 23.5 62.5 Q19.5 61.5 16.5 62.5 Z M54.5 50 Q50 52 48 55.5 Q52 54 55 54.5 Z M55.7 58 Q50.5 59 48.5 62.5 Q52.5 61.5 55.5 62.5 Z"/><path d="M31 44 L33.5 48 L36 44.5 L38.5 48 L41 44 Z"/></g><g stroke="#1d1a1c" stroke-width="2.2" stroke-linecap="round"><path d="M58.5 61.5 l2.5 4.5 M64.5 55 l4 2 M65 47.5 l4.2 -.8"/></g><ellipse cx="32" cy="35" rx="5" ry="3.6" fill="#fff8f0"/><ellipse cx="40" cy="35" rx="5" ry="3.6" fill="#fff8f0"/><path d="M33.6 32 h4.8 l-2.4 2.8 Z" fill="#f37aa6"/><path d="M36 34.8 q-1.5 3 -4.5 2 M36 34.8 q1.5 3 4.5 2" stroke="#1d1a1c" stroke-width="1.1" fill="none" stroke-linecap="round"/>`,
     wreath: `<path d="M16 13 Q36 4 56 13" stroke="#69db7c" stroke-width="2.5" fill="none" stroke-linecap="round"/>${[[18, 12, "#f783ac"], [26, 9.6, "#ffd43b"], [36, 8.5, "#b197fc"], [46, 9.6, "#ffd43b"], [54, 12, "#f783ac"]].map(([x, y, f]) => `<circle cx="${x}" cy="${y}" r="3.2" fill="${f}"/><circle cx="${x}" cy="${y}" r="1.1" fill="#fff"/>`).join("")}`,
     headphones: `<path d="M13 26 Q13 1 36 1 Q59 1 59 26" stroke="#845ef7" stroke-width="3.5" fill="none" stroke-linecap="round"/><rect x="8" y="19" width="8" height="14" rx="3.5" fill="#b197fc" stroke="#845ef7"/><rect x="56" y="19" width="8" height="14" rx="3.5" fill="#b197fc" stroke="#845ef7"/>`,
     straw: `<path d="M24 11 Q24 -4 36 -4 Q48 -4 48 11 Z" fill="#f8dc9b" stroke="#d9a648" stroke-width=".8"/><ellipse cx="36" cy="11" rx="27" ry="5.5" fill="#f5d38a" stroke="#d9a648" stroke-width=".8"/><path d="M24.3 5.5 Q36 8.5 47.7 5.5 L48 9 Q36 12 24 9 Z" fill="#ff8787"/><circle cx="45" cy="7.5" r="2.4" fill="#fff"/><circle cx="45" cy="7.5" r="1" fill="#ffd43b"/>`,
