@@ -3444,7 +3444,7 @@
   const CATS = [
     { id: "szary", name: "Szarek", fur: "#9d9da4", dark: "#7d7d84", belly: "#c9c9ce", stripes: true, how: "Jest z Tobą od początku", test: () => true },
     { id: "asia", name: "Asia", fur: "#8b5e3c", dark: "#6b4226", belly: "#c9a27e", stripes: true, eyes: "#7a4316", acc: ["curls", "silverglasses", "bag"], keep: true, how: "Kotek-przyjaciółka – od razu w albumie 💗", test: () => true },
-    { id: "hania", name: "Hania", fur: "#d2ab82", dark: "#b08458", belly: "#f1e1cd", stripes: true, eyes: "#15aabf", acc: ["straighthair", "phone"], keep: true, how: "Kotek-przyjaciółka – od razu w albumie 💗", test: () => true },
+    { id: "hania", name: "Hania", fur: "#d2ab82", dark: "#b08458", belly: "#f1e1cd", stripes: true, eyes: "#15aabf", acc: ["straighthair", "phone", "vape"], keep: true, how: "Kotek-przyjaciółka – od razu w albumie 💗", test: () => true },
     { id: "julia", name: "Julia", fur: "#f0a04b", dark: "#d27f2c", belly: "#fbd9a8", stripes: true, eyes: "#51cf66", acc: ["longhair", "freckles"], keep: true, how: "Kotek-przyjaciółka – od razu w albumie 💗", test: () => true },
     { id: "rudy", name: "Rudzik", fur: "#f0a04b", dark: "#d27f2c", belly: "#fbd9a8", stripes: true, how: "Pogłaszcz 5 kotków", test: (x) => x.pets >= 5 },
     { id: "czarny", name: "Węgielek", fur: "#3a3238", dark: "#241e23", belly: "#4c434a", eyes: "#f2c94c", how: "Zrób pierwszy raz cel dnia", test: (x) => x.goalDays >= 1 },
@@ -3503,6 +3503,7 @@
     straighthair: `<path d="M12 46 L12.5 30 Q12 9 36 8.5 Q60 9 59.5 30 L60 46 Q58 49 56 46.5 Q54 49 52 46.5 L51.5 30 Q49 17 36 15.5 Q23 17 20.5 30 L20 46.5 Q18 49 16 46.5 Q14 49 12 46 Z" fill="#5c3a0f"/><path d="M16 30 v13 M56 30 v13 M27 12 Q24 15 22 21" stroke="#3d2506" stroke-width=".8" fill="none" stroke-linecap="round"/>`,
     longhair: `<path d="M11 56 Q10.5 44 12 30 Q12 8.5 36 8 Q60 8.5 60 30 Q61.5 44 61 56 Q59 59.5 57 56.5 Q55 59.5 53 56.5 Q51 59 50 55 Q51 42 51.5 30 Q49 17 36 15.5 Q23 17 20.5 30 Q21 42 22 55 Q21 59 19 56.5 Q17 59.5 15 56.5 Q13 59.5 11 56 Z" fill="#d9480f"/><path d="M15.5 32 Q14.5 44 16 54 M56.5 32 Q57.5 44 56 54 M27 12 Q24 15 22 21 M45 12 Q48 15 50 21" stroke="#a63a0a" stroke-width=".8" fill="none" stroke-linecap="round"/><path d="M19.5 23 Q20 11 36 10.5 Q52 11 52.5 23 Q50 19.5 47 21 Q44 18 41 20 Q38.5 17.5 36 19.5 Q33.5 17.5 31 20 Q28 18 25 21 Q22 19.5 19.5 23 Z" fill="#d9480f"/><path d="M28 13.5 Q27 16.5 26.5 19.5 M36 12.5 V17.5 M44 13.5 Q45 16.5 45.5 19.5" stroke="#a63a0a" stroke-width=".7" fill="none" stroke-linecap="round"/>`,
     freckles: `<g fill="#b8561b" opacity=".85">${[[23.5, 31.5], [26.5, 33], [22.5, 34.5], [25.5, 35.5], [48.5, 31.5], [45.5, 33], [49.5, 34.5], [46.5, 35.5]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r=".75"/>`).join("")}</g>`,
+    vape: `<g fill="#e9ecef" opacity=".8"><circle cx="63" cy="43" r="2.4"/><circle cx="66.5" cy="40" r="3"/><circle cx="64" cy="36.5" r="2.2"/></g><rect x="56.5" y="49" width="6" height="15" rx="2.6" fill="#cc5de8" stroke="#9c36b5" stroke-width=".7"/><rect x="57.8" y="46" width="3.4" height="4" rx="1.2" fill="#343a40"/><rect x="58.3" y="54" width="2.4" height="4" rx="1" fill="#f3d9fa" opacity=".8"/><ellipse cx="57" cy="60" rx="4" ry="3" fill="#d2ab82" stroke="#b08458" stroke-width=".8"/>`,
     phone: `<rect x="2" y="51" width="12" height="20" rx="2.2" fill="#fff" stroke="#adb5bd" stroke-width="1.4"/><rect x="7.6" y="53" width="4.6" height="4.6" rx="1.2" fill="#dee2e6" stroke="#adb5bd" stroke-width=".6"/><circle cx="9.2" cy="54.6" r=".75" fill="#495057"/><circle cx="10.8" cy="56.2" r=".75" fill="#495057"/><ellipse cx="14.5" cy="63" rx="4" ry="3" fill="#d2ab82" stroke="#b08458" stroke-width=".8"/>`,
     wreath: `<path d="M16 13 Q36 4 56 13" stroke="#69db7c" stroke-width="2.5" fill="none" stroke-linecap="round"/>${[[18, 12, "#f783ac"], [26, 9.6, "#ffd43b"], [36, 8.5, "#b197fc"], [46, 9.6, "#ffd43b"], [54, 12, "#f783ac"]].map(([x, y, f]) => `<circle cx="${x}" cy="${y}" r="3.2" fill="${f}"/><circle cx="${x}" cy="${y}" r="1.1" fill="#fff"/>`).join("")}`,
     headphones: `<path d="M13 26 Q13 1 36 1 Q59 1 59 26" stroke="#845ef7" stroke-width="3.5" fill="none" stroke-linecap="round"/><rect x="8" y="19" width="8" height="14" rx="3.5" fill="#b197fc" stroke="#845ef7"/><rect x="56" y="19" width="8" height="14" rx="3.5" fill="#b197fc" stroke="#845ef7"/>`,
@@ -3539,7 +3540,7 @@
       <ellipse cx="45" cy="56" rx="6" ry="5" fill="${c.patches[0]}"/>` : "";
     const stars = c.stars ? `<g fill="#fff"><circle cx="24" cy="16" r=".9"/><circle cx="47" cy="18" r=".7"/><circle cx="29" cy="52" r=".9"/><circle cx="46" cy="60" r=".8"/><circle cx="40" cy="47" r=".6"/><circle cx="20" cy="38" r=".7"/></g>` : "";
     const acc = (c.acc || []).map((a) => CAT_ACC[a] || "");
-    const PROPS = ["pumpkin", "egg", "heart", "bag", "phone"];
+    const PROPS = ["pumpkin", "egg", "heart", "bag", "phone", "vape"];
     const head = acc.filter((_, i) => !PROPS.includes(c.acc[i])).join("");
     const props = acc.filter((_, i) => PROPS.includes(c.acc[i])).join("");
     return `<svg viewBox="0 0 72 76" aria-hidden="true">${defs}
