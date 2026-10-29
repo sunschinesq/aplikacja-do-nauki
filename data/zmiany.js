@@ -2,6 +2,16 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29m",
+    date: "29 października 2026",
+    items: [
+      "👗 Nowa półka w sklepie: Ubranka! Sweterek z serduszkiem, bluza psychologa Ψ, bluzka marynarska, fartuszek, spódniczka tutu i peleryna superbohaterki.",
+      "🎓 Nowe czapki: biret absolwentki, cylinder, słomkowy kapelusz, wianek, słuchawki, róg jednorożca i aureolka.",
+      "🕶️ Nowe okulary i dodatki: kocie oczy, monokl, okulary gwiazdki, maska karnawałowa, chustka w kropki, krawat, naszyjnik z serduszkiem i medal za zdany egzamin.",
+      "🖼️ Nowe tła pokoju: biblioteka, zimowy wieczór i tęcza."
+    ]
+  },
+  {
     v: "2026-10-29l",
     date: "29 października 2026",
     items: [

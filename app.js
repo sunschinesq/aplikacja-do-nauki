@@ -20,7 +20,7 @@
     statex: { n: 0, ok: 0 }, planDone: {}, challenge: { last: null, streak: 0, best: 0, treats: 0, days: {} },
     profile: { name: "", catName: "", asked: false }, paws: 0, pawsTotal: 0,
     seen: {},
-    pet: { food: 80, energy: 80, fun: 80, clean: 80, tick: 0, sleeping: false, look: "szary", owned: [], wear: { head: "", eyes: "", neck: "" }, bg: "pokoj" }
+    pet: { food: 80, energy: 80, fun: 80, clean: 80, tick: 0, sleeping: false, look: "szary", owned: [], wear: { head: "", eyes: "", neck: "", body: "" }, bg: "pokoj" }
   });
   function loadStore() {
     const store = STORE_DEFAULTS();
@@ -2719,19 +2719,43 @@
     { id: "witch", slot: "head", name: "Kapelusz czarodziejki", price: 150 },
     { id: "tiara", slot: "head", name: "Diadem", price: 200 },
     { id: "crown", slot: "head", name: "Korona", price: 300 },
+    { id: "wreath", slot: "head", name: "Wianek", price: 60 },
+    { id: "headphones", slot: "head", name: "Słuchawki", price: 100 },
+    { id: "straw", slot: "head", name: "Słomkowy kapelusz", price: 120 },
+    { id: "gradcap", slot: "head", name: "Biret absolwentki", price: 160 },
+    { id: "tophat", slot: "head", name: "Cylinder", price: 170 },
+    { id: "unicorn", slot: "head", name: "Róg jednorożca", price: 220 },
+    { id: "halo", slot: "head", name: "Aureolka", price: 250 },
     { id: "glasses", slot: "eyes", name: "Okulary profesora", price: 60 },
     { id: "sunglasses", slot: "eyes", name: "Okulary przeciwsłoneczne", price: 90 },
     { id: "heartglasses", slot: "eyes", name: "Okulary serduszka", price: 120 },
+    { id: "cateye", slot: "eyes", name: "Okulary kocie oczy", price: 80 },
+    { id: "monocle", slot: "eyes", name: "Monokl", price: 110 },
+    { id: "starglasses", slot: "eyes", name: "Okulary gwiazdki", price: 140 },
+    { id: "mask", slot: "eyes", name: "Maska karnawałowa", price: 160 },
     { id: "bowtie", slot: "neck", name: "Muszka", price: 50 },
     { id: "bell", slot: "neck", name: "Obroża z dzwoneczkiem", price: 70 },
     { id: "scarf", slot: "neck", name: "Szalik", price: 90 },
     { id: "pearls", slot: "neck", name: "Perły", price: 180 },
+    { id: "bandana", slot: "neck", name: "Chustka w kropki", price: 60 },
+    { id: "tie", slot: "neck", name: "Krawat", price: 80 },
+    { id: "heartnecklace", slot: "neck", name: "Naszyjnik z serduszkiem", price: 130 },
+    { id: "medal", slot: "neck", name: "Medal za zdany egzamin", price: 200 },
+    { id: "apron", slot: "body", name: "Fartuszek", price: 70 },
+    { id: "sweater", slot: "body", name: "Sweterek z serduszkiem", price: 100 },
+    { id: "sailor", slot: "body", name: "Bluzka marynarska", price: 110 },
+    { id: "psyhoodie", slot: "body", name: "Bluza psychologa Ψ", price: 140 },
+    { id: "tutu", slot: "body", name: "Spódniczka tutu", price: 150 },
+    { id: "cape", slot: "body", name: "Peleryna superbohaterki", price: 190 },
     { id: "ogrod", slot: "bg", name: "Ogród", price: 100 },
     { id: "plaza", slot: "bg", name: "Plaża", price: 150 },
     { id: "sypialnia", slot: "bg", name: "Sypialnia", price: 120 },
-    { id: "kosmos", slot: "bg", name: "Kosmos", price: 250 }
+    { id: "kosmos", slot: "bg", name: "Kosmos", price: 250 },
+    { id: "biblioteka", slot: "bg", name: "Biblioteka", price: 140 },
+    { id: "zima", slot: "bg", name: "Zimowy wieczór", price: 160 },
+    { id: "tecza", slot: "bg", name: "Tęcza", price: 200 }
   ];
-  const SLOTS = { head: "🎩 Na głowę", eyes: "👓 Okulary", neck: "🎀 Na szyję", bg: "🖼️ Tło pokoju", look: "🐱 Wygląd kotka" };
+  const SLOTS = { head: "🎩 Na głowę", eyes: "👓 Okulary", neck: "🎀 Na szyję", body: "👗 Ubranka", bg: "🖼️ Tło pokoju", look: "🐱 Wygląd kotka" };
   const clamp = (x) => Math.max(0, Math.min(100, Math.round(x)));
   // statystyki maleją z czasem (łagodnie); podczas snu energia rośnie
   function petTick() {
@@ -2779,7 +2803,7 @@
   function petLook() {
     const p = store.pet;
     const base = CATS.find((c) => c.id === p.look && (store.cats[c.id] || c.id === "szary")) || CATS[0];
-    const acc = [p.wear.neck, p.wear.eyes, p.wear.head].filter(Boolean);
+    const acc = [p.wear.body, p.wear.neck, p.wear.eyes, p.wear.head].filter(Boolean);
     return Object.assign({}, base, { acc });
   }
   function petLevel() {
@@ -2889,7 +2913,7 @@
       <a class="back" href="#/kotek">‹ ${esc(petName())}</a>
       <div class="pet-top"><h1>👗 Sklep i szafa</h1><span class="paws">🐾 ${store.paws || 0}</span></div>
       <div class="pet-room small bg-${p.bg}"><span class="pet-big">${petCatSvg(look)}</span></div>
-      ${["head", "eyes", "neck", "bg"].map((slot) => `
+      ${["head", "eyes", "neck", "body", "bg"].map((slot) => `
         <h2>${SLOTS[slot]}</h2>
         <div class="shop-grid">${slot === "bg" ? `<div class="shop-item${p.bg === "pokoj" ? " worn" : ""}"><span class="shop-img"><span class="shop-bg bg-pokoj"></span></span><strong>Różowy pokój</strong><button class="btn small${p.bg === "pokoj" ? "" : " primary"}" data-action="shop-wear" data-id="pokoj">${p.bg === "pokoj" ? "Ustawione" : "Ustaw"}</button></div>` : ""}${SHOP.filter((it) => it.slot === slot).map(item).join("")}</div>`).join("")}
       <h2>${SLOTS.look}</h2>
@@ -3468,7 +3492,28 @@
     heartglasses: `<g fill="#f06595" stroke="#c2255c" stroke-width=".8" opacity=".92"><path d="M27 33 C17 26 20 19 27 23 C34 19 37 26 27 33 Z"/><path d="M45 33 C35 26 38 19 45 23 C52 19 55 26 45 33 Z"/></g><path d="M35 25 h2 M20 24 L13 22 M52 24 L59 22" stroke="#c2255c" stroke-width="1.4"/>`,
     bowtie: `<path d="M36 45 l-9 -5.5 v11 Z M36 45 l9 -5.5 v11 Z" fill="#e64980"/><circle cx="36" cy="45" r="2.3" fill="#a61e4d"/>`,
     bell: `<path d="M18 42 Q36 49.5 54 42" stroke="#e03131" stroke-width="3.5" fill="none" stroke-linecap="round"/><circle cx="36" cy="48.5" r="3.4" fill="#fcc419" stroke="#e67700" stroke-width=".8"/><path d="M34 49.5 h4" stroke="#e67700" stroke-width=".8"/>`,
-    pearls: `<g fill="#fff" stroke="#dee2e6" stroke-width=".6">${[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => { const t = i / 8; const x = 19 + 34 * t; const y = 42 + 6.5 * Math.sin(Math.PI * t); return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2"/>`; }).join("")}</g>`
+    pearls: `<g fill="#fff" stroke="#dee2e6" stroke-width=".6">${[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => { const t = i / 8; const x = 19 + 34 * t; const y = 42 + 6.5 * Math.sin(Math.PI * t); return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2"/>`; }).join("")}</g>`,
+    wreath: `<path d="M16 13 Q36 4 56 13" stroke="#69db7c" stroke-width="2.5" fill="none" stroke-linecap="round"/>${[[18, 12, "#f783ac"], [26, 9.6, "#ffd43b"], [36, 8.5, "#b197fc"], [46, 9.6, "#ffd43b"], [54, 12, "#f783ac"]].map(([x, y, f]) => `<circle cx="${x}" cy="${y}" r="3.2" fill="${f}"/><circle cx="${x}" cy="${y}" r="1.1" fill="#fff"/>`).join("")}`,
+    headphones: `<path d="M13 26 Q13 1 36 1 Q59 1 59 26" stroke="#845ef7" stroke-width="3.5" fill="none" stroke-linecap="round"/><rect x="8" y="19" width="8" height="14" rx="3.5" fill="#b197fc" stroke="#845ef7"/><rect x="56" y="19" width="8" height="14" rx="3.5" fill="#b197fc" stroke="#845ef7"/>`,
+    straw: `<path d="M24 11 Q24 -4 36 -4 Q48 -4 48 11 Z" fill="#f8dc9b" stroke="#d9a648" stroke-width=".8"/><ellipse cx="36" cy="11" rx="27" ry="5.5" fill="#f5d38a" stroke="#d9a648" stroke-width=".8"/><path d="M24.3 5.5 Q36 8.5 47.7 5.5 L48 9 Q36 12 24 9 Z" fill="#ff8787"/><circle cx="45" cy="7.5" r="2.4" fill="#fff"/><circle cx="45" cy="7.5" r="1" fill="#ffd43b"/>`,
+    gradcap: `<path d="M24 8 L24 14 Q36 18 48 14 L48 8 Z" fill="#343a40"/><path d="M12 6 L36 -3 L60 6 L36 15 Z" fill="#212529"/><circle cx="36" cy="6" r="1.4" fill="#fcc419"/><path d="M36 6 L55 9 L55 19" stroke="#fcc419" stroke-width="1.2" fill="none"/><path d="M53.4 18 h3.2 l1 6 h-5.2 Z" fill="#fcc419"/>`,
+    tophat: `<rect x="25" y="-15" width="22" height="27" rx="2" fill="#212529"/><rect x="25" y="4.5" width="22" height="4" fill="#e64980"/><ellipse cx="36" cy="12" rx="19" ry="3.5" fill="#212529"/>`,
+    unicorn: `<path d="M31 10 L36 -17 L41 10 Z" fill="#ffe066" stroke="#fab005" stroke-width=".8" stroke-linejoin="round"/><path d="M32.4 2 L39.6 -1 M33.6 -5 L38.6 -7.5 M34.6 -11 L37.6 -12.5" stroke="#fab005" stroke-width="1"/><circle cx="26" cy="9" r="2.6" fill="#f783ac"/><circle cx="46" cy="9" r="2.6" fill="#b197fc"/><circle cx="29.5" cy="7" r="1.6" fill="#74c0fc"/>`,
+    halo: `<ellipse cx="36" cy="-5" rx="14" ry="3.6" fill="none" stroke="#ffe066" stroke-width="5" opacity=".45"/><ellipse cx="36" cy="-5" rx="14" ry="3.6" fill="none" stroke="#fcc419" stroke-width="2.2"/>`,
+    cateye: `<g fill="rgba(255,255,255,.2)" stroke="#e64980" stroke-width="1.8" stroke-linejoin="round"><path d="M19 22 Q27 19 33 23 Q33 31 26.5 31 Q20 30.5 19 22 Z"/><path d="M53 22 Q45 19 39 23 Q39 31 45.5 31 Q52 30.5 53 22 Z"/></g><path d="M33 24.5 Q36 22.5 39 24.5 M19 22 L15 18.5 M53 22 L57 18.5" stroke="#e64980" stroke-width="1.8" fill="none" stroke-linecap="round"/>`,
+    monocle: `<circle cx="45" cy="26" r="6.8" fill="rgba(255,255,255,.22)" stroke="#e67700" stroke-width="1.6"/><path d="M51 29 Q57 39 50 47" stroke="#e67700" stroke-width=".8" fill="none"/>`,
+    starglasses: `<g fill="#ffd43b" stroke="#f59f00" stroke-width=".8" stroke-linejoin="round" opacity=".92">${[27, 45].map((cx) => `<path d="${Array.from({ length: 10 }, (_, i) => { const a = -Math.PI / 2 + (i * Math.PI) / 5; const rr = i % 2 ? 3.6 : 8; return (i ? "L" : "M") + (cx + rr * Math.cos(a)).toFixed(1) + " " + (26.5 + rr * Math.sin(a)).toFixed(1); }).join(" ")} Z"/>`).join("")}</g><path d="M34.6 25.5 h2.8" stroke="#f59f00" stroke-width="1.4"/>`,
+    mask: `<path fill-rule="evenodd" d="M16 24 Q27 16 36 22.5 Q45 16 56 24 Q54 33.5 45 31.5 Q38.5 30 36 27.5 Q33.5 30 27 31.5 Q18 33.5 16 24 Z M23.2 26 a3.8 3 0 1 0 7.6 0 a3.8 3 0 1 0 -7.6 0 Z M41.2 26 a3.8 3 0 1 0 7.6 0 a3.8 3 0 1 0 -7.6 0 Z" fill="#9c36b5" stroke="#862e9c" stroke-width=".6"/><circle cx="18.5" cy="23.5" r="1" fill="#ffd43b"/><circle cx="53.5" cy="23.5" r="1" fill="#ffd43b"/><circle cx="36" cy="23.6" r="1.1" fill="#ffd43b"/>`,
+    bandana: `<path d="M17 42 Q36 49 55 42 L36 59 Z" fill="#e03131"/>${[[30, 47], [42, 47], [36, 52.5], [24, 45], [48, 45]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="1.2" fill="#fff"/>`).join("")}`,
+    tie: `<path d="M33.5 42 h5 l-1 3.5 h-3 Z" fill="#1864ab"/><path d="M34.5 45.5 h3 l2.6 12 l-4.1 4 l-4.1 -4 Z" fill="#1c7ed6"/><path d="M33.4 50 l5 -2.6 M32.8 54.5 l6.2 -3.2 M33.8 58.5 l5.2 -2.8" stroke="#a5d8ff" stroke-width="1"/>`,
+    heartnecklace: `<path d="M18 42 Q36 50 54 42" stroke="#fcc419" stroke-width="1.2" fill="none"/><path d="M36 54.5 C30 50.5 31 46 36 48.8 C41 46 42 50.5 36 54.5 Z" fill="#e64980" stroke="#a61e4d" stroke-width=".5"/>`,
+    medal: `<path d="M30 42 L36 52 L42 42" stroke="#4dabf7" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="36" cy="55" r="5" fill="#fcc419" stroke="#e67700" stroke-width=".8"/><path d="M36 51.8 l1 2.1 l2.3 .3 l-1.7 1.6 l.4 2.3 l-2 -1.1 l-2 1.1 l.4 -2.3 l-1.7 -1.6 l2.3 -.3 Z" fill="#fff3bf"/>`,
+    apron: `<path d="M26 50 L22 44.5 M46 50 L50 44.5" stroke="#ffa8a8" stroke-width="2" stroke-linecap="round"/><path d="M26 50 h20 v13 q-10 5 -20 0 Z" fill="#fff" stroke="#ffa8a8" stroke-width="1.2"/><rect x="31" y="56" width="10" height="5" rx="1.5" fill="none" stroke="#ffa8a8" stroke-width="1"/><path d="M36 54.5 C33.5 52.8 34 51 36 52.2 C38 51 38.5 52.8 36 54.5 Z" fill="#ff8787"/>`,
+    sweater: `<path d="M17 52 Q20 44 36 44 Q52 44 55 52 L56 66 Q36 73 16 66 Z" fill="#f783ac"/><path d="M27 45 Q36 50 45 45" stroke="#e64980" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M16.5 65 Q36 71.5 55.5 65" stroke="#e64980" stroke-width="2" fill="none"/><path d="M36 63 C31 59.5 32 55.5 36 57.5 C40 55.5 41 59.5 36 63 Z" fill="#fff"/>`,
+    sailor: `<path d="M17 52 Q20 44 36 44 Q52 44 55 52 L56 66 Q36 73 16 66 Z" fill="#fff"/><path d="M17.3 55 H54.7 M16.8 59.5 H55.2 M16.4 64 H55.6" stroke="#1c7ed6" stroke-width="2"/><path d="M25 44.8 L36 54 L47 44.8 Z" fill="#1c7ed6"/><path d="M36 54 l-3.5 -2 v4 Z M36 54 l3.5 -2 v4 Z" fill="#e03131"/>`,
+    psyhoodie: `<path d="M17 52 Q20 44 36 44 Q52 44 55 52 L56 66 Q36 73 16 66 Z" fill="#5c7cfa"/><path d="M24 45.5 Q36 52 48 45.5" stroke="#4263eb" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M33 48.5 v5 M39 48.5 v5" stroke="#fff" stroke-width=".9" stroke-linecap="round"/><text x="36" y="65" text-anchor="middle" font-size="10" font-weight="700" fill="#fff" font-family="Georgia, serif">Ψ</text>`,
+    tutu: `<path d="M15 63 q3 7 6 0 q3 7 6 0 q3 7 6 0 q3 7 6 0 q3 7 6 0 q3 7 6 0 q3 7 6 0 L57 60 L15 60 Z" fill="#fcc2d7"/><path d="M16 61 q2.5 5 5 0 q2.5 5 5 0 q2.5 5 5 0 q2.5 5 5 0 q2.5 5 5 0 q2.5 5 5 0 q2.5 5 5 0 q2.5 5 5 0 L56 58 L16 58 Z" fill="#faa2c1"/><path d="M16.5 56.5 Q36 62 55.5 56.5 L55.8 59.5 Q36 65 16.2 59.5 Z" fill="#e64980"/>`,
+    cape: `<path d="M19 46 Q8 60 11 75 L22 71 Q18 58 25 47.5 Z M53 46 Q64 60 61 75 L50 71 Q54 58 47 47.5 Z" fill="#e03131"/><path d="M23 46 Q36 51.5 49 46" stroke="#c92a2a" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="36" cy="49" r="2.8" fill="#fcc419" stroke="#e67700" stroke-width=".6"/>`,
   };
   function petCatSvg(c) {
     const eyes = c.eyes || "#7cc26b";
