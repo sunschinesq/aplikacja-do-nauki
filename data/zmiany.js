@@ -2,6 +2,14 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29z",
+    date: "29 października 2026",
+    items: [
+      "💇 Nowa potrzeba: Fryzura. Z czasem (i po zabawie albo po spaniu 🛏️) włosy i futerko się targają – pojawiają się sterczące kosmyki. Kliknij „🪮 Czesanie” i przeczesz je grzebieniem ✨.",
+      "🪥 Przy myciu zębów przyjaciółki mają teraz swoje włosy, okulary i piegi."
+    ]
+  },
+  {
     v: "2026-10-29y",
     date: "29 października 2026",
     items: [

@@ -20,7 +20,7 @@
     statex: { n: 0, ok: 0 }, planDone: {}, challenge: { last: null, streak: 0, best: 0, treats: 0, days: {} },
     profile: { name: "", catName: "", asked: false }, paws: 0, pawsTotal: 0,
     seen: {},
-    pet: { food: 80, energy: 80, fun: 80, clean: 80, teeth: 80, tick: 0, sleeping: false, look: "szary", owned: [], wear: { head: "", eyes: "", neck: "", body: "" }, bg: "pokoj" }
+    pet: { food: 80, energy: 80, fun: 80, clean: 80, teeth: 80, hair: 80, tick: 0, sleeping: false, look: "szary", owned: [], wear: { head: "", eyes: "", neck: "", body: "" }, bg: "pokoj" }
   });
   function loadStore() {
     const store = STORE_DEFAULTS();
@@ -2700,7 +2700,8 @@
     { k: "energy", icon: "⚡", name: "Energia" },
     { k: "fun", icon: "🎾", name: "Zabawa" },
     { k: "clean", icon: "🛁", name: "Czystość" },
-    { k: "teeth", icon: "🦷", name: "Ząbki" }
+    { k: "teeth", icon: "🦷", name: "Ząbki" },
+    { k: "hair", icon: "💇", name: "Fryzura" }
   ];
   const FOODS = [
     { id: "karma", icon: "🥣", name: "Karma", price: 5, food: 15 },
@@ -2776,6 +2777,7 @@
     const pet = store.pet;
     const now = Date.now();
     if (typeof pet.teeth !== "number") pet.teeth = 70;
+    if (typeof pet.hair !== "number") pet.hair = 70;
     if (!pet.tick) { pet.tick = now; return; }
     const h = Math.min(72, (now - pet.tick) / 3600000);
     if (h < 0.01) return;
@@ -2784,6 +2786,7 @@
     pet.clean = clamp(pet.clean - h * 2);
     if (typeof pet.teeth !== "number") pet.teeth = 70;
     pet.teeth = clamp(pet.teeth - h * (pet.sleeping ? 1 : 3));
+    pet.hair = clamp(pet.hair - h * (pet.sleeping ? 2 : 4));
     pet.energy = clamp(pet.energy + h * (pet.sleeping ? 90 : -3));
     pet.tick = now;
   }
@@ -2816,7 +2819,8 @@
         energy: `Oczka mi się kleją… położysz mnie spać${you}? 😴`,
         fun: `Nudzi mi się${you}! Pobawimy się? 🎾`,
         clean: `Coś mi się futerko pobrudziło… kąpiel? 🫧`,
-        teeth: `Coś mi zostało w ząbkach… umyjesz mi zęby${you}? 🪥`
+        teeth: `Coś mi zostało w ząbkach… umyjesz mi zęby${you}? 🪥`,
+        hair: `Mam potargane włosy… uczeszesz mnie${you}? 🪮`
       }[low.st.k];
     }
     if (low.v < 60) return pickOne([`Hej${you}! Jak tam nauka? 📚`, "Mrrr, dobrze, że jesteś 💗", `Ucz się dalej – zbieramy łapki na nowe ubranka 🐾`]);
@@ -2840,6 +2844,61 @@
     const stink = clean < 40 ? `<g class="stink" stroke="#8a9a5b" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".8"><path d="M8 40 q-3 -4 0 -8 t0 -8"/><path d="M64 38 q3 -4 0 -8 t0 -8"/></g>` : "";
     return `<svg class="pet-dirt" viewBox="0 0 72 76" aria-hidden="true"><g fill="#8b6b4a" opacity=".55">${spots.slice(0, n).map(([x, y, rx, ry]) => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}"/><circle cx="${x + rx}" cy="${y - ry}" r=".8"/>`).join("")}</g>${stink}</svg>`;
   }
+  // potargane kosmyki: im niższa „Fryzura”, tym więcej
+  const HAIR_COLORS = { curls: "#4a2a0a", straighthair: "#5c3a0f", longhair: "#d9480f", blondhair: "#f5c542", darkblondhair: "#b8862b", bun: "#868e96", whitetufts: "#dee2e6" };
+  function petMessy(look, hair) {
+    if (hair >= 60) return "";
+    const own = (look.acc || []).find((a) => HAIR_COLORS[a]);
+    const color = own ? HAIR_COLORS[own] : look.dark;
+    const strands = ["M14 14 q-5 -4 -3 -9 q2 3 1 6", "M24 7 q-2 -6 2 -9", "M33 5 q1 -6 -3 -8 q4 0 5 4", "M40 5 q3 -5 7 -5", "M49 7 q4 -4 3 -9", "M58 14 q6 -2 6 -8 q-3 2 -4 5", "M12 26 q-6 0 -8 -5", "M60 26 q6 1 8 -4"];
+    const n = hair < 35 ? 8 : 4;
+    return `<svg class="pet-messy" viewBox="0 0 72 76" aria-hidden="true"><g stroke="${color}" stroke-width="2.2" fill="none" stroke-linecap="round">${strands.slice(0, n).map((d, i) => `<path class="strand" data-i="${i}" d="${d}"/>`).join("")}</g></svg>`;
+  }
+  function setupComb(room, big, tool, bar, bubble) {
+    const all = big.querySelectorAll(".strand").length;
+    const fin = () => {
+      const p = store.pet;
+      p.hair = 100;
+      p.fun = clamp(p.fun + 3);
+      bath = null;
+      saveStore();
+      viewPet(pickOne(["Ale fryzura! 💁✨ Dziękuję!", "Wyglądam jak z salonu! 😻", "Mrrr… uwielbiam czesanie 💗"]));
+    };
+    if (!all) { store.pet.hair = Math.max(store.pet.hair, 60); }
+    let strokes = 0;
+    const need = Math.max(6, all * 2);
+    const move = (e) => {
+      const rr = room.getBoundingClientRect();
+      tool.style.left = e.clientX - rr.left + "px";
+      tool.style.top = e.clientY - rr.top + "px";
+      tool.classList.add("on");
+      if (!(e.buttons || e.pointerType === "touch")) return;
+      const b = big.getBoundingClientRect();
+      if (e.clientX < b.left - 30 || e.clientX > b.right + 30 || e.clientY < b.top - 40 || e.clientY > b.top + b.height * 0.75) return;
+      strokes++;
+      big.querySelectorAll(".strand").forEach((el) => {
+        const sr = el.getBoundingClientRect();
+        if (Math.hypot(sr.left + sr.width / 2 - e.clientX, sr.top + sr.height / 2 - e.clientY) < 34) {
+          el.remove();
+          const sp = document.createElement("span");
+          sp.className = "sparkle";
+          sp.textContent = "✨";
+          sp.style.left = sr.left - b.left + "px";
+          sp.style.top = sr.top - b.top + "px";
+          big.appendChild(sp);
+          setTimeout(() => sp.remove(), 700);
+        }
+      });
+      const left = big.querySelectorAll(".strand").length;
+      const k = Math.min(1, ((all - left) / Math.max(1, all)) * 0.7 + Math.min(1, strokes / need) * 0.3);
+      bar.style.width = k * 100 + "%";
+      if (strokes === 10) bubble.textContent = pickOne(["Mrrr… jak przyjemnie 😌", "Ała, kołtunek! 🙀 …dobra, już lepiej", "Czeszesz lepiej niż fryzjer 💇"]);
+      if (!left && strokes >= need) fin();
+    };
+    room.addEventListener("pointermove", move);
+    room.addEventListener("pointerdown", move);
+    room.addEventListener("pointerleave", () => tool.classList.remove("on"));
+  }
   // kąpiel: najpierw namydlanie gąbką (piana), potem spłukiwanie prysznicem
   let bath = null;
   const BATH_FOAM = 28;
@@ -2851,6 +2910,7 @@
     const bubble = app.querySelector(".pet-bubble2");
     const dirt = app.querySelector(".pet-dirt");
     if (!room || !big) return;
+    if (bath.phase === "comb") return setupComb(room, big, tool, bar, bubble);
     let last = null;
     const foams = () => big.querySelectorAll(".foam");
     const progress = () => {
@@ -2918,6 +2978,15 @@
     room.addEventListener("pointerleave", () => tool.classList.remove("on"));
   }
   // ---------- mycie zębów (zbliżenie na pyszczek) ----------
+  // włosy, okulary i piegi przyjaciółek w zbliżeniu (przeskalowane z małego kotka)
+  const CLOSE_HAIR = ["curls", "straighthair", "longhair", "blondhair", "darkblondhair", "bun", "whitetufts"];
+  const CLOSE_FACE = ["silverglasses", "glasses", "thickglasses", "freckles", "cateye", "heartglasses", "sunglasses", "starglasses", "monocle"];
+  function closeUpAcc(look) {
+    const acc = look.acc || [];
+    const hair = acc.filter((a) => CLOSE_HAIR.includes(a)).map((a) => CAT_ACC[a]).join("");
+    const face = acc.filter((a) => CLOSE_FACE.includes(a)).map((a) => CAT_ACC[a]).join("");
+    return `${face ? `<g transform="matrix(4.22 0 0 4.22 -52 -49.7)">${face}</g>` : ""}${hair ? `<g transform="matrix(4.22 0 0 1.75 -52 8.3)">${hair}</g>` : ""}`;
+  }
   function brushFace(look, bits) {
     const fur = look.fur || (look.grad || ["#9d9da4"])[0];
     const dark = look.dark || "#7d7d84";
@@ -2936,6 +3005,7 @@
       <path d="M93 84 h14 l-7 8 Z" fill="#f37aa6"/>
       <ellipse cx="44" cy="100" rx="13" ry="7" fill="#f7a8c4" opacity=".6"/><ellipse cx="156" cy="100" rx="13" ry="7" fill="#f7a8c4" opacity=".6"/>
       <path d="M40 92 L2 86 M40 100 L2 104 M160 92 L198 86 M160 100 L198 104" stroke="${dark}" stroke-width="1.6"/>
+      ${closeUpAcc(look)}
       <ellipse class="mouth" cx="100" cy="126" rx="46" ry="30" fill="#7a1f2b"/>
       <g clip-path="url(#mouth-clip)"><ellipse cx="100" cy="150" rx="28" ry="12" fill="#e8768a"/>${up}${low}
         ${bits.map((b, i) => `<circle class="bit" data-i="${i}" cx="${b.x}" cy="${b.y}" r="${b.r}" fill="${b.c}"/>`).join("")}</g>
@@ -3047,8 +3117,8 @@
       </div>
       <div class="pet-room bg-${p.bg}${p.sleeping ? " night" : ""}${bath ? " bathing" : ""}">
         ${p.sleeping ? `<span class="room-moon">🌙</span>` : ""}
-        <button class="pet-big ${p.sleeping ? "sleeping" : petMood()}" data-action="pet-pet" aria-label="Pogłaszcz kotka">${petCatSvg(look)}${petDirt(p.clean)}${p.sleeping ? `<span class="zzz">z<b>z</b><i>z</i></span>` : ""}</button>
-        ${bath ? `<span class="bath-tool">${bath.phase === "soap" ? "🧽" : "🚿"}</span><div class="bath-bar"><span>${bath.phase === "soap" ? "🧽 Pocieraj gąbką po futerku" : "🚿 Spłucz pianę prysznicem"}</span><span class="bath-prog"><span style="width:0%"></span></span><button class="btn small ghost" data-action="pet-bath-cancel">Przerwij</button></div>` : ""}
+        <button class="pet-big ${p.sleeping ? "sleeping" : petMood()}" data-action="pet-pet" aria-label="Pogłaszcz kotka">${petCatSvg(look)}${petDirt(p.clean)}${petMessy(look, p.hair)}${p.sleeping ? `<span class="zzz">z<b>z</b><i>z</i></span>` : ""}</button>
+        ${bath ? `<span class="bath-tool">${{ soap: "🧽", rinse: "🚿", comb: "🪮" }[bath.phase]}</span><div class="bath-bar"><span>${{ soap: "🧽 Pocieraj gąbką po futerku", rinse: "🚿 Spłucz pianę prysznicem", comb: "🪮 Przeczesz potargane kosmyki" }[bath.phase]}</span><span class="bath-prog"><span style="width:0%"></span></span><button class="btn small ghost" data-action="pet-bath-cancel">Przerwij</button></div>` : ""}
         <span class="pet-bubble2">${msg || petSays()}</span>
       </div>
       <div class="pet-stats">
@@ -3059,6 +3129,7 @@
         <button class="btn" data-action="pet-tab" data-tab="food">🍗 Nakarm</button>
         <button class="btn" data-action="pet-wash">🛁 Kąpiel</button>
         <button class="btn" data-action="pet-brush">🪥 Myj zęby</button>
+        <button class="btn" data-action="pet-comb">🪮 Czesanie</button>
         <button class="btn" data-action="pet-play">🎾 Pobaw się</button>
         <button class="btn" data-action="pet-sleep">💤 Spać</button>
         <a class="btn" href="#/kotek/sklep">👗 Sklep i szafa</a>`}
@@ -3109,6 +3180,9 @@
       else return viewBrush();
     } else if (act === "pet-brush-cancel") {
       msg = "Mycie zębów przerwane… ale tylko na chwilkę, prawda? 🥺";
+    } else if (act === "pet-comb") {
+      if (p.hair >= 95) msg = "Fryzura idealna! 💁✨";
+      else { bath = { phase: "comb" }; msg = "Uczeszesz mnie? Tylko delikatnie! 🪮"; }
     } else if (act === "pet-bath-cancel") {
       bath = null;
       msg = "Uff, uciekłem przed wodą! 😹";
@@ -3116,12 +3190,13 @@
       return;
     } else if (act === "pet-play") {
       if (p.energy < 10) msg = "Za bardzo chce mi się spać na zabawę… 😴";
-      else { p.fun = clamp(p.fun + 20); p.energy = clamp(p.energy - 8); p.food = clamp(p.food - 3); msg = pickOne(["Hop! Złapałem wędkę! 🎣", "Kłębek włóczki to moja miłość 🧶", "Jeszcze raz, jeszcze raz! 🎾"]); }
+      else { p.fun = clamp(p.fun + 20); p.energy = clamp(p.energy - 8); p.food = clamp(p.food - 3); p.hair = clamp(p.hair - 8); msg = pickOne(["Hop! Złapałem wędkę! 🎣", "Kłębek włóczki to moja miłość 🧶", "Jeszcze raz, jeszcze raz! 🎾"]); }
     } else if (act === "pet-sleep") {
       p.sleeping = true;
       msg = "Dobranoc… 🌙 Obudź mnie, kiedy wypoczynę.";
     } else if (act === "pet-wake") {
       p.sleeping = false;
+      p.hair = clamp(p.hair - 15);
       msg = p.energy >= 80 ? "Dzień dobry! Wyspałem się jak król 👑" : "Mrr… jeszcze pięć minutek… no dobrze, wstaję 🥱";
     } else if (act === "pet-pet") {
       if (p.sleeping) msg = "Zzz… *mruczy przez sen* 💤";
