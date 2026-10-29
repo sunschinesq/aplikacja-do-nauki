@@ -1158,6 +1158,22 @@ mark.hit { background: color-mix(in srgb, var(--good) 24%, transparent); }
   transition: filter .4s ease;
 }
 .pet-room.small { height: 190px; }
+/* brud i kąpiel */
+.pet-dirt { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; transition: opacity .3s ease; }
+.pet-dirt .stink { animation: stink 2.4s ease-in-out infinite; }
+@keyframes stink { 0%, 100% { transform: translateY(0); opacity: .8; } 50% { transform: translateY(-3px); opacity: .4; } }
+.pet-room.bathing { touch-action: none; user-select: none; -webkit-user-select: none; cursor: none; }
+.pet-room.bathing .pet-big { cursor: none; }
+.bath-tool { position: absolute; left: 50%; top: 40%; z-index: 4; font-size: 2.6rem; transform: translate(-50%, -50%); pointer-events: none; opacity: .0; transition: opacity .2s; }
+.bath-tool.on { opacity: 1; }
+.bath-bar { position: absolute; left: 12px; right: 12px; top: 12px; z-index: 3; display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 16px; background: rgba(255, 255, 255, .9); color: #3b1026; font-weight: 600; font-size: .92rem; }
+.bath-bar .bath-prog { flex: 1; height: 10px; border-radius: 99px; background: #e7f5ff; overflow: hidden; }
+.bath-bar .bath-prog span { display: block; height: 100%; background: #4dabf7; border-radius: 99px; transition: width .2s ease; }
+.pet-room.bathing .pet-bubble2 { top: 62px; }
+.foam { position: absolute; z-index: 2; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 35% 30%, #fff 0 25%, rgba(255, 255, 255, .92) 26% 60%, rgba(208, 235, 255, .9) 61%); box-shadow: inset -2px -2px 4px rgba(116, 192, 252, .35); animation: foam-in .25s ease; }
+@keyframes foam-in { from { transform: scale(.2); } to { transform: scale(1); } }
+.drop { position: absolute; z-index: 3; width: 6px; height: 10px; margin-left: -3px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: #74c0fc; pointer-events: none; animation: drop-fall .6s ease-in forwards; }
+@keyframes drop-fall { to { transform: translateY(46px); opacity: 0; } }
 .pet-room.night { filter: brightness(.55) saturate(.8); }
 .room-moon { position: absolute; top: 16px; right: 22px; font-size: 2.2rem; filter: brightness(1.8); }
 .pet-big { position: relative; width: 190px; height: 200px; margin-bottom: 22px; padding: 0; border: 0; background: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }

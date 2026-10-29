@@ -2827,6 +2827,91 @@
   function petLevel() {
     return Math.floor(Math.sqrt((store.pawsTotal || 0) / 40)) + 1;
   }
+  // brud na futerku: im niższa czystość, tym więcej plamek
+  function petDirt(clean) {
+    if (clean >= 70) return "";
+    const spots = [[26, 56, 4, 3], [45, 62, 3.5, 2.6], [20, 22, 2.6, 2], [50, 30, 3, 2.2], [32, 68, 3, 2], [40, 50, 2.6, 2], [54, 52, 3, 2.4], [17, 60, 2.6, 2.2], [30, 15, 2.2, 1.8]];
+    const n = clean < 30 ? 9 : clean < 50 ? 6 : 3;
+    const stink = clean < 40 ? `<g class="stink" stroke="#8a9a5b" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".8"><path d="M8 40 q-3 -4 0 -8 t0 -8"/><path d="M64 38 q3 -4 0 -8 t0 -8"/></g>` : "";
+    return `<svg class="pet-dirt" viewBox="0 0 72 76" aria-hidden="true"><g fill="#8b6b4a" opacity=".55">${spots.slice(0, n).map(([x, y, rx, ry]) => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}"/><circle cx="${x + rx}" cy="${y - ry}" r=".8"/>`).join("")}</g>${stink}</svg>`;
+  }
+  // kąpiel: najpierw namydlanie gąbką (piana), potem spłukiwanie prysznicem
+  let bath = null;
+  const BATH_FOAM = 28;
+  function setupBath() {
+    const room = app.querySelector(".pet-room");
+    const big = app.querySelector(".pet-big");
+    const tool = app.querySelector(".bath-tool");
+    const bar = app.querySelector(".bath-prog span");
+    const bubble = app.querySelector(".pet-bubble2");
+    const dirt = app.querySelector(".pet-dirt");
+    if (!room || !big) return;
+    let last = null;
+    const foams = () => big.querySelectorAll(".foam");
+    const progress = () => {
+      if (bath.phase === "soap") {
+        const k = Math.min(1, bath.n / BATH_FOAM);
+        bar.style.width = k * 100 + "%";
+        if (dirt) dirt.style.opacity = String(1 - k);
+      } else {
+        const left = foams().length;
+        bar.style.width = (100 - (left / Math.max(1, bath.total)) * 100) + "%";
+      }
+    };
+    const move = (e) => {
+      const rr = room.getBoundingClientRect();
+      tool.style.left = e.clientX - rr.left + "px";
+      tool.style.top = e.clientY - rr.top + "px";
+      tool.classList.add("on");
+      if (!(e.buttons || e.pointerType === "touch")) return;
+      const b = big.getBoundingClientRect();
+      const x = e.clientX - b.left, y = e.clientY - b.top;
+      const inside = x > 10 && x < b.width - 10 && y > 10 && y < b.height;
+      if (!inside) return;
+      if (last && Math.hypot(e.clientX - last[0], e.clientY - last[1]) < 14) return;
+      last = [e.clientX, e.clientY];
+      if (bath.phase === "soap") {
+        const f = document.createElement("span");
+        const size = 14 + Math.random() * 18;
+        f.className = "foam";
+        f.style.cssText = `left:${x - size / 2}px;top:${y - size / 2}px;width:${size}px;height:${size}px`;
+        big.appendChild(f);
+        bath.n++;
+        progress();
+        if (bath.n >= BATH_FOAM) {
+          bath.phase = "rinse";
+          bath.total = foams().length;
+          tool.textContent = "🚿";
+          app.querySelector(".bath-bar span").textContent = "🚿 Spłucz pianę prysznicem";
+          bar.style.width = "0%";
+          bubble.textContent = "Cały w pianie! 🫧 Teraz spłucz mnie prysznicem";
+        } else if (bath.n === 8) bubble.textContent = pickOne(["Hihi, łaskocze! 😹", "Mrr… pachnie truskawkami 🍓", "Tylko nie do oczu! 🙈"]);
+      } else {
+        const drop = document.createElement("span");
+        drop.className = "drop";
+        drop.style.left = x + "px";
+        drop.style.top = y + "px";
+        big.appendChild(drop);
+        setTimeout(() => drop.remove(), 600);
+        foams().forEach((f) => {
+          const fx = f.offsetLeft + f.offsetWidth / 2, fy = f.offsetTop + f.offsetHeight / 2;
+          if (Math.hypot(fx - x, fy - y) < 34) f.remove();
+        });
+        progress();
+        if (!foams().length) {
+          const p = store.pet;
+          p.clean = 100;
+          p.fun = clamp(p.fun + 5);
+          bath = null;
+          saveStore();
+          viewPet(pickOne(["Lśnię jak nowy! ✨ Dziękuję 💗", "Brrr, woda! …ale pachnę pięknie 🫧", "Czyściutki i puchaty! 😻"]));
+        }
+      }
+    };
+    room.addEventListener("pointermove", move);
+    room.addEventListener("pointerdown", (e) => { last = null; move(e); });
+    room.addEventListener("pointerleave", () => tool.classList.remove("on"));
+  }
   function viewPet(msg) {
     petTick();
     saveStore();
@@ -2839,9 +2924,10 @@
         <h1>🏠 ${esc(petName())} <span class="pet-lvl">poziom ${petLevel()}</span></h1>
         <span class="paws">🐾 ${store.paws || 0}</span>
       </div>
-      <div class="pet-room bg-${p.bg}${p.sleeping ? " night" : ""}">
+      <div class="pet-room bg-${p.bg}${p.sleeping ? " night" : ""}${bath ? " bathing" : ""}">
         ${p.sleeping ? `<span class="room-moon">🌙</span>` : ""}
-        <button class="pet-big ${p.sleeping ? "sleeping" : petMood()}" data-action="pet-pet" aria-label="Pogłaszcz kotka">${petCatSvg(look)}${p.sleeping ? `<span class="zzz">z<b>z</b><i>z</i></span>` : ""}</button>
+        <button class="pet-big ${p.sleeping ? "sleeping" : petMood()}" data-action="pet-pet" aria-label="Pogłaszcz kotka">${petCatSvg(look)}${petDirt(p.clean)}${p.sleeping ? `<span class="zzz">z<b>z</b><i>z</i></span>` : ""}</button>
+        ${bath ? `<span class="bath-tool">${bath.phase === "soap" ? "🧽" : "🚿"}</span><div class="bath-bar"><span>${bath.phase === "soap" ? "🧽 Pocieraj gąbką po futerku" : "🚿 Spłucz pianę prysznicem"}</span><span class="bath-prog"><span style="width:0%"></span></span><button class="btn small ghost" data-action="pet-bath-cancel">Przerwij</button></div>` : ""}
         <span class="pet-bubble2">${msg || petSays()}</span>
       </div>
       <div class="pet-stats">
@@ -2894,7 +2980,12 @@
       }
     } else if (act === "pet-wash") {
       if (p.clean >= 95) msg = "Jestem już czyściutki! ✨";
-      else { p.clean = 100; p.fun = clamp(p.fun - 5); msg = pickOne(["Brrr, woda! …ale pachnę pięknie 🫧", "Plusk plusk! Lśnię jak nowy ✨"]); }
+      else { bath = { phase: "soap", n: 0 }; msg = "Kąpiel? No dobrze… Najpierw namydl mnie gąbką 🧽"; }
+    } else if (act === "pet-bath-cancel") {
+      bath = null;
+      msg = "Uff, uciekłem przed wodą! 😹";
+    } else if (act === "pet-pet" && bath) {
+      return;
     } else if (act === "pet-play") {
       if (p.energy < 10) msg = "Za bardzo chce mi się spać na zabawę… 😴";
       else { p.fun = clamp(p.fun + 20); p.energy = clamp(p.energy - 8); p.food = clamp(p.food - 3); msg = pickOne(["Hop! Złapałem wędkę! 🎣", "Kłębek włóczki to moja miłość 🧶", "Jeszcze raz, jeszcze raz! 🎾"]); }
@@ -2912,6 +3003,7 @@
     }
     saveStore();
     viewPet(msg);
+    if (bath) setupBath();
   }
   function viewShop() {
     document.title = "Sklep – " + petName();
@@ -3413,7 +3505,7 @@
     if (parts[0] === "plan") return viewPlan();
     if (parts[0] === "nowosci") return viewChanges();
     if (parts[0] === "gry") return viewGamesAll();
-    if (parts[0] === "kotek") return parts[1] === "sklep" ? viewShop() : viewPet();
+    if (parts[0] === "kotek") { bath = null; return parts[1] === "sklep" ? viewShop() : viewPet(); }
     if (parts[0] === "wyzwanie") return startChallenge();
     if (parts[0] === "kopia") return viewBackup();
     if (parts[0] === "szukaj") return viewSearch();
@@ -3729,8 +3821,8 @@
 
   // ---------- kotki do głaskania ----------
   // co jakiś czas zza krawędzi ekranu wygląda odblokowany kotek (w święta częściej świąteczny); dotknięcie = głaskanie
-  const PET_FIRST_MS = [15000, 40000];
-  const PET_EVERY_MS = [45000, 120000];
+  const PET_FIRST_MS = [60000, 120000];
+  const PET_EVERY_MS = [270000, 330000]; // mniej więcej raz na 5 minut
   const PET_STAY_MS = 9000;
   const PET_SIDES = ["bottom", "bottom", "left", "right"];
   const PET_WORDS = ["mrrr ❤️", "mrau! 💕", "prrr… 💗", "miau ❤️", "jeszcze! 💞"];

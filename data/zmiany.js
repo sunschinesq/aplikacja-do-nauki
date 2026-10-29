@@ -2,6 +2,15 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29x",
+    date: "29 października 2026",
+    items: [
+      "🛁 Prawdziwa kąpiel! Najpierw pocieraj kotka gąbką 🧽, aż będzie cały w pianie, a potem spłucz ją prysznicem 🚿.",
+      "🟤 Kiedy czystość spadnie poniżej 70%, na futerku pojawiają się plamki brudu – im brudniej, tym więcej (a poniżej 40% kotek trochę… pachnie 😹).",
+      "🐾 Kotki do głaskania zaglądają na ekran rzadziej – mniej więcej raz na 5 minut."
+    ]
+  },
+  {
     v: "2026-10-29w",
     date: "29 października 2026",
     items: [
