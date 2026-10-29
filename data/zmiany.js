@@ -2,6 +2,13 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29g",
+    date: "29 października 2026",
+    items: [
+      "😹 Kotek ma nowe, zabawne teksty i żarty z psychologii – Freud, Skinner, Pawłow, Jung, Maslow, efekt Pigmaliona, czynności pomyłkowe… Pojawiają się co jakiś czas w fiszkach, quizach i grach, obok zwykłych pochwał i pocieszeń."
+    ]
+  },
+  {
     v: "2026-10-29f",
     date: "29 października 2026",
     items: [

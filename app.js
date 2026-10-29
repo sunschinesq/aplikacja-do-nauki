@@ -330,8 +330,62 @@
     bad: ["Nic nie szkodzi – ta wróci i następnym razem pójdzie lepiej 💗", "Błąd to też nauka: mózg właśnie to zapamiętuje 🧠", "Spokojnie, nikt nie umie wszystkiego od razu 🐾", "Nie przejmuj się, jestem obok 💕", "Dobrze, że to wyszło teraz, a nie na egzaminie 😺"],
     badMany: ["Trudny kawałek? Zajrzyj do notatki – to żaden wstyd 📖💗", "Weź łyk wody i głęboki oddech. Dasz radę! 🌷", "Wolniej też się liczy. Jestem z Ciebie dumna 🐾", "Może krótka przerwa? Pogłaszcz kotka i wracamy 😽"],
     partial: ["Częściowo to też postęp! 🌱", "Już blisko – jeszcze raz przeczytaj wzór 💗", "Dobry początek, dopisz pojęcia z wzoru ✨"],
-    goal: ["Cel na dziś zrobiony! 🎉 Jestem dumna!", "Mamy to! Dzisiejszy cel osiągnięty 🏆", "Cel dnia zaliczony – możesz być z siebie dumna 💖"]
+    goal: ["Cel na dziś zrobiony! 🎉 Jestem dumna!", "Mamy to! Dzisiejszy cel osiągnięty 🏆", "Cel dnia zaliczony – możesz być z siebie dumna 💖"],
+    // zabawne teksty i żarty z psychologii – mieszane ze zwykłymi (ok. co trzecia wypowiedź)
+    funGood: [
+      "Skinner dałby Ci za to wzmocnienie pozytywne. Ja daję mruczenie 😻",
+      "Pawłow dzwoni dzwonkiem, a mnie cieknie ślinka na kolejną dobrą odpowiedź 🔔",
+      "Hipoteza zerowa obalona: jednak umiesz! p < 0,05 📈",
+      "Twoje superego jest z Ciebie dumne, a id chce za to przekąskę 🍪",
+      "Maslow melduje: potrzeba wiedzy zaspokojona ✅",
+      "Jung mówi, że w Twoim cieniu siedzi geniusz 🌑✨",
+      "Efekt Pigmaliona działa: wierzę w Ciebie, więc Ci wychodzi 💗",
+      "Rorschach? Ja w tej plamie widzę… piątkę na egzaminie 🖤",
+      "Mam kompleks niższości przy tak mądrej osobie 🙀",
+      "Moje steny zachwytu: 10/10 😻",
+      "Bandura nagrałby to jako wzór do modelowania 🎬",
+      "Kot Schrödingera i wie, i nie wie. Ty po prostu wiesz 😼",
+      "To nie przypadek – to determinizm psychiczny. Zdeterminowana do sukcesu! 💪",
+      "Allport nazwałby to cechą kardynalną: mądrość 👑",
+      "Samorealizacja w toku… ładowanie: 87% 🔋",
+      "Gdyby Freud to widział, przestałby mówić o zazdrości i zaczął o podziwie 😸",
+      "Wzmocnienie ciągłe: każda dobra odpowiedź = jedno mrr 🐾",
+      "Efekt halo? Nie, po prostu jesteś świetna ✨"
+    ],
+    funBad: [
+      "To nie pomyłka, to czynność pomyłkowa. Freud byłby zachwycony 😹",
+      "Nawet Freud się mylił. Często 😹",
+      "Racjonalizacja na dziś: „pytanie było podchwytliwe” 😼",
+      "Błąd I rodzaju zdarza się najlepszym. Błąd II rodzaju też 📉",
+      "Efekt Zeigarnik: niedokończone sprawy pamiętamy lepiej, więc ta pomyłka zostanie w głowie 🧠",
+      "Dysonans poznawczy: wiedziałaś, a kliknęło się inaczej 😹",
+      "Wyuczona bezradność? Nie u nas! Następne będzie dobre 💪",
+      "Spokojnie, to tylko wygaszanie złej reakcji. Zaraz wzmocnimy dobrą 🐾",
+      "Rogers by powiedział: bezwarunkowa akceptacja. Ja dodam: bezwarunkowe mruczenie 💗",
+      "Pozycja depresyjna? Nie dziś! Integrujemy dobre i złe odpowiedzi 💗",
+      "Mój kompleks Ikara też czasem za wysoko lata. Lądujemy i próbujemy dalej 🪽",
+      "W teście plam też nie ma złych odpowiedzi… szkoda, że to nie Rorschach 🖤",
+      "To się nazywa uczenie metodą prób i błędów. Thorndike przybija piątkę 🐾"
+    ],
+    funMany: [
+      "Moje id chce się poddać, ale superego mówi: jeszcze jedna! 😼",
+      "Przerwa na hierarchię potrzeb: woda, przekąska, potem wiedza 🥤",
+      "Nawet szczury Skinnera miały gorsze dni. Weź oddech 🐀💗",
+      "Kryzys psychospołeczny? Erikson mówi, że to punkt zwrotny, nie katastrofa 🌱",
+      "Mechanizm obronny „pogłaszczę kotka” – w pełni zdrowy i polecany 😽"
+    ],
+    funHello: [
+      "Hierarchia potrzeb kotka: jedzenie, drzemka i Twoje dobre odpowiedzi 🐾",
+      "Moja ulubiona faza Freuda? Oralna. Bo rybki 🐟",
+      "Jestem kotem behawiorystą: mniej teorii, więcej mruczenia 😺",
+      "Dziś badam Cię metodą obserwacji uczestniczącej 🔍🐾",
+      "Moja tożsamość ego: kot, który kocha psychologię 💗",
+      "Uwaga, wchodzę w stan flow (czytaj: drzemka z otwartymi oczami) 😼",
+      "Ostrzegam: mogę stosować warunkowanie mruczeniem 😻"
+    ]
   };
+  // co jakiś czas zamiast zwykłego tekstu – żart z psychologii
+  const funOr = (plain, fun) => (Math.random() < 0.35 ? pickOne(fun) : pickOne(plain));
   const pickOne = (arr) => arr[Math.floor(Math.random() * arr.length)];
   function buddy(text, mood, fresh) {
     return `<div class="buddy${mood ? " " + mood : ""}${fresh ? " fresh" : ""}" aria-live="polite">
@@ -348,7 +402,9 @@
   function withName(text) {
     const name = store.profile && store.profile.name;
     if (!name || Math.random() > 0.35 || /^\d/.test(text)) return text;
-    return `${esc(name)}, ${text.charAt(0).toLowerCase()}${text.slice(1)}`;
+    // nazwiska (Freud, Rorschach…) zostają wielką literą
+    const keep = /^(Freud|Rorschach|Pawłow|Skinner|Jung|Maslow|Rogers|Bandura|Allport|Erikson|Ebbinghaus|Thorndike|Adler|Horney|Murray|Kot)\b/.test(text);
+    return `${esc(name)}, ${keep ? text.charAt(0) : text.charAt(0).toLowerCase()}${text.slice(1)}`;
   }
   function say(s, text, mood) {
     s.say = withName(text);
@@ -362,10 +418,10 @@
     if (goalReached) return say(s, pickOne(SAYS.goal), "happy");
     if (grade === 2) {
       if (s.inRowOk >= 3 && s.inRowOk % 3 === 0) return say(s, `${s.inRowOk} z rzędu! Jesteś w formie 🔥`, "happy");
-      return say(s, pickOne(SAYS.good), "happy");
+      return say(s, funOr(SAYS.good, SAYS.funGood), "happy");
     }
     if (grade === 1) return say(s, pickOne(SAYS.partial), "comfort");
-    say(s, pickOne(s.inRowBad >= 3 ? SAYS.badMany : SAYS.bad), "comfort");
+    say(s, s.inRowBad >= 3 ? funOr(SAYS.badMany, SAYS.funMany) : funOr(SAYS.bad, SAYS.funBad), "comfort");
   }
   function endSay(pct) {
     if (pct >= 90) return ["Wow! Prawie wszystko! Jestem z Ciebie dumna 😻", "happy"];
@@ -679,7 +735,7 @@
       type: "cards", subject, topicId, mode: CARD_MODES[mode] ? mode : "", queue, pos: 0, flipped: false, typed: "",
       known: 0, unknown: 0, total: queue.length, retried: new Set()
     };
-    say(session, session.mode === "pisz" ? "Napisz odpowiedź swoimi słowami – sprawdzę słowa kluczowe ⌨️" : session.mode === "odwrot" ? "Na odwrót: widzisz odpowiedź, a Ty przypominasz sobie pojęcie 🔄" : pickOne(SAYS.cards));
+    say(session, session.mode === "pisz" ? "Napisz odpowiedź swoimi słowami – sprawdzę słowa kluczowe ⌨️" : session.mode === "odwrot" ? "Na odwrót: widzisz odpowiedź, a Ty przypominasz sobie pojęcie 🔄" : funOr(SAYS.cards, SAYS.funHello));
     renderCard();
   }
 
@@ -797,7 +853,7 @@
       return Object.assign({}, q, { order: fixed ? idx : shuffle(idx) });
     });
     session = { type: "quiz", subject, topicId, qs, pos: 0, chosen: null, score: 0 };
-    say(session, pickOne(SAYS.quiz));
+    say(session, funOr(SAYS.quiz, SAYS.funHello));
     renderQuiz();
   }
 
@@ -2013,7 +2069,7 @@
   // --- wspólny silnik pytań (Kto to powiedział?, Uzupełnij lukę, Pojedynek, Wyzwanie dnia) ---
   function startMC(subject, kind, label, qs, hello) {
     session = { type: "mc", kind, subject, topicId: kind === "wyzwanie" ? undefined : gameTopic, label, qs, pos: 0, chosen: null, score: 0, cat: 0, catPick: null };
-    say(session, hello);
+    say(session, Math.random() < 0.3 ? pickOne(SAYS.funHello) : hello);
     renderMC();
   }
   function mcOptions(correct, pool, n = 3) {
@@ -2063,7 +2119,7 @@
     const goal = logAnswer(subj, ok, false);
     if (s.kind === "pojedynek") {
       const lead = s.score - s.cat;
-      say(s, ok ? (lead > 0 ? "Prowadzisz! Mrr, nie dam się tak łatwo 😼" : "Dobrze! Ale ja też nie śpię 😼") : pickOne(["Hehe, ten punkt mój 😸", "Nie szkodzi, jeszcze Cię dogonię… albo Ty mnie 🐾", "Spokojnie, gra trwa! 💗"]), ok ? "happy" : "comfort");
+      say(s, ok ? (lead > 0 ? pickOne(["Prowadzisz! Mrr, nie dam się tak łatwo 😼", "Czuję rozbieżność między Ja aktualnym a idealnym… przegrywam 🙀", "Mam kompleks niższości i zaczynam kompensować 😼"]) : pickOne(["Dobrze! Ale ja też nie śpię 😼", "Remisujemy jak ego z superego 😹"])) : pickOne(["Hehe, ten punkt mój 😸", "Nie szkodzi, jeszcze Cię dogonię… albo Ty mnie 🐾", "Spokojnie, gra trwa! 💗", "Dążenie do wyższości wg Adlera – właśnie je realizuję 😼", "Moje poczucie własnej skuteczności rośnie 📈😸"]), ok ? "happy" : "comfort");
       if (goal) say(s, pickOne(SAYS.goal), "happy");
     } else react(s, ok ? 2 : 0, goal);
     renderMC();
@@ -2356,7 +2412,7 @@
     if (ok) s.done.push(i);
     else { s.wrong++; s.seqWrong++; s.bad = i; }
     if (s.done.length === seq.items.length) react(s, s.seqWrong ? 1 : 2, logAnswer(s.subject, !s.seqWrong, false));
-    else if (!ok) say(s, pickOne(["Jeszcze nie ten – co było wcześniej? 🤔", "Prawie! Pomyśl, co jest przed nim 🐾", "Spokojnie, spróbuj inny 💗"]), "comfort");
+    else if (!ok) say(s, pickOne(["Jeszcze nie ten – co było wcześniej? 🤔", "Prawie! Pomyśl, co jest przed nim 🐾", "Spokojnie, spróbuj inny 💗", "Zasada epigenetyczna: najpierw to, co wcześniejsze 😼", "Nawet Erikson nie przeskakiwał stadiów 😹"]), "comfort");
     renderOrder();
   }
 
@@ -2419,7 +2475,7 @@
       if (ok) {
         s.matched.add(a.p);
         s.open = [];
-        say(s, pickOne(["Para! 🎉", "Mrr, jest! ✨", "Dobra pamięć! 😻"]), "happy");
+        say(s, pickOne(["Para! 🎉", "Mrr, jest! ✨", "Dobra pamięć! 😻", "Para jak id i superego – zawsze razem, zawsze się kłócą 😹", "Pamięć epizodyczna działa na 100% 🧠", "Ebbinghaus płacze, bo nic nie zapominasz 😼"]), "happy");
       } else {
         s.lock = true;
         renderMemory();
@@ -2509,7 +2565,7 @@
     s.guessed.add(l);
     if (!s.word.q.toUpperCase().includes(l)) {
       s.fish--;
-      say(s, s.fish > 0 ? pickOne(["Mniam, rybka! 😸", "Chrup chrup 🐟", "Ta litera nie pasuje… a rybka pyszna 😼"]) : "Ojej, zjadłem wszystkie rybki 🙀", s.fish > 0 ? "" : "comfort");
+      say(s, s.fish > 0 ? pickOne(["Mniam, rybka! 😸", "Chrup chrup 🐟", "Ta litera nie pasuje… a rybka pyszna 😼", "Faza oralna w pełni – dziękuję za rybkę 🐟😹", "Warunkowanie działa: zła litera = rybka dla mnie 😼"]) : "Ojej, zjadłem wszystkie rybki 🙀", s.fish > 0 ? "" : "comfort");
     }
     if (hangSolved(s)) { s.won++; react(s, 2, logAnswer(s.subject, true, false)); }
     else if (s.fish <= 0) { s.lost++; logAnswer(s.subject, false, false); }
