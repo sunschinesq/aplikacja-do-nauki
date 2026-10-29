@@ -350,7 +350,9 @@
       "Samorealizacja w toku… ładowanie: 87% 🔋",
       "Gdyby Freud to widział, przestałby mówić o zazdrości i zaczął o podziwie 😸",
       "Wzmocnienie ciągłe: każda dobra odpowiedź = jedno mrr 🐾",
-      "Efekt halo? Nie, po prostu jesteś świetna ✨"
+      "Efekt halo? Nie, po prostu jesteś świetna ✨",
+      "Jesteś moją dysponowaną myślą – wiem, że to bez sensu, ale i tak Cię uwielbiam 💗",
+      "Mój styl przywiązania do Ciebie: bezpieczny. Dopóki nie skończy się jedzenie 🐟😼"
     ],
     funBad: [
       "To nie pomyłka, to czynność pomyłkowa. Freud byłby zachwycony 😹",
@@ -381,7 +383,10 @@
       "Dziś badam Cię metodą obserwacji uczestniczącej 🔍🐾",
       "Moja tożsamość ego: kot, który kocha psychologię 💗",
       "Uwaga, wchodzę w stan flow (czytaj: drzemka z otwartymi oczami) 😼",
-      "Ostrzegam: mogę stosować warunkowanie mruczeniem 😻"
+      "Ostrzegam: mogę stosować warunkowanie mruczeniem 😻",
+      // teksty od Julki
+      "Jesteś moją dysponowaną myślą – wiem, że to bez sensu, ale i tak Cię uwielbiam 💗",
+      "Mój styl przywiązania do Ciebie: bezpieczny. Dopóki nie skończy się jedzenie 🐟😼"
     ]
   };
   // co jakiś czas zamiast zwykłego tekstu – żart z psychologii
@@ -2657,7 +2662,7 @@
       }[low.st.k];
     }
     if (low.v < 60) return pickOne([`Hej${you}! Jak tam nauka? 📚`, "Mrrr, dobrze, że jesteś 💗", `Ucz się dalej – zbieramy łapki na nowe ubranka 🐾`]);
-    return pickOne([`Jestem najszczęśliwszym kotkiem na świecie${you}! 😻`, "Mrrr… kocham to miejsce 💖", `Ale się dzisiaj postarałaś${you}! 🎉`, "Pogłaszcz mnie! 🐾"]);
+    return pickOne([`Jestem najszczęśliwszym kotkiem na świecie${you}! 😻`, "Mrrr… kocham to miejsce 💖", `Ale się dzisiaj postarałaś${you}! 🎉`, "Pogłaszcz mnie! 🐾", "Jesteś moją dysponowaną myślą – wiem, że to bez sensu, ale i tak Cię uwielbiam 💗", "Mój styl przywiązania do Ciebie: bezpieczny. Dopóki nie skończy się jedzenie 🐟😼"]);
   }
   function petLook() {
     const p = store.pet;
