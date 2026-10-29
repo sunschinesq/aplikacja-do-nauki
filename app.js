@@ -389,6 +389,40 @@
       "Mój styl przywiązania do Ciebie: bezpieczny. Dopóki nie skończy się jedzenie 🐟😼"
     ]
   };
+  // czułe teksty kotka z psychologicznym twistem (w stylu tych od Julki) – trafiają do powitań, pochwał i pokoju kotka
+  SAYS.love = [
+    "Mam na Twoim punkcie fiksację. Nie wiem, w której fazie, ale na pewno trwałą 😻",
+    "Jesteś moim obiektem przejściowym – tylko że z Ciebie nigdy nie wyrosnę 🧸",
+    "Moje id chce Cię przytulić, superego mówi „nie przeszkadzaj w nauce”, a ego idzie na kompromis: mruczę obok 💗",
+    "Wobec Ciebie mam wyłącznie pozytywne przeniesienie 💞",
+    "W mojej piramidzie Maslowa jesteś na samym szczycie. Zaraz po rybkach 🐟",
+    "Warunkowanie klasyczne: słyszę, że otwierasz aplikację – i już mruczę 🔔😻",
+    "Jesteś moim lustrzanym self-obiektem – przy Tobie czuję się wspaniały ✨",
+    "Holding według Winnicotta? Wystarczą mi Twoje kolana 🐾",
+    "Mam wobec Ciebie bezwarunkową akceptację. Rogers byłby dumny 💖",
+    "Kiedy Cię widzę, moja ekstrawersja skacze na 10 stenów 📣😻",
+    "Twoja obecność obniża mój poziom stresu. Badania własne, n = 1 🐾",
+    "Korelacja między Twoim uśmiechem a moim mruczeniem: r = 0,99, p < 0,001 📈",
+    "Moje umiejscowienie kontroli jest zewnętrzne: to Ty kontrolujesz miskę 🥣😼",
+    "Ty jesteś moim Ja idealnym, a ja Twoim Ja… puszystym 😸",
+    "To nie projekcja. Naprawdę jesteś najlepsza 💗",
+    "Dysonans poznawczy: chcę spać, ale chcę też patrzeć, jak się uczysz 😴💗",
+    "Kocham Cię bardziej, niż Freud kochał interpretować sny 🌙",
+    "Twoje imię to mój ulubiony bodziec warunkowy 🔔",
+    "Mój lęk separacyjny włącza się za każdym razem, gdy zamykasz aplikację 🥺",
+    "W teście TAT na każdej planszy widzę Ciebie 🖼️💗",
+    "Mamy przymierze terapeutyczne. I przekąskowe 🍪",
+    "Według Eriksona jestem w stadium bliskości. Z Tobą. Na zawsze 💞",
+    "Moje schematy Ja: puszysty, głodny, Twój 😻",
+    "Mruczę w tempie Twojego czytania – to się nazywa akomodacja 😺",
+    "Gdybyś była testem, miałabyś 100% trafności i rzetelności 💯",
+    "Mój system Ja dzieli świat na: dobre Ja, złe Ja i Ty – najlepsza 💗",
+    "Archetyp Wielkiej Matki? U mnie to archetyp Wielkiej Opiekunki Miski 🥣😹",
+    "Gdy jesteś obok, mój popęd życia wygrywa z popędem drzemki 😼",
+    "Jesteś dla mnie jak wzmocnienie ciągłe – każdy Twój widok = radość 🐾"
+  ];
+  SAYS.funHello = SAYS.funHello.concat(SAYS.love);
+  SAYS.funGood = SAYS.funGood.concat(SAYS.love.slice(0, 15));
   // co jakiś czas zamiast zwykłego tekstu – żart z psychologii
   const funOr = (plain, fun) => (Math.random() < 0.35 ? pickOne(fun) : pickOne(plain));
   const pickOne = (arr) => arr[Math.floor(Math.random() * arr.length)];
@@ -2662,7 +2696,7 @@
       }[low.st.k];
     }
     if (low.v < 60) return pickOne([`Hej${you}! Jak tam nauka? 📚`, "Mrrr, dobrze, że jesteś 💗", `Ucz się dalej – zbieramy łapki na nowe ubranka 🐾`]);
-    return pickOne([`Jestem najszczęśliwszym kotkiem na świecie${you}! 😻`, "Mrrr… kocham to miejsce 💖", `Ale się dzisiaj postarałaś${you}! 🎉`, "Pogłaszcz mnie! 🐾", "Jesteś moją dysponowaną myślą – wiem, że to bez sensu, ale i tak Cię uwielbiam 💗", "Mój styl przywiązania do Ciebie: bezpieczny. Dopóki nie skończy się jedzenie 🐟😼"]);
+    return pickOne([`Jestem najszczęśliwszym kotkiem na świecie${you}! 😻`, "Mrrr… kocham to miejsce 💖", `Ale się dzisiaj postarałaś${you}! 🎉`, "Pogłaszcz mnie! 🐾", "Jesteś moją dysponowaną myślą – wiem, że to bez sensu, ale i tak Cię uwielbiam 💗", "Mój styl przywiązania do Ciebie: bezpieczny. Dopóki nie skończy się jedzenie 🐟😼", pickOne(SAYS.love), pickOne(SAYS.love), pickOne(SAYS.love)]);
   }
   function petLook() {
     const p = store.pet;
