@@ -2,6 +2,18 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29c",
+    date: "29 października 2026",
+    items: [
+      "🎮 Nowa zakładka Gry (na stronie głównej i w każdym przedmiocie) – 7 nowych gier:",
+      "🗣️ Kto to powiedział? – pojęcie lub teoria, a Ty wybierasz autora.",
+      "⚡ Prawda czy fałsz – 60 sekund, możesz przesuwać kartę w lewo i w prawo.",
+      "🔢 Ułóż po kolei – stadia Eriksona, fazy Freuda, etapy Brzezińskiego, model Maloneya i Warda i inne.",
+      "🃏 Memory, 🐟 Wisielec (kotek zjada rybki za pomyłki), ✏️ Uzupełnij lukę i ⚔️ Pojedynek z kotkiem.",
+      "🐾 Kotkowe wyzwanie dnia – 5 pytań ze wszystkich przedmiotów; za komplet smakołyk dla kotka, a 7 dni z rzędu odblokowuje kotka Smakosza w albumie."
+    ]
+  },
+  {
     v: "2026-10-29b",
     date: "29 października 2026",
     items: [

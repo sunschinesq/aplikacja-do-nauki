@@ -17,7 +17,7 @@
     cards: {}, quiz: {}, exams: {}, lastBackup: null, pets: 0,
     days: {}, goal: 20, bestStreak: 0, marks: {}, open: {}, tries: {},
     cats: {}, birthday: null, focus: { sessions: 0, minutes: 0, days: {} }, games: { match: 0, best: {} },
-    statex: { n: 0, ok: 0 }, planDone: {}
+    statex: { n: 0, ok: 0 }, planDone: {}, challenge: { last: null, streak: 0, best: 0, treats: 0, days: {} }
   });
   function loadStore() {
     const store = STORE_DEFAULTS();
@@ -427,6 +427,7 @@
           <span>🔥 Seria: <b>${streak}</b> ${plural(streak, "dzień", "dni", "dni")}${bestStreak() > streak ? ` · rekord: ${bestStreak()}` : ""}</span>
           <div class="today-links">
             <a href="#/plan">📋 Plan na dziś${plan.length ? ` (${plan.filter((t) => t.done).length}/${plan.length})` : ""}</a>
+            <a href="#/gry">🎮 Gry</a>
             <a href="#/skupienie">🍅 Skupienie</a>
             <a href="#/statystyki">📊 Statystyki</a>
             <a href="#/zakladki">⭐ Zakładki${marks ? ` (${marks})` : ""}</a>
@@ -545,7 +546,7 @@
         ${openQuestions(subject).length ? `<a class="btn" href="#/s/${subject.id}/otwarte">✍️ Pytania otwarte</a>` : ""}
         ${subject.exam ? `<a class="btn" href="#/s/${subject.id}/egzamin">📝 Próbny egzamin (test)</a>` : ""}
         ${subject.openExam && realQuestions(subject).length >= subject.openExam.questions ? `<a class="btn" href="#/s/${subject.id}/egzamin-pisemny">🖊️ Egzamin pisemny</a>` : ""}
-        ${matchCards(subject).length >= 4 ? `<a class="btn" href="#/s/${subject.id}/pary">🧩 Gra w pary</a>` : ""}
+        <a class="btn" href="#/s/${subject.id}/gry">🎮 Gry</a>
         ${subject.statex ? `<a class="btn" href="#/s/${subject.id}/zadania">🧮 Zadania ze statystyki</a>` : ""}
       </div>
       <div class="modes">Fiszki inaczej: <a href="#/s/${subject.id}/fiszki/wszystko/odwrot">🔄 na odwrót</a> · <a href="#/s/${subject.id}/fiszki/wszystko/pisz">⌨️ z pisaniem</a></div>` : `
@@ -1891,10 +1892,562 @@
       <div class="panel whatsnew-page">${changesList(CHANGES)}</div>`;
   }
 
+  // ---------- gry ----------
+  // hub gier przedmiotu (#/s/:id/gry) i wspólny silnik pytań wielokrotnego wyboru dla kilku gier
+  const AUTHORS = window.GAME_AUTHORS || {};
+  const SEQUENCES = window.GAME_SEQUENCES || {};
+  let gameTimer = null;
+  const GAMES = [
+    { kind: "pary", icon: "🧩", name: "Gra w pary", desc: "Połącz pojęcia z odpowiedziami na czas.", ok: (sub) => matchCards(sub).length >= 4, href: (sub) => `#/s/${sub.id}/pary` },
+    { kind: "kto", icon: "🗣️", name: "Kto to powiedział?", desc: "Pojęcie lub teoria – wybierz autora.", ok: (sub) => (AUTHORS[sub.id] || []).length >= 4 },
+    { kind: "pf", icon: "⚡", name: "Prawda czy fałsz", desc: "60 sekund – jak najwięcej trafnych odpowiedzi.", ok: (sub) => matchCards(sub).length >= 6 },
+    { kind: "kolejnosc", icon: "🔢", name: "Ułóż po kolei", desc: "Stadia, etapy i fazy we właściwej kolejności.", ok: (sub) => (SEQUENCES[sub.id] || []).length > 0 },
+    { kind: "memory", icon: "🃏", name: "Memory", desc: "Odkrywaj karty i szukaj par pojęcie–definicja.", ok: (sub) => matchCards(sub).length >= 8 },
+    { kind: "wisielec", icon: "🐟", name: "Wisielec", desc: "Zgadnij pojęcie po literach – kotek pilnuje rybek.", ok: (sub) => hangWords(sub).length >= 3 },
+    { kind: "pojedynek", icon: "⚔️", name: "Pojedynek z kotkiem", desc: "Kto zdobędzie więcej punktów w quizie?", ok: (sub) => subjectQuiz(sub).length >= 10 },
+    { kind: "luki", icon: "✏️", name: "Uzupełnij lukę", desc: "Zdanie z notatki bez słowa kluczowego.", ok: (sub) => gapItems(sub).length >= 4 }
+  ];
+  function viewGames(subject) {
+    document.title = "Gry – " + subject.short;
+    const best = store.games;
+    app.innerHTML = `
+      <a class="back" href="#/s/${subject.id}">‹ ${esc(subject.short)}</a>
+      <h1>🎮 Gry: ${esc(subject.short)}</h1>
+      <a class="game-tile challenge" href="#/wyzwanie"><span class="game-icon">🐾</span><span><strong>Kotkowe wyzwanie dnia</strong><span>5 pytań ze wszystkich przedmiotów · seria: ${store.challenge.streak || 0} · 🐟 ${store.challenge.treats || 0}</span></span></a>
+      <div class="game-grid" style="--accent:${subject.color}">
+        ${GAMES.filter((g) => g.ok(subject)).map((g) => {
+          let rec = "";
+          if (g.kind === "pf" && (best.tf || {})[subject.id]) rec = `rekord: ${best.tf[subject.id]}`;
+          if (g.kind === "memory" && (best.memory || {})[subject.id]) rec = `rekord: ${best.memory[subject.id]} ruchów`;
+          if (g.kind === "pary" && (best.best || {})[subject.id + "/all"]) rec = `rekord: ${best.best[subject.id + "/all"]} s`;
+          return `<a class="game-tile" href="${g.href ? g.href(subject) : `#/s/${subject.id}/gra/${g.kind}`}"><span class="game-icon">${g.icon}</span><span><strong>${g.name}</strong><span>${g.desc}${rec ? ` · ${rec}` : ""}</span></span></a>`;
+        }).join("")}
+      </div>`;
+  }
+  function viewGamesAll() {
+    document.title = "Gry – nauka";
+    app.innerHTML = `
+      <a class="back" href="#/">‹ Przedmioty</a>
+      <h1>🎮 Gry</h1>
+      <a class="game-tile challenge" href="#/wyzwanie"><span class="game-icon">🐾</span><span><strong>Kotkowe wyzwanie dnia</strong><span>5 pytań ze wszystkich przedmiotów · seria: ${store.challenge.streak || 0} ${plural(store.challenge.streak || 0, "dzień", "dni", "dni")} · 🐟 ${store.challenge.treats || 0}${store.challenge.last === dayKey() ? " · dzisiaj zrobione ✓" : ""}</span></span></a>
+      <h2>Wybierz przedmiot</h2>
+      <div class="game-grid">${SUBJECTS.filter(hasContent).map((sub) => `<a class="game-tile" href="#/s/${sub.id}/gry" style="--accent:${sub.color}"><span class="game-icon">${sub.icon}</span><span><strong>${esc(sub.name)}</strong><span>${GAMES.filter((g) => g.ok(sub)).length} gier</span></span></a>`).join("")}</div>`;
+  }
+  function startGame(subject, kind) {
+    if (kind === "kto") return startWho(subject);
+    if (kind === "pf") return startTF(subject);
+    if (kind === "kolejnosc") return startOrder(subject);
+    if (kind === "memory") return startMemory(subject);
+    if (kind === "wisielec") return startHang(subject);
+    if (kind === "pojedynek") return startDuel(subject);
+    if (kind === "luki") return startGap(subject);
+    viewGames(subject);
+  }
+  function gameBack(s) {
+    return s.kind === "wyzwanie" ? "#/gry" : `#/s/${s.subject.id}/gry`;
+  }
+
+  // --- wspólny silnik pytań (Kto to powiedział?, Uzupełnij lukę, Pojedynek, Wyzwanie dnia) ---
+  function startMC(subject, kind, label, qs, hello) {
+    session = { type: "mc", kind, subject, label, qs, pos: 0, chosen: null, score: 0, cat: 0, catPick: null };
+    say(session, hello);
+    renderMC();
+  }
+  function mcOptions(correct, pool, n = 3) {
+    const others = shuffle(pool.filter((x) => fold(x) !== fold(correct))).filter((x, i, arr) => arr.findIndex((y) => fold(y) === fold(x)) === i).slice(0, n);
+    return mc(correct, others);
+  }
+  function renderMC() {
+    const s = session;
+    const back = gameBack(s);
+    const duel = s.kind === "pojedynek";
+    if (s.pos >= s.qs.length) return endMC();
+    const q = s.qs[s.pos];
+    const answered = s.chosen !== null;
+    app.innerHTML = `
+      <div class="session-top">
+        <a class="back" href="${back}">‹ Zakończ</a>
+        <span class="counter">${s.pos + 1} / ${s.qs.length} · ${duel ? `Ty ${s.score} : ${s.cat} Kotek` : `wynik ${s.score}`}</span>
+      </div>
+      ${sessionBar(s, Math.round((s.pos / s.qs.length) * 100))}
+      <div class="quiz-card" style="--accent:${s.subject.color}">
+        <div class="fc-topic">${esc(q.cat || s.label)}</div>
+        <div class="quiz-q${q.gap ? " gap-q" : ""}">${q.html || esc(q.q)}</div>
+        <div class="options">${q.o.map((o, i) => {
+          let cls = "option";
+          if (answered) cls += i === q.a ? " correct" : i === s.chosen ? " wrong" : " dim";
+          return `<button class="${cls}" data-action="mc-answer" data-i="${i}" ${answered ? "disabled" : ""}><span class="opt-letter">${"ABCD"[i]}</span><span>${esc(o)}</span>${duel && answered && i === s.catPick ? `<span class="cat-pick">🐱</span>` : ""}</button>`;
+        }).join("")}</div>
+        ${answered ? `
+          ${duel ? `<div class="duel-line">🐱 Kotek wybrał ${"ABCD"[s.catPick]} – ${s.catPick === q.a ? "dobrze! 😼" : "pomylił się 🙀"}</div>` : ""}
+          <div class="explain ${s.chosen === q.a ? "ok" : "no"}"><strong>${s.chosen === q.a ? "Dobrze!" : "Niestety nie."}</strong> ${esc(q.e || "")}</div>
+          <button class="btn primary big" style="--accent:${s.subject.color}" data-action="mc-next">${s.pos + 1 < s.qs.length ? "Dalej ›" : "Zobacz wynik"}</button>` : ""}
+      </div>
+      ${sessionBuddy(s)}`;
+  }
+  function answerMC(i) {
+    const s = session;
+    const q = s.qs[s.pos];
+    s.chosen = i;
+    const ok = i === q.a;
+    if (ok) s.score++;
+    if (s.kind === "pojedynek") {
+      // kotek odpowiada dobrze w ok. 70% pytań
+      s.catPick = Math.random() < 0.7 ? q.a : pick(q.o.map((_, k) => k).filter((k) => k !== q.a));
+      if (s.catPick === q.a) s.cat++;
+    }
+    const subj = q.subject || s.subject;
+    const goal = logAnswer(subj, ok, false);
+    if (s.kind === "pojedynek") {
+      const lead = s.score - s.cat;
+      say(s, ok ? (lead > 0 ? "Prowadzisz! Mrr, nie dam się tak łatwo 😼" : "Dobrze! Ale ja też nie śpię 😼") : pickOne(["Hehe, ten punkt mój 😸", "Nie szkodzi, jeszcze Cię dogonię… albo Ty mnie 🐾", "Spokojnie, gra trwa! 💗"]), ok ? "happy" : "comfort");
+      if (goal) say(s, pickOne(SAYS.goal), "happy");
+    } else react(s, ok ? 2 : 0, goal);
+    renderMC();
+  }
+  function endMC() {
+    const s = session;
+    const back = gameBack(s);
+    const pct = Math.round((s.score / s.qs.length) * 100);
+    let title = `Wynik: ${s.score} / ${s.qs.length}`, emoji = "🎮", text, mood;
+    [text, mood] = endSay(pct);
+    if (s.kind === "pojedynek") {
+      const win = s.score > s.cat, tie = s.score === s.cat;
+      if (!s.saved) {
+        s.saved = true;
+        store.games.duel = store.games.duel || { won: 0, lost: 0, tie: 0 };
+        store.games.duel[win ? "won" : tie ? "tie" : "lost"]++;
+        saveStore();
+      }
+      emoji = win ? "👑" : tie ? "🤝" : "😼";
+      title = `Ty ${s.score} : ${s.cat} Kotek`;
+      [text, mood] = win ? ["Wygrałaś! Korona należy do Ciebie 👑 Następnym razem się zrewanżuję!", "happy"] : tie ? ["Remis! Jesteśmy siebie warte 🤝", "happy"] : ["Tym razem wygrał kotek 😼 Rewanż? Ćwiczenie czyni mistrza 💗", "comfort"];
+    }
+    if (s.kind === "wyzwanie" && !s.saved) {
+      s.saved = true;
+      const c = store.challenge;
+      const today = dayKey();
+      if (c.last !== today) {
+        c.streak = c.last === shiftDay(today, -1) ? (c.streak || 0) + 1 : 1;
+        c.best = Math.max(c.best || 0, c.streak);
+        c.last = today;
+        c.days[today] = s.score;
+        if (s.score === s.qs.length) c.treats = (c.treats || 0) + 1;
+        saveStore();
+        checkCats();
+        s.counted = true;
+      }
+    }
+    if (s.kind === "wyzwanie") {
+      emoji = s.score === s.qs.length ? "🐟" : "🐾";
+      text = s.counted ? (s.score === s.qs.length ? `Komplet! Kotek dostaje smakołyk 🐟 Seria: ${store.challenge.streak} ${plural(store.challenge.streak, "dzień", "dni", "dni")}.` : `Wyzwanie zaliczone! Seria: ${store.challenge.streak} ${plural(store.challenge.streak, "dzień", "dni", "dni")}. Za komplet 5/5 kotek dostaje smakołyk 🐟`) : "Dzisiejsze wyzwanie już było liczone – to była dodatkowa runda. Wróć jutro po nowe pytania 🐾";
+      mood = "happy";
+    }
+    app.innerHTML = `
+      <a class="back" href="${back}">‹ Wróć</a>
+      <div class="done">
+        <div class="done-emoji">${emoji}</div>
+        <h2>${title}</h2>
+        ${buddy(text, mood, true)}
+        <div class="actions center">
+          ${s.kind === "wyzwanie" ? "" : `<button class="btn primary" style="--accent:${s.subject.color}" data-action="restart-game">Jeszcze raz</button>`}
+          <a class="btn" href="${back}">Wróć do gier</a>
+        </div>
+      </div>`;
+  }
+
+  // --- Kto to powiedział? ---
+  function startWho(subject) {
+    const list = AUTHORS[subject.id] || [];
+    const all = [...new Set(list.map((x) => x[1]))];
+    const qs = shuffle(list).slice(0, 10).map(([concept, author]) => ({
+      q: `„${concept}” – kto jest autorem?`, ...mcOptions(author, all), e: `${concept} → ${author}.`
+    }));
+    startMC(subject, "kto", "🗣️ Kto to powiedział?", qs, "Kto to wymyślił? Ja stawiam na Freuda… zawsze 😸");
+  }
+
+  // --- Uzupełnij lukę (zdania z notatek z pogrubionym słowem kluczowym) ---
+  function gapItems(subject) {
+    const out = [];
+    subject.topics.forEach((t) => {
+      const items = [];
+      (t.notes || "").split("\n").forEach((line) => {
+        if (/^\s*\|/.test(line) || /^#/.test(line)) return;
+        const terms = (line.match(/\*\*(.+?)\*\*/g) || []).map((m) => m.slice(2, -2).replace(/\*/g, "").replace(/[:;,.]+$/, "").trim())
+          .filter((x) => x.length >= 4 && x.length <= 30 && x.split(/\s+/).length <= 3 && /^[A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż]/.test(x));
+        if (!terms.length) return;
+        const text = plain(line.replace(/^\s*[-*>]\s*/, "")).replace(/\*/g, "");
+        const term = pick(terms);
+        if (text.length < 40 || text.length > 230 || text.indexOf(term) < 0) return;
+        items.push({ text, term, topic: t.title });
+      });
+      // dystraktory z tego samego tematu (podobne pojęcia są trudniejsze do odróżnienia)
+      const pool = items.map((x) => x.term);
+      items.forEach((it) => { it.pool = pool; });
+      out.push(...items);
+    });
+    return out;
+  }
+  function startGap(subject) {
+    const items = gapItems(subject);
+    const all = items.map((x) => x.term);
+    const qs = shuffle(items).slice(0, 10).map((it) => {
+      const idx = it.text.indexOf(it.term);
+      const html = esc(it.text.slice(0, idx)) + `<span class="gap-blank">_____</span>` + esc(it.text.slice(idx + it.term.length));
+      const pool = new Set(it.pool.map(fold)).size >= 4 ? it.pool : all;
+      return { html, gap: true, cat: `✏️ ${it.topic}`, ...mcOptions(it.term, pool), e: it.text };
+    });
+    startMC(subject, "luki", "✏️ Uzupełnij lukę", qs, "Jakie słowo uciekło z notatki? Znajdźmy je 🔎");
+  }
+
+  // --- Pojedynek z kotkiem ---
+  function startDuel(subject) {
+    const qs = shuffle(subjectQuiz(subject)).slice(0, 10).map((q) => {
+      const fixed = q.o.some((o) => FIXED_ORDER.test(o));
+      const order = fixed ? q.o.map((_, i) => i) : shuffle(q.o.map((_, i) => i));
+      return { q: q.q, o: order.map((i) => q.o[i]), a: order.indexOf(q.a), e: q.e, cat: `⚔️ ${q.topic}` };
+    });
+    startMC(subject, "pojedynek", "⚔️ Pojedynek", qs, "Pojedynek! Kto zdobędzie więcej punktów – Ty czy ja? 😼");
+  }
+
+  // --- Kotkowe wyzwanie dnia (te same pytania przez cały dzień) ---
+  function seededRandom(seed) {
+    let x = seed % 2147483647 || 1;
+    return () => (x = (x * 48271) % 2147483647) / 2147483647;
+  }
+  function startChallenge() {
+    const rnd = seededRandom(parseInt(hash("wyzwanie-" + dayKey()), 36));
+    const all = SUBJECTS.flatMap((sub) => subjectQuiz(sub).map((q) => Object.assign({ subject: sub }, q)));
+    const qs = [];
+    const used = new Set();
+    while (qs.length < 5 && used.size < all.length) {
+      const i = Math.floor(rnd() * all.length);
+      if (used.has(i)) continue;
+      used.add(i);
+      const q = all[i];
+      const fixed = q.o.some((o) => FIXED_ORDER.test(o));
+      const order = q.o.map((_, k) => k);
+      if (!fixed) for (let k = order.length - 1; k > 0; k--) { const j = Math.floor(rnd() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; }
+      qs.push({ q: q.q, o: order.map((k) => q.o[k]), a: order.indexOf(q.a), e: q.e, cat: `${q.subject.icon} ${q.subject.short} · ${q.topic}`, subject: q.subject });
+    }
+    const hello = store.challenge.last === dayKey() ? "Dzisiejsze wyzwanie już zrobione – możesz zagrać jeszcze raz dla treningu 🐾" : "Kotkowe wyzwanie dnia! 5 pytań – za komplet dostanę smakołyk 🐟";
+    startMC(SUBJECTS[0], "wyzwanie", "🐾 Wyzwanie dnia", qs, hello);
+  }
+
+  // --- Prawda czy fałsz (60 s) ---
+  function startTF(subject) {
+    clearInterval(gameTimer);
+    session = { type: "tf", kind: "pf", subject, cards: matchCards(subject), score: 0, wrong: 0, end: Date.now() + 60000, last: null, item: null, started: false };
+    nextTF();
+    say(session, "Prawda czy fałsz? Masz 60 sekund – licznik rusza po pierwszej odpowiedzi ⚡");
+    renderTF();
+  }
+  function nextTF() {
+    const s = session;
+    const c = pick(s.cards);
+    const truth = Math.random() < 0.5;
+    let a = c.a;
+    if (!truth) {
+      const other = pick(s.cards.filter((x) => fold(x.a) !== fold(c.a)));
+      a = other.a;
+    }
+    s.item = { q: c.q, a, truth, right: c.a };
+  }
+  function renderTF() {
+    const s = session;
+    const back = gameBack(s);
+    if (s.over) {
+      const prev = (store.games.tf || {})[s.subject.id] || 0;
+      if (!s.saved) {
+        s.saved = true;
+        store.games.tf = store.games.tf || {};
+        if (s.score > prev) store.games.tf[s.subject.id] = s.score;
+        saveStore();
+      }
+      const record = s.score > prev;
+      app.innerHTML = `
+        <a class="back" href="${back}">‹ Wróć</a>
+        <div class="done">
+          <div class="done-emoji">⚡</div>
+          <h2>${s.score} ${plural(s.score, "punkt", "punkty", "punktów")}!</h2>
+          <p>Pomyłki: ${s.wrong}${prev ? ` · poprzedni rekord: ${prev}` : ""}</p>
+          ${buddy(record && prev ? "Nowy rekord! Jesteś błyskawicą ⚡😻" : s.score >= 15 ? "Ale tempo! Super 😻" : "Dobra rozgrzewka – następnym razem będzie więcej! 🐾", "happy", true)}
+          <div class="actions center">
+            <button class="btn primary" style="--accent:${s.subject.color}" data-action="restart-game">Jeszcze raz</button>
+            <a class="btn" href="${back}">Wróć do gier</a>
+          </div>
+        </div>`;
+      return;
+    }
+    const it = s.item;
+    app.innerHTML = `
+      <div class="session-top">
+        <a class="back" href="${back}">‹ Zakończ</a>
+        <span class="exam-timer tf-timer">⏱ ${s.started ? Math.max(0, Math.ceil((s.end - Date.now()) / 1000)) : 60} s</span>
+      </div>
+      <div class="tf-score">Punkty: <strong>${s.score}</strong> · pomyłki: ${s.wrong}</div>
+      <div class="quiz-card tf-card${s.flash ? " " + s.flash : ""}" style="--accent:${s.subject.color}" data-swipe="tf">
+        <div class="tf-q">${esc(it.q)}</div>
+        <div class="tf-arrow">↓</div>
+        <div class="tf-a">${esc(it.a)}</div>
+        ${s.last ? `<div class="tf-last ${s.last.ok ? "ok" : "no"}">${s.last.ok ? "✓ Dobrze" : `✗ Poprzednie: ${esc(s.last.q)} → ${esc(s.last.right)}`}</div>` : ""}
+      </div>
+      <div class="grade">
+        <button class="btn bad" data-action="tf-answer" data-v="0">✗ Fałsz</button>
+        <button class="btn good" data-action="tf-answer" data-v="1">✓ Prawda</button>
+      </div>
+      <p class="muted center-note">Możesz też przesunąć kartę: w lewo = fałsz, w prawo = prawda.</p>`;
+    s.flash = "";
+  }
+  function answerTF(v) {
+    const s = session;
+    if (s.over) return;
+    if (!s.started) {
+      s.started = true;
+      s.end = Date.now() + 60000;
+      clearInterval(gameTimer);
+      gameTimer = setInterval(() => {
+        if (!session || session.type !== "tf") return clearInterval(gameTimer);
+        const left = session.end - Date.now();
+        if (left <= 0) { clearInterval(gameTimer); session.over = true; renderTF(); return; }
+        const el = document.querySelector(".tf-timer");
+        if (el) { el.textContent = `⏱ ${Math.ceil(left / 1000)} s`; el.classList.toggle("low", left < 10000); }
+      }, 250);
+    }
+    const ok = v === s.item.truth;
+    if (ok) s.score++; else s.wrong++;
+    s.last = { ok, q: s.item.q, right: s.item.right };
+    s.flash = ok ? "flash-ok" : "flash-no";
+    logAnswer(s.subject, ok, false);
+    nextTF();
+    renderTF();
+  }
+
+  // --- Ułóż po kolei (dotykaj elementy w dobrej kolejności) ---
+  function startOrder(subject) {
+    const seqs = shuffle(SEQUENCES[subject.id] || []).slice(0, 3);
+    session = { type: "order", kind: "kolejnosc", subject, seqs, idx: 0, done: [], wrong: 0, total: 0, bad: null };
+    say(session, "Dotykaj elementy po kolei – od pierwszego do ostatniego 🔢");
+    prepOrder();
+    renderOrder();
+  }
+  function prepOrder() {
+    const s = session;
+    const seq = s.seqs[s.idx];
+    s.pool = shuffle(seq.items.map((_, i) => i));
+    s.done = [];
+    s.seqWrong = 0;
+  }
+  function renderOrder() {
+    const s = session;
+    const back = gameBack(s);
+    if (s.idx >= s.seqs.length) {
+      if (!s.saved) { s.saved = true; store.games.order = (store.games.order || 0) + 1; saveStore(); checkCats(); }
+      const text = s.wrong === 0 ? "Wszystko po kolei bez ani jednej pomyłki! 😻" : s.wrong <= 3 ? "Prawie idealnie! 💪" : "Ułożone! Kolejność wejdzie do głowy z każdą rundą 🌱";
+      app.innerHTML = `
+        <a class="back" href="${back}">‹ Wróć</a>
+        <div class="done">
+          <div class="done-emoji">🔢</div>
+          <h2>Ułożone: ${s.seqs.length} ${plural(s.seqs.length, "sekwencja", "sekwencje", "sekwencji")}</h2>
+          <p>Pomyłki: <strong>${s.wrong}</strong></p>
+          ${buddy(text, s.wrong <= 3 ? "happy" : "", true)}
+          <div class="actions center">
+            <button class="btn primary" style="--accent:${s.subject.color}" data-action="restart-game">Jeszcze raz</button>
+            <a class="btn" href="${back}">Wróć do gier</a>
+          </div>
+        </div>`;
+      return;
+    }
+    const seq = s.seqs[s.idx];
+    const finished = s.done.length === seq.items.length;
+    app.innerHTML = `
+      <div class="session-top">
+        <a class="back" href="${back}">‹ Zakończ</a>
+        <span class="counter">${s.idx + 1} / ${s.seqs.length} · pomyłki: ${s.wrong}</span>
+      </div>
+      <div class="quiz-card" style="--accent:${s.subject.color}">
+        <div class="fc-topic">🔢 Ułóż po kolei</div>
+        <div class="quiz-q">${esc(seq.title)}</div>
+        <ol class="order-done">${s.done.map((i) => `<li>${esc(seq.items[i])}</li>`).join("")}${finished ? "" : `<li class="order-next">?</li>`}</ol>
+        ${finished ? `<div class="explain ok"><strong>Brawo!</strong> ${s.seqWrong ? `Pomyłki w tej sekwencji: ${s.seqWrong}.` : "Bez pomyłki!"}</div>
+          <button class="btn primary big" style="--accent:${s.subject.color}" data-action="ord-next">${s.idx + 1 < s.seqs.length ? "Następna sekwencja ›" : "Zobacz wynik"}</button>` : `
+        <div class="order-pool">${s.pool.filter((i) => !s.done.includes(i)).map((i) => `<button class="order-item${s.bad === i ? " bad" : ""}" data-action="ord-pick" data-i="${i}">${esc(seq.items[i])}</button>`).join("")}</div>`}
+      </div>
+      ${sessionBuddy(s)}`;
+    s.bad = null;
+  }
+  function pickOrder(i) {
+    const s = session;
+    const seq = s.seqs[s.idx];
+    const ok = i === s.done.length;
+    if (ok) s.done.push(i);
+    else { s.wrong++; s.seqWrong++; s.bad = i; }
+    if (s.done.length === seq.items.length) react(s, s.seqWrong ? 1 : 2, logAnswer(s.subject, !s.seqWrong, false));
+    else if (!ok) say(s, pickOne(["Jeszcze nie ten – co było wcześniej? 🤔", "Prawie! Pomyśl, co jest przed nim 🐾", "Spokojnie, spróbuj inny 💗"]), "comfort");
+    renderOrder();
+  }
+
+  // --- Memory (4×4: 8 par) ---
+  function startMemory(subject) {
+    const seen = new Set();
+    const pairs = shuffle(matchCards(subject)).filter((c) => { const k = fold(c.a); if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 8);
+    const cards = shuffle(pairs.flatMap((c, i) => [{ p: i, t: c.q, side: "q" }, { p: i, t: c.a, side: "a" }]));
+    session = { type: "memory", kind: "memory", subject, cards, open: [], matched: new Set(), moves: 0, started: Date.now(), lock: false };
+    say(session, "Odkrywaj po dwie karty i szukaj par: pojęcie + definicja 🃏");
+    renderMemory();
+  }
+  function renderMemory() {
+    const s = session;
+    const back = gameBack(s);
+    if (s.matched.size === s.cards.length / 2) {
+      const secs = Math.round((Date.now() - s.started) / 1000);
+      const prev = (store.games.memory || {})[s.subject.id];
+      if (!s.saved) {
+        s.saved = true;
+        store.games.memory = store.games.memory || {};
+        if (!prev || s.moves < prev) store.games.memory[s.subject.id] = s.moves;
+        saveStore();
+      }
+      app.innerHTML = `
+        <a class="back" href="${back}">‹ Wróć</a>
+        <div class="done">
+          <div class="done-emoji">🃏</div>
+          <h2>Wszystkie pary odkryte!</h2>
+          <p>Ruchy: <strong>${s.moves}</strong> · czas: ${secs} s${prev ? ` · rekord: ${Math.min(prev, s.moves)} ruchów` : ""}</p>
+          ${buddy(s.moves <= 12 ? "Co za pamięć! 😻" : "Udało się! Za każdym razem pójdzie szybciej 🐾", "happy", true)}
+          <div class="actions center">
+            <button class="btn primary" style="--accent:${s.subject.color}" data-action="restart-game">Jeszcze raz</button>
+            <a class="btn" href="${back}">Wróć do gier</a>
+          </div>
+        </div>`;
+      return;
+    }
+    app.innerHTML = `
+      <div class="session-top">
+        <a class="back" href="${back}">‹ Zakończ</a>
+        <span class="counter">pary: ${s.matched.size} / ${s.cards.length / 2} · ruchy: ${s.moves}</span>
+      </div>
+      <div class="mem-grid" style="--accent:${s.subject.color}">
+        ${s.cards.map((c, i) => {
+          const up = s.open.includes(i) || s.matched.has(c.p);
+          return `<button class="mem-card${up ? " up" : ""}${s.matched.has(c.p) ? " matched" : ""} side-${c.side}" data-action="mem-flip" data-i="${i}" ${s.matched.has(c.p) ? "disabled" : ""}>${up ? `<span>${esc(c.t)}</span>` : "🐾"}</button>`;
+        }).join("")}
+      </div>
+      ${sessionBuddy(s)}`;
+  }
+  function flipMemory(i) {
+    const s = session;
+    if (s.lock || s.open.includes(i) || s.matched.has(s.cards[i].p)) return;
+    s.open.push(i);
+    if (s.open.length === 2) {
+      s.moves++;
+      const [a, b] = s.open.map((k) => s.cards[k]);
+      const ok = a.p === b.p && a.side !== b.side;
+      logAnswer(s.subject, ok, false);
+      if (ok) {
+        s.matched.add(a.p);
+        s.open = [];
+        say(s, pickOne(["Para! 🎉", "Mrr, jest! ✨", "Dobra pamięć! 😻"]), "happy");
+      } else {
+        s.lock = true;
+        renderMemory();
+        setTimeout(() => { if (session === s) { s.open = []; s.lock = false; renderMemory(); } }, 1100);
+        return;
+      }
+    }
+    renderMemory();
+  }
+
+  // --- Wisielec (zgadnij pojęcie; kotek zjada rybkę za każdą pomyłkę) ---
+  const PL_LETTERS = "AĄBCĆDEĘFGHIJKLŁMNŃOÓPQRSŚTUVWXYZŹŻ".split("");
+  function hangWords(subject) {
+    const seen = new Set();
+    return matchCards(subject).filter((c) => {
+      const w = c.q.trim();
+      if (!/^[A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż][A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż -]{2,21}$/.test(w) || w.split(" ").length > 3) return false;
+      // podpowiedź nie może zdradzać hasła
+      if (seen.has(w.toLowerCase()) || fold(c.a).includes(fold(w).slice(0, 5))) return false;
+      seen.add(w.toLowerCase());
+      return true;
+    });
+  }
+  function startHang(subject) {
+    const words = shuffle(hangWords(subject)).slice(0, 5);
+    session = { type: "hang", kind: "wisielec", subject, words, idx: 0, won: 0, lost: 0 };
+    say(session, "Zgadnij pojęcie po literach. Uważaj na moje rybki! 🐟");
+    prepHang();
+    renderHang();
+  }
+  function prepHang() {
+    const s = session;
+    s.word = s.words[s.idx];
+    s.guessed = new Set();
+    s.fish = 6;
+  }
+  function hangSolved(s) {
+    return s.word.q.toUpperCase().split("").every((ch) => !PL_LETTERS.includes(ch) || s.guessed.has(ch));
+  }
+  function renderHang() {
+    const s = session;
+    const back = gameBack(s);
+    if (s.idx >= s.words.length) {
+      if (!s.saved) {
+        s.saved = true;
+        store.games.hang = store.games.hang || { won: 0, lost: 0 };
+        store.games.hang.won += s.won;
+        store.games.hang.lost += s.lost;
+        saveStore();
+      }
+      app.innerHTML = `
+        <a class="back" href="${back}">‹ Wróć</a>
+        <div class="done">
+          <div class="done-emoji">🐟</div>
+          <h2>Odgadnięte: ${s.won} / ${s.words.length}</h2>
+          ${buddy(s.won === s.words.length ? "Wszystkie! A moje rybki prawie całe 😻" : s.won ? "Nieźle! Mniam, kilka rybek mi się dostało 😸" : "Ojej, zjadłem sporo rybek… ale pojęcia już znasz! 💗", "happy", true)}
+          <div class="actions center">
+            <button class="btn primary" style="--accent:${s.subject.color}" data-action="restart-game">Jeszcze raz</button>
+            <a class="btn" href="${back}">Wróć do gier</a>
+          </div>
+        </div>`;
+      return;
+    }
+    const solved = hangSolved(s);
+    const lost = s.fish <= 0;
+    const over = solved || lost;
+    const shown = s.word.q.toUpperCase().split("").map((ch) => !PL_LETTERS.includes(ch) ? `<span class="hl space">${ch === " " ? "&nbsp;" : esc(ch)}</span>` : `<span class="hl">${s.guessed.has(ch) || over ? esc(ch) : "&nbsp;"}</span>`).join("");
+    app.innerHTML = `
+      <div class="session-top">
+        <a class="back" href="${back}">‹ Zakończ</a>
+        <span class="counter">${s.idx + 1} / ${s.words.length}</span>
+      </div>
+      <div class="quiz-card hang-card" style="--accent:${s.subject.color}">
+        <div class="fc-topic">🐟 Wisielec · ${esc(s.word.topic)}</div>
+        <div class="hang-hint">Podpowiedź: ${esc(s.word.a)}</div>
+        <div class="hang-word${lost ? " lost" : ""}">${shown}</div>
+        <div class="hang-fish">${"🐟".repeat(Math.max(0, s.fish))}${"🦴".repeat(6 - Math.max(0, s.fish))}</div>
+        ${over ? `<div class="explain ${solved ? "ok" : "no"}"><strong>${solved ? "Odgadnięte!" : "Rybki się skończyły…"}</strong> ${solved ? "" : `To było: ${esc(s.word.q)}`}</div>
+          <button class="btn primary big" style="--accent:${s.subject.color}" data-action="hang-next">${s.idx + 1 < s.words.length ? "Następne słowo ›" : "Zobacz wynik"}</button>` : `
+        <div class="hang-keys">${PL_LETTERS.map((l) => `<button class="hk${s.guessed.has(l) ? (s.word.q.toUpperCase().includes(l) ? " hit" : " miss") : ""}" data-action="hang-letter" data-l="${l}" ${s.guessed.has(l) ? "disabled" : ""}>${l}</button>`).join("")}</div>`}
+      </div>
+      ${sessionBuddy(s)}`;
+  }
+  function guessHang(l) {
+    const s = session;
+    if (s.guessed.has(l) || hangSolved(s) || s.fish <= 0) return;
+    s.guessed.add(l);
+    if (!s.word.q.toUpperCase().includes(l)) {
+      s.fish--;
+      say(s, s.fish > 0 ? pickOne(["Mniam, rybka! 😸", "Chrup chrup 🐟", "Ta litera nie pasuje… a rybka pyszna 😼"]) : "Ojej, zjadłem wszystkie rybki 🙀", s.fish > 0 ? "" : "comfort");
+    }
+    if (hangSolved(s)) { s.won++; react(s, 2, logAnswer(s.subject, true, false)); }
+    else if (s.fish <= 0) { s.lost++; logAnswer(s.subject, false, false); }
+    renderHang();
+  }
+
   // ---------- zdarzenia ----------
   // ---------- kopia zapasowa ----------
   const BACKUP_APP = "nauka-drugi-rok";
-  const BACKUP_FIELDS = ["cards", "quiz", "exams", "pets", "days", "goal", "bestStreak", "marks", "open", "tries", "cats", "birthday", "focus", "games", "statex", "planDone"];
+  const BACKUP_FIELDS = ["cards", "quiz", "exams", "pets", "days", "goal", "bestStreak", "marks", "open", "tries", "cats", "birthday", "focus", "games", "statex", "planDone", "challenge"];
 
   function hasProgress() {
     return Object.keys(store.cards).length + Object.keys(store.quiz).length + Object.keys(store.exams).length > 0;
@@ -2024,6 +2577,16 @@
     else delete store.exams[subject.id];
     saveStore();
     viewSubject(subject);
+  });
+
+  // przesunięcie karty w grze „Prawda czy fałsz”: w lewo = fałsz, w prawo = prawda
+  let swipeX = null;
+  app.addEventListener("pointerdown", (ev) => { swipeX = ev.target.closest("[data-swipe]") ? ev.clientX : null; });
+  app.addEventListener("pointerup", (ev) => {
+    if (swipeX === null || !session || session.type !== "tf") return;
+    const dx = ev.clientX - swipeX;
+    swipeX = null;
+    if (Math.abs(dx) > 60) answerTF(dx > 0);
   });
 
   app.addEventListener("input", (ev) => {
@@ -2192,6 +2755,34 @@
       } else if (action === "openexam-grade" && session.finished) {
         gradeOpenExam(Number(el.dataset.i), Number(el.dataset.g));
       }
+    } else if (action === "mc-answer" && session.type === "mc" && session.chosen === null) {
+      answerMC(Number(el.dataset.i));
+    } else if (action === "mc-next" && session.type === "mc") {
+      session.pos++;
+      session.chosen = null;
+      session.catPick = null;
+      renderMC();
+      window.scrollTo(0, 0);
+    } else if (action === "restart-game") {
+      startGame(session.subject, session.kind);
+    } else if (action === "tf-answer" && session.type === "tf") {
+      answerTF(el.dataset.v === "1");
+    } else if (action === "ord-pick" && session.type === "order") {
+      pickOrder(Number(el.dataset.i));
+    } else if (action === "ord-next" && session.type === "order") {
+      session.idx++;
+      if (session.idx < session.seqs.length) prepOrder();
+      renderOrder();
+      window.scrollTo(0, 0);
+    } else if (action === "mem-flip" && session.type === "memory") {
+      flipMemory(Number(el.dataset.i));
+    } else if (action === "hang-letter" && session.type === "hang") {
+      guessHang(el.dataset.l);
+    } else if (action === "hang-next" && session.type === "hang") {
+      session.idx++;
+      if (session.idx < session.words.length) prepHang();
+      renderHang();
+      window.scrollTo(0, 0);
     } else if (action === "restart-open") {
       startOpen(session.subject, session.topicId, session.realOnly);
     } else if (session.type === "exam" && !session.finished) {
@@ -2217,6 +2808,13 @@
 
   // klawiatura (np. iPad z klawiaturą): spacja = odwróć, 1/2 = nie umiem/umiem
   document.addEventListener("keydown", (ev) => {
+    if (session && session.type === "tf" && !session.over && (ev.key === "ArrowLeft" || ev.key === "ArrowRight")) {
+      ev.preventDefault();
+      return answerTF(ev.key === "ArrowRight");
+    }
+    if (session && session.type === "hang" && /^[a-ząćęłńóśźż]$/i.test(ev.key)) {
+      return guessHang(ev.key.toUpperCase());
+    }
     if (!session || session.type !== "cards" || session.pos >= session.queue.length) return;
     if (ev.target.matches && ev.target.matches(".type-answer")) {
       if (ev.key === "Enter" && !ev.shiftKey && !session.flipped) {
@@ -2242,6 +2840,7 @@
   function route() {
     session = null;
     clearInterval(examTimer);
+    clearInterval(gameTimer);
     const parts = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
     currentView = parts[0] === "skupienie" ? "focus" : parts[0] || "home";
     focusTick();
@@ -2249,6 +2848,8 @@
     if (parts[0] === "skupienie") return viewFocus();
     if (parts[0] === "plan") return viewPlan();
     if (parts[0] === "nowosci") return viewChanges();
+    if (parts[0] === "gry") return viewGamesAll();
+    if (parts[0] === "wyzwanie") return startChallenge();
     if (parts[0] === "kopia") return viewBackup();
     if (parts[0] === "szukaj") return viewSearch();
     if (parts[0] === "zakladki") return viewMarks();
@@ -2273,6 +2874,8 @@
       return startMatch(subject, parts[3]);
     }
     if (sub === "zadania" && subject.statex) return startStatex(subject);
+    if (sub === "gry") return viewGames(subject);
+    if (sub === "gra" && GAMES.some((g) => g.kind === parts[3] && g.ok(subject))) return startGame(subject, parts[3]);
     if (sub === "zagadnienia" && realQuestions(subject, parts[3]).length) return startOpen(subject, parts[3], true);
     if (sub === "egzamin-pisemny" && subject.openExam && realQuestions(subject).length >= subject.openExam.questions) return viewOpenExamIntro(subject);
     if (sub === "otwarte") {
@@ -2307,6 +2910,7 @@
     { id: "arbuzek", name: "Arbuzek", fur: "#8ce99a", dark: "#51cf66", belly: "#ff8787", eyes: "#212529", how: "Pogłaszcz 50 kotków", test: (x) => x.pets >= 50 },
     { id: "teczowy", name: "Tęczuś", grad: ["#ff8787", "#ffd43b", "#69db7c", "#4dabf7", "#da77f2"], dark: "#9775fa", belly: "#fff9db", how: "Zdaj próbny egzamin", test: (x) => x.examPassed },
     { id: "kosmos", name: "Kosmos", grad: ["#364fc7", "#5f3dc4", "#862e9c"], dark: "#2b2350", belly: "#748ffc", eyes: "#ffd43b", stars: true, how: "1000 odpowiedzi łącznie", test: (x) => x.answers >= 1000 },
+    { id: "smakosz", name: "Smakosz", fur: "#ffd8a8", dark: "#f08c00", belly: "#fff4e6", eyes: "#2f9e44", acc: ["bow"], how: "Wyzwanie dnia 7 dni z rzędu", test: (x) => x.challenge >= 7 },
     { id: "zloty", name: "Złotko", grad: ["#ffe066", "#fab005", "#f08c00"], dark: "#e67700", belly: "#fff3bf", acc: ["crown"], how: "Seria 30 dni albo cały przedmiot opanowany na 100%", test: (x) => x.streak >= 30 || x.fullSubject },
     // świąteczne – pojawiają się i odblokowują tylko w swoim czasie
     { id: "halloween", name: "Dyniek", fur: "#3a3238", dark: "#241e23", belly: "#4c434a", eyes: "#ff922b", acc: ["witch", "pumpkin"], holiday: "halloween", how: "Halloween (24 X – 2 XI)" },
@@ -2415,6 +3019,7 @@
       focus: store.focus.sessions || 0,
       games: store.games.match || 0,
       statOk: store.statex.ok || 0,
+      challenge: Math.max(store.challenge.best || 0, store.challenge.streak || 0),
       examPassed: SUBJECTS.some((sub) => sub.exam && (store.tries[sub.id] || []).some((t) => t.score >= sub.exam.pass)),
       fullSubject: SUBJECTS.some((sub) => { const fc = subjectCards(sub); return fc.length && mastery(fc) === 100; })
     };

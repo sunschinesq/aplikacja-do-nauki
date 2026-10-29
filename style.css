@@ -1066,3 +1066,76 @@ mark.hit { background: color-mix(in srgb, var(--good) 24%, transparent); }
 .whatsnew-card .buddy { margin-top: 10px; }
 .whatsnew-page .whatsnew-entry + .whatsnew-entry { margin-top: 16px; padding-top: 16px; }
 .pet-count a { color: var(--accent); font-weight: 600; }
+
+/* ---------- gry ---------- */
+.game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; margin-top: 14px; }
+.game-tile {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--accent);
+  box-shadow: var(--shadow);
+}
+.game-tile:active { transform: scale(.98); }
+.game-tile > span:last-child { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.game-tile strong { font-size: 1.02rem; }
+.game-tile > span:last-child > span { font-size: .85rem; color: var(--muted); line-height: 1.35; }
+.game-icon { flex: none; font-size: 2rem; width: 44px; text-align: center; }
+.game-tile.challenge { margin-top: 12px; background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 16%, var(--surface)), var(--surface)); }
+.gap-blank { display: inline-block; min-width: 80px; border-bottom: 3px solid var(--accent); color: var(--accent); text-align: center; }
+.gap-q { font-weight: 550; }
+.cat-pick { margin-left: auto; font-size: 1.2rem; }
+.duel-line { margin-top: 12px; font-weight: 600; }
+/* prawda / fałsz */
+.tf-score { text-align: center; margin: 10px 0; color: var(--muted); }
+.tf-card { text-align: center; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.tf-q { font-size: 1.3rem; font-weight: 700; }
+.tf-arrow { color: var(--muted); margin: 6px 0; }
+.tf-a { font-size: 1.12rem; }
+.tf-last { margin-top: 14px; font-size: .88rem; padding: 6px 10px; border-radius: 10px; }
+.tf-last.ok { color: var(--good); background: color-mix(in srgb, var(--good) 10%, transparent); }
+.tf-last.no { color: var(--bad); background: color-mix(in srgb, var(--bad) 8%, transparent); }
+.tf-card.flash-ok { animation: tf-ok .35s ease; }
+.tf-card.flash-no { animation: shake .35s ease; }
+@keyframes tf-ok { 50% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--good) 40%, transparent); } }
+/* ułóż po kolei */
+.order-done { margin: 0 0 14px; padding-left: 26px; }
+.order-done li { padding: 6px 0; font-weight: 600; color: var(--good); }
+.order-done .order-next { color: var(--muted); }
+.order-pool { display: flex; flex-wrap: wrap; gap: 8px; }
+.order-item { padding: 10px 14px; border-radius: 12px; border: 2px solid var(--border); background: var(--bg); font-size: .95rem; cursor: pointer; text-align: left; }
+.order-item:active { transform: scale(.97); }
+.order-item.bad { border-color: var(--bad); animation: shake .35s ease; }
+/* memory */
+.mem-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
+.mem-card {
+  aspect-ratio: 1 / 1;
+  padding: 6px;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.7rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.mem-card.up { background: var(--surface); color: var(--text); font-size: clamp(.62rem, 1.9vw, .9rem); line-height: 1.25; animation: fadein .2s ease; }
+.mem-card.up.side-q { font-weight: 700; }
+.mem-card.matched { border-color: var(--good); background: color-mix(in srgb, var(--good) 12%, var(--surface)); opacity: .7; }
+/* wisielec */
+.hang-hint { padding: 10px 14px; border-radius: 12px; background: var(--bg-2); font-size: .95rem; }
+.hang-word { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 22px 0 12px; }
+.hl { width: 1.5em; border-bottom: 3px solid var(--text); text-align: center; font-size: 1.5rem; font-weight: 800; line-height: 1.3; }
+.hl.space { border-bottom: 0; width: .8em; }
+.hang-word.lost .hl { color: var(--bad); }
+.hang-fish { text-align: center; font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 14px; }
+.hang-keys { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 6px; }
+.hk { min-height: 44px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); font-weight: 700; cursor: pointer; }
+.hk.hit { background: color-mix(in srgb, var(--good) 22%, transparent); }
+.hk.miss { opacity: .35; }
