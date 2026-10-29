@@ -2,6 +2,14 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29zd",
+    date: "29 października 2026",
+    items: [
+      "✍️ 148 nowych, ręcznie napisanych pytań do quizów w tematach, które miały ich najmniej: cała pomoc psychologiczna, cała Diagnoza sprawności poznawczych (etyka), metody badań, teorie uczenia się, teorie cech, psychologia pozytywna i egzystencjalna, teorie narracyjne oraz metodologia (podstawy, raport APA).",
+      "📝 Nowe pytania trafiają też do próbnych egzaminów z tych przedmiotów."
+    ]
+  },
+  {
     v: "2026-10-29zc",
     date: "29 października 2026",
     items: [

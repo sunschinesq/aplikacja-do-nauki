@@ -22,6 +22,7 @@ const FILES = [
   "data/diagnostyka-zagadnienia.js",
   "data/poznawcze.js",
   "data/pomoc.js",
+  "data/pytania-dodatkowe.js",
   "data/gry.js",
   "data/zmiany.js"
 ];
