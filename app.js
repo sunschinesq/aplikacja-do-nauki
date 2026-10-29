@@ -164,6 +164,32 @@
     const topics = topicId ? subject.topics.filter((t) => t.id === topicId) : subject.topics;
     return topics.flatMap((t) => (t.quiz || []).map((q) => Object.assign({ topic: t.title }, q)));
   }
+  // pula do quizu: pytania z quizu + pytania z fiszek (krótka odpowiedź, 3 dystraktory z tego samego tematu, o podobnej długości)
+  const quizPoolCache = {};
+  function quizPool(subject, topicId) {
+    const ck = subject.id + "/" + (topicId || "all");
+    if (quizPoolCache[ck]) return quizPoolCache[ck];
+    const topics = topicId ? subject.topics.filter((t) => t.id === topicId) : subject.topics;
+    const handKeys = new Set(subjectQuiz(subject).map((q) => fold(q.o[q.a])));
+    const out = [];
+    topics.forEach((t) => {
+      (t.quiz || []).forEach((q) => out.push(Object.assign({ topic: t.title, id: "q:" + hash(q.q) }, q)));
+      const cards = topicCards(subject, t).filter((c) => c.a.length <= 110 && c.q.length <= 160 && !handKeys.has(fold(c.a)));
+      const topicAnswers = topicCards(subject, t).map((c) => c.a).filter((a) => a.length <= 110);
+      cards.forEach((c) => {
+        if (topicAnswers.length < 6) return;
+        const pool = topicAnswers.filter((a, i, arr) => fold(a) !== fold(c.a) && arr.findIndex((b) => fold(b) === fold(a)) === i);
+        if (pool.length < 3) return;
+        const near = pool.sort((x, y) => Math.abs(x.length - c.a.length) - Math.abs(y.length - c.a.length)).slice(0, 6);
+        const wrong = shuffle(near).slice(0, 3);
+        const q = /[?…:]$/.test(c.q.trim()) ? c.q : c.q + " – to:";
+        out.push({ q, o: [c.a, ...wrong], a: 0, e: `${c.q} → ${c.a}`, topic: t.title, gen: true, id: "c:" + hash(c.q) });
+      });
+    });
+    quizPoolCache[ck] = out;
+    return out;
+  }
+  const QUIZ_TOPIC_SESSION = 10;
   function mastery(cards) {
     if (!cards.length) return 0;
     const ok = cards.filter((c) => (store.cards[c.key] || {}).box >= MASTERED_BOX).length;
@@ -709,7 +735,7 @@
           <span class="topic-main">
             <span class="topic-title">${esc(t.title)}</span>
             <span class="topic-meta">${filled
-              ? `${fc.length} fiszek · ${(t.quiz || []).length} pytań${qs ? ` · quiz: ${qs.best}%` : ""}`
+              ? `${fc.length} fiszek · ${quizPool(subject, t.id).length} pytań${qs ? ` · quiz: ${qs.best}%` : ""}`
               : "wkrótce"}</span>
             ${filled ? progressBar(mastery(fc), subject.color) : ""}
           </span>
@@ -753,7 +779,7 @@
   function viewTopic(subject, topic, tab, anchor) {
     document.title = topic.title + " – nauka";
     const fc = topicCards(subject, topic);
-    const quiz = topic.quiz || [];
+    const quiz = quizPool(subject, topic.id);
     tab = tab || "notatka";
     const tabs = [
       ["notatka", "📖 Notatka"],
@@ -798,7 +824,7 @@
       const qs = store.quiz[quizKey(subject, topic.id)];
       body = `
         <div class="panel">
-          <p>${quiz.length} ${plural(quiz.length, "pytanie", "pytania", "pytań")} jednokrotnego wyboru.${qs ? ` Ostatni wynik: <strong>${qs.last}%</strong>, najlepszy: <strong>${qs.best}%</strong>.` : ""}</p>
+          <p>${quiz.length} ${plural(quiz.length, "pytanie", "pytania", "pytań")} jednokrotnego wyboru (w jednej rundzie do ${QUIZ_TOPIC_SESSION}, bez powtórek, dopóki nie przejdziesz wszystkich).${qs ? ` Ostatni wynik: <strong>${qs.last}%</strong>, najlepszy: <strong>${qs.best}%</strong>.` : ""}</p>
           <a class="btn primary big" style="--accent:${subject.color}" href="#/s/${subject.id}/quiz/${topic.id}">Zacznij quiz</a>
         </div>`;
     }
@@ -961,8 +987,9 @@
 
   // ---------- quiz ----------
   function startQuiz(subject, topicId) {
-    let qs = shuffle(subjectQuiz(subject, topicId));
-    if (!topicId) qs = qs.slice(0, SESSION_ALL_QUIZ);
+    // bez powtórek: najpierw pytania, których jeszcze nie było, dopiero potem nowa runda
+    const pool = quizPool(subject, topicId);
+    let qs = freshPick(`quiz:${quizKey(subject, topicId)}`, pool, (q) => q.id, Math.min(pool.length, topicId ? QUIZ_TOPIC_SESSION : SESSION_ALL_QUIZ));
     qs = qs.map((q) => {
       // opcje odwołujące się do innych („Odpowiedzi A i B…”, „Wszystkie…”) wymagają stałej kolejności
       const fixed = q.o.some((o) => FIXED_ORDER.test(o));
@@ -1016,7 +1043,7 @@
       </div>
       ${sessionBar(s, Math.round((s.pos / s.qs.length) * 100))}
       <div class="quiz-card">
-        <div class="fc-topic">${esc(q.topic)}</div>
+        <div class="fc-topic">${esc(q.topic)}${q.gen ? " · 🃏 z fiszek" : ""}</div>
         <div class="quiz-q">${esc(q.q)}</div>
         <div class="options">${opts}</div>
         ${answered ? `
@@ -1168,7 +1195,7 @@
   }
   function startExam(subject) {
     const ex = subject.exam;
-    const qs = shuffle(subjectQuiz(subject)).slice(0, ex.questions).map((q) => {
+    const qs = freshPick(`egzamin:${subject.id}`, subjectQuiz(subject).map((q) => Object.assign({ id: "q:" + hash(q.q) }, q)), (q) => q.id, ex.questions).map((q) => {
       const fixed = q.o.some((o) => FIXED_ORDER.test(o));
       const idx = q.o.map((_, i) => i);
       return Object.assign({}, q, { order: fixed ? idx : shuffle(idx) });
@@ -1858,7 +1885,7 @@
   }
   function startOpenExam(subject) {
     const ex = subject.openExam;
-    const qs = shuffle(realQuestions(subject)).slice(0, ex.questions);
+    const qs = freshPick(`egzamin-pisemny:${subject.id}`, realQuestions(subject), (q) => q.q, ex.questions);
     session = { type: "openexam", subject, qs, answers: qs.map(() => ""), started: Date.now(), end: Date.now() + ex.minutes * 60000, finished: false, graded: qs.map(() => null) };
     clearInterval(examTimer);
     examTimer = setInterval(() => {
@@ -3745,7 +3772,7 @@
     }
     if (sub === "egzamin" && subject.exam && subjectQuiz(subject).length) return viewExamIntro(subject);
     if (sub === "quiz") {
-      if (!subjectQuiz(subject, parts[3]).length) return viewSubject(subject);
+      if (!quizPool(subject, parts[3]).length) return viewSubject(subject);
       return startQuiz(subject, parts[3]);
     }
     viewSubject(subject);

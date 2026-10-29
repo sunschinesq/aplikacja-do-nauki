@@ -2,6 +2,14 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29zc",
+    date: "29 października 2026",
+    items: [
+      "❓ Prawie 3 razy więcej pytań w quizach – z ok. 380 do ok. 1000! Do pytań z quizu doszły pytania z fiszek (oznaczone „🃏 z fiszek”): pytanie z fiszki i 4 odpowiedzi z tego samego tematu.",
+      "🔁 Koniec powtórek: quiz z tematu (do 10 pytań w rundzie), quiz z całego przedmiotu i próbne egzaminy najpierw dają pytania, których jeszcze nie było. Dopiero gdy przejdziesz wszystkie, zaczyna się nowa runda."
+    ]
+  },
+  {
     v: "2026-10-29zb",
     date: "29 października 2026",
     items: ["👓 Kotek Iza nosi teraz transparentne okulary."]
