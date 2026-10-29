@@ -91,6 +91,29 @@ Konstrukt naukowy pozwalający wnioskować o normalnych (= prawidłowych) zachow
         ["Etapy diagnozy interakcyjnej", "Protodiagnoza → badania → rezultat → ustosunkowanie klienta → negocjacje i przeformułowanie → uzgodnienie znaczeń."],
         ["Protodiagnoza", "Wstępne rozumienie problemu przez klienta i jego otoczenie – „produkt myśli kolektywnej”."]
       ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Autorka podręcznika", "Katarzyna Stemplewska-Żakowicz"],
+        ["Diagnoza jako dziedzina", "dział psychologii stosowanej (aplikacyjnej)"],
+        ["Diagnoza jako proces", "diagnozowanie, badanie (assessment)"],
+        ["Diagnoza jako efekt", "rozpoznanie, prognoza, plan interwencji"],
+        ["3 filary kompetencji", "wiedza, umiejętności, wartości"],
+        ["Fundament kompetencji", "zdolności i osobowość"],
+        ["Kompetencja a umiejętność", "to nie synonimy"],
+        ["Norma statystyczna", "to, co przeciętne i najczęstsze"],
+        ["Norma społeczno-kulturowa", "to, co powszechne w danej kulturze"],
+        ["Norma teoretyczna", "wzorzec idealny z teorii"],
+        ["Optymalne funkcjonowanie (Lewicki)", "zaspokajanie potrzeb zgodnie z normami"],
+        ["ICD-10", "klasyfikacja WHO, alfanumeryczna"],
+        ["DSM-5", "klasyfikacja amerykańska (2013)"],
+        ["DC: 0-3R", "dzieci do 3 r.ż., 5 osi"],
+        ["Diagnoza nozologiczna", "model medyczny, różnicowanie"],
+        ["Diagnoza funkcjonalna", "etiologia, zasoby i mocne strony"],
+        ["Diagnoza interakcyjna", "uzgadnianie rozumienia z klientem"],
+        ["Reifikacja", "uprzedmiotowienie"],
+        ["Etykietowanie", "pozorne wyjaśnienie przez nazwanie"],
+        ["Efekt Rumpelstilzchena", "nazwanie choroby = zrzeczenie się leczenia"]
+      ],
       quiz: [
         { q: "Która odpowiedź NIE jest jednym z trzech znaczeń terminu „diagnoza”?", o: ["dziedzina nauki i praktyki", "proces diagnozowania", "efekt procesu diagnozowania", "narzędzie diagnostyczne"], a: 3, e: "Trzy znaczenia: dziedzina, proces, efekt." },
         { q: "Trzy filary kompetencji diagnostycznej to:", o: ["wiedza, umiejętności, wartości", "zdolności, osobowość, wiedza", "testy, wywiad, obserwacja", "trafność, rzetelność, normalizacja"], a: 0, e: "Zdolności i osobowość są fundamentem, nie filarami." },
@@ -177,6 +200,28 @@ Konstrukt naukowy pozwalający wnioskować o normalnych (= prawidłowych) zachow
         ["Diagnoza kliniczna", "Diagnosta łączy dane i wyciąga wnioski metodami nieformalnymi, subiektywnymi."],
         ["Kto porównał predykcję kliniczną i statystyczną?", "Paul E. Meehl (1954)."]
       ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Orzeczenie obligatoryjne", "wymagane ustawą"],
+        ["Opinia nieobligatoryjna", "może, ale nie musi być wydana"],
+        ["Orzeczenie rozstrzygające", "decyduje, np. o pozwoleniu na broń"],
+        ["Orzeczenie a opinia", "orzeczenie się wykonuje, opinia wspiera"],
+        ["Licencja detektywa", "samodzielna nierozstrzygająca"],
+        ["Kształcenie specjalne", "niesamodzielne rozstrzygające"],
+        ["Opinie biegłych sądowych", "nieobligatoryjne"],
+        ["Model laboranta", "badania na zlecenie psychiatry"],
+        ["Model członka zespołu", "wspólne planowanie i decyzje"],
+        ["Podejście nomotetyczne", "prawa ogólne, skala normatywna"],
+        ["Podejście idiograficzne", "jednostka, skala ipsatywna"],
+        ["Autor podziału nomotetyczne/idiograficzne", "Windelband (1884)"],
+        ["Skala normatywna", "porównanie z innymi osobami"],
+        ["Skala ipsatywna", "porównanie z wynikami tej samej osoby"],
+        ["Fakty natury", "świat obiektywny – jak? dlaczego?"],
+        ["Fakty kultury", "świat subiektywny – po co?"],
+        ["Diagnoza kliniczna", "nieformalne, subiektywne łączenie danych"],
+        ["Diagnoza statystyczna", "formalna, aktuarialna, algorytmiczna"],
+        ["Paul Meehl", "predykcja kliniczna vs statystyczna"]
+      ],
       quiz: [
         { q: "Pozwolenie na broń to orzeczenie:", o: ["nieobligatoryjne, samodzielne", "obligatoryjne, samodzielne, rozstrzygające", "obligatoryjne, niesamodzielne, nierozstrzygające", "obligatoryjne, samodzielne, nierozstrzygające"], a: 1, e: "Jak zaświadczenia dla sędziów czy kierowców zawodowych." },
         { q: "Opinie biegłych sądowych są:", o: ["obligatoryjne i rozstrzygające", "nieobligatoryjne i nierozstrzygające", "obligatoryjne i niesamodzielne", "nieobligatoryjne i rozstrzygające"], a: 1, e: "Wszystkie nieobligatoryjne są nierozstrzygające." },
@@ -254,6 +299,24 @@ Konstrukt naukowy pozwalający wnioskować o normalnych (= prawidłowych) zachow
         ["Błąd niezupełnej eliminacji", "Pominięcie alternatyw – zbyt wczesne zdefiniowanie problemu."],
         ["Błąd pomieszania walorów objawów", "Uznanie objawu chwilowego za stały (lub odwrotnie)."],
         ["Błąd jatrogenny", "Szkoda wyrządzona przez personel lub sam proces diagnozy/leczenia."]
+      ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Kontekst sytuacyjny", "miejsce, czas, cel badania"],
+        ["Kontekst kulturowy", "różnorodność i kompetencja kulturowa"],
+        ["Rola diagnosty", "definiują ją etyka i orientacja teoretyczna"],
+        ["Efekt Pigmaliona", "samospełniająca się przepowiednia"],
+        ["Efekt Galatei", "pozytywne pierwsze wrażenie"],
+        ["Efekt Golema", "negatywne pierwsze wrażenie"],
+        ["Akomodacja", "dopasowanie = konwergencja"],
+        ["Behawioralne potwierdzenie", "badany robi to, czego oczekuje diagnosta"],
+        ["Postawa alarmistyczna", "dramatyzowanie problemu"],
+        ["Postawa polipragmatyczna", "jak najwięcej testów"],
+        ["Postawa nihilistyczna", "„nic się nie da zrobić”"],
+        ["Postawa demonstratorska", "popisywanie się doświadczeniem"],
+        ["Błąd niezupełnej eliminacji", "pominięcie alternatyw"],
+        ["Błąd jatrogenny", "szkoda wyrządzona przez personel"],
+        ["Błąd techniczny", "np. test bez norm w diagnozie"]
       ],
       quiz: [
         { q: "Negatywne pierwsze wrażenie, przez które diagnosta staje się sztywny, to efekt:", o: ["Galatei", "Golema", "Pigmaliona", "Rumpelstilzchena"], a: 1, e: "Galatea – pozytywny, Golem – negatywny." },
@@ -347,6 +410,24 @@ Ograniczenia wniosków i ich komunikowanie · czasoprzestrzeń · kultura · gra
         ["Co psycholog może ujawnić stronie trzeciej?", "Informacje będące celem diagnozy, odpowiedzi na pytania (np. sądu) i informacje potrzebne do zaplanowania pomocy."],
         ["Granice w relacji diagnostycznej", "Ograniczenia wniosków, czasoprzestrzeń, kultura, granice interpersonalne, formy grzecznościowe, dotyk, relacje uczuciowe."]
       ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Kodeks PTP", "Kodeks Etyczno-Zawodowy Psychologa (1991)"],
+        ["Meta-Kodeks EFPA", "godność, kompetencja, odpowiedzialność, prawość"],
+        ["Zgoda na badanie dziecka", "pisemna zgoda rodzica do 18 r.ż."],
+        ["Podwójna zgoda", "rodzic i dziecko powyżej 16 r.ż."],
+        ["Art. 240 KK", "obowiązek zawiadomienia o przestępstwie"],
+        ["Kara za niezawiadomienie", "do 3 lat pozbawienia wolności"],
+        ["Okoliczności świadomej zgody", "13 (Stemplewska-Żakowicz)"],
+        ["Wyjątek od poufności", "zagrożenie życia lub zdrowia"],
+        ["Nadwątlona zdolność osądu", "czasowa niezdolność do praktyki"],
+        ["Model Gottlieba", "władza, czas relacji, jasność zakończenia"],
+        ["Konflikt ról", "podwójna relacja"],
+        ["Relacja wykorzystująca", "relacja zawodowa dla prywatnych korzyści"],
+        ["Klient w sensie prawnym", "ten, kto płaci"],
+        ["Klient w sensie moralnym", "podmiot oddziaływań"],
+        ["Diagnoza jako interwencja", "zawsze coś zmienia, nie może szkodzić"]
+      ],
       quiz: [
         { q: "Która zasada NIE należy do Meta-Kodeksu EFPA?", o: ["kompetencja", "odpowiedzialność", "prawość", "skuteczność"], a: 3, e: "Cztery zasady: godność, kompetencja, odpowiedzialność, prawość." },
         { q: "Rodzice 15-latka nie zgadzają się na badanie, choć nastolatek chce. Psycholog:", o: ["może zbadać, bo dziecko się zgodziło", "nie może przeprowadzić badania", "może, jeśli zgodzi się szkoła", "może po skończeniu 16 lat bez zgody rodzica"], a: 1, e: "Badanie osoby do 18 r.ż. wymaga pisemnej zgody rodzica/opiekuna." },
@@ -421,6 +502,24 @@ Całościowy, uwzględnia standardy metodologiczne, etyczne i profesjonalne; obe
         ["Dlaczego model Paluchowskiego jest iteracyjny?", "Kompletność stwierdza się dopiero po pomyślnym przeprowadzeniu ostatniej fazy; etapy można powtarzać."],
         ["Model GAP – autor i typ", "Fernández-Ballesteros i in. (2001); model integracyjny."],
         ["4 etapy modelu GAP", "Analiza przypadku, organizowanie i raportowanie wyników, planowanie interwencji, ocena interwencji i odroczone badanie kontrolne."]
+      ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Hipoteza opisowa", "np. obniżony nastrój"],
+        ["Hipoteza wyjaśniająca", "np. depresja po stracie"],
+        ["Wskaźnik", "obserwowalny przejaw stanu"],
+        ["Konceptualizacja przypadku", "jak jest? dlaczego? co zrobić?"],
+        ["Diagnoza a testowanie", "diagnoza to więcej niż testy"],
+        ["Model Maloneya i Warda", "opisowy, 7 faz"],
+        ["Procedura Szustrowej", "normatywna, 5 pytań"],
+        ["Model Paluchowskiego", "opisowy, iteracyjny"],
+        ["Model GAP", "integracyjny"],
+        ["Proporcja podstawowa", "jak często zjawisko występuje w populacji"],
+        ["Protodiagnoza", "wstępne rozumienie problemu"],
+        ["Ostatnia faza Maloneya i Warda", "predykcja zachowania"],
+        ["Analiza wyników u Szustrowej", "te same pytania w odwrotnej kolejności"],
+        ["Etap prediagnostyczny", "kontekst, oczekiwania, protodiagnoza"],
+        ["Ostatni etap GAP", "ocena interwencji i badanie kontrolne"]
       ],
       quiz: [
         { q: "Procedura pięciu pytań Szustrowej to model:", o: ["opisowy", "normatywny", "integracyjny", "aktuarialny"], a: 1, e: "Szustrowa – normatywny; Paluchowski – opisowy; GAP – integracyjny." },
@@ -499,6 +598,23 @@ Nigdy: „nie możesz się tak czuć”, „nie płacz”.
         ["Reakcja przeciwprzeniesieniowa", "Emocjonalna reakcja psychologa na to, co przeżywa lub wywołuje klient."],
         ["Sposoby radzenia sobie z oporem", "Kontrakt, nazywanie uczuć, dawanie wyboru, przeformułowanie pytań, pytania projekcyjne, metoda dwóch krzeseł."],
         ["Pytanie projekcyjne – przykład", "„Jak myślisz, czego uczniowie nie lubią w zachowaniu nauczycieli matematyki?”"]
+      ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Niesymetryczność relacji", "psycholog wydaje opinie o kliencie"],
+        ["Dwóch ekspertów", "psycholog – wiedza o człowieku, klient – o sobie"],
+        ["Kolejność relacji diagnostycznej", "kontakt → kontrakt → przymierze"],
+        ["Wzajemna uwaga", "ważna przez cały kontakt"],
+        ["Pozytywne nastawienie", "znaczenie maleje z czasem"],
+        ["Koordynacja zachowań", "znaczenie rośnie z czasem"],
+        ["Kontakt pozorny", "wydaje się, że jest, a go nie ma"],
+        ["Odpowiedzi fasadowe", "wskaźnik kontaktu pozornego"],
+        ["Kontrakt (Zalewski)", "dobrowolna, negocjowalna umowa"],
+        ["Elementy kontraktu", "cel, sposoby, zyski, koszty"],
+        ["Opór", "niechęć do eksplorowania treści"],
+        ["No-show", "niestawienie się na spotkanie"],
+        ["Pytanie projekcyjne", "sposób na opór"],
+        ["Reakcja przeciwprzeniesieniowa", "emocje psychologa wobec klienta"]
       ],
       quiz: [
         { q: "W modelu Tickle-Degnen i Rosenthala znaczenie koordynacji zachowań z czasem:", o: ["maleje", "rośnie", "jest stałe", "zanika"], a: 1, e: "Uwaga – stała, pozytywne nastawienie – maleje, koordynacja – rośnie." },
@@ -587,6 +703,31 @@ Rozmowa w celu uzyskania informacji; różne układy osób (1:1, panel, kwestion
         ["Agrawacja, symulacja, dyssymulacja", "Wyolbrzymianie objawów; udawanie choroby; ukrywanie choroby."],
         ["Zespół Münchhausena", "Uporczywe przekonywanie o chorobie (fałszowanie objawów i dokumentacji), aż do niepotrzebnego leczenia."],
         ["Rodzaje wywiadów", "Ustrukturalizowany, częściowo ustrukturalizowany, sytuacyjny (poznawczy), biograficzny, swobodny, aktywny."]
+      ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["EBA", "praktyka oparta na dowodach"],
+        ["Standaryzacja", "ujednolicony sposób użycia testu"],
+        ["Obiektywność testu", "każdy obliczy wynik tak samo"],
+        ["Trafność", "czy test mierzy to, co ma mierzyć"],
+        ["Rzetelność", "dokładność pomiaru"],
+        ["Normalizacja", "normy do przeliczenia wyniku"],
+        ["Skala stenowa", "1–10, M = 5,5, SD = 2"],
+        ["7 sten", "wynik wysoki"],
+        ["Kategoria C testów", "tylko psycholodzy"],
+        ["Kryteria Dauberta", "dopuszczenie opinii biegłego"],
+        ["Obserwacja ambulatoryjna", "w naturalnym środowisku, całą dobę"],
+        ["Sopor", "półśpiączka"],
+        ["Złudzenie (iluzja)", "błędne rozpoznanie istniejącego bodźca"],
+        ["Omam", "spostrzeżenie bez bodźca"],
+        ["Derealizacja", "poczucie nierealności świata"],
+        ["Jamais vu", "nierozpoznanie znanego"],
+        ["Aproseksja", "niemożność skupienia uwagi"],
+        ["Urojenie", "sąd niepodlegający sprostowaniu"],
+        ["Dysforia", "złość, rozdrażnienie"],
+        ["Katatymia", "życzeniowe zniekształcenie przeżyć"],
+        ["Agrawacja", "wyolbrzymianie objawów"],
+        ["Dyssymulacja", "ukrywanie choroby"]
       ],
       quiz: [
         { q: "Średnia i odchylenie standardowe skali stenowej to:", o: ["M = 5; SD = 2", "M = 5,5; SD = 2", "M = 10; SD = 3", "M = 50; SD = 10"], a: 1, e: "Zakres 1–10, M = 5,5, SD = 2." },
@@ -692,6 +833,27 @@ Do nawiązania kontaktu · przy silnym oporze · gdy badany boi się wyrażać o
         ["Kiedy NIE stosować metod projekcyjnych?", "Do wykrywania nadużyć seksualnych/fizycznych, bez właściwości psychometrycznych, bez eksperckiej wiedzy, gdy metoda jest w internecie."],
         ["Czy Test Drzewa Kocha i Rysunek Rodziny są narzędziami diagnozy?", "Nie – nie spełniają standardów naukowych; można je stosować najwyżej do nawiązania kontaktu."]
       ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Skala", "narzędzie jednorodne, jeden konstrukt"],
+        ["Inwentarz", "narzędzie heterogeniczne"],
+        ["Najkrótszy kwestionariusz", "SWLS – 5 twierdzeń"],
+        ["MMPI-2", "567 pozycji, samoopis"],
+        ["SWLS", "Diener; satysfakcja z życia"],
+        ["ACL", "300 przymiotników, Ja realne i idealne"],
+        ["WISC-R", "dzieci 6–16 lat"],
+        ["WAIS-R", "dorośli 16–79 lat"],
+        ["TMK", "Raven – dzieci 4–10 lat"],
+        ["Skala Leitera", "dzieci niesłyszące, niewerbalna"],
+        ["APIS", "baterie do badań grupowych"],
+        ["Test Rysunku Postaci", "rozwój intelektualny, nie projekcja"],
+        ["Termin „metody projekcyjne”", "Lawrence K. Frank (1939)"],
+        ["Test Niedokończonych Zdań", "Rotter, 40 zdań"],
+        ["TAT", "Murray i Morgan, 1935"],
+        ["Test Rorschacha", "plamy atramentowe, 1921"],
+        ["Kiedy NIE stosować projekcji", "do wykrywania nadużyć"],
+        ["Głowonogi", "schemat uproszczony, 4–5 r.ż."]
+      ],
       quiz: [
         { q: "Narzędzie jednorodne, którego pozycje są wysoko skorelowane i wymienne, to:", o: ["inwentarz", "skala", "bateria", "kwestionariusz projekcyjny"], a: 1, e: "Inwentarz jest heterogeniczny." },
         { q: "Autorem SWLS jest:", o: ["Gough", "Diener", "Butcher", "Rotter"], a: 1, e: "Ed Diener; polska adaptacja Juczyński (2001)." },
@@ -754,6 +916,25 @@ Do nawiązania kontaktu · przy silnym oporze · gdy badany boi się wyrażać o
         ["Podstawowy błąd atrybucji", "Przecenianie czynników dyspozycyjnych i niedocenianie sytuacyjnych w wyjaśnianiu cudzych zachowań."],
         ["Egotyzm atrybucyjny", "Przypisywanie sobie sukcesów i wypieranie się odpowiedzialności za porażki."],
         ["Po czym poznać kompetencję kulturową diagnosty?", "Wiedza o kulturach, brak etnocentryzmu i stereotypów, pytanie o znaczenia, dostosowanie języka, gestów i narzędzi, świadomość uprzedzeń."]
+      ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Komu należy się informacja zwrotna", "zleceniodawcy i osobie badanej"],
+        ["Proporcja w informacji zwrotnej", "2× więcej pozytywów niż negatywów"],
+        ["Liczba zaleceń", "niewiele, np. 3"],
+        ["Dobre zalecenie", "konkretne i realne"],
+        ["Czego nie robić", "etykietować, oceniać, dawać „dobrych rad”"],
+        ["Kompetencja międzykulturowa", "przyjęcie relatywizmu kulturowego"],
+        ["Relatywizm kulturowy", "nie ma kultur lepszych i gorszych"],
+        ["Etnocentryzm", "„moja kultura jest najlepsza”"],
+        ["Etnorelatywizm", "kultury są równoprawne"],
+        ["Mniejszość narodowa", "ma państwo gdzie indziej"],
+        ["Mniejszość kulturowa", "bez państwowości, np. Kaszubi"],
+        ["Model Boltena", "kompetencje międzykulturowe w indywidualnych"],
+        ["„Inny” (Bauman)", "tajemniczy, wieloznaczny"],
+        ["Ukryty emigrant", "wygląda jak miejscowy, wychowany gdzie indziej"],
+        ["Neutralny język", "„czy jest pan w bliskiej relacji?”"],
+        ["Podstawowy błąd atrybucji", "przecenianie dyspozycji"]
       ],
       quiz: [
         { q: "Przekonanie, że własna kultura jest najlepsza, to:", o: ["relatywizm kulturowy", "etnocentryzm", "etnorelatywizm", "akomodacja"], a: 1, e: "Etnocentryzm – przeciwieństwo relatywizmu." },
@@ -827,6 +1008,25 @@ Postępowanie zgodne z **praktyką opartą na dowodach** (EBA) i standardami ety
         ["Obserwacja ambulatoryjna", "Prowadzona w naturalnym, codziennym środowisku osoby (poza szpitalem)."],
         ["Dobra praktyka", "Praktyka oparta na dowodach empirycznych i standardach etycznych, z uwzględnieniem klienta."],
         ["Naukowcy w diagnostyce to inaczej…", "Metodolodzy."]
+      ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Stosowany", "aplikacyjny"],
+        ["Naukowcy w diagnostyce", "metodolodzy"],
+        ["Predykcja", "przewidywanie"],
+        ["Ewaluacja", "sprawdzenie, ocena"],
+        ["Obligatoryjny", "obowiązkowy"],
+        ["Normalny", "prawidłowy"],
+        ["Etiologia", "przyczyny zaburzenia"],
+        ["Amnezja", "niepamięć"],
+        ["Prekognicja", "przewidywanie, co się stanie"],
+        ["Anhedonia", "niezdolność do odczuwania przyjemności"],
+        ["Symulacja", "udawanie choroby"],
+        ["Hipertymia", "przesadna ekspresja emocji"],
+        ["Hipotymia", "ograniczona ekspresja emocji"],
+        ["Paratymia", "emocje niedostosowane do sytuacji"],
+        ["Déjà vu", "„już widziane”"],
+        ["Ślepa recenzja", "ocena bez znajomości autora"]
       ],
       quiz: [
         { q: "Synonimem słowa „reifikacja” jest:", o: ["etykietowanie", "uprzedmiotowienie", "stygmatyzacja", "ewaluacja"], a: 1, e: "Reifikacja = uprzedmiotowienie." },

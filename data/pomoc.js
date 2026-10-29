@@ -69,6 +69,21 @@ Kontrakt obejmuje też **rozpoznanie motywacji** (Markus, 1993): udział ma być
         ["Dlaczego nie zatrzymywać się na pierwszej trudności?", "Bo klient uzna ją za główną, choć może nią nie być."],
         ["Kiedy kierować rozmową zamiast trybu swobodnego?", "Przy dygresjach, ogólnikach lub trudności ze spontaniczną wypowiedzią."]
       ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Warunki formalne rozmowy", "jak rozmawiać"],
+        ["Warunki treściowe rozmowy", "o czym rozmawiać"],
+        ["Części rozmowy", "wprowadzająca, zasadnicza, zakończenie"],
+        ["Cel rozpoczęcia", "kontakt i motywacja do współpracy"],
+        ["Temat trudny na początek", "przy bardzo silnym lęku"],
+        ["Kontrakt diagnostyczny", "umowa diagnosty z badanym"],
+        ["Motywacja w kontrakcie (Markus)", "choć częściowo świadomy wybór"],
+        ["Pytania odroczone", "odłożone na później"],
+        ["Skarga", "to, z czym klient przychodzi"],
+        ["Pierwsza trudność", "nie musi być główną"],
+        ["Kierowanie rozmową", "przy dygresjach i ogólnikach"],
+        ["Efekt pierwszego wrażenia", "samowzmacniające się sprzężenie zwrotne"]
+      ],
       quiz: [
         { q: "Warunki treściowe rozmowy dotyczą:", o: ["klimatu rozmowy", "tego, o czym rozmawiać", "sposobu zadawania pytań", "miejsca spotkania"], a: 1, e: "Formalne – jak; treściowe – o czym." },
         { q: "Kontrakt diagnostyczny NIE obejmuje:", o: ["celu rozmowy", "granic poufności", "diagnozy klienta", "procedury i czasu"], a: 2, e: "Diagnoza jest wynikiem, nie elementem kontraktu." },
@@ -130,6 +145,21 @@ Kategorie się nakładają. Najbezpieczniejsze: otwarte, neutralne, projekcyjne 
         ["Zasada „jedno pytanie na raz”", "Pytanie podwójne daje niejednoznaczną odpowiedź (np. „tak” na dwa pytania)."],
         ["4 aspekty pełnego obrazu człowieka w rozmowie", "Poznawczy, emocjonalny, motywacyjny, behawioralny."],
         ["Pytanie o fakty vs o interpretacje", "Fakty – co się stało; interpretacje – jakie to ma dla osoby znaczenie."]
+      ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Funkcje pytań [GS]", "informacyjna i motywująca"],
+        ["Funkcje pytań (Suchańska)", "zmniejszanie oporu, kierowanie rozmową"],
+        ["O co pytać", "o fakty w języku badanego"],
+        ["Pytania zamknięte", "przy klasyfikacji i braku czasu"],
+        ["Pytanie „dlaczego?”", "sugeruje ocenę – unikać"],
+        ["Pytanie uwikłane", "właściwe ukryte wśród neutralnych"],
+        ["Pytanie projekcyjne", "o innych zamiast o siebie"],
+        ["Pytanie sugerujące", "sprawdza podatność na sugestię"],
+        ["Pytanie przejściowe", "łagodna zmiana tematu"],
+        ["Pytanie podwójne", "niejednoznaczna odpowiedź"],
+        ["4 aspekty obrazu człowieka", "poznawczy, emocjonalny, motywacyjny, behawioralny"],
+        ["Pytanie o interpretacje", "jakie znaczenie ma to dla osoby"]
       ],
       quiz: [
         { q: "„Jak często kłóci się pani z mężem?” to pytanie:", o: ["otwarte neutralne", "sugerujące", "projekcyjne", "uwikłane"], a: 1, e: "Zakłada, że kłótnie są normalne – może zmniejszać lęk." },
@@ -194,6 +224,21 @@ Kategorie się nakładają. Najbezpieczniejsze: otwarte, neutralne, projekcyjne 
         ["Sondowanie (Egan)", "Pomoc w przejściu od ogólników do konkretnych zachowań i uczuć."],
         ["Czego unikać w rozmowie (Wolberg)", "Moralizowania, oceniania, fałszywych obietnic, grożenia, ośmieszania, przedwczesnych interpretacji, niepotrzebnego uspokajania, rad."]
       ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Lejek", "od ogólnych do szczegółowych"],
+        ["Odwrócony lejek", "od konkretów do uogólnień"],
+        ["Progresja", "od mniej zagrażających tematów"],
+        ["Rozszerzająca się spirala", "najpierw szkielet, potem szczegóły"],
+        ["Facylitacja", "„Proszę mówić dalej”"],
+        ["Parafraza", "treść klienta własnymi słowami"],
+        ["Klaryfikacja", "prośba o wyjaśnienie"],
+        ["Interpretacja", "nazwanie ukrytego znaczenia"],
+        ["Konfrontacja", "wskazanie rozbieżności"],
+        ["Sondowanie (Egan)", "od ogólników do konkretów"],
+        ["Czego unikać (Wolberg)", "moralizowania i fałszywych obietnic"],
+        ["Logika badanego", "diagnosta jej nie burzy"]
+      ],
       quiz: [
         { q: "Badany z silnym lękiem i ubogim słownikiem – jaką taktykę wybrać?", o: ["lejek", "odwrócony lejek", "konfrontację", "pytania projekcyjne"], a: 1, e: "Od konkretów do ogólnych wniosków – konkret uspokaja." },
         { q: "„Nie mam pretensji do szefa” + zaciśnięte pięści. Nazwanie ukrytej złości to:", o: ["parafraza", "interpretacja", "facylitacja", "klaryfikacja"], a: 1, e: "Interpretacja proponuje ukryte znaczenie." },
@@ -256,6 +301,21 @@ Bardzo wylewny badany też wymaga kierowania – inaczej godzina monologu da ma�
         ["Trzy cechy strategii wywiadu [GS]", "Standaryzacja, kierowanie, głębokość."],
         ["Od czego zależy stopień kierowania rozmową?", "Od motywacji badanego, celu i czasu."],
         ["Od czego zależy głębokość wywiadu?", "Od celu, teorii, wglądu badanego i etyki."]
+      ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["Uprzedzenie o końcu rozmowy", "ważne sprawy padają na końcu"],
+        ["Kiedy nie kończyć", "w szczycie kontaktu lub napięcia"],
+        ["Warunki zakończenia", "Chevalier-Beaumel – 5 warunków"],
+        ["Pytanie „jak wypadłem?”", "rekapitulacja bez ocen i rad"],
+        ["Typowy czas rozmowy", "zwykle do godziny"],
+        ["Slang badanego", "nie naśladować"],
+        ["Rozmowa ustrukturalizowana", "klasyfikacja objawów, badania naukowe"],
+        ["Rozmowa swobodna", "kontakt i wstępny problem"],
+        ["Zasada Rogersa", "liczy się dopasowanie formy do celu"],
+        ["3 cechy strategii [GS]", "standaryzacja, kierowanie, głębokość"],
+        ["Stopień kierowania", "motywacja, cel i czas"],
+        ["Głębokość wywiadu", "cel, teoria, wgląd, etyka"]
       ],
       quiz: [
         { q: "Rozmowa ze stałymi pytaniami, kolejnością i kodowaniem, bez dopytywania, to rozmowa:", o: ["swobodna", "częściowo ustrukturalizowana", "ustrukturalizowana", "w pełni swobodna"], a: 2, e: "Podejście ilościowe, nomotetyczne." },
@@ -338,6 +398,21 @@ Częsty błąd: **mylenie tego, co chcę wiedzieć, z tym, o co pytam**.
         ["5 par informacji z wywiadu [GS]", "Obiektywne/subiektywne, realne/wyobrażone, własne/odzwierciedlone, jednostkowe/uogólnione, teraźniejsze/przeszłe i przyszłe."],
         ["Informacje odzwierciedlone", "Jak badany sądzi, że widzą go inni (działają jak dane projekcyjne)."],
         ["Czy można nagrywać rozmowę bez wiedzy badanego?", "Nie – ukrywanie nagrywania jest niedopuszczalne."]
+      ],
+      // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
+      pairs: [
+        ["O treści rozmowy decyduje", "cel i kategorie teoretyczne"],
+        ["Teoria w rozmowie swobodnej", "służy do interpretacji po rozmowie"],
+        ["Błąd w planowaniu", "mylenie „co chcę wiedzieć” z „o co pytam”"],
+        ["Poziomy poznawcze", "Beck – od przekonań pierwotnych"],
+        ["Paradygmat behawioralny", "bodziec – reakcja – skutki"],
+        ["Model Lazarusa", "ABC × BASIC ID"],
+        ["BASIC ID", "Behavior, Affect, Sensation, Imagery…"],
+        ["Wtórne korzyści", "zyski z utrzymywania problemu"],
+        ["Przywiązanie – jak pytać", "pośrednio, nie wprost o rodziców"],
+        ["Informacje odzwierciedlone", "jak badany sądzi, że widzą go inni"],
+        ["Nagrywanie bez wiedzy", "niedopuszczalne"],
+        ["5 par informacji [GS]", "obiektywne/subiektywne itd."]
       ],
       quiz: [
         { q: "Pierwszy krok planowania treści wywiadu to:", o: ["dobór tematów", "określenie celu", "wybór narzędzi", "sformułowanie hipotez"], a: 1, e: "Cel → kategorie → pytania → informacje → tematy." },

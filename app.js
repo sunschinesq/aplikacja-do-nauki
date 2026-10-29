@@ -19,6 +19,7 @@
     cats: {}, birthday: null, focus: { sessions: 0, minutes: 0, days: {} }, games: { match: 0, best: {} },
     statex: { n: 0, ok: 0 }, planDone: {}, challenge: { last: null, streak: 0, best: 0, treats: 0, days: {} },
     profile: { name: "", catName: "", asked: false }, paws: 0, pawsTotal: 0,
+    seen: {},
     pet: { food: 80, energy: 80, fun: 80, clean: 80, tick: 0, sleeping: false, look: "szary", owned: [], wear: { head: "", eyes: "", neck: "" }, bg: "pokoj" }
   });
   function loadStore() {
@@ -1282,10 +1283,7 @@
     return subjectCards(subject, topicId).filter((c) => c.q.length <= 70 && c.a.length <= 80).concat(pairs);
   }
   function startMatch(subject, topicId) {
-    const pool = shuffle(matchCards(subject, topicId));
-    // bez powtórzeń tej samej odpowiedzi (np. dwa pytania z odpowiedzią „Freud”)
-    const seen = new Set();
-    const cards = pool.filter((c) => { const k = fold(c.a); if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, MATCH_PAIRS);
+    const cards = freshPick(`pary:${subject.id}/${topicId || "all"}`, uniqueAnswers(shuffle(matchCards(subject, topicId))), (c) => c.q, MATCH_PAIRS);
     session = {
       type: "match", subject, topicId, cards, left: shuffle(cards.map((_, i) => i)), right: shuffle(cards.map((_, i) => i)),
       done: new Set(), pickL: null, pickR: null, wrong: 0, started: Date.now(), wrongPair: null
@@ -1910,6 +1908,26 @@
 
   // ---------- gry ----------
   // hub gier przedmiotu (#/s/:id/gry) i wspólny silnik pytań wielokrotnego wyboru dla kilku gier
+  // losowanie bez powtórek: najpierw to, czego jeszcze nie było; gdy wszystko już było – nowa runda
+  function freshPick(key, items, idOf, n) {
+    const ids = new Set(items.map(idOf));
+    const seen = new Set((store.seen[key] || []).filter((x) => ids.has(x)));
+    let picked = shuffle(items.filter((x) => !seen.has(idOf(x)))).slice(0, n);
+    if (picked.length < n) {
+      const used = new Set(picked.map(idOf));
+      picked = picked.concat(shuffle(items.filter((x) => !used.has(idOf(x)))).slice(0, n - picked.length));
+      store.seen[key] = picked.map(idOf);
+    } else {
+      store.seen[key] = [...seen, ...picked.map(idOf)];
+    }
+    saveStore();
+    return picked;
+  }
+  // bez dwóch kart z tą samą odpowiedzią w jednej grze (np. dwa razy „Freud”)
+  function uniqueAnswers(cards) {
+    const seen = new Set();
+    return cards.filter((c) => { const k = fold(c.a); if (seen.has(k)) return false; seen.add(k); return true; });
+  }
   const AUTHORS = window.GAME_AUTHORS || {};
   const SEQUENCES = window.GAME_SEQUENCES || {};
   let gameTimer = null;
@@ -2106,7 +2124,7 @@
   function startWho(subject) {
     const list = authorsFor(subject, gameTopic);
     const all = [...new Set((AUTHORS[subject.id] || []).map((x) => x[1]))];
-    const qs = shuffle(list).slice(0, 10).map(([concept, author]) => ({
+    const qs = freshPick(`kto:${subject.id}/${gameTopic || "all"}`, list, (x) => x[0], 15).map(([concept, author]) => ({
       q: `„${concept}” – kto jest autorem?`, ...mcOptions(author, all), e: `${concept} → ${author}.`
     }));
     startMC(subject, "kto", "🗣️ Kto to powiedział?", qs, "Kto to wymyślił? Ja stawiam na Freuda… zawsze 😸");
@@ -2137,7 +2155,8 @@
   function startGap(subject) {
     const items = gapItems(subject, gameTopic);
     const all = gapItems(subject).map((x) => x.term);
-    const qs = shuffle(items).slice(0, 10).map((it) => {
+    const unique = items.filter((it, i) => items.findIndex((x) => x.text === it.text) === i);
+    const qs = freshPick(`luki:${subject.id}/${gameTopic || "all"}`, unique, (it) => it.text, 12).map((it) => {
       const idx = it.text.indexOf(it.term);
       const html = esc(it.text.slice(0, idx)) + `<span class="gap-blank">_____</span>` + esc(it.text.slice(idx + it.term.length));
       const pool = new Set(it.pool.map(fold)).size >= 4 ? it.pool : all;
@@ -2148,11 +2167,16 @@
 
   // --- Pojedynek z kotkiem ---
   function startDuel(subject) {
-    const qs = shuffle(subjectQuiz(subject, gameTopic)).slice(0, 10).map((q) => {
+    // pula: pytania z quizu + pytania z fiszek („co to jest…?” z 4 odpowiedziami z tego samego zakresu)
+    const quiz = subjectQuiz(subject, gameTopic).map((q) => {
       const fixed = q.o.some((o) => FIXED_ORDER.test(o));
       const order = fixed ? q.o.map((_, i) => i) : shuffle(q.o.map((_, i) => i));
-      return { q: q.q, o: order.map((i) => q.o[i]), a: order.indexOf(q.a), e: q.e, cat: `⚔️ ${q.topic}` };
+      return { id: "q:" + q.q, q: q.q, o: order.map((i) => q.o[i]), a: order.indexOf(q.a), e: q.e, cat: `⚔️ ${q.topic}` };
     });
+    const cards = uniqueAnswers(matchCards(subject, gameTopic));
+    const answers = cards.map((c) => c.a);
+    const fromCards = cards.length >= 4 ? cards.map((c) => ({ id: "f:" + c.q, q: c.q, ...mcOptions(c.a, answers), e: `${c.q} → ${c.a}`, cat: `⚔️ ${c.topic} · fiszka` })) : [];
+    const qs = freshPick(`pojedynek:${subject.id}/${gameTopic || "all"}`, quiz.concat(fromCards), (x) => x.id, 10);
     startMC(subject, "pojedynek", "⚔️ Pojedynek", qs, "Pojedynek! Kto zdobędzie więcej punktów – Ty czy ja? 😼");
   }
 
@@ -2183,14 +2207,17 @@
   // --- Prawda czy fałsz (60 s) ---
   function startTF(subject) {
     clearInterval(gameTimer);
-    session = { type: "tf", kind: "pf", subject, topicId: gameTopic, cards: matchCards(subject, gameTopic), score: 0, wrong: 0, end: Date.now() + 60000, last: null, item: null, started: false };
+    const tfCards = matchCards(subject, gameTopic);
+    session = { type: "tf", kind: "pf", subject, topicId: gameTopic, cards: tfCards, deck: freshPick(`pf:${subject.id}/${gameTopic || "all"}`, tfCards, (c) => c.q, tfCards.length), score: 0, wrong: 0, end: Date.now() + 60000, last: null, item: null, started: false };
     nextTF();
     say(session, "Prawda czy fałsz? Masz 60 sekund – licznik rusza po pierwszej odpowiedzi ⚡");
     renderTF();
   }
   function nextTF() {
     const s = session;
-    const c = pick(s.cards);
+    // kolejna karta z talii bez powtórek; po przejściu całej talii – nowe tasowanie
+    if (!s.deck.length) s.deck = shuffle(s.cards);
+    const c = s.deck.shift();
     const truth = Math.random() < 0.5;
     let a = c.a;
     if (!truth) {
@@ -2271,7 +2298,7 @@
 
   // --- Ułóż po kolei (dotykaj elementy w dobrej kolejności) ---
   function startOrder(subject) {
-    const seqs = shuffle(seqsFor(subject, gameTopic)).slice(0, 3);
+    const seqs = freshPick(`kolejnosc:${subject.id}/${gameTopic || "all"}`, seqsFor(subject, gameTopic), (x) => x.title, 3);
     session = { type: "order", kind: "kolejnosc", subject, topicId: gameTopic, seqs, idx: 0, done: [], wrong: 0, total: 0, bad: null };
     say(session, "Dotykaj elementy po kolei – od pierwszego do ostatniego 🔢");
     prepOrder();
@@ -2335,8 +2362,7 @@
 
   // --- Memory (4×4: 8 par) ---
   function startMemory(subject) {
-    const seen = new Set();
-    const pairs = shuffle(matchCards(subject, gameTopic)).filter((c) => { const k = fold(c.a); if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 8);
+    const pairs = freshPick(`memory:${subject.id}/${gameTopic || "all"}`, uniqueAnswers(shuffle(matchCards(subject, gameTopic))), (c) => c.q, 8);
     const cards = shuffle(pairs.flatMap((c, i) => [{ p: i, t: c.q, side: "q" }, { p: i, t: c.a, side: "a" }]));
     session = { type: "memory", kind: "memory", subject, topicId: gameTopic, cards, open: [], matched: new Set(), moves: 0, started: Date.now(), lock: false };
     say(session, "Odkrywaj po dwie karty i szukaj par: pojęcie + definicja 🃏");
@@ -2418,7 +2444,7 @@
     });
   }
   function startHang(subject) {
-    const words = shuffle(hangWords(subject, gameTopic)).slice(0, 5);
+    const words = freshPick(`wisielec:${subject.id}/${gameTopic || "all"}`, hangWords(subject, gameTopic), (c) => c.q, 5);
     session = { type: "hang", kind: "wisielec", subject, topicId: gameTopic, words, idx: 0, won: 0, lost: 0 };
     say(session, "Zgadnij pojęcie po literach. Uważaj na moje rybki! 🐟");
     prepHang();

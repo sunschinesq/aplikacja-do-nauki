@@ -2,6 +2,15 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29f",
+    date: "29 października 2026",
+    items: [
+      "🧩 230 nowych par do gier z diagnostyki (wszystkie 10 tematów) i pomocy psychologicznej (wszystkie 5 tematów) – Gra w pary, Memory, Prawda czy fałsz i Wisielec mają teraz dużo więcej materiału.",
+      "🔁 Pytania w grach się nie powtarzają: najpierw trafiają te, których jeszcze nie było, a dopiero gdy przejdziesz wszystkie, zaczyna się nowa runda.",
+      "➕ Więcej pytań: „Kto to powiedział?” ma 15 pytań w rundzie, „Uzupełnij lukę” 12, a w Pojedynku z kotkiem są też pytania z fiszek."
+    ]
+  },
+  {
     v: "2026-10-29e",
     date: "29 października 2026",
     items: [
