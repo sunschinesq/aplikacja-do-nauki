@@ -2,6 +2,11 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29o",
+    date: "29 października 2026",
+    items: ["🤎 Asia jest teraz brązowym kotkiem, a Hania – jasnobrązowym."]
+  },
+  {
     v: "2026-10-29n",
     date: "29 października 2026",
     items: [
