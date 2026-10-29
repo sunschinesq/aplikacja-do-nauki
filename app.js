@@ -20,7 +20,7 @@
     statex: { n: 0, ok: 0 }, planDone: {}, challenge: { last: null, streak: 0, best: 0, treats: 0, days: {} },
     profile: { name: "", catName: "", asked: false }, paws: 0, pawsTotal: 0,
     seen: {},
-    pet: { food: 80, energy: 80, fun: 80, clean: 80, tick: 0, sleeping: false, look: "szary", owned: [], wear: { head: "", eyes: "", neck: "", body: "" }, bg: "pokoj" }
+    pet: { food: 80, energy: 80, fun: 80, clean: 80, teeth: 80, tick: 0, sleeping: false, look: "szary", owned: [], wear: { head: "", eyes: "", neck: "", body: "" }, bg: "pokoj" }
   });
   function loadStore() {
     const store = STORE_DEFAULTS();
@@ -2699,17 +2699,18 @@
     { k: "food", icon: "🍗", name: "Najedzenie" },
     { k: "energy", icon: "⚡", name: "Energia" },
     { k: "fun", icon: "🎾", name: "Zabawa" },
-    { k: "clean", icon: "🛁", name: "Czystość" }
+    { k: "clean", icon: "🛁", name: "Czystość" },
+    { k: "teeth", icon: "🦷", name: "Ząbki" }
   ];
   const FOODS = [
     { id: "karma", icon: "🥣", name: "Karma", price: 5, food: 15 },
     { id: "mleko", icon: "🥛", name: "Mleczko", price: 8, food: 15, fun: 5 },
-    { id: "truskawka", icon: "🍓", name: "Truskawka", price: 8, food: 8, fun: 12 },
+    { id: "truskawka", icon: "🍓", name: "Truskawka", price: 8, food: 8, fun: 12, sweet: true },
     { id: "jajko", icon: "🥚", name: "Jajeczko", price: 10, food: 22 },
-    { id: "ciastko", icon: "🍪", name: "Ciasteczko", price: 10, food: 10, fun: 15 },
+    { id: "ciastko", icon: "🍪", name: "Ciasteczko", price: 10, food: 10, fun: 15, sweet: true },
     { id: "rybka", icon: "🐟", name: "Rybka", price: 12, food: 30 },
     { id: "ser", icon: "🧀", name: "Serek", price: 14, food: 25, fun: 5 },
-    { id: "lody", icon: "🍦", name: "Lody", price: 15, food: 10, fun: 25 },
+    { id: "lody", icon: "🍦", name: "Lody", price: 15, food: 10, fun: 25, sweet: true },
     { id: "tunczyk", icon: "🥫", name: "Tuńczyk z puszki", price: 16, food: 38 },
     { id: "kurczak", icon: "🍗", name: "Kurczak", price: 18, food: 45 },
     { id: "kawa", icon: "🍵", name: "Kocia herbatka", price: 18, food: 5, energy: 25 },
@@ -2719,7 +2720,7 @@
     { id: "sushi", icon: "🍣", name: "Sushi", price: 25, food: 50, fun: 10 },
     { id: "pizza", icon: "🍕", name: "Pizza", price: 28, food: 55, fun: 12 },
     { id: "burger", icon: "🍔", name: "Burger", price: 30, food: 60, fun: 10 },
-    { id: "tort", icon: "🎂", name: "Torcik", price: 35, food: 60, fun: 25 },
+    { id: "tort", icon: "🎂", name: "Torcik", price: 35, food: 60, fun: 25, sweet: true },
     { id: "uczta", icon: "🦞", name: "Królewska uczta", price: 60, food: 100, fun: 30, energy: 10 }
   ];
   const SHOP = [
@@ -2774,12 +2775,15 @@
   function petTick() {
     const pet = store.pet;
     const now = Date.now();
+    if (typeof pet.teeth !== "number") pet.teeth = 70;
     if (!pet.tick) { pet.tick = now; return; }
     const h = Math.min(72, (now - pet.tick) / 3600000);
     if (h < 0.01) return;
     pet.food = clamp(pet.food - h * (pet.sleeping ? 2 : 4));
     pet.fun = clamp(pet.fun - h * (pet.sleeping ? 1 : 3));
     pet.clean = clamp(pet.clean - h * 2);
+    if (typeof pet.teeth !== "number") pet.teeth = 70;
+    pet.teeth = clamp(pet.teeth - h * (pet.sleeping ? 1 : 3));
     pet.energy = clamp(pet.energy + h * (pet.sleeping ? 90 : -3));
     pet.tick = now;
   }
@@ -2811,7 +2815,8 @@
         food: `Burczy mi w brzuszku${you}… nakarmisz mnie? 🥺`,
         energy: `Oczka mi się kleją… położysz mnie spać${you}? 😴`,
         fun: `Nudzi mi się${you}! Pobawimy się? 🎾`,
-        clean: `Coś mi się futerko pobrudziło… kąpiel? 🫧`
+        clean: `Coś mi się futerko pobrudziło… kąpiel? 🫧`,
+        teeth: `Coś mi zostało w ząbkach… umyjesz mi zęby${you}? 🪥`
       }[low.st.k];
     }
     if (low.v < 60) return pickOne([`Hej${you}! Jak tam nauka? 📚`, "Mrrr, dobrze, że jesteś 💗", `Ucz się dalej – zbieramy łapki na nowe ubranka 🐾`]);
@@ -2912,6 +2917,122 @@
     room.addEventListener("pointerdown", (e) => { last = null; move(e); });
     room.addEventListener("pointerleave", () => tool.classList.remove("on"));
   }
+  // ---------- mycie zębów (zbliżenie na pyszczek) ----------
+  function brushFace(look, bits) {
+    const fur = look.fur || (look.grad || ["#9d9da4"])[0];
+    const dark = look.dark || "#7d7d84";
+    const eyes = look.eyes || "#7cc26b";
+    const up = [64, 75, 86, 97, 108, 119, 130].map((x, i) => `<rect x="${x}" y="${i === 0 || i === 6 ? 92 : 94}" width="10.4" height="${i === 0 || i === 6 ? 22 : 19}" rx="3.5" fill="#fffdf5" stroke="#e6dcc4" stroke-width=".8"/>`).join("");
+    const low = [68, 79, 90, 101, 112, 123].map((x, i) => `<rect x="${x}" y="${i === 0 || i === 5 ? 136 : 139}" width="10.4" height="22" rx="3.5" fill="#fffdf5" stroke="#e6dcc4" stroke-width=".8"/>`).join("");
+    return `<svg class="brush-face" viewBox="0 0 200 175" aria-hidden="true">
+      <defs><clipPath id="mouth-clip"><ellipse cx="100" cy="126" rx="46" ry="30"/></clipPath></defs>
+      <path d="M22 70 L36 4 L86 34 Z M178 70 L164 4 L114 34 Z" fill="${fur}" stroke="${dark}" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M34 50 L40 18 L70 36 Z M166 50 L160 18 L130 36 Z" fill="#f7a8c4"/>
+      <ellipse cx="100" cy="98" rx="92" ry="74" fill="${fur}"/>
+      <ellipse cx="62" cy="60" rx="17" ry="19" fill="#fff"/><ellipse cx="138" cy="60" rx="17" ry="19" fill="#fff"/>
+      <ellipse cx="64" cy="62" rx="12" ry="14" fill="${eyes}"/><ellipse cx="136" cy="62" rx="12" ry="14" fill="${eyes}"/>
+      <ellipse cx="64" cy="63" rx="5.5" ry="10" fill="#1d1a1c"/><ellipse cx="136" cy="63" rx="5.5" ry="10" fill="#1d1a1c"/>
+      <circle cx="68" cy="56" r="3.4" fill="#fff"/><circle cx="140" cy="56" r="3.4" fill="#fff"/>
+      <path d="M93 84 h14 l-7 8 Z" fill="#f37aa6"/>
+      <ellipse cx="44" cy="100" rx="13" ry="7" fill="#f7a8c4" opacity=".6"/><ellipse cx="156" cy="100" rx="13" ry="7" fill="#f7a8c4" opacity=".6"/>
+      <path d="M40 92 L2 86 M40 100 L2 104 M160 92 L198 86 M160 100 L198 104" stroke="${dark}" stroke-width="1.6"/>
+      <ellipse class="mouth" cx="100" cy="126" rx="46" ry="30" fill="#7a1f2b"/>
+      <g clip-path="url(#mouth-clip)"><ellipse cx="100" cy="150" rx="28" ry="12" fill="#e8768a"/>${up}${low}
+        ${bits.map((b, i) => `<circle class="bit" data-i="${i}" cx="${b.x}" cy="${b.y}" r="${b.r}" fill="${b.c}"/>`).join("")}</g>
+      <ellipse cx="100" cy="126" rx="46" ry="30" fill="none" stroke="#e03131" stroke-width="3"/>
+    </svg>`;
+  }
+  function viewBrush() {
+    const p = store.pet;
+    const look = petLook();
+    const n = p.teeth < 30 ? 11 : p.teeth < 60 ? 8 : 5;
+    const colors = ["#69db7c", "#e03131", "#9c36b5", "#a0522d", "#fab005", "#40c057"];
+    const spots = [[69, 108], [80, 106], [91, 109], [102, 107], [113, 108], [124, 106], [135, 108], [73, 144], [84, 146], [95, 143], [106, 145], [117, 144], [128, 146]];
+    const bits = spots.sort(() => Math.random() - 0.5).slice(0, n).map(([x, y]) => ({ x, y, r: 3.2 + Math.random() * 2, c: pickOne(colors), hp: 3 }));
+    document.title = "Mycie zębów – " + petName();
+    app.innerHTML = `
+      <button class="back linkish" data-action="pet-brush-cancel">‹ ${esc(petName())}</button>
+      <h1>🪥 Mycie zębów</h1>
+      <div class="brush-bar"><span class="brush-hint">🪥 Szoruj ząbki szczoteczką – usuń wszystkie resztki jedzenia</span><span class="bath-prog"><span style="width:0%"></span></span></div>
+      <div class="brush-stage">
+        ${brushFace(look, bits)}
+        <div class="brush-foam"></div>
+        <span class="brush-cup left"><span class="cup-tool">💦</span></span>
+        <span class="brush-cup right"><span class="cup-tool">🪥</span></span>
+        <span class="bath-tool">🪥</span>
+        <span class="pet-bubble2 brush-say">Aaaa… 😮 Szeroko otwieram!</span>
+      </div>`;
+    const stage = app.querySelector(".brush-stage");
+    const foamBox = app.querySelector(".brush-foam");
+    const tool = app.querySelector(".bath-tool");
+    const bar = app.querySelector(".bath-prog span");
+    const hint = app.querySelector(".brush-hint");
+    const say = app.querySelector(".brush-say");
+    const mouth = app.querySelector(".mouth");
+    let phase = "brush", foamN = 0, last = null, totalFoam = 0;
+    const left = () => bits.filter((b) => b.hp > 0).length;
+    const move = (e) => {
+      const sr = stage.getBoundingClientRect();
+      const x = e.clientX - sr.left, y = e.clientY - sr.top;
+      tool.style.left = x + "px";
+      tool.style.top = y + "px";
+      tool.classList.add("on");
+      if (!(e.buttons || e.pointerType === "touch")) return;
+      const mr = mouth.getBoundingClientRect();
+      const inMouth = e.clientX > mr.left - 10 && e.clientX < mr.right + 10 && e.clientY > mr.top - 10 && e.clientY < mr.bottom + 10;
+      if (!inMouth) return;
+      if (last && Math.hypot(e.clientX - last[0], e.clientY - last[1]) < 10) return;
+      last = [e.clientX, e.clientY];
+      if (phase === "brush") {
+        app.querySelectorAll(".bit").forEach((el) => {
+          const b = bits[+el.dataset.i];
+          if (b.hp <= 0) return;
+          const br = el.getBoundingClientRect();
+          if (Math.hypot(br.left + br.width / 2 - e.clientX, br.top + br.height / 2 - e.clientY) < mr.width * 0.13) {
+            b.hp--;
+            el.style.opacity = String(b.hp / 3);
+          }
+        });
+        const f = document.createElement("span");
+        const size = 10 + Math.random() * 14;
+        f.className = "foam";
+        f.style.cssText = `left:${x - size / 2}px;top:${y - size / 2}px;width:${size}px;height:${size}px`;
+        foamBox.appendChild(f);
+        foamN++;
+        bar.style.width = Math.min(100, ((bits.length - left()) / bits.length) * 100) + "%";
+        if (foamN === 10) say.textContent = pickOne(["Mmm, miętowa! 🌿", "Łaskocze! 😹", "Szoruj, szoruj! 🪥"]);
+        if (!left() && foamN >= 12) {
+          phase = "rinse";
+          totalFoam = foamBox.children.length;
+          tool.textContent = "💦";
+          hint.textContent = "💦 Spłucz pianę wodą";
+          bar.style.width = "0%";
+          say.textContent = "Teraz płukanko! 💦";
+        }
+      } else {
+        const d = document.createElement("span");
+        d.className = "drop";
+        d.style.left = x + "px";
+        d.style.top = y + "px";
+        foamBox.appendChild(d);
+        setTimeout(() => d.remove(), 600);
+        [...foamBox.querySelectorAll(".foam")].forEach((f) => {
+          if (Math.hypot(f.offsetLeft + f.offsetWidth / 2 - x, f.offsetTop + f.offsetHeight / 2 - y) < 34) f.remove();
+        });
+        const rest = foamBox.querySelectorAll(".foam").length;
+        bar.style.width = (100 - (rest / Math.max(1, totalFoam)) * 100) + "%";
+        if (!rest) {
+          p.teeth = 100;
+          p.fun = clamp(p.fun + 5);
+          saveStore();
+          viewPet(pickOne(["Ząbki lśnią! 😁✨", "Mogę teraz uśmiechać się do wszystkich! 😁", "Świeży oddech, miętowy kotek 🌿😻"]));
+        }
+      }
+    };
+    stage.addEventListener("pointermove", move);
+    stage.addEventListener("pointerdown", (e) => { last = null; move(e); });
+    stage.addEventListener("pointerleave", () => tool.classList.remove("on"));
+  }
   function viewPet(msg) {
     petTick();
     saveStore();
@@ -2937,6 +3058,7 @@
         ${p.sleeping ? `<button class="btn primary big-ish" data-action="pet-wake">☀️ Obudź ${esc(petName())}</button>` : `
         <button class="btn" data-action="pet-tab" data-tab="food">🍗 Nakarm</button>
         <button class="btn" data-action="pet-wash">🛁 Kąpiel</button>
+        <button class="btn" data-action="pet-brush">🪥 Myj zęby</button>
         <button class="btn" data-action="pet-play">🎾 Pobaw się</button>
         <button class="btn" data-action="pet-sleep">💤 Spać</button>
         <a class="btn" href="#/kotek/sklep">👗 Sklep i szafa</a>`}
@@ -2976,11 +3098,17 @@
         p.food = clamp(p.food + f.food);
         if (f.fun) p.fun = clamp(p.fun + f.fun);
         if (f.energy) p.energy = clamp(p.energy + f.energy);
+        p.teeth = clamp((p.teeth || 0) - (f.sweet ? 8 : 2));
         msg = pickOne([`Mniam! ${f.icon} Dziękuję!`, `Pycha! ${f.icon} Mrrr…`, `${f.icon} Najlepsze jedzonko na świecie! 😻`]);
       }
     } else if (act === "pet-wash") {
       if (p.clean >= 95) msg = "Jestem już czyściutki! ✨";
       else { bath = { phase: "soap", n: 0 }; msg = "Kąpiel? No dobrze… Najpierw namydl mnie gąbką 🧽"; }
+    } else if (act === "pet-brush") {
+      if (p.teeth >= 95) msg = "Moje ząbki już lśnią! 😁✨";
+      else return viewBrush();
+    } else if (act === "pet-brush-cancel") {
+      msg = "Mycie zębów przerwane… ale tylko na chwilkę, prawda? 🥺";
     } else if (act === "pet-bath-cancel") {
       bath = null;
       msg = "Uff, uciekłem przed wodą! 😹";

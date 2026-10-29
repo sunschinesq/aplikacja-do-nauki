@@ -1158,6 +1158,19 @@ mark.hit { background: color-mix(in srgb, var(--good) 24%, transparent); }
   transition: filter .4s ease;
 }
 .pet-room.small { height: 190px; }
+/* mycie zębów */
+.brush-bar { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-weight: 600; }
+.brush-bar .bath-prog { flex: 1; height: 10px; border-radius: 99px; background: #e7f5ff; overflow: hidden; }
+.brush-bar .bath-prog span { display: block; height: 100%; background: #4dabf7; border-radius: 99px; transition: width .2s ease; }
+.brush-stage { position: relative; height: 470px; border-radius: 24px; overflow: hidden; background: linear-gradient(180deg, #e5dbff 0 80%, #cc5de8 80% 100%); touch-action: none; user-select: none; -webkit-user-select: none; cursor: none; box-shadow: var(--shadow); }
+.brush-face { position: absolute; left: 50%; top: 70px; width: min(92%, 440px); transform: translateX(-50%); }
+.brush-foam { position: absolute; inset: 0; pointer-events: none; }
+.brush-cup { position: absolute; bottom: 0; width: 86px; height: 70px; border-radius: 10px 10px 0 0; background: #e64980; box-shadow: inset 0 6px 0 rgba(255, 255, 255, .25); }
+.brush-cup.left { left: 14px; } .brush-cup.right { right: 14px; }
+.cup-tool { position: absolute; left: 50%; top: -30px; transform: translateX(-50%); font-size: 2.2rem; }
+.brush-say { top: 12px; }
+.brush-stage .bath-tool { font-size: 3rem; }
+button.back.linkish { border: 0; background: none; padding: 0; font: inherit; cursor: pointer; }
 /* brud i kąpiel */
 .pet-dirt { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; transition: opacity .3s ease; }
 .pet-dirt .stink { animation: stink 2.4s ease-in-out infinite; }

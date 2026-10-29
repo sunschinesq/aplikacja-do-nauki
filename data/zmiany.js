@@ -2,6 +2,14 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29y",
+    date: "29 października 2026",
+    items: [
+      "🪥 Mycie zębów jak w My Talking Angela! Kotek otwiera szeroko pyszczek – szoruj szczoteczką resztki jedzenia z ząbków, a potem spłucz pianę wodą 💦.",
+      "🦷 Nowa potrzeba: Ząbki. Powoli spada z czasem, a szybciej po słodyczach (truskawka, ciasteczko, lody, torcik)."
+    ]
+  },
+  {
     v: "2026-10-29x",
     date: "29 października 2026",
     items: [
