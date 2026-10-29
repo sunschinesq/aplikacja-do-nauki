@@ -2,6 +2,11 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29v",
+    date: "29 października 2026",
+    items: ["😴 Kotek szybciej się wysypia: energia ładuje się 5 razy szybciej (z połowy do pełna w ok. pół godziny), a pasek rośnie na bieżąco, kiedy patrzysz, jak śpi."]
+  },
+  {
     v: "2026-10-29u",
     date: "29 października 2026",
     items: ["📷 Kotek Oliwia trzyma teraz w łapce aparat cyfrowy."]

@@ -2767,10 +2767,14 @@
     pet.food = clamp(pet.food - h * (pet.sleeping ? 2 : 4));
     pet.fun = clamp(pet.fun - h * (pet.sleeping ? 1 : 3));
     pet.clean = clamp(pet.clean - h * 2);
-    pet.energy = clamp(pet.energy + h * (pet.sleeping ? 18 : -3));
+    pet.energy = clamp(pet.energy + h * (pet.sleeping ? 90 : -3));
     pet.tick = now;
   }
   // czy kotek czegoś potrzebuje (do znaczka na stronie głównej)
+  // gdy kotek śpi, a pokój jest otwarty – pasek energii rośnie na bieżąco
+  setInterval(() => {
+    if (location.hash === "#/kotek" && store.pet.sleeping && !document.hidden) viewPet();
+  }, 30000);
   function petNeeds() {
     petTick();
     const p = store.pet;
@@ -2846,7 +2850,7 @@
           <li>cel dnia – 20 🐾 · sesja skupienia – 15 🐾 · wyzwanie dnia – 10 🐾 (za 5/5 – 20 🐾)</li>
           <li>pogłaskanie kotka, który zagląda na ekran – 1 🐾</li>
         </ul>
-        <p class="muted small-note">Kotek robi się głodny i zmęczony powoli, a gdy śpi, odzyskuje energię. Nic złego mu się nie stanie, jeśli zajrzysz rzadziej – po prostu się stęskni 💗</p>
+        <p class="muted small-note">Kotek robi się głodny i zmęczony powoli, a gdy śpi, szybko odzyskuje energię (z połowy do pełna w ok. pół godziny). Nic złego mu się nie stanie, jeśli zajrzysz rzadziej – po prostu się stęskni 💗</p>
         <button class="btn small ghost" data-action="profile-edit">✏️ Zmień imiona</button>
       </div>`;
   }
