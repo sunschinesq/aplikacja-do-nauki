@@ -2,6 +2,15 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29w",
+    date: "29 października 2026",
+    items: [
+      "🎓 Kotki psychologów w albumie! Zygmunt Mruczud (z brodą i cygarem), Carl Gustaw Miau (pół jasny, pół w Cieniu 🌗), Alfred Kotler, Erik Mrikson, Karen Mrorney, B.F. Skinnerek (ze skrzynką Skinnera), Abraham Miaułow (z piramidą potrzeb), Carl Mrogers i Wiktor Frankot (z książką o sensie).",
+      "🔓 Odblokujesz je, opanowując fiszki o danym psychologu albo zdając quiz z jego tematu z osobowości na 80%. Album ma teraz osobne działy: Przyjaciółki, Kotki psychologów, Za naukę i Świąteczne.",
+      "🍕 13 nowych przysmaków dla kotka: truskawka, jajeczko, ciasteczko, serek, lody, tuńczyk, krewetki, kocimiętka (dużo zabawy), kocia herbatka (dodaje energii), spaghetti, pizza, burger i Królewska uczta 🦞."
+    ]
+  },
+  {
     v: "2026-10-29v",
     date: "29 października 2026",
     items: ["😴 Kotek szybciej się wysypia: energia ładuje się 5 razy szybciej (z połowy do pełna w ok. pół godziny), a pasek rośnie na bieżąco, kiedy patrzysz, jak śpi."]

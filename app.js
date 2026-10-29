@@ -2704,10 +2704,23 @@
   const FOODS = [
     { id: "karma", icon: "🥣", name: "Karma", price: 5, food: 15 },
     { id: "mleko", icon: "🥛", name: "Mleczko", price: 8, food: 15, fun: 5 },
+    { id: "truskawka", icon: "🍓", name: "Truskawka", price: 8, food: 8, fun: 12 },
+    { id: "jajko", icon: "🥚", name: "Jajeczko", price: 10, food: 22 },
+    { id: "ciastko", icon: "🍪", name: "Ciasteczko", price: 10, food: 10, fun: 15 },
     { id: "rybka", icon: "🐟", name: "Rybka", price: 12, food: 30 },
+    { id: "ser", icon: "🧀", name: "Serek", price: 14, food: 25, fun: 5 },
+    { id: "lody", icon: "🍦", name: "Lody", price: 15, food: 10, fun: 25 },
+    { id: "tunczyk", icon: "🥫", name: "Tuńczyk z puszki", price: 16, food: 38 },
     { id: "kurczak", icon: "🍗", name: "Kurczak", price: 18, food: 45 },
+    { id: "kawa", icon: "🍵", name: "Kocia herbatka", price: 18, food: 5, energy: 25 },
+    { id: "krewetki", icon: "🍤", name: "Krewetki", price: 20, food: 40, fun: 5 },
+    { id: "kocimietka", icon: "🌿", name: "Kocimiętka", price: 20, food: 5, fun: 40 },
+    { id: "makaron", icon: "🍝", name: "Spaghetti", price: 22, food: 50 },
     { id: "sushi", icon: "🍣", name: "Sushi", price: 25, food: 50, fun: 10 },
-    { id: "tort", icon: "🎂", name: "Torcik", price: 35, food: 60, fun: 25 }
+    { id: "pizza", icon: "🍕", name: "Pizza", price: 28, food: 55, fun: 12 },
+    { id: "burger", icon: "🍔", name: "Burger", price: 30, food: 60, fun: 10 },
+    { id: "tort", icon: "🎂", name: "Torcik", price: 35, food: 60, fun: 25 },
+    { id: "uczta", icon: "🦞", name: "Królewska uczta", price: 60, food: 100, fun: 30, energy: 10 }
   ];
   const SHOP = [
     { id: "flower", slot: "head", name: "Kwiatek", price: 40 },
@@ -2871,11 +2884,12 @@
     if (act === "pet-feed") {
       const f = FOODS.find((x) => x.id === el.dataset.id);
       if (!f || store.paws < f.price) return;
-      if (p.food >= 98) msg = "Już nie zmieszczę ani kęska! 😹";
+      if (p.food >= 98 && f.food > 5) msg = "Już nie zmieszczę ani kęska! 😹";
       else {
         store.paws -= f.price;
         p.food = clamp(p.food + f.food);
         if (f.fun) p.fun = clamp(p.fun + f.fun);
+        if (f.energy) p.energy = clamp(p.energy + f.energy);
         msg = pickOne([`Mniam! ${f.icon} Dziękuję!`, `Pycha! ${f.icon} Mrrr…`, `${f.icon} Najlepsze jedzonko na świecie! 😻`]);
       }
     } else if (act === "pet-wash") {
@@ -3462,6 +3476,15 @@
     { id: "mietowy", name: "Mięta", fur: "#96f2d7", dark: "#63c9ad", belly: "#e6fcf5", eyes: "#e64980", how: "Pierwsza sesja w trybie skupienia", test: (x) => x.focus >= 1 },
     { id: "blekitny", name: "Błękitek", fur: "#a5d8ff", dark: "#74c0fc", belly: "#e7f5ff", eyes: "#f59f00", how: "Ukończ 3 gry w pary", test: (x) => x.games >= 3 },
     { id: "profesor", name: "Profesor Mruczek", fur: "#9d9da4", dark: "#7d7d84", belly: "#c9c9ce", acc: ["glasses"], how: "20 dobrze rozwiązanych zadań ze statystyki", test: (x) => x.statOk >= 20 },
+    { id: "freud", name: "Zygmunt Mruczud", fur: "#d9d9de", dark: "#adadb5", belly: "#f1f1f4", eyes: "#4c6ef5", acc: ["whitebeard", "glasses", "cigar"], psych: true, how: "Freud: quiz z psychoanalizy na 80% albo 5 opanowanych fiszek o Freudzie", test: (x) => x.topic("freud") || x.know(/Freud/, 5) },
+    { id: "jung", name: "Carl Gustaw Miau", grad: ["#f1f3f5", "#f1f3f5", "#495057"], dark: "#868e96", belly: "#e9ecef", eyes: "#7048e8", acc: ["mustache", "glasses"], psych: true, how: "Jung (z Cieniem 🌗): 5 opanowanych fiszek o Jungu", test: (x) => x.know(/Jung/, 5) },
+    { id: "adler", name: "Alfred Kotler", fur: "#c4a484", dark: "#9c7c5c", belly: "#ecdcc8", acc: ["mustache", "crown"], psych: true, how: "Adler (dążenie do wyższości 👑): 4 opanowane fiszki o Adlerze", test: (x) => x.know(/Adler/, 4) },
+    { id: "erikson", name: "Erik Mrikson", fur: "#f3e3c3", dark: "#d8c39a", belly: "#fffaf0", eyes: "#339af0", acc: ["whitetufts", "bowtie"], psych: true, how: "Erikson (8 stadiów rozwoju): 5 opanowanych fiszek o Eriksonie", test: (x) => x.know(/Erikson/, 5) },
+    { id: "horney", name: "Karen Mrorney", fur: "#b9a9c9", dark: "#9585a8", belly: "#e5ddee", acc: ["bun", "pearls"], psych: true, how: "Horney: 4 opanowane fiszki o Karen Horney", test: (x) => x.know(/Horney/, 4) },
+    { id: "skinner", name: "B.F. Skinnerek", fur: "#ffd8a8", dark: "#f0a860", belly: "#fff4e6", stripes: true, acc: ["labcoat", "skinnerbox"], psych: true, how: "Behawioryzm: quiz z teorii uczenia się na 80% albo 8 opanowanych fiszek z tego tematu", test: (x) => x.topic("uczenie") },
+    { id: "maslow", name: "Abraham Miaułow", fur: "#a07b5a", dark: "#7a5a3e", belly: "#d6bc9e", acc: ["mustache", "pyramid"], psych: true, how: "Koncepcje humanistyczne: quiz na 80% albo 8 opanowanych fiszek", test: (x) => x.topic("humanistyczne") },
+    { id: "rogers", name: "Carl Mrogers", fur: "#f0a04b", dark: "#d27f2c", belly: "#fbd9a8", acc: ["sweater", "glasses"], psych: true, how: "Rogers (bezwarunkowa akceptacja 💗): 4 opanowane fiszki o Rogersie", test: (x) => x.know(/Rogers/, 4) },
+    { id: "frankl", name: "Wiktor Frankot", fur: "#868e96", dark: "#5c636a", belly: "#ced4da", eyes: "#fab005", acc: ["thickglasses", "book"], psych: true, how: "Psychologia pozytywna i egzystencjalna: quiz na 80% albo 8 opanowanych fiszek", test: (x) => x.topic("pozytywna-egzystencjalna") },
     { id: "cukierkowy", name: "Cukierek", fur: "#fcc2d7", dark: "#f783ac", belly: "#fff0f6", eyes: "#7048e8", how: "Seria 7 dni z celem", test: (x) => x.streak >= 7 },
     { id: "spioch", name: "Śpioch", fur: "#d0bfff", dark: "#b197fc", belly: "#f3f0ff", acc: ["nightcap"], how: "10 sesji skupienia", test: (x) => x.focus >= 10 },
     { id: "arbuzek", name: "Arbuzek", fur: "#8ce99a", dark: "#51cf66", belly: "#ff8787", eyes: "#212529", how: "Pogłaszcz 50 kotków", test: (x) => x.pets >= 50 },
@@ -3515,6 +3538,16 @@
     vape: `<g fill="#e9ecef" opacity=".8"><circle cx="63" cy="43" r="2.4"/><circle cx="66.5" cy="40" r="3"/><circle cx="64" cy="36.5" r="2.2"/></g><rect x="56.5" y="49" width="6" height="15" rx="2.6" fill="#cc5de8" stroke="#9c36b5" stroke-width=".7"/><rect x="57.8" y="46" width="3.4" height="4" rx="1.2" fill="#343a40"/><rect x="58.3" y="54" width="2.4" height="4" rx="1" fill="#f3d9fa" opacity=".8"/><ellipse cx="57" cy="60" rx="4" ry="3" fill="#d2ab82" stroke="#b08458" stroke-width=".8"/>`,
     camera: `<path d="M14 61 Q19 52 24 47" stroke="#495057" stroke-width=".9" fill="none"/><rect x="11" y="51.6" width="3.4" height="1.6" rx=".6" fill="#868e96"/><rect x="1" y="53" width="15" height="10.5" rx="2" fill="#dee2e6" stroke="#868e96" stroke-width=".8"/><rect x="2.6" y="54.6" width="3" height="1.8" rx=".5" fill="#fff" stroke="#adb5bd" stroke-width=".4"/><circle cx="9" cy="58.6" r="3.8" fill="#343a40" stroke="#adb5bd" stroke-width=".8"/><circle cx="9" cy="58.6" r="1.8" fill="#4dabf7"/><circle cx="8.3" cy="57.9" r=".6" fill="#fff"/><circle cx="14" cy="55.3" r=".6" fill="#f03e3e"/><ellipse cx="15.5" cy="61.5" rx="4" ry="3" fill="#f7e6c4" stroke="#dcc396" stroke-width=".8"/>`,
     phone: `<rect x="2" y="51" width="12" height="20" rx="2.2" fill="#fff" stroke="#adb5bd" stroke-width="1.4"/><rect x="7.6" y="53" width="4.6" height="4.6" rx="1.2" fill="#dee2e6" stroke="#adb5bd" stroke-width=".6"/><circle cx="9.2" cy="54.6" r=".75" fill="#495057"/><circle cx="10.8" cy="56.2" r=".75" fill="#495057"/><ellipse cx="14.5" cy="63" rx="4" ry="3" fill="#d2ab82" stroke="#b08458" stroke-width=".8"/>`,
+    whitebeard: `<path d="M24 34 Q24 44 30 48 Q36 52 42 48 Q48 44 48 34 Q42 39 36 38.5 Q30 39 24 34 Z" fill="#f8f9fa" stroke="#dee2e6" stroke-width=".7"/><path d="M30.5 37.5 Q33 35.5 36 37 Q39 35.5 41.5 37.5" stroke="#f8f9fa" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M33.6 32 h4.8 l-2.4 2.8 Z" fill="#f37aa6"/>`,
+    cigar: `<rect x="44" y="37.5" width="11" height="2.6" rx="1" fill="#8b5a2b" transform="rotate(-12 44 38.8)"/><rect x="53.6" y="35.2" width="2" height="2.6" rx=".6" fill="#ff922b" transform="rotate(-12 54.6 36.5)"/><path d="M57 33 q2 -2 0 -4 q-2 -2 0 -4" stroke="#ced4da" stroke-width="1" fill="none" stroke-linecap="round" opacity=".8"/>`,
+    mustache: `<path d="M36 35.6 Q31 33.4 27.5 35.6 Q25 37 23 35.5 Q25 39.5 30 38.5 Q34 37.8 36 36.6 Q38 37.8 42 38.5 Q47 39.5 49 35.5 Q47 37 44.5 35.6 Q41 33.4 36 35.6 Z" fill="#5c4033"/>`,
+    whitetufts: `<g fill="#f8f9fa" stroke="#dee2e6" stroke-width=".6">${[[14, 18], [12, 24], [14, 30], [58, 18], [60, 24], [58, 30], [30, 9.5], [36, 8.5], [42, 9.5]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3.6"/>`).join("")}</g>`,
+    bun: `<circle cx="36" cy="5" r="6.5" fill="#868e96"/><path d="M15 22 Q16 9 36 8.5 Q56 9 57 22 Q50 14 36 14 Q22 14 15 22 Z" fill="#868e96"/><path d="M32 3 q4 3 8 0" stroke="#5c636a" stroke-width=".8" fill="none"/><circle cx="41" cy="2" r="1.2" fill="#e64980"/>`,
+    labcoat: `<path d="M17 52 Q20 44 36 44 Q52 44 55 52 L56 66 Q36 73 16 66 Z" fill="#fff" stroke="#dee2e6" stroke-width=".7"/><path d="M29 44.5 L36 56 L43 44.5" stroke="#ced4da" stroke-width="1.4" fill="none"/><path d="M36 56 V69" stroke="#ced4da" stroke-width=".9"/><circle cx="38" cy="59.5" r=".9" fill="#adb5bd"/><circle cx="38" cy="64" r=".9" fill="#adb5bd"/><rect x="42" y="56" width="6" height="4.5" rx="1" fill="none" stroke="#ced4da" stroke-width=".8"/><path d="M44 56 v-2.5" stroke="#4dabf7" stroke-width="1"/>`,
+    skinnerbox: `<rect x="0.5" y="56" width="15" height="17" rx="1.5" fill="#ced4da" stroke="#868e96" stroke-width=".8"/><rect x="2.5" y="58" width="11" height="9" rx="1" fill="#e7f5ff" stroke="#868e96" stroke-width=".5"/><path d="M5 64 h4" stroke="#495057" stroke-width="1.2" stroke-linecap="round"/><circle cx="11" cy="61" r="1.2" fill="#fcc419"/><circle cx="8" cy="70" r="1.3" fill="#a0522d"/><circle cx="4.5" cy="70.3" r="1" fill="#a0522d"/>`,
+    pyramid: `${[["#ff8787", 0], ["#ffc078", 1], ["#ffe066", 2], ["#8ce99a", 3], ["#74c0fc", 4]].map(([f, i]) => { const y0 = 54 + i * 4, y1 = y0 + 4, w0 = (i * 4) * 0.42, w1 = ((i + 1) * 4) * 0.42; return `<path d="M${(8 - w0).toFixed(2)} ${y0} H${(8 + w0).toFixed(2)} L${(8 + w1).toFixed(2)} ${y1} H${(8 - w1).toFixed(2)} Z" fill="${f}" stroke="#fff" stroke-width=".4"/>`; }).join("")}`,
+    thickglasses: `<g fill="rgba(255,255,255,.2)" stroke="#212529" stroke-width="2.4"><rect x="20" y="20.5" width="13.5" height="11" rx="3"/><rect x="38.5" y="20.5" width="13.5" height="11" rx="3"/><path d="M33.5 25 Q36 23.5 38.5 25 M20 24 L14 22 M52 24 L58 22" fill="none"/></g>`,
+    book: `<path d="M1.5 58 Q8 56 14.5 58.5 V73 Q8 70.5 1.5 72.5 Z" fill="#c92a2a" stroke="#862e1e" stroke-width=".6"/><path d="M3.5 59.4 Q8 58 12.5 60" stroke="#fff3bf" stroke-width=".6" fill="none"/><text x="8" y="66.5" text-anchor="middle" font-size="3.6" font-weight="700" fill="#fff3bf" font-family="Georgia, serif">SENS</text><ellipse cx="14.5" cy="65" rx="4" ry="3" fill="#868e96" stroke="#5c636a" stroke-width=".8"/>`,
     wreath: `<path d="M16 13 Q36 4 56 13" stroke="#69db7c" stroke-width="2.5" fill="none" stroke-linecap="round"/>${[[18, 12, "#f783ac"], [26, 9.6, "#ffd43b"], [36, 8.5, "#b197fc"], [46, 9.6, "#ffd43b"], [54, 12, "#f783ac"]].map(([x, y, f]) => `<circle cx="${x}" cy="${y}" r="3.2" fill="${f}"/><circle cx="${x}" cy="${y}" r="1.1" fill="#fff"/>`).join("")}`,
     headphones: `<path d="M13 26 Q13 1 36 1 Q59 1 59 26" stroke="#845ef7" stroke-width="3.5" fill="none" stroke-linecap="round"/><rect x="8" y="19" width="8" height="14" rx="3.5" fill="#b197fc" stroke="#845ef7"/><rect x="56" y="19" width="8" height="14" rx="3.5" fill="#b197fc" stroke="#845ef7"/>`,
     straw: `<path d="M24 11 Q24 -4 36 -4 Q48 -4 48 11 Z" fill="#f8dc9b" stroke="#d9a648" stroke-width=".8"/><ellipse cx="36" cy="11" rx="27" ry="5.5" fill="#f5d38a" stroke="#d9a648" stroke-width=".8"/><path d="M24.3 5.5 Q36 8.5 47.7 5.5 L48 9 Q36 12 24 9 Z" fill="#ff8787"/><circle cx="45" cy="7.5" r="2.4" fill="#fff"/><circle cx="45" cy="7.5" r="1" fill="#ffd43b"/>`,
@@ -3550,7 +3583,7 @@
       <ellipse cx="45" cy="56" rx="6" ry="5" fill="${c.patches[0]}"/>` : "";
     const stars = c.stars ? `<g fill="#fff"><circle cx="24" cy="16" r=".9"/><circle cx="47" cy="18" r=".7"/><circle cx="29" cy="52" r=".9"/><circle cx="46" cy="60" r=".8"/><circle cx="40" cy="47" r=".6"/><circle cx="20" cy="38" r=".7"/></g>` : "";
     const acc = (c.acc || []).map((a) => CAT_ACC[a] || "");
-    const PROPS = ["pumpkin", "egg", "heart", "bag", "phone", "vape", "camera"];
+    const PROPS = ["pumpkin", "egg", "heart", "bag", "phone", "vape", "camera", "skinnerbox", "pyramid", "book"];
     const head = acc.filter((_, i) => !PROPS.includes(c.acc[i])).join("");
     const props = acc.filter((_, i) => PROPS.includes(c.acc[i])).join("");
     return `<svg viewBox="0 0 72 76" aria-hidden="true">${defs}
@@ -3622,7 +3655,17 @@
       statOk: store.statex.ok || 0,
       challenge: Math.max(store.challenge.best || 0, store.challenge.streak || 0),
       examPassed: SUBJECTS.some((sub) => sub.exam && (store.tries[sub.id] || []).some((t) => t.score >= sub.exam.pass)),
-      fullSubject: SUBJECTS.some((sub) => { const fc = subjectCards(sub); return fc.length && mastery(fc) === 100; })
+      fullSubject: SUBJECTS.some((sub) => { const fc = subjectCards(sub); return fc.length && mastery(fc) === 100; }),
+      // opanowane fiszki, w których pada dane nazwisko
+      know: (re, n) => SUBJECTS.flatMap((sub) => subjectCards(sub)).filter((c) => re.test(c.q + " " + c.a) && (store.cards[c.key] || {}).box >= MASTERED_BOX).length >= n,
+      // temat z osobowości: quiz na min. 80% albo 8 opanowanych fiszek
+      topic: (tid) => {
+        const sub = SUBJECTS.find((x) => x.id === "osobowosc");
+        const best = (store.quiz[quizKey(sub, tid)] || {}).best || 0;
+        const fc = subjectCards(sub, tid);
+        const ok = fc.filter((c) => (store.cards[c.key] || {}).box >= MASTERED_BOX).length;
+        return best >= 80 || ok >= Math.min(8, fc.length || 99);
+      }
     };
   }
   function catUnlockable(cat, x) {
@@ -3668,8 +3711,13 @@
       <h1>🐱 Album kotków</h1>
       <p class="muted">Zebrane: <strong>${have} / ${CATS.length}</strong>. Kotki odblokowujesz nauką, a świąteczne – otwierając aplikację w ich czasie. Odblokowane kotki odwiedzają Cię na ekranie.</p>
       ${now.length ? `<div class="album-now">🎉 Teraz trwa: ${now.map((c) => `<strong>${esc(c.how.split(" (")[0])}</strong>`).join(", ")} – świąteczny kotek częściej zagląda na ekran!</div>` : ""}
+      <h2>Przyjaciółki 💗</h2>
+      <div class="album-grid">${CATS.filter((c) => c.keep).map(card).join("")}</div>
+      <h2>Kotki psychologów 🎓</h2>
+      <p class="muted">Odblokujesz je, opanowując fiszki o danym psychologu (pudełko 5 w fiszkach) albo zdając quiz z jego tematu na 80%.</p>
+      <div class="album-grid">${CATS.filter((c) => c.psych).map(card).join("")}</div>
       <h2>Za naukę</h2>
-      <div class="album-grid">${CATS.filter((c) => !c.holiday).map(card).join("")}</div>
+      <div class="album-grid">${CATS.filter((c) => !c.holiday && !c.keep && !c.psych).map(card).join("")}</div>
       <h2>Świąteczne</h2>
       <div class="album-grid">${CATS.filter((c) => c.holiday).map(card).join("")}</div>
       <div class="panel birthday">
