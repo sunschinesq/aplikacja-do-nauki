@@ -198,7 +198,10 @@ Wszyscy wyszli od Freuda, ale przesunęli akcent z popędu seksualnego na sens, 
 - Funkcje **racjonalne** (oceniające): myślenie, uczucie; **irracjonalne** (odbierające): percepcja/doznanie, intuicja.
 
 ### Jung w schemacie: struktura – działanie – rozwój
-- **Struktura (psyche)**: świadome Ja (ego) · nieświadomość indywidualna z **kompleksami** · nieświadomość zbiorowa z **archetypami** (persona, cień, anima/animus, Jaźń).
+- **Struktura (psyche)** – kilka powiązanych poziomów:
+  - **świadome Ja (ego)** – centrum świadomości, percepcji, myśli i tożsamości,
+  - **nieświadomość indywidualna** – wyparte, zapomniane lub stłumione doświadczenia, zorganizowane w **kompleksy** (grupy emocjonalnie powiązanych myśli i wspomnień wokół jednego motywu),
+  - **nieświadomość zbiorowa** – uniwersalna, ewolucyjna warstwa wspólna całemu gatunkowi, złożona z **archetypów** (wrodzonych wzorców reagowania i przeżywania): **persona** (maska społeczna), **cień** (nieakceptowane, prymitywne, instynktowne aspekty „ja”), **anima/animus** (pierwiastek kobiecy u mężczyzny / męski u kobiety), **Jaźń** (centralny archetyp porządku, pełni i jedności psychiki).
 - **Działanie**: układ dynamiczny napędzany **energią psychiczną (libido)**; zasada **równoważności** (energia wycofana z jednego obszaru, np. świadomości, przenosi się do innego, np. do cienia) i **entropii** (dążenie do równowagi napięć); dynamikę wyznaczają też postawy i funkcje.
 - **Rozwój**: **teleologiczny** – kształtują nas nie tylko przeszłość, ale przede wszystkim dążenia; centralny proces to **indywiduacja** (integracja świadomości z nieświadomością, cienia, animy/animusa → samourzeczywistnienie wokół Jaźni).
 - **Etapy życia**: **dzieciństwo** – dominacja instynktów, brak ukształtowanego ego · **młodość i wczesna dorosłość** – umacnianie ego, ekspansja na zewnątrz, przystosowanie społeczne (rozwój **persony**) · **wiek średni** (punkt zwrotny ok. **35–40 r.ż.**) – zwrot ku wnętrzu, kryzys dotychczasowych wartości, intensywna indywiduacja i szukanie sensu.
@@ -273,7 +276,7 @@ Inne nazwy kryzysów spotykane w materiałach: **zaufanie vs podstawowa nieufno�
   - **Ego cielesne** – świadomość własnego ciała, jego ograniczeń i możliwości.
   - **Ideał ego** – obraz siebie w porównaniu z normami i ideałami społecznymi.
   - **Tożsamość ego** – zintegrowany obraz siebie, poczucie ciągłości „ja” w czasie i przestrzeni oraz spójność z tym, jak postrzegają nas inni.
-- **Działanie**: osobowość to **system psychospołeczny** dążący do adaptacji i integracji z otoczeniem kulturowym; ego stale równoważy wewnętrzne potrzeby i wymagania społeczne.
+- **Działanie**: osobowość to **system psychospołeczny** dążący do adaptacji i integracji z otoczeniem kulturowym. Ego nieustannie balansuje między **wewnętrznymi potrzebami biologicznymi** a **wymaganiami norm społecznych**. Jego kluczowa funkcja to **ochrona poczucia tożsamości** i **konstruktywne rozwiązywanie kryzysów życiowych** za pomocą **adaptacyjnych mechanizmów obronnych** i **świadomych wyborów**.
 - **Rozwój**: **zasada epigenetyczna** – kolejne etapy wynikają z poprzednich, a każdy ma swój optymalny czas ujawnienia; trwa całe życie, 8 stadiów psychospołecznych, każde z kryzysem między dwiema tendencjami; pozytywne rozwiązanie daje **cnotę (siłę ego)**.
 
 **Statusy tożsamości (Marcia)**: osiągnięta (było poszukiwanie + jest zaangażowanie), moratorium (poszukiwanie trwa), przejęta (zaangażowanie bez poszukiwania), rozproszona (ani jedno, ani drugie).
@@ -336,7 +339,9 @@ Inne nazwy kryzysów spotykane w materiałach: **zaufanie vs podstawowa nieufno�
         ["Epoki rozwojowe Sullivana", "Niemowlęctwo → dzieciństwo → wiek młodzieńczy (szkolny) → wczesna adolescencja (chumship) → właściwa adolescencja → późna adolescencja i dojrzałość."],
         ["Ego u Eriksona vs u Freuda", "U Eriksona ego jest autonomiczne, racjonalne i adaptacyjne, a nie tylko biernym mediatorem między id a superego."],
         ["Ego cielesne, ideał ego, tożsamość ego (Erikson)", "Ego cielesne – świadomość ciała; ideał ego – obraz siebie wobec norm społecznych; tożsamość ego – zintegrowany obraz siebie i poczucie ciągłości „ja”."],
-        ["Zasada epigenetyczna (Erikson)", "Etapy rozwoju wynikają z poprzednich, a każdy ma swój optymalny czas ujawnienia."]
+        ["Zasada epigenetyczna (Erikson)", "Etapy rozwoju wynikają z poprzednich, a każdy ma swój optymalny czas ujawnienia."],
+        ["Kluczowa funkcja ego u Eriksona", "Ochrona poczucia tożsamości i konstruktywne rozwiązywanie kryzysów życiowych (adaptacyjne mechanizmy obronne, świadome wybory); ego balansuje między potrzebami biologicznymi a normami społecznymi."],
+        ["Kompleks (Jung)", "Grupa emocjonalnie powiązanych myśli i wspomnień wokół jednego motywu; treść nieświadomości indywidualnej."]
       ],
       quiz: [
         { q: "Archetypy znajdują się w:", o: ["ego", "nieświadomości osobistej", "nieświadomości zbiorowej", "superego"], a: 2, e: "Archetypy to treści nieświadomości zbiorowej; kompleksy – osobistej." },
