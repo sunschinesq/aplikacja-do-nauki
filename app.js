@@ -401,7 +401,8 @@
       <div class="exam-hint">📅 Ustaw daty egzaminów w przedmiotach, a tutaj pojawi się odliczanie do najbliższego.</div>`}
       <div class="subject-grid">${cards}</div>
       <a class="backup-link${backupOverdue() ? " overdue" : ""}" href="#/kopia">💾 Kopia zapasowa postępów · ${lastBackupText()}${backupOverdue() ? (store.lastBackup ? " – czas na nową kopię!" : " – zrób pierwszą!") : ""}</a>
-      ${store.pets ? `<p class="pet-count">🐾 Pogłaskane kotki: ${store.pets}</p>` : ""}`;
+      ${store.pets ? `<p class="pet-count">🐾 Pogłaskane kotki: ${store.pets}</p>` : ""}
+      <p class="pet-count"><a href="#/nowosci">✨ Co nowego w aplikacji</a></p>`;
   }
 
 
@@ -1258,8 +1259,11 @@
   // ---------- gra w pary ----------
   // 6 krótkich fiszek: dotknij pytanie, potem pasującą odpowiedź; liczy się czas i pomyłki
   const MATCH_PAIRS = 6;
+  // krótkie fiszki + dodatkowe pary z pola „pairs” tematu (skrócone wersje dłuższych fiszek)
   function matchCards(subject, topicId) {
-    return subjectCards(subject, topicId).filter((c) => c.q.length <= 70 && c.a.length <= 80);
+    const topics = topicId ? subject.topics.filter((t) => t.id === topicId) : subject.topics;
+    const pairs = topics.flatMap((t) => (t.pairs || []).map(([q, a]) => ({ key: subject.id + ":p:" + hash(q), q, a, topic: t.title })));
+    return subjectCards(subject, topicId).filter((c) => c.q.length <= 70 && c.a.length <= 80).concat(pairs);
   }
   function startMatch(subject, topicId) {
     const pool = shuffle(matchCards(subject, topicId));
@@ -1839,6 +1843,54 @@
       }).join("")}</div>` : `<div class="empty"><p><strong>Brak dat egzaminów.</strong></p><p>Wejdź w przedmiot i ustaw datę egzaminu – wtedy plan rozłoży materiał na dni (z ostatnim dniem na powtórkę).</p></div>`}`;
   }
 
+  // ---------- co nowego ----------
+  // okienko z nowościami po aktualizacji (lista w data/zmiany.js); widziana wersja w osobnym kluczu
+  const SEEN_KEY = "nauka-zmiany-widziane";
+  const CHANGES = window.CHANGELOG || [];
+  function changesList(entries) {
+    return entries.map((e) => `
+      <div class="whatsnew-entry">
+        <div class="whatsnew-date">${esc(e.date)}</div>
+        <ul>${e.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>
+      </div>`).join("");
+  }
+  function showWhatsNew() {
+    if (!CHANGES.length) return;
+    let seen = null;
+    try { seen = localStorage.getItem(SEEN_KEY); } catch (e) { /* bez zapisu */ }
+    const latest = CHANGES[0].v;
+    if (seen === latest) return;
+    // nowsze niż ostatnio widziane (przy pierwszym razie – tylko najnowszy wpis)
+    const idx = seen ? CHANGES.findIndex((e) => e.v === seen) : 1;
+    const fresh = CHANGES.slice(0, idx < 0 ? 3 : Math.min(idx, 3));
+    const box = document.createElement("div");
+    box.className = "whatsnew";
+    box.innerHTML = `
+      <div class="whatsnew-card" role="dialog" aria-label="Co nowego w aplikacji">
+        <div class="whatsnew-head">✨ Co nowego w aplikacji</div>
+        ${changesList(fresh)}
+        ${buddy("Miau! Sprawdź nowości 🐾", "happy", true)}
+        <button class="btn primary big" data-whatsnew="ok">Super, dzięki! 💖</button>
+      </div>`;
+    document.body.appendChild(box);
+    requestAnimationFrame(() => requestAnimationFrame(() => box.classList.add("show")));
+    box.addEventListener("click", (ev) => {
+      if (ev.target.closest("[data-whatsnew]") || ev.target === box) {
+        try { localStorage.setItem(SEEN_KEY, latest); } catch (e) { /* bez zapisu */ }
+        box.classList.remove("show");
+        setTimeout(() => box.remove(), 300);
+      }
+    });
+  }
+  function viewChanges() {
+    document.title = "Co nowego – nauka";
+    app.innerHTML = `
+      <a class="back" href="#/">‹ Przedmioty</a>
+      <h1>✨ Co nowego</h1>
+      <p class="muted">Historia zmian w aplikacji, od najnowszych.</p>
+      <div class="panel whatsnew-page">${changesList(CHANGES)}</div>`;
+  }
+
   // ---------- zdarzenia ----------
   // ---------- kopia zapasowa ----------
   const BACKUP_APP = "nauka-drugi-rok";
@@ -2196,6 +2248,7 @@
     if (parts[0] === "kotki") return viewAlbum();
     if (parts[0] === "skupienie") return viewFocus();
     if (parts[0] === "plan") return viewPlan();
+    if (parts[0] === "nowosci") return viewChanges();
     if (parts[0] === "kopia") return viewBackup();
     if (parts[0] === "szukaj") return viewSearch();
     if (parts[0] === "zakladki") return viewMarks();
@@ -2501,4 +2554,5 @@
   window.addEventListener("hashchange", () => { route(); window.scrollTo(0, 0); });
   checkCats();
   route();
+  setTimeout(showWhatsNew, 600);
 })();

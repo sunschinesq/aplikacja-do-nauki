@@ -21,7 +21,8 @@ const FILES = [
   "data/diagnostyka.js",
   "data/diagnostyka-zagadnienia.js",
   "data/poznawcze.js",
-  "data/pomoc.js"
+  "data/pomoc.js",
+  "data/zmiany.js"
 ];
 
 self.addEventListener("install", (event) => {

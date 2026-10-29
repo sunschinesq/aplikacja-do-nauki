@@ -30,7 +30,8 @@ Cała aplikacja jest w różowej kolorystyce (jasny i ciemny motyw).
 - **Plan na dziś** – z dat egzaminów i postępów aplikacja codziennie układa listę: ile fiszek (nowe + powtórki, ostatni dzień przed egzaminem zostaje na powtórkę), quiz z najsłabszego tematu, pytania otwarte (od 3 tygodni przed egzaminem), próbny egzamin (od 10 dni przed). Fiszki odhaczają się same, resztę odhacza się ręcznie.
 - **Tryb skupienia (pomodoro)** – 15/25/45/50 minut nauki i przerwa; kotek śpi, gdy się uczysz, i budzi się na przerwę. Licznik działa w tle w całej aplikacji (🍅 w rogu ekranu), na koniec rundy krótki dźwięk. Minuty i sesje są w statystykach.
 - **Fiszki inaczej** – „🔄 na odwrót” (widzisz odpowiedź, przypominasz sobie pojęcie) i „⌨️ z pisaniem” (wpisujesz odpowiedź, aplikacja podświetla trafione słowa kluczowe i podpowiada, czy umiesz).
-- **Gra w pary** – 6 krótkich fiszek z przedmiotu albo tematu: łączysz pytania z odpowiedziami na czas; zapisuje się rekord.
+- **Co nowego** – po każdej aktualizacji przy otwarciu aplikacji pokazuje się okienko z nowościami (lista w `data/zmiany.js`, nowy wpis dopisuje się na górze); historia zmian pod „✨ Co nowego” na dole strony głównej.
+- **Gra w pary** – 6 krótkich fiszek (oraz par z pola `pairs` tematu – skróconych wersji dłuższych fiszek) z przedmiotu albo tematu: łączysz pytania z odpowiedziami na czas; zapisuje się rekord.
 - **Zadania ze statystyki** (metodologia) – generowane za każdym razem na nowo: stopnie swobody, istotność, wynik z, rozkład normalny i IQ, steny, wybór testu, wielkość efektu, siła korelacji, zapis APA, błędy I/II rodzaju, skale pomiarowe, średnia i mediana, η². Każde z wyjaśnieniem.
 - **Zagadnienia egzaminacyjne 📌** – prawdziwe pytania z egzaminów (osobowość: 79 z pliku psychologia-osobowości-egzamin.pdf; diagnostyka: 51 z listy „Pytania egzamin”) z wzorcowymi odpowiedziami, jako pytania otwarte ze sprawdzaniem pojęć.
 - **Próbne egzaminy** – test na czas we wszystkich przedmiotach (metodologia: 30 pytań/30 min/próg 16 jak na egzaminie; w pozostałych format orientacyjny, opisany na ekranie egzaminu) oraz **egzamin pisemny** z prawdziwych zagadnień (osobowość, diagnostyka): losowe pytania otwarte na czas, potem wzorce i samoocena 0–2 pkt.
@@ -69,7 +70,7 @@ data/pomoc.js         treść: podstawy pomocy psychologicznej
 sw.js                 tryb offline (lista plików zapisywanych na urządzeniu)
 ```
 
-Nowy plik z treścią trzeba dopisać w `index.html` i na liście `FILES` w `sw.js`.
+Nowy plik z treścią trzeba dopisać w `index.html` i na liście `FILES` w `sw.js`. Po każdej zmianie widocznej dla użytkowniczki dopisz wpis na górze `data/zmiany.js`.
 
 ### Jak dodać treść do przedmiotu
 

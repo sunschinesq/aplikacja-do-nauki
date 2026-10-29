@@ -380,6 +380,22 @@ Inne nazwy kryzysów spotykane w materiałach: **zaufanie vs podstawowa nieufno�
         ["Przebiegi i serie (Murray)", "Przebiegi – krótkie interakcje osoby z otoczeniem; serie – dłuższe, celowe ciągi przebiegów."],
         ["Kompleks Ikara (Murray)", "Kompleks uretralny: wygórowana ambicja, marzenia o wzlocie i wielkości."]
       ],
+      // krótkie pary do gry „Gra w pary” (dłuższe fiszki w skróconej wersji)
+      pairs: [
+        ["Persona", "maska społeczna"], ["Cień", "nieakceptowane, instynktowne aspekty „ja”"], ["Anima", "pierwiastek kobiecy u mężczyzny"], ["Animus", "pierwiastek męski u kobiety"],
+        ["Jaźń (Jung)", "archetyp całości, symbol – mandala"], ["Kompleks (Jung)", "myśli i wspomnienia wokół jednego motywu"], ["Archetypy", "treść nieświadomości zbiorowej"],
+        ["Zasada równoważności (Jung)", "energia nie ginie, przenosi się gdzie indziej"], ["Zasada entropii (Jung)", "dążenie do równowagi napięć"],
+        ["Funkcje racjonalne (Jung)", "myślenie i uczucie"], ["Funkcje irracjonalne (Jung)", "percepcja i intuicja"], ["Punkt zwrotny życia (Jung)", "ok. 35–40 r.ż. – zwrot ku wnętrzu"], ["Indywiduacja", "integracja przeciwieństw, stawanie się całością"],
+        ["Twórcze Ja (Adler)", "przetwarza predyspozycje w unikalny plan"], ["Fikcyjna celowość (Adler)", "motywują nas cele na przyszłość"], ["Kompensacja (Adler)", "odpowiedź na poczucie niższości"],
+        ["Pierworodny (Adler)", "„detronizacja”, potrzeba kontroli"], ["Drugie dziecko (Adler)", "rywalizacja, wyścig"], ["Najmłodszy (Adler)", "ryzyko rozpieszczenia"], ["Jedynak (Adler)", "trudność we współdzieleniu uwagi"],
+        ["3 zadania życiowe (Adler)", "praca, przyjaźń, miłość"], ["Miara zdrowia u Adlera", "zainteresowanie społeczne"],
+        ["Osobowość wg Sullivana", "trwały układ sytuacji interpersonalnych"], ["Dobre Ja (Sullivan)", "zachowania nagradzane przez innych"], ["Złe Ja (Sullivan)", "dezaprobata i umiarkowany lęk"], ["Nie-Ja (Sullivan)", "wyparte treści, paraliżujący lęk"],
+        ["Operacje zabezpieczające", "wybiórcza nieuwaga, dysocjacja"], ["Tryb parataksyczny", "związki przyczynowe tam, gdzie ich nie ma"], ["Chumship", "bliski przyjaciel tej samej płci"],
+        ["Ego u Eriksona", "autonomiczne, racjonalne, adaptacyjne"], ["Ego cielesne (Erikson)", "świadomość własnego ciała"], ["Ideał ego (Erikson)", "obraz siebie wobec ideałów społecznych"], ["Tożsamość ego (Erikson)", "poczucie ciągłości „ja” w czasie"],
+        ["Zasada epigenetyczna", "etapy wynikają z poprzednich"], ["Generatywność vs stagnacja", "wiek średni → troska"], ["Integralność vs rozpacz", "późna dorosłość → mądrość"],
+        ["Ja wyidealizowane (Horney)", "nierealny, wspaniały obraz siebie"], ["Ja prawdziwe (Horney)", "potencjał zdrowego rozwoju"], ["Tyrania powinności (Horney)", "wewnętrzne „muszę”"], ["Lęk podstawowy (Horney)", "izolacja i bezradność we wrogim świecie"],
+        ["Temat (Murray)", "potrzeba + presja"], ["Presja alfa (Murray)", "obiektywna, rzeczywista"], ["Presja beta (Murray)", "spostrzegana przez osobę"], ["Kompleks Ikara (Murray)", "kompleks uretralny – ambicja"], ["Serie (Murray)", "dłuższe, celowe ciągi przebiegów"]
+      ],
       quiz: [
         { q: "Archetypy znajdują się w:", o: ["ego", "nieświadomości osobistej", "nieświadomości zbiorowej", "superego"], a: 2, e: "Archetypy to treści nieświadomości zbiorowej; kompleksy – osobistej." },
         { q: "Miarą zdrowia psychicznego u Adlera jest:", o: ["indywiduacja", "zainteresowanie społeczne", "silne ego", "brak lęku"], a: 1, e: "Zdrowy człowiek dąży do wyższości dla dobra wspólnoty." },
