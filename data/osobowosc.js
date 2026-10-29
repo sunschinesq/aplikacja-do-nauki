@@ -287,12 +287,41 @@ Inne nazwy kryzysów spotykane w materiałach: **zaufanie vs podstawowa nieufno�
 - Neurotyk sztywno trzyma się jednej postawy; zdrowa osoba elastycznie korzysta ze wszystkich.
 - Utrata kontaktu z „prawdziwym ja” → tworzenie wyidealizowanego **„ja idealnego”**.
 
+### Horney w schemacie: struktura – działanie – rozwój
+- **Struktura**: w centrum **Ja**, w trzech postaciach:
+  - **Ja prawdziwe** (real self) – wewnętrzne źródło rozwoju, potencjał zdrowego wzrostu,
+  - **Ja rzeczywiste** (actual self) – to, kim osoba jest tu i teraz,
+  - **Ja wyidealizowane** (idealized self) – nierealny, wspaniały obraz siebie tworzony przez neurotyka dla ochrony przed lękiem.
+  - Kluczowe pojęcia: **lęk podstawowy** i **wrogość podstawowa**.
+- **Działanie**: osobowość organizuje się wokół **radzenia sobie z lękiem podstawowym**.
+  - **3 orientacje**: **ku ludziom** (uległość, potrzeba miłości), **przeciw ludziom** (agresja, potrzeba władzy), **od ludzi** (wycofanie, niezależność). Zdrowa osoba używa ich elastycznie, neurotyk – sztywno jednej.
+  - **Potrzeby neurotyczne** (Horney opisała 10, m.in. potrzeba miłości i aprobaty, partnera, władzy, prestiżu, podziwu, niezależności, doskonałości) – nienasycone i nierealistyczne strategie obrony.
+  - **Tyrania powinności** – wewnętrzne „muszę”, by dorównać Ja wyidealizowanemu; **poszukiwanie chwały**; konflikt między Ja rzeczywistym a wyidealizowanym → **alienacja od siebie**.
+- **Rozwój**: decydują **relacje z rodzicami w dzieciństwie** i **czynniki kulturowe** (krytyka biologizmu Freuda, m.in. „zazdrości o penisa”).
+  - Brak ciepła, obojętność, niekonsekwencja, dominacja rodziców → dziecko czuje **wrogość podstawową**, ale ją tłumi (bo jest zależne i boi się utraty miłości) → **lęk podstawowy** (poczucie izolacji i bezradności we wrogim świecie).
+  - Zdrowy rozwój: ciepło i bezpieczeństwo → **samorealizacja Ja prawdziwego**; neurotyczny: sztywne strategie, Ja wyidealizowane i oddalanie się od siebie.
+
 ## Henry Murray – personologia
 - **Potrzeba** – siła w mózgu organizująca percepcję, myślenie i działanie (np. osiągnięć, afiliacji, dominacji, autonomii).
 - Podziały potrzeb: pierwotne/wtórne, jawne/ukryte, skoncentrowane/rozproszone, proaktywne/reaktywne.
 - **Presja** – zewnętrzny odpowiednik potrzeby (ze strony środowiska), rzeczywista lub wyobrażona.
 - **Temat** = połączenie potrzeby i presji (badany Testem Apercepcji Tematycznej, TAT).
 - 5 kompleksów: klaustralny, oralny, analny, uretralny (Ikara), kastracyjny.
+
+### Murray w schemacie: struktura – działanie – rozwój
+- **Struktura**: osobowość ma podłoże w **mózgu** („bez mózgu nie ma osobowości”); Murray zachował freudowskie instancje, ale je przeformułował:
+  - **id** – popędy i impulsy, także **pozytywne** (nie tylko niebezpieczne),
+  - **ego** – aktywny, świadomy **organizator** zachowania (planuje, decyduje), nie tylko pośrednik,
+  - **superego** – uwewnętrznione normy kształtowane przez **kulturę** i rówieśników, nie tylko rodziców; **ideał ego** – obraz tego, kim osoba chce się stać.
+  - Jednostki opisu: **potrzeby** (ok. 20, np. osiągnięć, afiliacji, dominacji, autonomii, agresji, poniżenia, opiekowania się) i **presje**.
+- **Działanie**: zachowanie wynika z **interakcji potrzeb (wewnątrz) i presji (środowisko)** → **temat** (thema).
+  - Presje **alfa** (rzeczywiste, obiektywne) i **beta** (spostrzegane, subiektywne) – na zachowanie wpływa głównie presja beta.
+  - Potrzeby się łączą (fuzja), jedne służą innym (subsydiacja), mogą się ścierać (konflikt).
+  - Satysfakcję daje nie tylko **redukcja napięcia**, ale i sam proces jego **wytwarzania** i rozładowania.
+  - Jednostki zachowania: **przebiegi** (proceedings – krótkie interakcje) łączące się w **serie** (dłuższe, celowe ciągi działań).
+- **Rozwój**: ślady przyjemnych doświadczeń z dzieciństwa tworzą **kompleksy dziecięce** – nieświadomie wpływają na dalszy rozwój:
+  - **klaustralny** (życie płodowe – potrzeba schronienia, bezpieczeństwa), **oralny** (ssanie, karmienie), **analny** (wydalanie), **uretralny** (oddawanie moczu – **kompleks Ikara**: ambicja, marzenia o wzlocie), **kastracyjny** (lęk przed utratą penisa).
+  - Rozwój to zmiana i coraz lepsza **integracja potrzeb**; ważne źródło danych o osobowości – historia życia i **TAT**.
 
 > Na pamięć: Jung = Jaźń i głębia · Adler = Ambicja (niższość → wyższość) · Sullivan = Społeczne relacje · Erikson = Etapy życia. Kolejność kryzysów: „U Ani i Piotra tylko imprezy gra Igor” (ufność, autonomia, inicjatywa, pracowitość, tożsamość, intymność, generatywność, integralność).
 `,
@@ -341,7 +370,15 @@ Inne nazwy kryzysów spotykane w materiałach: **zaufanie vs podstawowa nieufno�
         ["Ego cielesne, ideał ego, tożsamość ego (Erikson)", "Ego cielesne – świadomość ciała; ideał ego – obraz siebie wobec norm społecznych; tożsamość ego – zintegrowany obraz siebie i poczucie ciągłości „ja”."],
         ["Zasada epigenetyczna (Erikson)", "Etapy rozwoju wynikają z poprzednich, a każdy ma swój optymalny czas ujawnienia."],
         ["Kluczowa funkcja ego u Eriksona", "Ochrona poczucia tożsamości i konstruktywne rozwiązywanie kryzysów życiowych (adaptacyjne mechanizmy obronne, świadome wybory); ego balansuje między potrzebami biologicznymi a normami społecznymi."],
-        ["Kompleks (Jung)", "Grupa emocjonalnie powiązanych myśli i wspomnień wokół jednego motywu; treść nieświadomości indywidualnej."]
+        ["Kompleks (Jung)", "Grupa emocjonalnie powiązanych myśli i wspomnień wokół jednego motywu; treść nieświadomości indywidualnej."],
+        ["Ja prawdziwe, rzeczywiste i wyidealizowane (Horney)", "Prawdziwe – potencjał zdrowego rozwoju; rzeczywiste – kim jestem teraz; wyidealizowane – nierealny, wspaniały obraz siebie tworzony przez neurotyka."],
+        ["Wrogość podstawowa a lęk podstawowy (Horney)", "Dziecko czuje wrogość wobec rodziców (brak ciepła, obojętność), ale ją tłumi z zależności i lęku przed utratą miłości – to rodzi lęk podstawowy."],
+        ["Tyrania powinności (Horney)", "Wewnętrzne „muszę” narzucane przez Ja wyidealizowane; prowadzi do alienacji od siebie."],
+        ["Potrzeby neurotyczne (Horney)", "10 nienasyconych strategii obrony przed lękiem, np. potrzeba miłości i aprobaty, władzy, prestiżu, podziwu, niezależności, doskonałości."],
+        ["Id, ego i superego u Murraya", "Id zawiera też pozytywne impulsy; ego to aktywny organizator zachowania; superego kształtuje kultura i rówieśnicy; do tego ideał ego."],
+        ["Presja alfa i beta (Murray)", "Alfa – rzeczywista, obiektywna; beta – spostrzegana przez osobę. Na zachowanie wpływa głównie presja beta."],
+        ["Przebiegi i serie (Murray)", "Przebiegi – krótkie interakcje osoby z otoczeniem; serie – dłuższe, celowe ciągi przebiegów."],
+        ["Kompleks Ikara (Murray)", "Kompleks uretralny: wygórowana ambicja, marzenia o wzlocie i wielkości."]
       ],
       quiz: [
         { q: "Archetypy znajdują się w:", o: ["ego", "nieświadomości osobistej", "nieświadomości zbiorowej", "superego"], a: 2, e: "Archetypy to treści nieświadomości zbiorowej; kompleksy – osobistej." },
@@ -359,7 +396,11 @@ Inne nazwy kryzysów spotykane w materiałach: **zaufanie vs podstawowa nieufno�
         { q: "Czynnik, który według Adlera przetwarza predyspozycje i doświadczenia w unikalny plan działania, to:", o: ["persona", "twórcze Ja", "system Ja", "ideał ego"], a: 1, e: "Twórcze Ja (creative self)." },
         { q: "Zachowania wywołujące paraliżujący lęk Sullivan przypisał do:", o: ["dobrego Ja", "złego Ja", "nie-Ja", "personifikacji matki"], a: 2, e: "Nie-Ja – wyparte, traumatyczne aspekty." },
         { q: "Wybiórcza nieuwaga i dysocjacja to u Sullivana:", o: ["dynamizmy", "operacje zabezpieczające", "tryby doświadczania", "personifikacje"], a: 1, e: "Mechanizmy obronne systemu Ja redukujące lęk." },
-        { q: "Zasada epigenetyczna u Eriksona oznacza, że:", o: ["rozwój kończy się w adolescencji", "etapy wynikają z poprzednich i mają swój optymalny czas", "osobowość jest dziedziczona", "kryzysy można pominąć"], a: 1, e: "Kolejne stadia budują się na poprzednich, każde w swoim czasie." }
+        { q: "Zasada epigenetyczna u Eriksona oznacza, że:", o: ["rozwój kończy się w adolescencji", "etapy wynikają z poprzednich i mają swój optymalny czas", "osobowość jest dziedziczona", "kryzysy można pominąć"], a: 1, e: "Kolejne stadia budują się na poprzednich, każde w swoim czasie." },
+        { q: "Nierealny, wspaniały obraz siebie, którym neurotyk broni się przed lękiem, to według Horney:", o: ["Ja prawdziwe", "Ja rzeczywiste", "Ja wyidealizowane", "persona"], a: 2, e: "Ja wyidealizowane – źródło tyranii powinności." },
+        { q: "Według Horney lęk podstawowy powstaje, gdy dziecko:", o: ["przeżywa kompleks Edypa", "tłumi wrogość wobec chłodnych lub obojętnych rodziców", "nie przejdzie fazy analnej", "doznaje frustracji popędu śmierci"], a: 1, e: "Wrogość podstawowa tłumiona z zależności → lęk podstawowy." },
+        { q: "Presja beta według Murraya to presja:", o: ["obiektywna, rzeczywista", "spostrzegana przez osobę", "ze strony superego", "biologiczna"], a: 1, e: "Alfa – obiektywna; beta – subiektywnie spostrzegana; to ona głównie wpływa na zachowanie." },
+        { q: "Kompleks Ikara Murray łączył z kompleksem:", o: ["klaustralnym", "oralnym", "uretralnym", "kastracyjnym"], a: 2, e: "Uretralny – ambicja i marzenia o wzlocie." }
       ]
     },
     // ------------------------------------------------------------------
