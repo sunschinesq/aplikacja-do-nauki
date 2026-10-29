@@ -2,6 +2,11 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29zb",
+    date: "29 października 2026",
+    items: ["👓 Kotek Iza nosi teraz transparentne okulary."]
+  },
+  {
     v: "2026-10-29za",
     date: "29 października 2026",
     items: ["🐯 Nowy kotek w albumie: Tygrysas – pomarańczowy w czarne tygrysie pręgi, z białym pyszczkiem i bursztynowymi oczami. Odblokujesz go za 250 odpowiedzi łącznie."]
