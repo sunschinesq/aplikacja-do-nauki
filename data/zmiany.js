@@ -2,6 +2,13 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-10-29s",
+    date: "29 października 2026",
+    items: [
+      "💛 Dwa nowe kotki-przyjaciółki, od razu w albumie: Oliwia – jasny, kremowy kotek z blond włosami do ramion i niebieskimi oczami, oraz Iza – kotek z długimi ciemnoblond włosami, jasnymi oczami i w kowbojkach 🤠"
+    ]
+  },
+  {
     v: "2026-10-29r",
     date: "29 października 2026",
     items: ["💨 Kotek Hania trzyma teraz w drugiej łapce fioletowego e-papierosa."]
