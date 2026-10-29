@@ -421,6 +421,31 @@
     "Gdy jesteś obok, mój popęd życia wygrywa z popędem drzemki 😼",
     "Jesteś dla mnie jak wzmocnienie ciągłe – każdy Twój widok = radość 🐾"
   ];
+  // teksty od Julki: kotek-motywator, pocieszyciel i chwalipięta
+  const JULKA_HELLO = [
+    "Pusta miska sama na siebie nie zarobi – to się w behawioryzmie nazywa prawo efektu, więc siadaj do książek.",
+    "Twoja hierarchia potrzeb Maslowa zaczyna się i kończy na pełnej misce, więc zalicz ten semestr.",
+    "Stosuję wobec Ciebie rozkład wzmocnień sporadycznych: pouczysz się pół godziny, to łaskawie dam się pogłaskać.",
+    "Dziś rolę Twojego superego przejmuję ja: koniec z prokrastynacją na telefonie, marsz do teorii.",
+    "Wyglądasz na ofiarę dysonansu poznawczego: wiesz, że musisz czytać, a i tak patrzysz na mnie – przestań, ja tu tylko leżę i pachnę.",
+    "Wyparcie tego materiału do nieświadomości nie sprawi, że zniknie; próbowałem tak z transporterem do weterynarza i nie działa."
+  ];
+  const JULKA_COMFORT = [
+    "Spokojnie, to nie jest wyuczona bezradność, tylko faza inkubacji problemu – połóż się obok mnie i poczekaj na olśnienie.",
+    "Widzę, że kortyzol rośnie, dlatego włączam mruczenie: to najtańsza terapia poznawczo-behawioralna, na jaką Cię stać.",
+    "Nie panikuj, to tylko chwilowe przeciążenie pamięci roboczej – zrób reset systemu i podrap mnie za uchem.",
+    "Wyparcie tego materiału do nieświadomości nie sprawi, że zniknie; próbowałem tak z transporterem do weterynarza i nie działa."
+  ];
+  const JULKA_GOOD = [
+    "Brawo, krzywa uczenia się poszła w górę – teraz zrób transfer tej skuteczności na otwieranie saszetki.",
+    "Pełne wejście w stan flow, jestem dumny – w nagrodę możesz popatrzeć, jak śpię w Twoich notatkach.",
+    "Jesteś jak gołąb u Skinnera: dziobałaś ten podręcznik cały dzień i wreszcie zaskoczyło."
+  ];
+  SAYS.funHello = SAYS.funHello.concat(JULKA_HELLO, JULKA_HELLO);
+  SAYS.funGood = SAYS.funGood.concat(JULKA_GOOD, JULKA_GOOD);
+  SAYS.funBad = SAYS.funBad.concat(JULKA_COMFORT);
+  SAYS.funMany = SAYS.funMany.concat(JULKA_COMFORT, JULKA_COMFORT);
+  SAYS.love = SAYS.love.concat(JULKA_HELLO.slice(0, 4), JULKA_GOOD.slice(1, 2));
   SAYS.funHello = SAYS.funHello.concat(SAYS.love);
   SAYS.funGood = SAYS.funGood.concat(SAYS.love.slice(0, 15));
   // co jakiś czas zamiast zwykłego tekstu – żart z psychologii
