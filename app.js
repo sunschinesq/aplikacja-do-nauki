@@ -1526,7 +1526,7 @@
       const done = s.done.has(i);
       const picked = side === "L" ? s.pickL === i : s.pickR === i;
       const bad = s.wrongPair && s.wrongPair[side] === i;
-      return `<button class="mt mt-${side}${done ? " done" : ""}${picked ? " picked" : ""}${bad ? " bad" : ""}" data-action="match-pick" data-side="${side}" data-i="${i}" ${done ? "disabled" : ""}>${esc(side === "L" ? c.q : c.a)}</button>`;
+      return `<button class="mt mt-${side}${done ? " done" : ""}${picked ? " picked" : ""}${bad ? " bad" : ""}${s.hintI === i && !done ? " hinted" : ""}" data-action="match-pick" data-side="${side}" data-i="${i}" ${done ? "disabled" : ""}>${esc(side === "L" ? c.q : c.a)}</button>`;
     };
     app.innerHTML = `
       <div class="session-top">
@@ -1537,6 +1537,7 @@
         <div class="match-col">${s.left.map((i) => tile("L", i)).join("")}</div>
         <div class="match-col">${s.right.map((i) => tile("R", i)).join("")}</div>
       </div>
+      <div class="hint-row"><button class="btn small hint-btn" data-action="game-hint">💡 Podpowiedź – pokaż jedną parę</button></div>
       ${sessionBuddy(s)}`;
     s.wrongPair = null;
   }
@@ -2217,7 +2218,16 @@
     renderMC();
   }
   function mcOptions(correct, pool, n = 3) {
-    const others = shuffle(pool.filter((x) => fold(x) !== fold(correct))).filter((x, i, arr) => arr.findIndex((y) => fold(y) === fold(x)) === i).slice(0, n);
+    // losuje n różnych błędnych odpowiedzi (bez porównywania całej puli ze sobą – przy setkach fiszek to zawieszało grę)
+    const seen = new Set([fold(correct)]);
+    const others = [];
+    for (const x of shuffle(pool)) {
+      const k = fold(x);
+      if (seen.has(k)) continue;
+      seen.add(k);
+      others.push(x);
+      if (others.length >= n) break;
+    }
     return mc(correct, others);
   }
   function renderMC() {
@@ -2239,8 +2249,10 @@
         <div class="options">${q.o.map((o, i) => {
           let cls = "option";
           if (answered) cls += i === q.a ? " correct" : i === s.chosen ? " wrong" : " dim";
-          return `<button class="${cls}" data-action="mc-answer" data-i="${i}" ${answered ? "disabled" : ""}><span class="opt-letter">${"ABCD"[i]}</span><span>${esc(o)}</span>${duel && answered && i === s.catPick ? `<span class="cat-pick">🐱</span>` : ""}</button>`;
+          else if ((q.hid || []).includes(i)) cls += " hinted-out";
+          return `<button class="${cls}" data-action="mc-answer" data-i="${i}" ${answered || (q.hid || []).includes(i) ? "disabled" : ""}><span class="opt-letter">${"ABCD"[i]}</span><span>${esc(o)}</span>${duel && answered && i === s.catPick ? `<span class="cat-pick">🐱</span>` : ""}</button>`;
         }).join("")}</div>
+        ${!answered ? `<div class="hint-row">${q.hid ? `<span class="hint-used">💡 Usunięto dwie złe odpowiedzi</span>` : `<button class="btn small hint-btn" data-action="game-hint">💡 Podpowiedź (50/50)</button>`}</div>` : ""}
         ${answered ? `
           ${duel ? `<div class="duel-line">🐱 Kotek wybrał ${"ABCD"[s.catPick]} – ${s.catPick === q.a ? "dobrze! 😼" : "pomylił się 🙀"}</div>` : ""}
           <div class="explain ${s.chosen === q.a ? "ok" : "no"}"><strong>${s.chosen === q.a ? "Dobrze!" : "Niestety nie."}</strong> ${esc(q.e || "")}</div>
@@ -2463,12 +2475,14 @@
         <div class="tf-q">${esc(it.q)}</div>
         <div class="tf-arrow">↓</div>
         <div class="tf-a">${esc(it.a)}</div>
+        ${it.hint ? `<div class="hint-text">💡 Prawidłowa odpowiedź zaczyna się od: „${esc(it.hint)}…”</div>` : ""}
         ${s.last ? `<div class="tf-last ${s.last.ok ? "ok" : "no"}">${s.last.ok ? "✓ Dobrze" : `✗ Poprzednie: ${esc(s.last.q)} → ${esc(s.last.right)}`}</div>` : ""}
       </div>
       <div class="grade">
         <button class="btn bad" data-action="tf-answer" data-v="0">✗ Fałsz</button>
         <button class="btn good" data-action="tf-answer" data-v="1">✓ Prawda</button>
       </div>
+      <div class="hint-row">${(s.hints || 0) < 3 && !it.hint ? `<button class="btn small hint-btn" data-action="game-hint">💡 Podpowiedź (zostało ${3 - (s.hints || 0)})</button>` : (s.hints || 0) >= 3 ? `<span class="hint-used">💡 Podpowiedzi wykorzystane</span>` : ""}</div>
       <p class="muted center-note">Możesz też przesunąć kartę: w lewo = fałsz, w prawo = prawda.</p>`;
     s.flash = "";
   }
@@ -2544,10 +2558,12 @@
         <ol class="order-done">${s.done.map((i) => `<li>${esc(seq.items[i])}</li>`).join("")}${finished ? "" : `<li class="order-next">?</li>`}</ol>
         ${finished ? `<div class="explain ok"><strong>Brawo!</strong> ${s.seqWrong ? `Pomyłki w tej sekwencji: ${s.seqWrong}.` : "Bez pomyłki!"}</div>
           <button class="btn primary big" style="--accent:${s.subject.color}" data-action="ord-next">${s.idx + 1 < s.seqs.length ? "Następna sekwencja ›" : "Zobacz wynik"}</button>` : `
-        <div class="order-pool">${s.pool.filter((i) => !s.done.includes(i)).map((i) => `<button class="order-item${s.bad === i ? " bad" : ""}" data-action="ord-pick" data-i="${i}">${esc(seq.items[i])}</button>`).join("")}</div>`}
+        <div class="order-pool">${s.pool.filter((i) => !s.done.includes(i)).map((i) => `<button class="order-item${s.bad === i ? " bad" : ""}${s.hintI === i ? " hinted" : ""}" data-action="ord-pick" data-i="${i}">${esc(seq.items[i])}</button>`).join("")}</div>
+        <div class="hint-row"><button class="btn small hint-btn" data-action="game-hint">💡 Podpowiedź – co jest następne?</button></div>`}
       </div>
       ${sessionBuddy(s)}`;
     s.bad = null;
+    s.hintI = null;
   }
   function pickOrder(i) {
     const s = session;
@@ -2558,6 +2574,62 @@
     if (s.done.length === seq.items.length) react(s, s.seqWrong ? 1 : 2, logAnswer(s.subject, !s.seqWrong, false));
     else if (!ok) say(s, pickOne(["Jeszcze nie ten – co było wcześniej? 🤔", "Prawie! Pomyśl, co jest przed nim 🐾", "Spokojnie, spróbuj inny 💗", "Zasada epigenetyczna: najpierw to, co wcześniejsze 😼", "Nawet Erikson nie przeskakiwał stadiów 😹"]), "comfort");
     renderOrder();
+  }
+
+  // --- podpowiedzi w grach (przycisk 💡) ---
+  function gameHint() {
+    const s = session;
+    if (!s) return;
+    if (s.type === "mc" && s.chosen === null) {
+      const q = s.qs[s.pos];
+      if (q.hid) return;
+      q.hid = shuffle(q.o.map((_, i) => i).filter((i) => i !== q.a)).slice(0, Math.max(0, q.o.length - 2));
+      say(s, pickOne(["Mrr, zabrałem dwie złe odpowiedzi 😼", "Psst… zostały tylko dwie możliwości 🐾", "Podpowiadam łapką: jedna z tych dwóch! 😸"]), "happy");
+      return renderMC();
+    }
+    if (s.type === "tf" && !s.over && (s.hints || 0) < 3 && !s.item.hint) {
+      const words = s.item.right.split(/\s+/);
+      s.item.hint = words.slice(0, Math.min(words.length > 3 ? 2 : 1, words.length)).join(" ");
+      s.hints = (s.hints || 0) + 1;
+      return renderTF();
+    }
+    if (s.type === "order") {
+      const seq = s.seqs[s.idx];
+      if (s.done.length >= seq.items.length) return;
+      s.hintI = s.done.length;
+      say(s, "Psst… to jest następne 👉✨", "happy");
+      return renderOrder();
+    }
+    if (s.type === "memory" && !s.lock && (s.hints || 0) < 3) {
+      const left = [...new Set(s.cards.map((c) => c.p))].filter((p) => !s.matched.has(p));
+      if (!left.length) return;
+      s.hints = (s.hints || 0) + 1;
+      s.peek = pick(left);
+      s.open = [];
+      s.lock = true;
+      say(s, "Zapamiętaj tę parę! 👀", "happy");
+      renderMemory();
+      setTimeout(() => { if (session === s) { s.peek = null; s.lock = false; renderMemory(); } }, 1600);
+      return;
+    }
+    if (s.type === "hang" && !s.hinted && !hangSolved(s) && s.fish > 0) {
+      const missing = [...new Set(s.word.q.toUpperCase().split(""))].filter((ch) => PL_LETTERS.includes(ch) && !s.guessed.has(ch));
+      if (!missing.length) return;
+      s.hinted = true;
+      s.guessed.add(pick(missing));
+      say(s, "Masz jedną literkę ode mnie 🐾", "happy");
+      if (hangSolved(s)) { s.won++; react(s, 2, logAnswer(s.subject, true, false)); }
+      return renderHang();
+    }
+    if (s.type === "match") {
+      const left = s.cards.map((_, i) => i).filter((i) => !s.done.has(i));
+      if (!left.length) return;
+      s.hintI = pick(left);
+      s.pickL = s.pickR = null;
+      say(s, "Te dwie pasują do siebie 👀✨", "happy");
+      renderMatch();
+      setTimeout(() => { if (session === s) { s.hintI = null; renderMatch(); } }, 1800);
+    }
   }
 
   // --- Memory (4×4: 8 par) ---
@@ -2601,10 +2673,11 @@
       </div>
       <div class="mem-grid" style="--accent:${s.subject.color}">
         ${s.cards.map((c, i) => {
-          const up = s.open.includes(i) || s.matched.has(c.p);
-          return `<button class="mem-card${up ? " up" : ""}${s.matched.has(c.p) ? " matched" : ""} side-${c.side}" data-action="mem-flip" data-i="${i}" ${s.matched.has(c.p) ? "disabled" : ""}>${up ? `<span>${esc(c.t)}</span>` : "🐾"}</button>`;
+          const up = s.open.includes(i) || s.matched.has(c.p) || s.peek === c.p;
+          return `<button class="mem-card${up ? " up" : ""}${s.matched.has(c.p) ? " matched" : ""}${s.peek === c.p && !s.matched.has(c.p) ? " hinted" : ""} side-${c.side}" data-action="mem-flip" data-i="${i}" ${s.matched.has(c.p) ? "disabled" : ""}>${up ? `<span>${esc(c.t)}</span>` : "🐾"}</button>`;
         }).join("")}
       </div>
+      <div class="hint-row">${(s.hints || 0) < 3 ? `<button class="btn small hint-btn" data-action="game-hint" ${s.lock ? "disabled" : ""}>💡 Pokaż na chwilę jedną parę (zostało ${3 - (s.hints || 0)})</button>` : `<span class="hint-used">💡 Podpowiedzi wykorzystane</span>`}</div>
       ${sessionBuddy(s)}`;
   }
   function flipMemory(i) {
@@ -2655,6 +2728,7 @@
     s.word = s.words[s.idx];
     s.guessed = new Set();
     s.fish = 6;
+    s.hinted = false;
   }
   function hangSolved(s) {
     return s.word.q.toUpperCase().split("").every((ch) => !PL_LETTERS.includes(ch) || s.guessed.has(ch));
@@ -2699,6 +2773,7 @@
         <div class="hang-fish">${"🐟".repeat(Math.max(0, s.fish))}${"🦴".repeat(6 - Math.max(0, s.fish))}</div>
         ${over ? `<div class="explain ${solved ? "ok" : "no"}"><strong>${solved ? "Odgadnięte!" : "Rybki się skończyły…"}</strong> ${solved ? "" : `To było: ${esc(s.word.q)}`}</div>
           <button class="btn primary big" style="--accent:${s.subject.color}" data-action="hang-next">${s.idx + 1 < s.words.length ? "Następne słowo ›" : "Zobacz wynik"}</button>` : `
+        <div class="hint-row">${s.hinted ? `<span class="hint-used">💡 Odkryto jedną literę</span>` : `<button class="btn small hint-btn" data-action="game-hint">💡 Odkryj jedną literę</button>`}</div>
         <div class="hang-keys">${PL_LETTERS.map((l) => `<button class="hk${s.guessed.has(l) ? (s.word.q.toUpperCase().includes(l) ? " hit" : " miss") : ""}" data-action="hang-letter" data-l="${l}" ${s.guessed.has(l) ? "disabled" : ""}>${l}</button>`).join("")}</div>`}
       </div>
       ${sessionBuddy(s)}`;
@@ -3641,6 +3716,8 @@
       } else if (action === "openexam-grade" && session.finished) {
         gradeOpenExam(Number(el.dataset.i), Number(el.dataset.g));
       }
+    } else if (action === "game-hint") {
+      gameHint();
     } else if (action === "mc-answer" && session.type === "mc" && session.chosen === null) {
       answerMC(Number(el.dataset.i));
     } else if (action === "mc-next" && session.type === "mc") {

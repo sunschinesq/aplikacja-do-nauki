@@ -2,6 +2,18 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-11-05a",
+    date: "5 listopada 2026",
+    items: [
+      "💡 Podpowiedzi we wszystkich grach – wystarczy kliknąć „💡 Podpowiedź”:",
+      "🗣️✏️⚔️🐾 Kto to powiedział, Uzupełnij lukę, Pojedynek i Wyzwanie dnia – kotek usuwa dwie złe odpowiedzi (50/50).",
+      "⚡ Prawda czy fałsz – pokazuje początek prawidłowej odpowiedzi (3 razy na grę).",
+      "🔢 Ułóż po kolei – podświetla, co jest następne. 🧩 Gra w pary – podświetla jedną pasującą parę.",
+      "🃏 Memory – na chwilę odsłania jedną parę (3 razy na grę). 🐟 Wisielec – odkrywa jedną literę w każdym słowie (bez utraty rybki).",
+      "🛠️ Naprawiony Pojedynek z kotkiem – przy dużych przedmiotach zawieszał aplikację, teraz włącza się od razu."
+    ]
+  },
+  {
     v: "2026-10-29zd",
     date: "29 października 2026",
     items: [
