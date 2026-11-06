@@ -2,6 +2,15 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-11-06a",
+    date: "6 listopada 2026",
+    items: [
+      "🤝 Podstawy pomocy psychologicznej: 4 nowe tematy z materiałów dr Darii Sucheckiej, które dodałaś na Dysk:",
+      "📋 Zaliczenie, organizacja zajęć i literatura · 🩺 Kliniczne studium przypadku i wywiad kliniczny · ✍️ Transkrypcja wywiadu · 📊 Raport z badania diagnostycznego (radzenie sobie ze stresem, COPE, EAS).",
+      "🃏 63 nowe fiszki, 33 pytania w quizie, 48 par do gier, 4 pytania otwarte i 2 nowe sekwencje w „Ułóż po kolei” (części studium przypadku, mechanizm radzenia sobie ze stresem)."
+    ]
+  },
+  {
     v: "2026-11-05a",
     date: "5 listopada 2026",
     items: [

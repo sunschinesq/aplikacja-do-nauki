@@ -12,7 +12,7 @@ Podział odpowiada folderom z Dysku Google („drugi rok JULIA / 1 semestr”):
 | Metodologia badań i statystyka | 11 tematów (wykład + ćwiczenia): notatki, 201 fiszek, 165 pytań (w tym wszystkie 100 pytań ze statystyki z kluczem) |
 | Wprowadzenie do diagnostyki psychologicznej | 10 tematów (9 wykładów + słowniczek): notatki, 182 fiszki, 66 pytań, 51 zagadnień z listy pytań egzaminacyjnych |
 | Diagnoza sprawności poznawczych | 8 tematów (etyka diagnozy, testy, trafność i SEM, adaptacja): notatki, 86 fiszek, 36 pytań |
-| Podstawy pomocy psychologicznej | 5 tematów (rozmowa diagnostyczna): notatki, 61 fiszek, 24 pytania |
+| Podstawy pomocy psychologicznej | 9 tematów (rozmowa diagnostyczna; zaliczenie, studium przypadku, transkrypcja i raport z badania – materiały dr Sucheckiej): notatki, 124 fiszki, 57 pytań w quizie |
 
 Cała aplikacja jest w różowej kolorystyce (jasny i ciemny motyw).
 

@@ -1,5 +1,7 @@
-// Podstawy pomocy psychologicznej. Opracowane na podstawie pliku z Dysku:
-// Notatka_Rozmowa_diagnostyczna.pdf (A. Suchańska; H. Grzegołowska-Klarkowska i T. Szustrowa).
+// Podstawy pomocy psychologicznej. Opracowane na podstawie plików z Dysku:
+// Notatka_Rozmowa_diagnostyczna.pdf (A. Suchańska; H. Grzegołowska-Klarkowska i T. Szustrowa)
+// oraz materiałów dr Darii Sucheckiej: PPP_OWRSP_wymagania_25-26.pdf, Studium przypadku_wymagania.pdf,
+// PPP Transkrypcja.pdf, studium_przypadku_raport.pdf.
 window.SUBJECTS = window.SUBJECTS || [];
 window.SUBJECTS.push({
   id: "pomoc",
@@ -8,9 +10,13 @@ window.SUBJECTS.push({
   icon: "🤝",
   color: "#d6336c",
   // format egzaminu orientacyjny – zmień, gdy poznasz zasady
-  exam: { questions: 15, minutes: 15, pass: 8, note: "Format orientacyjny (15 pytań, 15 minut, próg 8) – nie znam dokładnych zasad zaliczenia." },
+  exam: { questions: 15, minutes: 15, pass: 8, note: "To tylko test do powtórki – według wymagań dr Sucheckiej przedmiot zalicza się pracą praktyczną (rozmowa na forum, studium przypadku z transkrypcją, prezentacja), a nie egzaminem." },
   sources: [
-    "Notatka_Rozmowa_diagnostyczna.pdf – na podstawie: A. Suchańska, Rozmowa i obserwacja w diagnozie psychologicznej (rozdz. 2–4) oraz H. Grzegołowska-Klarkowska, T. Szustrowa, Swobodne techniki diagnostyczne (rozdz. 2–3)"
+    "Notatka_Rozmowa_diagnostyczna.pdf – na podstawie: A. Suchańska, Rozmowa i obserwacja w diagnozie psychologicznej (rozdz. 2–4) oraz H. Grzegołowska-Klarkowska, T. Szustrowa, Swobodne techniki diagnostyczne (rozdz. 2–3)",
+    "PPP_OWRSP_wymagania_25-26.pdf – wymagania, oceny, plan zajęć i literatura (dr D. Suchecka)",
+    "Studium przypadku_wymagania.pdf – kliniczne studium przypadku i elementy wywiadu klinicznego (dr D. Suchecka)",
+    "PPP Transkrypcja.pdf – transkrypcja wywiadu (dr D. Suchecka)",
+    "studium_przypadku_raport.pdf – wskazówki do raportu z badania diagnostycznego (radzenie sobie ze stresem, COPE, EAS)"
   ],
   topics: [
     // ------------------------------------------------------------------
@@ -420,6 +426,373 @@ Częsty błąd: **mylenie tego, co chcę wiedzieć, z tym, o co pytam**.
         { q: "„Jak sądzisz, jak widzą cię koledzy?” dotyczy informacji:", o: ["obiektywnych", "odzwierciedlonych", "uogólnionych", "przeszłych"], a: 1, e: "Własne vs odzwierciedlone." },
         { q: "Który paradygmat stosuje rozmowę niedyrektywną z parafrazą i odzwierciedlaniem?", o: ["behawioralny", "humanistyczny", "poznawczo-behawioralny", "narracyjny"], a: 1, e: "Paradygmat humanistyczny." },
         { q: "Który sposób zapisu jest najlepszy dla kontaktu, ale grozi zniekształceniami?", o: ["nagranie", "notatki w trakcie", "notatki po rozmowie", "kwestionariusz"], a: 2, e: "Trzeba notować od razu po rozmowie." }
+      ]
+    },
+    // ------------------------------------------------------------------
+    {
+      id: "zaliczenie",
+      title: "Zaliczenie, organizacja zajęć i literatura (dr Suchecka)",
+      notes: `
+Prowadząca ćwiczenia: **dr n. med. i n. o zdr. Daria Suchecka** (Instytut Psychologii US). Źródło: plik *PPP_OWRSP_wymagania_25-26.pdf* – przedmiot w tej wersji nazywa się „Podstawy pomocy psychologicznej – obserwacja, rozmowa i wywiad, studium przypadku”.
+
+> Uwaga: daty w pliku dotyczą roku 2025/2026 – sprawdź, czy w tym roku obowiązuje ten sam harmonogram.
+
+## Warunki zaliczenia
+- **Ćwiczenia: 45 h.** Dozwolona **1 nieobecność nieusprawiedliwiona**; każda kolejna nieusprawiedliwiona = **−0,5 oceny końcowej**. Usprawiedliwienia przez **Teams**.
+- **Rozmowa na forum grupy** – odgrywanie ról psycholog – pacjent.
+- **Studium przypadku** – praca pisemna **w parach** (termin w pliku: najpóźniej 22.01): obserwacja + wywiad.
+- **Transkrypcja wywiadu** – zapis przeprowadzonego wywiadu z „pacjentem/klientem”: **pisemnie + na nośniku** (nagranie).
+- **Prezentacja studium przypadku** na forum grupy (w parach).
+
+## Oceny (skrót)
+| Ocena | Co trzeba umieć |
+|---|---|
+| **5,0 (A)** | dokładnie opanowany materiał + wiedza z literatury; samodzielnie przeprowadza wywiad i obserwację i sporządza opis |
+| **4,5 (B)** | dosyć dobrze; samodzielnie przeprowadza wywiad i obserwację, nieznaczące błędy |
+| **4,0 (C)** | wystarczająco; trudności z trudniejszymi pytaniami i interpretacją, ale radzi sobie z typowymi zadaniami |
+| **3,5 (D)** | przeciętnie opanowany materiał i prowadzenie wywiadu oraz obserwacji |
+| **3,0 (E)** | minimum; zna zastosowania metod, ale trudno mu odnieść wiedzę do praktyki |
+| **2,0 (F)** | nie opanował podstaw, nie potrafi poprawnie i samodzielnie przeprowadzić wywiadu i obserwacji |
+
+## Plan ćwiczeń
+| Nr | Treść |
+|---|---|
+| 1 | wprowadzenie, podstawowe terminy |
+| 2 | **obserwacja** – rola w badaniu, rodzaje, nadawanie struktury, ćwiczenia |
+| 3 | specyfika **wywiadu**, **kontakt i kontrakt**, **transkrypcja** |
+| 4 | forma i struktura **rozmowy diagnostycznej** |
+| 5–8 | prowadzenie wywiadu i **instrumenty konwersacyjne** – ćwiczenia |
+| 8 | **studium przypadku** – zasady tworzenia, przykłady |
+| 9–11 | prezentacje prac własnych |
+| 12 | konsultacje prac zaliczeniowych |
+
+## Literatura
+- **Kępiński A.** (2002). *Poznanie chorego*.
+- **Shaughnessy, Zechmeister, Zechmeister** (2002). *Metody badawcze w psychologii*.
+- **Stemplewska-Żakowicz K.** (2013). *Diagnoza psychologiczna. Diagnozowanie jako kompetencja profesjonalna*.
+- **Stemplewska-Żakowicz K.** (2005). *Wywiad psychologiczny*, t. 1 i 2.
+- **Suchańska A.** (2007). *Rozmowa i obserwacja w diagnozie psychologicznej*.
+- **Szustrowa T.** (2005). *Swobodne techniki diagnostyczne. Wywiad i obserwacja*.
+
+> Na pamięć: zaliczenie = obecność + rozmowa na forum + studium przypadku w parach (z transkrypcją) + prezentacja.`,
+      flashcards: [
+        ["Kto prowadzi ćwiczenia z obserwacji, rozmowy i studium przypadku?", "Dr n. med. i n. o zdr. Daria Suchecka."],
+        ["Ile nieobecności nieusprawiedliwionych jest dozwolonych bez kary?", "Jedna; każda kolejna nieusprawiedliwiona obniża ocenę końcową o 0,5."],
+        ["Gdzie składa się usprawiedliwienia nieobecności?", "Na Teams."],
+        ["Z czego składa się zaliczenie przedmiotu?", "Obecność, rozmowa na forum grupy (psycholog – pacjent), studium przypadku w parach z obserwacją i wywiadem, transkrypcja wywiadu, prezentacja studium przypadku."],
+        ["W jakiej formie oddaje się transkrypcję wywiadu?", "Pisemnie i na nośniku (nagranie)."],
+        ["Studium przypadku pisze się…", "W parach."],
+        ["Czym różni się ocena 5,0 od 4,5?", "Na 5,0 student uzupełnił materiał wiedzą z literatury; na 4,5 popełnia nieznaczące błędy w przygotowaniu wywiadu i obserwacji."],
+        ["Co charakteryzuje ocenę 3,0?", "Minimalne opanowanie materiału: zna zastosowania metod, ale ma trudności z odniesieniem wiedzy do praktyki."],
+        ["Autor książki „Poznanie chorego”", "Antoni Kępiński (2002)."],
+        ["Autorka książki „Rozmowa i obserwacja w diagnozie psychologicznej”", "Aleksandra Suchańska (2007)."],
+        ["Autorka książki „Swobodne techniki diagnostyczne. Wywiad i obserwacja”", "Teresa Szustrowa (2005)."],
+        ["Autorka „Wywiadu psychologicznego” (t. 1 i 2)", "Katarzyna Stemplewska-Żakowicz (2005)."]
+      ],
+      pairs: [
+        ["Kępiński", "Poznanie chorego"],
+        ["Suchańska", "Rozmowa i obserwacja w diagnozie psychologicznej"],
+        ["Szustrowa", "Swobodne techniki diagnostyczne"],
+        ["Stemplewska-Żakowicz (2005)", "Wywiad psychologiczny, t. 1 i 2"],
+        ["Shaughnessy i Zechmeisterowie", "Metody badawcze w psychologii"],
+        ["Każda kolejna nieobecność nieusprawiedliwiona", "−0,5 oceny końcowej"],
+        ["Transkrypcja wywiadu", "pisemnie + na nośniku"],
+        ["Ćwiczenia 5–8", "prowadzenie wywiadu i instrumenty konwersacyjne"],
+        ["Ćwiczenie 2", "obserwacja – rodzaje i struktura"],
+        ["Ocena 5,0 (A)", "materiał + wiedza z literatury"]
+      ],
+      quiz: [
+        { q: "Ile nieobecności nieusprawiedliwionych można mieć bez obniżenia oceny?", o: ["1", "0", "2", "3"], a: 0, e: "Każda kolejna nieusprawiedliwiona to −0,5 oceny końcowej." },
+        { q: "Studium przypadku na zaliczenie przygotowuje się:", o: ["w parach", "indywidualnie", "w grupach 4-osobowych", "całą grupą"], a: 0, e: "Prezentacja również w parach." },
+        { q: "Który element NIE należy do zaliczenia przedmiotu?", o: ["egzamin pisemny z testem", "rozmowa na forum grupy", "transkrypcja wywiadu", "prezentacja studium przypadku"], a: 0, e: "Zaliczenie opiera się na pracy praktycznej, nie na teście." },
+        { q: "Książkę „Poznanie chorego” napisał:", o: ["Kępiński", "Szustrowa", "Suchańska", "Shaughnessy"], a: 0, e: "A. Kępiński (2002)." },
+        { q: "Na ocenę bardzo dobrą student musi m.in.:", o: ["uzupełnić materiał z zajęć wiedzą z literatury", "zdać test na 100%", "przeprowadzić 3 wywiady", "napisać pracę samodzielnie, bez pary"], a: 0, e: "I samodzielnie przeprowadzić wywiad i obserwację oraz sporządzić opis." },
+        { q: "Kontakt, kontrakt w wywiadzie i transkrypcja to temat ćwiczeń nr:", o: ["3", "1", "8", "12"], a: 0, e: "Ćw. 3 – specyfika wywiadu psychologicznego." }
+      ]
+    },
+    // ------------------------------------------------------------------
+    {
+      id: "studium",
+      title: "Kliniczne studium przypadku i wywiad kliniczny",
+      notes: `
+Źródło: *Studium przypadku_wymagania.pdf* (dr D. Suchecka).
+
+## 7 części klinicznego studium przypadku
+| # | Część | Co zawiera |
+|---|---|---|
+| 1 | **Wstęp** | kontekst zgłoszenia (kto skierował, wcześniejsze leczenie i jego skutek), relacja z wcześniej leczącymi, czy przyszedł **z własnej inicjatywy** (jeśli nie – z czyjej i co to znaczy), **obserwacja** |
+| 2 | **Informacje socjometryczne** | wiek, płeć, wykształcenie, miejsce zamieszkania, liczba członków najbliższej rodziny, praca |
+| 3 | **Problemy, na które skarży się pacjent** | aktualne problemy i ich historia, jak je przekazuje, **własne teorie pacjenta** o przyczynach, sytuacja wzmacniająca problem, emocjonalny stosunek, cierpienie, **wtórna korzyść z choroby**, hipotezy o funkcjonowaniu |
+| 4 | **Aktualna sytuacja** | obraz siebie i bliskich, przyszłość według pacjenta, cechy osobowości i temperamentu, radzenie sobie ze stresem, inteligencja i zdolności |
+| 5 | **Informacje medyczne** | aktualne choroby, leki, stan somatyczny, wizyty u psychiatry/psychologa, choroby psychiczne/neurologiczne w rodzinie, historia choroby |
+| 6 | **Wnioski i zalecenia** | podsumowanie, **weryfikacja hipotez**, wnioski o funkcjonowaniu i przyczynach problemów, zalecenia psychologiczne |
+| 7 | **Transkrypcja** | wybrany fragment wywiadu (**10 min**), z zaznaczonymi przedziałami czasowymi; nagranie + wersja papierowa |
+
+## Obserwacja w studium przypadku
+- **Przedmiot**: osoba badana.
+- **Cel**: opis zachowania na podstawie wskaźników i hipotezy o cechach osobowości, temperamentu i ewentualnej psychopatologii (wraz z **recypatią** obserwatora – jego własnymi odczuciami wobec badanego).
+- **Podstawa teoretyczna**: psychodynamiczne podejście **Kępińskiego**, podejście **integracyjne (Suchańska)** albo inna wybrana teoria.
+
+## Elementy wywiadu klinicznego
+| Obszar | Pytamy o… |
+|---|---|
+| **Dziedziczność** (rodzina biologiczna) | choroby neurologiczne (zwłaszcza **padaczka**), psychiczne, uzależnienie od alkoholu, inne przewlekłe |
+| **Leki** | obecne i wcześniejsze – pacjenci często nie znają skutków ubocznych (zwłaszcza poznawczych), więc warto je spisać i sprawdzić w **Pharmindeksie** |
+| **Używki** | alkohol, papierosy, narkotyki – od kiedy, ile, jak często |
+| **Ciąża i poród** | stosunek emocjonalny do dziecka (chciane?), przebieg ciąży i porodu, choroby noworodka (np. żółtaczka), **skala APGAR** |
+| **Wczesne dzieciństwo** | karmienie, trening toaletowy, sen, choroby, rozwój psychomotoryczny |
+| **Okres przedszkolny i szkolny** | relacje z rówieśnikami, rodzeństwem, rodzicami; zabawy; czy poszedł do szkoły o czasie; trudności w nauce; adolescencja; etapy rozwoju wg **Freuda, Eriksona, Piageta, Kohlberga** |
+| **Dorosłość i praca** | studia, pierwsza praca, konflikty, **frustracje ambicji**, służba wojskowa |
+| **Rodzina** | liczba członków, warunki ekonomiczno-społeczne, **układ sił** (kto rządzi), sylwetki rodziców, atmosfera |
+| **Trwałe związki** | pierwsze kontakty seksualne, stosunek do partnera, ciąże, źródła konfliktów, rozwiązywanie problemów |
+| **Późna dorosłość** | menopauza, kryzys wieku średniego, stosunek do starości i śmierci |
+| **Obecna choroba** | pierwsze objawy, czynniki wywoławcze, dokładny przebieg |
+
+## Wymagania wobec pracy
+- **Etapy**: I – przygotowawczy (wywiad, obserwacja, materiały), II – sprawozdawczy (prezentacja + praca pisemna).
+- **Praca pisemna**: **4–8 stron** A4, Times New Roman 12, interlinia **1,5**; wyczerpujący wstęp teoretyczny, **min. 5 pozycji** w bibliografii; tytuły rozdziałów; **osadzenie przypadku na tle populacji**.
+- **Prezentacja**: podstawowe informacje ze studium, **odwołanie do teorii** dotyczących danej patologii, **nie kopia** pracy pisemnej, przejrzysta, z tytułami i spisem piśmiennictwa.
+- **Na 5,0**: praca nie jest tylko rozwinięciem informacji ze studium – **oryginalne spojrzenie** i wyjątkowość opisu.
+
+> Na pamięć: W-S-P-A-M-W-T – Wstęp · Socjometryczne · Problemy · Aktualna sytuacja · Medyczne · Wnioski · Transkrypcja.`,
+      flashcards: [
+        ["7 części klinicznego studium przypadku", "Wstęp, informacje socjometryczne, problemy pacjenta, aktualna sytuacja, informacje medyczne, wnioski i zalecenia, transkrypcja."],
+        ["Co zawiera wstęp studium przypadku?", "Kontekst zgłoszenia (kto skierował, wcześniejsze leczenie i skutek), relację z wcześniej leczącymi, czy pacjent przyszedł z własnej inicjatywy, obserwację."],
+        ["Informacje socjometryczne to…", "Wiek, płeć, wykształcenie, miejsce zamieszkania, liczba członków najbliższej rodziny, praca."],
+        ["Wtórna korzyść z choroby", "Zysk, jaki pacjent ma z objawów (np. uwaga, zwolnienie z obowiązków) – część opisu problemów pacjenta."],
+        ["Recypatia", "Uczucia, refleksje i wrażenia badającego wobec osoby badanej – element obserwacji i opisu relacji."],
+        ["Podstawy teoretyczne obserwacji w studium przypadku", "Psychodynamiczne podejście Kępińskiego, integracyjne (Suchańska) lub inna wybrana teoria."],
+        ["Jak długi fragment wywiadu transkrybuje się do studium przypadku?", "10 minut, z zaznaczonymi przedziałami czasowymi; nagranie + wersja papierowa."],
+        ["Dlaczego warto spisać leki pacjenta i sprawdzić je w Pharmindeksie?", "Pacjenci często nie znają skutków ubocznych leków, zwłaszcza wpływu na funkcjonowanie poznawcze."],
+        ["Którą chorobę neurologiczną w rodzinie szczególnie się wymienia w wywiadzie?", "Padaczkę."],
+        ["Skala APGAR", "Ocena stanu noworodka tuż po porodzie – element wywiadu o ciąży i porodzie."],
+        ["Etapy rozwoju w wywiadzie o okresie szkolnym – według jakich teorii?", "Freuda, Eriksona, Piageta, Kohlberga."],
+        ["Układ sił w rodzinie", "Kto rządzi i jak podzielone są obowiązki – element wywiadu o rodzinie."],
+        ["Objętość pisemnego studium przypadku", "4–8 stron A4, Times New Roman 12, interlinia 1,5."],
+        ["Ile pozycji w bibliografii studium przypadku?", "Minimum 5."],
+        ["Czego NIE może być prezentacja studium przypadku?", "Prostą kopią pracy pisemnej."],
+        ["Co wyróżnia pracę na ocenę bardzo dobrą?", "Nie jest tylko rozwinięciem informacji ze studium – ma oryginalne spojrzenie i wyjątkowość opisu."],
+        ["Osadzenie przypadku na tle populacji", "Wymóg pracy pisemnej: odniesienie przypadku do danych o częstości i specyfice problemu w populacji."],
+        ["Co obejmuje część „Wnioski i zalecenia”?", "Podsumowanie, weryfikację hipotez, wnioski o funkcjonowaniu i przyczynach problemów, zalecenia psychologiczne."]
+      ],
+      pairs: [
+        ["Wstęp", "kontekst zgłoszenia i obserwacja"],
+        ["Informacje socjometryczne", "wiek, płeć, wykształcenie, praca"],
+        ["Aktualna sytuacja", "obraz siebie, cechy, radzenie sobie ze stresem"],
+        ["Informacje medyczne", "choroby, leki, wizyty u psychiatry"],
+        ["Wnioski i zalecenia", "weryfikacja hipotez"],
+        ["Transkrypcja w studium", "10-minutowy fragment wywiadu"],
+        ["Recypatia", "odczucia obserwatora wobec badanego"],
+        ["Pharmindex", "sprawdzanie skutków ubocznych leków"],
+        ["Skala APGAR", "stan noworodka po porodzie"],
+        ["Padaczka", "dziedziczność – choroby neurologiczne"],
+        ["Kryzys wieku średniego", "okres przejściowy – późna dorosłość"],
+        ["Frustracje ambicji", "okres dorosłości i praca"],
+        ["Układ sił w rodzinie", "kto rządzi, podział obowiązków"],
+        ["Praca pisemna", "4–8 stron, min. 5 pozycji literatury"]
+      ],
+      open: [
+        { q: "Omów strukturę klinicznego studium przypadku.", a: "Siedem części: **wstęp** (kontekst zgłoszenia, wcześniejsze leczenie, inicjatywa zgłoszenia, obserwacja), **informacje socjometryczne**, **problemy pacjenta** (historia, własne teorie przyczyn, sytuacje wzmacniające, cierpienie, **wtórna korzyść**, hipotezy), **aktualna sytuacja** (obraz siebie, cechy osobowości i temperamentu, radzenie sobie ze stresem), **informacje medyczne**, **wnioski i zalecenia** (weryfikacja hipotez) oraz **transkrypcja** 10-minutowego fragmentu wywiadu." },
+        { q: "Jakie obszary obejmuje wywiad kliniczny?", a: "**Dziedziczność**, **leki** (Pharmindex), **używki**, **ciąża i poród** (APGAR), **wczesne dzieciństwo**, **okres przedszkolny i szkolny** (etapy wg Freuda, Eriksona, Piageta, Kohlberga), **dorosłość i praca**, **rodzina** (układ sił, atmosfera), **trwałe związki**, **późna dorosłość** i **obecna choroba** (pierwsze objawy, czynniki wywoławcze, przebieg)." }
+      ],
+      quiz: [
+        { q: "Ile części ma kliniczne studium przypadku wg dr Sucheckiej?", o: ["7", "5", "4", "10"], a: 0, e: "Wstęp, socjometryczne, problemy, aktualna sytuacja, medyczne, wnioski i zalecenia, transkrypcja." },
+        { q: "Wtórna korzyść z choroby jest opisywana w części:", o: ["problemy, na które skarży się pacjent", "informacje socjometryczne", "informacje medyczne", "transkrypcja"], a: 0, e: "Razem z historią problemu, cierpieniem i hipotezami." },
+        { q: "Recypatia to:", o: ["odczucia i wrażenia obserwatora wobec badanego", "skala oceny noworodka", "rodzaj transkrypcji", "lek przeciwlękowy"], a: 0, e: "Uwzględniana w obserwacji i opisie relacji diagnostycznej." },
+        { q: "Po co spisywać leki pacjenta i sprawdzać je w Pharmindeksie?", o: ["pacjenci często nie znają ich skutków ubocznych, zwłaszcza poznawczych", "żeby zmienić dawkowanie", "bo wymaga tego RODO", "żeby wystawić receptę"], a: 0, e: "Leki mogą wpływać na funkcjonowanie poznawcze w badaniu." },
+        { q: "Skala APGAR pojawia się w wywiadzie o:", o: ["ciąży i porodzie", "pracy zawodowej", "trwałych związkach", "używkach"], a: 0, e: "Ocena stanu noworodka po porodzie." },
+        { q: "Jakiej długości powinno być pisemne studium przypadku?", o: ["4–8 stron", "1–2 strony", "15–20 stron", "dowolnej"], a: 0, e: "A4, Times New Roman 12, interlinia 1,5." },
+        { q: "Ile minimum pozycji w bibliografii studium przypadku?", o: ["5", "1", "3", "10"], a: 0, e: "Plus wyczerpujący wstęp teoretyczny." },
+        { q: "Który obszar NIE należy do informacji socjometrycznych?", o: ["przyjmowane leki", "wiek", "wykształcenie", "praca"], a: 0, e: "Leki należą do informacji medycznych." },
+        { q: "Prezentacja studium przypadku powinna:", o: ["odwoływać się do teorii dotyczących danej patologii", "być kopią pracy pisemnej", "nie zawierać literatury", "zawierać pełną transkrypcję"], a: 0, e: "Nie może być prostą kopią pracy pisemnej." },
+        { q: "Etapy rozwoju w wywiadzie o okresie szkolnym opisuje się wg teorii:", o: ["Freuda, Eriksona, Piageta, Kohlberga", "Maslowa i Rogersa", "Skinnera i Pawłowa", "Eysencka i Cattella"], a: 0, e: "Wymienieni w slajdzie o okresie przedszkolnym i szkolnym." }
+      ]
+    },
+    // ------------------------------------------------------------------
+    {
+      id: "transkrypcja",
+      title: "Transkrypcja wywiadu",
+      notes: `
+Źródło: *PPP Transkrypcja.pdf* (dr D. Suchecka).
+
+## Czym jest transkrypcja?
+- **Przedstawienie aktów języka mówionego w formie pisemnej** (Davidson, 2006) – zamiana mowy na tekst.
+- Badacze traktują ją jako **„surowe dane”**, interpretowane dopiero w analizie (Ritchie i Lewis, 2003).
+- W wąskim sensie: „**techniczna procedura przepisywania**, która przedstawia dyskurs mówiony w postaci tekstu” (Bloor, Wood, 2006).
+- W szerokim sensie: każdy **przekład z jednego typu danych na inny** (np. wizualnych na tekst) – antropolodzy (Clifford) transkrybują rytuały i czynności.
+- Transkrypcja obrazów jest rzadsza, bo **brak skodyfikowanego sposobu** ich zapisu.
+
+## Kto ma transkrybować?
+- **Angrosino (2010)**: to „powolne i nudne zajęcie” – przeciętny badacz nie ma czasu ani umiejętności → zlecić osobie trzeciej (drogo).
+- Autorzy *„Analizy układów społecznych”* (2009): **lepiej samodzielnie** – transkrypcja pobudza interpretację i krystalizację pojęć. Gdy robi ją ktoś inny, trzeba **szybko przesłuchać nagranie i poprawić błędy**.
+
+## Transkrypcja w sądzie
+- Nagranie może być dowodem (np. sprawy rodzinne, alimenty, podział majątku, władza rodzicielska).
+- Każde takie nagranie musi mieć **stenogram** – staranny, z uczestnikami rozmowy i **znacznikami czasu** przed wypowiedziami, z **dźwiękami otoczenia i emocjami** rozmówców.
+
+## Funkcje transkrypcji w badaniu
+- szczegółowa analiza **bez ciągłego wracania do nagrania**,
+- krytyczna analiza przebiegu wywiadu,
+- odświeża wspomnienia i uzupełnia notatki terenowe,
+- **redukuje uprzedzenia badacza i pobudza refleksyjność**,
+- wielokrotna analiza tego samego materiału (ważne w **hermeneutycznym** modelu badań jakościowych),
+- **replikacja** badania i powtórna analiza przez innych (bank danych),
+- uwiarygodnia wyniki w raportach,
+- pozwala używać programów komputerowych (**CAQDAS**).
+
+## Typy transkrypcji
+| Podział | Typ | Cechy |
+|---|---|---|
+| Bucholtz (2000), Mero-Jaffe (2011) | **zdenaturalizowana** | jak tekst pisany, z interpunkcją; łatwa w odbiorze, ale **bardziej odbiega** od oryginału |
+| | **znaturalizowana** | kopiuje mowę: **powtórzenia, falstarty, zająknięcia**, błędy; trudniejsza, „drażni niedoskonałością” |
+| Evers (2011) | **pragmatyczna** | najsłabiej sformalizowana, dopasowana do potrzeb badania i budżetu |
+| | **wg Gail Jefferson** | najczęściej w **analizie konwersacyjnej**; złożona – ok. **20 godzin na 1 godzinę** nagrania |
+| | **skondensowana (gisted)** | **streszczenie** rozmowy na podstawie notatek terenowych |
+
+## Prozodia (E. Soroko)
+- **Informacje prozodyczne** – akcent, długość samogłosek, **rytm** – trzeba zapisywać odpowiednimi znakami, jeśli mają mówić o **emocjach** rozmówców.
+- Znaki przestankowe w transkrypcji pełnią funkcję **intonacyjną**, nie gramatyczną.
+- **Pauzy** mierzy się liczeniem sekund w myślach albo licznikiem w odtwarzaczu (ten Have, 2002).
+
+> Na pamięć: zdenaturalizowana = ładna, ale daleka od mowy · znaturalizowana = wierna, ale „brzydka” · Jefferson = analiza konwersacyjna, 20 h na 1 h.`,
+      flashcards: [
+        ["Transkrypcja (Davidson, 2006)", "Przedstawienie aktów języka mówionego w formie pisemnej – zamiana mowy na tekst."],
+        ["Transkrypcja jako „surowe dane”", "Badacze (Ritchie i Lewis) traktują ją jako dane, które interpretuje się dopiero w analizie."],
+        ["Transkrypcja w wąskim sensie (Bloor, Wood)", "Techniczna procedura przepisywania, która przedstawia dyskurs mówiony w postaci tekstu."],
+        ["Transkrypcja w szerokim sensie", "Każdy przekład z jednego typu danych na inny, np. wizualnych na język pisany."],
+        ["Co uważał Angrosino (2010) o transkrypcji?", "Że jest powolna i nudna, a przeciętny badacz nie ma czasu ani umiejętności – lepiej zlecić ją osobie trzeciej."],
+        ["Dlaczego warto transkrybować samodzielnie?", "Bo transkrypcja pobudza interpretację i krystalizację pojęć analitycznych („Analiza układów społecznych”)."],
+        ["Stenogram w sądzie", "Pisemna wersja nagrania-dowodu: z uczestnikami, znacznikami czasu, dźwiękami otoczenia i emocjami rozmówców."],
+        ["Transkrypcja zdenaturalizowana", "Ma formę tekstu pisanego z interpunkcją; łatwiejsza w odbiorze, ale bardziej odbiega od oryginału."],
+        ["Transkrypcja znaturalizowana", "Kopiuje mowę z powtórzeniami, falstartami, zająknięciami i błędami; wymaga więcej wysiłku interpretacyjnego."],
+        ["Transkrypcja pragmatyczna (Evers)", "Najsłabiej sformalizowana; badacz dopasowuje zapis do potrzeb badania i budżetu."],
+        ["Zapis według Gail Jefferson", "Złożony zapis używany w analizie konwersacyjnej; ok. 20 godzin pracy na 1 godzinę nagrania."],
+        ["Transkrypcja skondensowana (gisted)", "Streszczenie rozmowy sporządzone na podstawie notatek terenowych."],
+        ["Informacje prozodyczne", "Sposób akcentowania, długość samogłosek, rytm wypowiedzi – mówią o emocjach rozmówców."],
+        ["Jaką funkcję pełnią znaki przestankowe w transkrypcji?", "Intonacyjną, a nie gramatyczną."],
+        ["Jak mierzy się pauzy w transkrypcji?", "Licząc sekundy w myślach albo licznikiem w programie odtwarzającym (ten Have, 2002)."],
+        ["CAQDAS", "Komputerowe programy do analizy danych jakościowych – transkrypcja pozwala z nich korzystać."],
+        ["Dlaczego transkrypcja redukuje uprzedzenia badacza?", "Bo pozwala wielokrotnie i krytycznie analizować dokładny zapis, pobudzając refleksyjność."]
+      ],
+      pairs: [
+        ["Davidson (2006)", "język mówiony w formie pisemnej"],
+        ["Bloor i Wood", "techniczna procedura przepisywania"],
+        ["Angrosino", "transkrypcja powolna i nudna"],
+        ["Zdenaturalizowana", "tekst z interpunkcją, daleki od oryginału"],
+        ["Znaturalizowana", "powtórzenia, falstarty, zająknięcia"],
+        ["Pragmatyczna", "dopasowana do potrzeb i budżetu"],
+        ["Gail Jefferson", "analiza konwersacyjna, 20 h na 1 h"],
+        ["Skondensowana (gisted)", "streszczenie z notatek terenowych"],
+        ["Prozodia", "akcent, długość samogłosek, rytm"],
+        ["Stenogram", "transkrypcja nagrania dla sądu"],
+        ["CAQDAS", "programy do analizy jakościowej"],
+        ["ten Have (2002)", "pomiar pauz"]
+      ],
+      open: [
+        { q: "Omów typy transkrypcji i ich wady oraz zalety.", a: "Wg **Bucholtz** i **Mero-Jaffe**: **zdenaturalizowana** – forma tekstu pisanego z interpunkcją, łatwa w odbiorze, ale odbiega od oryginału; **znaturalizowana** – kopiuje mowę z powtórzeniami, falstartami i zająknięciami, wierniejsza, ale trudniejsza. Wg **Eversa**: **pragmatyczna** (dopasowana do potrzeb i budżetu), **zapis wg Gail Jefferson** (analiza konwersacyjna, ok. 20 h na 1 h nagrania) i **skondensowana** (streszczenie z notatek terenowych)." },
+        { q: "Jakie funkcje pełni transkrypcja w procesie badawczym?", a: "Pozwala na szczegółową analizę bez wracania do nagrania, krytyczną analizę przebiegu wywiadu, odświeża wspomnienia i uzupełnia notatki, **redukuje uprzedzenia i pobudza refleksyjność**, umożliwia wielokrotną analizę (model hermeneutyczny), **replikację** i powtórną analizę przez innych, uwiarygodnia wyniki i pozwala korzystać z programów **CAQDAS**." }
+      ],
+      quiz: [
+        { q: "Transkrypcja kopiująca mowę z powtórzeniami, falstartami i zająknięciami to transkrypcja:", o: ["znaturalizowana", "zdenaturalizowana", "skondensowana", "pragmatyczna"], a: 0, e: "Zdenaturalizowana ma formę tekstu pisanego z interpunkcją." },
+        { q: "Zapis według Gail Jefferson stosuje się najczęściej w:", o: ["analizie konwersacyjnej", "testach psychometrycznych", "sądownictwie", "obserwacji uczestniczącej"], a: 0, e: "Zajmuje ok. 20 godzin na 1 godzinę nagrania." },
+        { q: "Transkrypcja skondensowana (gisted) to:", o: ["streszczenie rozmowy na podstawie notatek terenowych", "pełny zapis z prozodią", "zapis tylko pytań badacza", "nagranie wideo"], a: 0, e: "Typ wyróżniony przez Eversa (2011)." },
+        { q: "Kto uważał transkrypcję za „powolne i nudne zajęcie”?", o: ["Angrosino", "Davidson", "Jefferson", "Bucholtz"], a: 0, e: "Michael Angrosino (2010) – zalecał zlecanie jej osobie trzeciej." },
+        { q: "Znaki przestankowe w transkrypcji pełnią funkcję:", o: ["intonacyjną", "gramatyczną", "ozdobną", "żadną"], a: 0, e: "Oddają intonację mowy, a nie reguły gramatyki." },
+        { q: "Stenogram nagrania wykorzystywanego w sądzie powinien zawierać m.in.:", o: ["znaczniki czasowe, dźwięki otoczenia i emocje rozmówców", "tylko słowa bez kontekstu", "streszczenie rozmowy", "wyłącznie wypowiedzi oskarżonego"], a: 0, e: "I oznaczenie uczestników rozmowy." },
+        { q: "Która funkcja NIE należy do funkcji transkrypcji?", o: ["zastąpienie nagrania jako jedynego dowodu w sądzie", "redukcja uprzedzeń badacza", "umożliwienie replikacji badania", "korzystanie z programów CAQDAS"], a: 0, e: "W sądzie dowodem jest nagranie, a stenogram musi mu towarzyszyć." },
+        { q: "Dlaczego autorzy „Analizy układów społecznych” zalecają samodzielną transkrypcję?", o: ["pobudza interpretację i krystalizację pojęć", "jest tańsza od nagrania", "jest wymagana prawem", "eliminuje potrzebę analizy"], a: 0, e: "Transkrypcja towarzyszy procesowi interpretacji." }
+      ]
+    },
+    // ------------------------------------------------------------------
+    {
+      id: "raport-stres",
+      title: "Raport z badania diagnostycznego: radzenie sobie ze stresem (COPE, EAS)",
+      notes: `
+Źródło: *studium_przypadku_raport.pdf* – wskazówki do pracy indywidualnej (badania diagnostycznego).
+
+## Strona formalna
+Czcionka **12 pt** (Arial lub Times New Roman), odstęp **1,5**, raport (integracja danych) **maks. 4 strony**, strony ponumerowane. Z całości **usuwa się dane identyfikacyjne**.
+
+## Struktura raportu
+1. **Dane ogólne** o osobie badanej (inicjały, płeć, wiek, wykształcenie, zawód, miejsce zamieszkania).
+2. **Osoba badająca**.
+3. **Cel badań** – 4 pytania diagnostyczne:
+   - **jak** osoba radzi sobie ze stresem (strategie)?
+   - **od czego zależy** wybór strategii (typ sytuacji, stresory)?
+   - **dlaczego** stosuje te strategie (uwarunkowania temperamentalne, osobowościowe)?
+   - **jak efektywnie** radzi sobie ze stresem?
+4. **Przebieg badań** – kiedy i jakimi metodami, odstępstwa od procedury, zakłócenia.
+5. **Relacja diagnostyczna** – kontekst, motywacja badanego.
+6. **Sposób radzenia sobie ze stresem i weryfikacja hipotez** – **najważniejsza część** (integracja danych z różnych metod).
+7. **Zasoby** (zewnętrzne i wewnętrzne) – wykorzystywane i niewykorzystywane.
+8. **Prognoza** funkcjonowania w sytuacjach stresowych.
+9. **Luki diagnostyczne** – jakich informacji jeszcze brakuje (obszary „diagnostycznej penetracji”).
+10. Ewentualne **zalecenia pomocy psychologicznej** (gdy radzi sobie nieefektywnie).
+11. Uwagi o **komunikowaniu wyników** (termin trzeciego spotkania) · bibliografia · podpis.
+
+## Mechanizm radzenia sobie ze stresem (schemat)
+**Uwarunkowania (temperamentalne i inne)** → **zdarzenie aktywizujące (typ stresora)** → **doświadczanie napięcia** → **strategie radzenia sobie** → **spostrzeganie podobnych zdarzeń w przyszłości**.
+Strategie trzeba rozwinąć, np.: przekonania i myśli → emocje → działanie · działanie → emocje · brak działania → przewartościowanie → działanie.
+
+## Ważne zasady interpretacji
+- analiza w **jednym paradygmacie** teoretycznym (nie mieszamy teorii z różnych paradygmatów),
+- zbieramy i interpretujemy tylko dane **związane z celem** (zachowanie w obliczu stresu),
+- hipotezy w **terminach psychologicznych**, nie potocznych; powinny **wyjaśniać**, a nie tylko klasyfikować – **diagnoza funkcjonalna, a nie nozologiczna**,
+- warto określać **stopień pewności** („najprawdopodobniej…”, „można przypuszczać…”),
+- na wysoką ocenę – dobra **agregacja danych**, która uchwyca indywidualność osoby.
+
+## Portfolio diagnostyczne
+- **Obserwacja i rozmowa nr 1**: dane obserwacyjne (gestykulacja, mimika, postawa, emocje, sposób mówienia, wygląd), relacja diagnostyczna z **recypatią**, tabela **hipotez z przesłankami** (numery wypowiedzi z transkrypcji, np. „H1: osoba unika kontaktów towarzyskich w trudnych sytuacjach”).
+- Hipotezy dotyczą m.in.: typów stresujących sytuacji, stresorów, reakcji stresowych, **oceny pierwotnej wg Lazarusa** (**wyzwanie czy zagrożenie**), wsparcia społecznego, elastyczności strategii, dominującego stylu.
+- **Kwestionariusz nr 1 – COPE** (radzenie sobie w sytuacjach stresowych): procedura, wyniki surowe i przeliczone, **przedziały ufności**, tabela, interpretacja – czy przeważają strategie **aktywne czy unikowe**. Skale m.in.: aktywne radzenie sobie, planowanie, poszukiwanie wsparcia instrumentalnego i emocjonalnego, zwrot ku religii, pozytywne przewartościowanie, akceptacja, koncentracja na emocjach, zaprzeczanie, odwracanie uwagi, zaprzestanie działań, zażywanie środków psychoaktywnych, poczucie humoru.
+- **Obserwacja i rozmowa nr 2** – zmiany w zachowaniu w porównaniu z pierwszą rozmową.
+- **Kwestionariusz nr 2 – EAS** (temperament): podskale **Emocjonalność, Strach, Złość, Aktywność, Towarzyskość**; przedziały ufności w **stenach**.
+- **Metoda projekcyjna** (fakultatywnie) – opowiadania do 2–3 tablic.
+- **Tabela wniosków** z różnych źródeł (rozmowa, obserwacja, kwestionariusz) + **załączniki** (arkusze, transkrypcje).
+
+> Na pamięć: raport = 4 pytania (jak? od czego? dlaczego? jak skutecznie?) · COPE = strategie · EAS = temperament · diagnoza funkcjonalna, nie nozologiczna.`,
+      flashcards: [
+        ["Maksymalna objętość raportu (integracji danych)", "4 strony; czcionka 12 pt, odstęp 1,5, strony ponumerowane."],
+        ["4 pytania diagnostyczne w badaniu radzenia sobie ze stresem", "Jak osoba radzi sobie ze stresem? Od czego zależy wybór strategii? Dlaczego stosuje te strategie? Jak efektywnie radzi sobie ze stresem?"],
+        ["Najważniejsza część raportu", "Integracja danych z różnych metod i wnioski (pkt 6) – decyduje o ocenie."],
+        ["Schemat mechanizmu radzenia sobie ze stresem", "Uwarunkowania → zdarzenie aktywizujące (stresor) → doświadczanie napięcia → strategie radzenia sobie → spostrzeganie podobnych zdarzeń w przyszłości."],
+        ["Luki diagnostyczne", "Informacje, których jeszcze brakuje, by w pełni zrealizować cel diagnozy (obszary diagnostycznej penetracji)."],
+        ["Diagnoza funkcjonalna vs nozologiczna", "Funkcjonalna wyjaśnia mechanizm i przyczyny zachowania; nozologiczna tylko klasyfikuje (np. do jednostki chorobowej)."],
+        ["Czy w raporcie można łączyć teorie z różnych paradygmatów?", "Nie – analiza w ramach jednego paradygmatu teoretycznego."],
+        ["Jak formułuje się hipotezy w portfolio?", "W terminach psychologicznych, z przesłankami (numerami wypowiedzi z transkrypcji), związane z celem badania."],
+        ["Ocena pierwotna wg Lazarusa", "Czy sytuacja stresowa jest odbierana jako wyzwanie, czy jako zagrożenie."],
+        ["Co mierzy kwestionariusz COPE?", "Sposoby (strategie) radzenia sobie w sytuacjach stresowych – np. aktywne radzenie sobie, planowanie, wsparcie, zaprzeczanie, humor."],
+        ["Co mierzy kwestionariusz EAS?", "Temperament: Emocjonalność, Strach, Złość, Aktywność, Towarzyskość."],
+        ["W jakich jednostkach podaje się przedziały ufności dla EAS?", "W stenach."],
+        ["Na co zwrócić uwagę interpretując wyniki COPE?", "Czy przeważają aktywne, czy unikowe sposoby radzenia sobie ze stresem."],
+        ["Recypatia w portfolio", "Uczucia, refleksje i wrażenia badającego wobec osoby badanej – opisywane w relacji diagnostycznej."],
+        ["Zasoby osoby badanej w raporcie", "Zewnętrzne i wewnętrzne – te, z których korzysta (i jaką pełnią funkcję), oraz te, których nie wykorzystuje."],
+        ["Jak wyrażać stopień pewności hipotez?", "Np. „Osoba badana najprawdopodobniej…”, „Można przypuszczać, że…”, „Na podstawie danych z rozmowy można przyjąć…”."]
+      ],
+      pairs: [
+        ["COPE", "strategie radzenia sobie ze stresem"],
+        ["EAS", "temperament: emocjonalność, strach, złość, aktywność, towarzyskość"],
+        ["Lazarus – ocena pierwotna", "wyzwanie czy zagrożenie"],
+        ["Diagnoza funkcjonalna", "wyjaśnia mechanizm, nie tylko klasyfikuje"],
+        ["Luki diagnostyczne", "czego jeszcze brakuje do celu diagnozy"],
+        ["Pkt 6 raportu", "integracja danych – najważniejsza część"],
+        ["Przedziały ufności EAS", "w stenach"],
+        ["Raport", "maks. 4 strony"],
+        ["Metoda projekcyjna", "fakultatywnie: opowiadania do 2–3 tablic"],
+        ["Hipoteza w portfolio", "terminy psychologiczne + przesłanki z transkrypcji"],
+        ["Zdarzenie aktywizujące", "typ stresora"],
+        ["Dane identyfikacyjne", "trzeba je usunąć z całości materiałów"]
+      ],
+      quiz: [
+        { q: "Kwestionariusz EAS bada:", o: ["temperament", "strategie radzenia sobie ze stresem", "inteligencję", "depresję"], a: 0, e: "Podskale: Emocjonalność, Strach, Złość, Aktywność, Towarzyskość." },
+        { q: "Kwestionariusz COPE służy do badania:", o: ["sposobów radzenia sobie w sytuacjach stresowych", "temperamentu", "osobowości wg Wielkiej Piątki", "lęku jako stanu i cechy"], a: 0, e: "Interpretujemy m.in. przewagę strategii aktywnych lub unikowych." },
+        { q: "Która część raportu jest najważniejsza dla oceny?", o: ["integracja danych i odpowiedź na pytania diagnostyczne", "dane ogólne o osobie badanej", "bibliografia", "podpis"], a: 0, e: "Liczy się dobra agregacja danych uchwytująca indywidualność osoby." },
+        { q: "Hipotezy w raporcie powinny prowadzić do diagnozy:", o: ["funkcjonalnej, a nie nozologicznej", "nozologicznej, a nie funkcjonalnej", "wyłącznie ilościowej", "medycznej"], a: 0, e: "Hipotezy mają wyjaśniać, a nie tylko klasyfikować." },
+        { q: "Ocena pierwotna według Lazarusa dotyczy tego, czy sytuacja jest odbierana jako:", o: ["wyzwanie czy zagrożenie", "przyjemna czy nieprzyjemna", "znana czy nowa", "krótka czy długa"], a: 0, e: "Jeden z obszarów hipotez w portfolio." },
+        { q: "Czy w interpretacji można łączyć teorie z różnych paradygmatów?", o: ["nie – analiza w jednym paradygmacie", "tak, im więcej, tym lepiej", "tak, ale tylko w bibliografii", "tylko za zgodą osoby badanej"], a: 0, e: "Zasada spójności teoretycznej raportu." },
+        { q: "Luki diagnostyczne to:", o: ["informacje, których brakuje do pełnej realizacji celu diagnozy", "błędy w transkrypcji", "nieobecności na zajęciach", "pytania bez odpowiedzi w teście"], a: 0, e: "Pkt 9 raportu – obszary diagnostycznej penetracji." },
+        { q: "Maksymalna objętość raportu (integracji danych) to:", o: ["4 strony", "1 strona", "10 stron", "brak limitu"], a: 0, e: "Czcionka 12 pt, odstęp 1,5." },
+        { q: "Przedziały ufności dla wyników EAS podaje się w:", o: ["stenach", "procentach", "punktach surowych", "skali IQ"], a: 0, e: "Zgodnie z podręcznikiem testu." }
       ]
     }
   ]

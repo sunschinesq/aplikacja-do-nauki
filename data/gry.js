@@ -43,7 +43,10 @@ window.GAME_AUTHORS = {
   ],
   pomoc: [
     ["model integrujący (BASIC ID)", "Lazarus"], ["analiza behawioralna: bodziec – reakcja – skutki", "Kanfer i Saslow"], ["przekonania pierwotne i zniekształcenia poznawcze", "Beck"],
-    ["formy rozmowy wg stopnia strukturalizacji", "Suchańska"], ["kontrakt zawierany po rozeznaniu celu", "Trzebińska"], ["czynniki sprzed spotkania", "Paluchowski i Hornowska"]
+    ["formy rozmowy wg stopnia strukturalizacji", "Suchańska"], ["kontrakt zawierany po rozeznaniu celu", "Trzebińska"], ["czynniki sprzed spotkania", "Paluchowski i Hornowska"],
+    ["transkrypcja jako przedstawienie języka mówionego w formie pisemnej", "Davidson"], ["transkrypcja to powolne i nudne zajęcie", "Angrosino"],
+    ["zapis stosowany w analizie konwersacyjnej", "Jefferson"], ["transkrypcja zdenaturalizowana i znaturalizowana", "Bucholtz"],
+    ["„Poznanie chorego”", "Kępiński"], ["ocena pierwotna: wyzwanie czy zagrożenie", "Lazarus"]
   ]
 };
 
@@ -85,6 +88,8 @@ window.GAME_SEQUENCES = {
   pomoc: [
     { title: "Początek rozmowy diagnostycznej", items: ["rozpoczęcie (kontakt)", "kontrakt diagnostyczny", "wstępne sformułowanie problemu"] },
     { title: "Planowanie treści wywiadu – 5 kroków", items: ["cel", "kategorie (język opisu)", "pytania i hipotezy", "potrzebne informacje", "tematy rozmowy"] },
-    { title: "Progresja – przykład: narkotyki u licealisty", items: ["muzyka", "atmosfera w szkole", "papierosy", "alkohol", "„trawka”"] }
+    { title: "Progresja – przykład: narkotyki u licealisty", items: ["muzyka", "atmosfera w szkole", "papierosy", "alkohol", "„trawka”"] },
+    { title: "Części klinicznego studium przypadku", items: ["wstęp", "informacje socjometryczne", "problemy pacjenta", "aktualna sytuacja", "informacje medyczne", "wnioski i zalecenia", "transkrypcja"] },
+    { title: "Mechanizm radzenia sobie ze stresem", items: ["uwarunkowania", "zdarzenie aktywizujące", "doświadczanie napięcia", "strategie radzenia sobie", "spostrzeganie podobnych zdarzeń w przyszłości"] }
   ]
 };
