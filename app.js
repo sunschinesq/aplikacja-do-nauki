@@ -4209,17 +4209,13 @@
   updateOnline();
   // ---------- start ----------
   window.addEventListener("hashchange", () => { route(); window.scrollTo(0, 0); });
-  // przedmiot może mieć znaną datę zaliczenia (examDate) – wpisujemy ją raz, potem można ją zmienić lub usunąć
+  // sprzątanie: usuń datę zaliczenia z angielskiego wpisaną automatycznie w wersji z 16.11 (datę ustawia się samemu)
   try {
-    const seeded = JSON.parse(localStorage.getItem("nauka-daty-domyslne") || "{}");
-    SUBJECTS.forEach((sub) => {
-      if (sub.examDate && !seeded[sub.id]) {
-        if (!store.exams[sub.id]) store.exams[sub.id] = sub.examDate;
-        seeded[sub.id] = true;
-      }
-    });
-    localStorage.setItem("nauka-daty-domyslne", JSON.stringify(seeded));
-    saveStore();
+    const seeded = JSON.parse(localStorage.getItem("nauka-daty-domyslne") || "null");
+    if (seeded) {
+      if (seeded.angielski && store.exams.angielski === "2026-11-23") { delete store.exams.angielski; saveStore(); }
+      localStorage.removeItem("nauka-daty-domyslne");
+    }
   } catch (e) { /* bez zapisu */ }
   checkCats();
   route();

@@ -6,8 +6,6 @@ window.SUBJECTS.push({
   short: "Angielski",
   icon: "🇬🇧",
   color: "#4c6ef5",
-  // data zaliczenia ustawiana automatycznie przy pierwszym uruchomieniu (można ją zmienić w przedmiocie)
-  examDate: "2026-11-23",
   exam: { questions: 22, minutes: 15, pass: 12, note: "Próbne zaliczenie ze słówek „Psychology vocabulary I” (22 słówka). Format orientacyjny – nie znam dokładnych zasad zaliczenia." },
   sources: [
     "Psychology vocabulary I – lista 22 słówek z lektoratu (zdjęcia z 16.11), zaliczenie 23.11"
@@ -23,7 +21,7 @@ Lista **Psychology vocabulary I** – słówka 1–11. **Zaliczenie: 23 listopad
 ## Social influence – wpływ społeczny
 | English | Polski |
 |---|---|
-| **informational social influence** | wpływ informacyjny; potrzeba zachowania pozytywnego obrazu siebie |
+| **informational social influence** | wpływ informacyjny: (1) potrzeba zachowania pozytywnego obrazu siebie (wersja z listy), (2) potrzeba posiadania trafnej wiedzy o świecie – gdy nie wiemy, jak się zachować, traktujemy innych jako źródło informacji |
 | **normative social influence** | potrzeba bycia akceptowanym społecznie |
 | **conformity** | konformizm |
 | **compliance** | uległość, uleganie |
@@ -49,7 +47,7 @@ Lista **Psychology vocabulary I** – słówka 1–11. **Zaliczenie: 23 listopad
 > - **latent** ↔ **manifest** – jak treść utajona i jawna snu u Freuda (*latent content*, *manifest content*).
 > - **lucid** – *lucid dream* = świadomy sen, w którym wiesz, że śnisz.`,
       flashcards: [
-        ["informational social influence", "wpływ informacyjny; potrzeba zachowania pozytywnego obrazu siebie"],
+        ["informational social influence", "wpływ informacyjny: 1) potrzeba zachowania pozytywnego obrazu siebie (z listy), 2) potrzeba posiadania trafnej wiedzy o świecie (inni jako źródło informacji)"],
         ["normative social influence", "potrzeba bycia akceptowanym społecznie"],
         ["conformity", "konformizm"],
         ["compliance", "uległość, uleganie"],
@@ -85,7 +83,8 @@ Lista **Psychology vocabulary I** – słówka 1–11. **Zaliczenie: 23 listopad
         { q: "Jak po angielsku „schematy”?", o: ["schemas / schemata", "schemes", "schematics", "scripts"], a: 0, e: "schema (l.p.) → schemas / schemata (l.mn.)." },
         { q: "„preconceived idea” to po polsku:", o: ["pomysł przyjęty z góry", "pomysł wymyślony wspólnie", "idea wrodzona", "pierwsze wrażenie"], a: 0, e: "preconceived – przyjęty z góry." },
         { q: "„potrzeba bycia akceptowanym społecznie” to:", o: ["normative social influence", "informational social influence", "compliance", "primacy effect"], a: 0, e: "normative – od norm grupy." },
-        { q: "„wpływ informacyjny” to:", o: ["informational social influence", "normative social influence", "conformity", "self-fulfilling prophecy"], a: 0, e: "informational social influence." }
+        { q: "„wpływ informacyjny” to:", o: ["informational social influence", "normative social influence", "conformity", "self-fulfilling prophecy"], a: 0, e: "informational social influence." },
+        { q: "„potrzeba posiadania trafnej wiedzy o świecie” (inni jako źródło informacji) to:", o: ["informational social influence", "normative social influence", "compliance", "primacy effect"], a: 0, e: "Drugie tłumaczenie informational social influence; na liście: potrzeba zachowania pozytywnego obrazu siebie." }
       ]
     },
     // ------------------------------------------------------------------
