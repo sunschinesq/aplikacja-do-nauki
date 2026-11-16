@@ -2,6 +2,15 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-11-16a",
+    date: "16 listopada 2026",
+    items: [
+      "🇬🇧 Nowy przedmiot: Angielski – lektorat! 22 słówka z listy „Psychology vocabulary I” w dwóch tematach: wpływ i poznanie społeczne (1–11) oraz sen i zaburzenia snu (12–22).",
+      "📅 Data zaliczenia 23.11 jest już ustawiona – na stronie głównej widać odliczanie.",
+      "🃏 Fiszki (z angielskiego na polski, a „na odwrót” – z polskiego na angielski), quizy, pary, wisielec z angielskimi słówkami i próbne zaliczenie z 22 pytań."
+    ]
+  },
+  {
     v: "2026-11-06a",
     date: "6 listopada 2026",
     items: [

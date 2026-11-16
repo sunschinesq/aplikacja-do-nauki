@@ -4209,6 +4209,18 @@
   updateOnline();
   // ---------- start ----------
   window.addEventListener("hashchange", () => { route(); window.scrollTo(0, 0); });
+  // przedmiot może mieć znaną datę zaliczenia (examDate) – wpisujemy ją raz, potem można ją zmienić lub usunąć
+  try {
+    const seeded = JSON.parse(localStorage.getItem("nauka-daty-domyslne") || "{}");
+    SUBJECTS.forEach((sub) => {
+      if (sub.examDate && !seeded[sub.id]) {
+        if (!store.exams[sub.id]) store.exams[sub.id] = sub.examDate;
+        seeded[sub.id] = true;
+      }
+    });
+    localStorage.setItem("nauka-daty-domyslne", JSON.stringify(seeded));
+    saveStore();
+  } catch (e) { /* bez zapisu */ }
   checkCats();
   route();
   setTimeout(() => (store.profile.asked ? showWhatsNew() : showProfile(showWhatsNew)), 600);

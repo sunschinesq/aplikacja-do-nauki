@@ -13,6 +13,7 @@ Podział odpowiada folderom z Dysku Google („drugi rok JULIA / 1 semestr”):
 | Wprowadzenie do diagnostyki psychologicznej | 10 tematów (9 wykładów + słowniczek): notatki, 182 fiszki, 66 pytań, 51 zagadnień z listy pytań egzaminacyjnych |
 | Diagnoza sprawności poznawczych | 8 tematów (etyka diagnozy, testy, trafność i SEM, adaptacja): notatki, 86 fiszek, 36 pytań |
 | Podstawy pomocy psychologicznej | 9 tematów (rozmowa diagnostyczna; zaliczenie, studium przypadku, transkrypcja i raport z badania – materiały dr Sucheckiej): notatki, 124 fiszki, 57 pytań w quizie |
+| Angielski – lektorat | 2 tematy (Psychology vocabulary I, zaliczenie 23.11): 22 słówka, 22 pytania |
 
 Cała aplikacja jest w różowej kolorystyce (jasny i ciemny motyw).
 
@@ -69,6 +70,7 @@ data/diagnostyka.js   treść: wprowadzenie do diagnostyki psychologicznej
 data/diagnostyka-zagadnienia.js 51 zagadnień egzaminacyjnych z diagnostyki
 data/poznawcze.js     treść: diagnoza sprawności poznawczych
 data/pomoc.js         treść: podstawy pomocy psychologicznej
+data/angielski.js     treść: angielski – lektorat (słówka)
 data/gry.js           dane do gier: autorzy pojęć i sekwencje do układania
 data/zmiany.js        lista zmian do okienka „Co nowego”
 sw.js                 tryb offline (lista plików zapisywanych na urządzeniu)
