@@ -2,6 +2,17 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-11-16c",
+    date: "16 listopada 2026",
+    items: [
+      "📋 Nowy plan na dziś! Wybierasz, ile masz czasu (z grafiku albo inaczej na dziś), jak się czujesz i czego się dziś uczysz – a plan dopasowuje zadania do tego czasu.",
+      "⏱ Przy każdym zadaniu jest szacowany czas i przycisk „Start” – włącza tryb skupienia na czas zadania i od razu otwiera zadanie.",
+      "😴 „Mało siły” = mniej i lżejszych zadań (fiszki, gry, krótkie quizy) i czulszy kotek; ⚡ „Dużo energii” = też pytania otwarte i próbne egzaminy.",
+      "➕ Własne zadania i terminy (np. oddanie studium przypadku) – na dziś albo na wybrany dzień, z czasem trwania.",
+      "🗓️ Plan na tydzień: terminy i zaliczenia, zadania na każdy dzień, ile czasu dziennie i co już zrobione. ⚙️ Swój grafik (czas na każdy dzień tygodnia) ustawisz na dole planu."
+    ]
+  },
+  {
     v: "2026-11-16b",
     date: "16 listopada 2026",
     items: [

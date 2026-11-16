@@ -17,7 +17,7 @@
     cards: {}, quiz: {}, exams: {}, lastBackup: null, pets: 0,
     days: {}, goal: 20, bestStreak: 0, marks: {}, open: {}, tries: {},
     cats: {}, birthday: null, focus: { sessions: 0, minutes: 0, days: {} }, games: { match: 0, best: {} },
-    statex: { n: 0, ok: 0 }, planDone: {}, challenge: { last: null, streak: 0, best: 0, treats: 0, days: {} },
+    statex: { n: 0, ok: 0 }, planDone: {}, planCfg: { week: [60, 60, 60, 60, 60, 60, 60], days: {} }, myTasks: [], challenge: { last: null, streak: 0, best: 0, treats: 0, days: {} },
     profile: { name: "", catName: "", asked: false }, paws: 0, pawsTotal: 0,
     seen: {},
     pet: { food: 80, energy: 80, fun: 80, clean: 80, teeth: 80, hair: 80, tick: 0, sleeping: false, look: "szary", owned: [], wear: { head: "", eyes: "", neck: "", body: "" }, bg: "pokoj" }
@@ -1979,84 +1979,341 @@
   }
 
   // ---------- plan nauki do egzaminów ----------
-  function planTasks() {
-    const today = dayKey();
-    const ts = dayStats(today);
-    const tasks = [];
-    const ups = SUBJECTS.map((sub) => ({ sub, exam: examInfo(sub) }))
-      .filter((x) => x.exam && x.exam.days >= 0 && hasContent(x.sub))
-      .sort((a, b) => a.exam.days - b.exam.days);
-    ups.forEach(({ sub, exam }) => {
-      const fc = subjectCards(sub);
-      const left = toLearn(sub);
-      const due = dueCount(fc);
-      const days = exam.days;
-      if (days === 0) {
-        tasks.push({ id: sub.id + ":dzis", sub, icon: "🍀", text: `Dziś egzamin z przedmiotu ${sub.short}! Tylko lekka powtórka: zakładki i „Na pamięć” z notatek.`, href: "#/zakladki" });
-        return;
-      }
-      // ostatni dzień przed egzaminem zostaje na powtórkę
-      const newPer = left ? Math.min(40, Math.ceil(left / Math.max(1, days - 1))) : 0;
-      const target = Math.min(60, due + newPer);
-      if (target) tasks.push({ id: sub.id + ":fiszki", sub, icon: "🃏", text: `${target} ${plural(target, "fiszka", "fiszki", "fiszek")} z przedmiotu ${sub.short}${due ? ` (w tym ${due} do powtórki)` : ""}`, href: `#/s/${sub.id}/fiszki`, goal: target, progress: ts.s[sub.id] || 0 });
-      const weak = sub.topics.filter((t) => (t.quiz || []).length)
-        .map((t) => ({ t, best: (store.quiz[quizKey(sub, t.id)] || {}).best }))
-        .sort((a, b) => (a.best === undefined ? -1 : a.best) - (b.best === undefined ? -1 : b.best))[0];
-      if (weak && (weak.best === undefined || weak.best < 80)) tasks.push({ id: sub.id + ":quiz:" + weak.t.id, sub, icon: "✅", text: `Quiz: „${weak.t.title}”${weak.best !== undefined ? ` (Twój najlepszy wynik: ${weak.best}%)` : " – jeszcze nie robiony"}`, href: `#/s/${sub.id}/quiz/${weak.t.id}` });
-      if (days <= 21) {
-        const real = realQuestions(sub).length;
-        if (real || openQuestions(sub).length) tasks.push({ id: sub.id + ":otwarte", sub, icon: "✍️", text: `Pytania otwarte z przedmiotu ${sub.short}${real ? " (prawdziwe zagadnienia)" : ""} – jedna seria`, href: real ? `#/s/${sub.id}/zagadnienia` : `#/s/${sub.id}/otwarte` });
-      }
-      if (sub.exam && days <= 10) {
-        const lastTry = (store.tries[sub.id] || []).slice(-1)[0];
-        const ago = lastTry ? (Date.now() - new Date(lastTry.at).getTime()) / DAY : 99;
-        if (ago >= 2) tasks.push({ id: sub.id + ":egzamin", sub, icon: "📝", text: `Próbny egzamin z przedmiotu ${sub.short}`, href: `#/s/${sub.id}/egzamin` });
-      }
-    });
-    if (!ups.length) {
-      SUBJECTS.forEach((sub) => {
-        const due = dueCount(subjectCards(sub));
-        if (due) tasks.push({ id: sub.id + ":powtorka", sub, icon: "🔁", text: `${due} ${plural(due, "fiszka", "fiszki", "fiszek")} do powtórki z przedmiotu ${sub.short}`, href: `#/s/${sub.id}/fiszki`, goal: due, progress: ts.s[sub.id] || 0 });
-      });
+  // ---------- plan na dziś i na tydzień ----------
+  // czas: grafik tygodnia (domyślnie) + zmiana na dziś; energia; przedmioty wybiera Julia; własne zadania i terminy
+  const PLAN_DAYS = ["poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota", "niedziela"];
+  const TIME_CHOICES = [15, 30, 45, 60, 90, 120, 180];
+  const ENERGY = [
+    { id: "low", icon: "😴", name: "Mało siły" },
+    { id: "normal", icon: "🙂", name: "Normalnie" },
+    { id: "high", icon: "⚡", name: "Dużo energii" }
+  ];
+  function planCfg() {
+    store.planCfg = store.planCfg || {};
+    const c = store.planCfg;
+    if (!Array.isArray(c.week) || c.week.length !== 7) c.week = [60, 60, 60, 60, 60, 60, 60];
+    c.days = c.days || {};
+    return c;
+  }
+  function weekdayIdx(key) {
+    const [y, m, d] = key.split("-").map(Number);
+    return (new Date(y, m - 1, d).getDay() + 6) % 7; // 0 = poniedziałek
+  }
+  function lastSubjects(before) {
+    const c = planCfg();
+    const k = Object.keys(c.days).filter((x) => x < before && (c.days[x].subjects || []).length).sort().pop();
+    return k ? c.days[k].subjects : [];
+  }
+  // ustawienia dnia: grafik + to, co zmieniono na ten dzień
+  function dayCfg(key) {
+    const c = planCfg();
+    const own = c.days[key] || {};
+    return {
+      minutes: own.minutes !== undefined ? own.minutes : c.week[weekdayIdx(key)],
+      fromWeek: own.minutes === undefined,
+      energy: own.energy || "normal",
+      subjects: (own.subjects || (key >= dayKey() ? lastSubjects(key) : [])).filter((id) => SUBJECTS.some((s) => s.id === id)),
+      chosen: !!own.subjects
+    };
+  }
+  function setDayCfg(key, patch) {
+    const c = planCfg();
+    c.days[key] = Object.assign({}, c.days[key], patch);
+    Object.keys(c.days).forEach((k) => { if (k < shiftDay(dayKey(), -30)) delete c.days[k]; });
+    saveStore();
+  }
+  function myTasksOn(key) {
+    return (store.myTasks || []).filter((t) => t.date === key);
+  }
+  function examDaysFrom(sub, key) {
+    const date = store.exams[sub.id];
+    if (!date) return null;
+    const [y, m, d] = date.split("-").map(Number);
+    const [y2, m2, d2] = key.split("-").map(Number);
+    return Math.round((new Date(y, m - 1, d) - new Date(y2, m2 - 1, d2)) / DAY);
+  }
+  // kandydaci na zadania z jednego przedmiotu (w kolejności ważności), każdy z szacowanym czasem
+  function subjectCandidates(sub, key, energy) {
+    const out = [];
+    const days = examDaysFrom(sub, key);
+    if (days === 0) {
+      out.push({ id: sub.id + ":dzis", type: "light", min: 10, icon: "🍀", text: `Dziś egzamin z przedmiotu ${sub.short}! Tylko lekka powtórka zakładek i „Na pamięć”.`, href: "#/zakladki" });
+      return out;
     }
-    const done = store.planDone[today] || {};
-    tasks.forEach((t) => { t.done = !!done[t.id] || (t.goal && t.progress >= t.goal); });
+    const fc = subjectCards(sub);
+    const left = toLearn(sub);
+    const due = dueCount(fc);
+    // tempo do egzaminu (ostatni dzień na powtórkę), ale co najmniej 10 nowych, gdy jest czas
+    const pace = days !== null && days > 1 ? Math.ceil(left / (days - 1)) : 15;
+    const newPer = Math.min(left, Math.min(40, Math.max(pace, energy === "low" ? 5 : 10)));
+    let n = Math.min(energy === "low" ? 20 : 60, due + newPer);
+    if (n) out.push({ id: sub.id + ":fiszki", type: "cards", min: Math.max(5, Math.round(n * 0.5)), n, due, icon: "🃏", href: `#/s/${sub.id}/fiszki` });
+    const weak = sub.topics.filter((t) => quizPool(sub, t.id).length)
+      .map((t) => ({ t, best: (store.quiz[quizKey(sub, t.id)] || {}).best }))
+      .sort((a, b) => (a.best === undefined ? -1 : a.best) - (b.best === undefined ? -1 : b.best))[0];
+    if (energy === "low") {
+      out.push({ id: sub.id + ":gra", type: "light", min: 5, icon: "🎮", text: `Krótka gra z przedmiotu ${sub.short} (na luzie)`, href: `#/s/${sub.id}/gry` });
+      if (weak && (weak.best === undefined || weak.best < 80)) out.push({ id: sub.id + ":quiz:" + weak.t.id, type: "quiz", min: 8, icon: "✅", text: `Quiz: „${weak.t.title}”`, href: `#/s/${sub.id}/quiz/${weak.t.id}` });
+      return out;
+    }
+    if (weak && (weak.best === undefined || weak.best < 80)) out.push({ id: sub.id + ":quiz:" + weak.t.id, type: "quiz", min: 8, icon: "✅", text: `Quiz: „${weak.t.title}”${weak.best !== undefined ? ` (najlepszy wynik: ${weak.best}%)` : " – jeszcze nie robiony"}`, href: `#/s/${sub.id}/quiz/${weak.t.id}` });
+    const unread = sub.topics.filter((t) => t.notes).find((t) => !subjectCards(sub, t.id).some((c) => store.cards[c.key]));
+    if (unread) out.push({ id: sub.id + ":notatka:" + unread.id, type: "read", min: 10, icon: "📖", text: `Przeczytaj notatkę: „${unread.title}”`, href: `#/s/${sub.id}/t/${unread.id}/notatka` });
+    if (days === null || days <= 21 || energy === "high") {
+      const real = realQuestions(sub).length;
+      if (real || openQuestions(sub).length) out.push({ id: sub.id + ":otwarte", type: "open", min: 15, icon: "✍️", text: `Pytania otwarte z przedmiotu ${sub.short}${real ? " (prawdziwe zagadnienia)" : ""} – jedna seria`, href: real ? `#/s/${sub.id}/zagadnienia` : `#/s/${sub.id}/otwarte` });
+    }
+    if (sub.exam && ((days !== null && days <= 10) || energy === "high")) {
+      const lastTry = (store.tries[sub.id] || []).slice(-1)[0];
+      const ago = lastTry ? (Date.now() - new Date(lastTry.at).getTime()) / DAY : 99;
+      if (ago >= 2) out.push({ id: sub.id + ":egzamin", type: "exam", min: sub.exam.minutes, icon: "📝", text: `Próbny egzamin z przedmiotu ${sub.short}`, href: `#/s/${sub.id}/egzamin` });
+    }
+    return out;
+  }
+  // plan dnia: najpierw własne zadania, potem po kolei (na zmianę) zadania z wybranych przedmiotów, aż skończy się czas
+  function genTasks(key, cfg) {
+    const ts = dayStats(key);
+    const tasks = [];
+    let used = 0;
+    myTasksOn(key).forEach((t) => {
+      tasks.push({ id: "my:" + t.id, my: t, icon: t.deadline ? "📌" : "📝", text: t.text, min: t.deadline ? 0 : t.minutes || 0, href: null, deadline: t.deadline });
+      if (!t.deadline) used += t.minutes || 0;
+    });
+    const budget = Math.round(cfg.minutes * (cfg.energy === "low" ? 0.7 : 1));
+    const maxTasks = cfg.energy === "low" ? 3 : cfg.energy === "high" ? 8 : 6;
+    const subs = cfg.subjects.map((id) => SUBJECTS.find((s) => s.id === id)).filter((s) => s && hasContent(s))
+      .sort((a, b) => { const da = examDaysFrom(a, key), db = examDaysFrom(b, key); return (da === null || da < 0 ? 999 : da) - (db === null || db < 0 ? 999 : db); });
+    const queues = subs.map((sub) => ({ sub, list: subjectCandidates(sub, key, cfg.energy) }));
+    let generated = 0;
+    let added = true;
+    while (added && generated < maxTasks) {
+      added = false;
+      for (const q of queues) {
+        if (generated >= maxTasks) break;
+        const room = budget - used;
+        if (room < 5) break;
+        const i = q.list.findIndex((c) => c.min <= room || c.type === "cards");
+        if (i < 0) continue;
+        const c = q.list.splice(i, 1)[0];
+        if (c.type === "cards") {
+          // fiszki: tyle, ile zmieści się w czasie (ok. 30 s na fiszkę)
+          const n = Math.min(c.n, Math.max(5, Math.floor(room / 0.5)));
+          c.min = Math.max(5, Math.round(n * 0.5));
+          c.text = `${n} ${plural(n, "fiszka", "fiszki", "fiszek")} z przedmiotu ${q.sub.short}${c.due ? ` (w tym ${Math.min(c.due, n)} do powtórki)` : ""}`;
+          c.goal = n;
+          c.progress = ts.s[q.sub.id] || 0;
+        }
+        c.sub = q.sub;
+        tasks.push(c);
+        used += c.min;
+        generated++;
+        added = true;
+      }
+    }
+    const done = store.planDone[key] || {};
+    tasks.forEach((t) => { t.done = !!done[t.id] || (t.my && t.my.done) || !!(t.goal && t.progress >= t.goal); });
     return tasks;
+  }
+  function planTasks() {
+    const key = dayKey();
+    return genTasks(key, dayCfg(key));
+  }
+  function planMinutes(tasks) {
+    return tasks.reduce((a, t) => a + (t.min || 0), 0);
   }
   function viewPlan() {
     document.title = "Plan nauki – nauka";
-    const tasks = planTasks();
-    const ups = SUBJECTS.map((sub) => ({ sub, exam: examInfo(sub) })).filter((x) => x.exam && x.exam.days >= 0).sort((a, b) => a.exam.days - b.exam.days);
+    const key = dayKey();
+    const cfg = dayCfg(key);
+    const tasks = genTasks(key, cfg);
     const doneN = tasks.filter((t) => t.done).length;
+    const total = planMinutes(tasks);
+    const left = planMinutes(tasks.filter((t) => !t.done));
+    const low = cfg.energy === "low";
     let text;
-    if (!tasks.length) text = ups.length ? "Na dziś wszystko zrobione z góry – odpocznij albo pogłaszcz kotka 😽" : "Ustaw daty egzaminów, a ułożę Ci plan na każdy dzień 📅";
-    else if (doneN === tasks.length) text = "Cały plan na dziś zrobiony! Jesteś niesamowita 🎉";
-    else if (doneN) text = `Już ${doneN} z ${tasks.length}! Tak trzymać 💪`;
-    else text = "Zacznij od pierwszego punktu – reszta pójdzie sama 🐾";
+    if (!cfg.subjects.length && !tasks.length) text = "Wybierz przedmioty na dziś, a ja ułożę plan na tyle czasu, ile masz 🐾";
+    else if (!tasks.length) text = "Na dziś wszystko zrobione z góry – odpocznij albo pogłaszcz kotka 😽";
+    else if (doneN === tasks.length) text = low ? "Zrobione, mimo że było mało siły. Jestem z Ciebie bardzo dumny 💗" : "Cały plan na dziś zrobiony! Jesteś niesamowita 🎉";
+    else if (doneN) text = low ? `Już ${doneN} z ${tasks.length} – każdy kroczek się liczy 💗` : `Już ${doneN} z ${tasks.length}! Tak trzymać 💪`;
+    else text = low ? pickOne(["Mało siły? To nic – zrobimy tylko trochę, w swoim tempie 💗", "Dziś na spokojnie. Nawet 10 minut to sukces 🐾", "Odpoczynek też jest częścią nauki. Zrób tyle, ile dasz radę 💗"]) : "Zacznij od pierwszego punktu – reszta pójdzie sama 🐾";
+    const subjChips = SUBJECTS.filter(hasContent).map((sub) => {
+      const on = cfg.subjects.includes(sub.id);
+      const d = examDaysFrom(sub, key);
+      return `<button class="chip${on ? " on" : ""}" style="--accent:${sub.color}" data-action="plan-subject" data-id="${sub.id}">${sub.icon} ${esc(sub.short)}${d !== null && d >= 0 ? ` · ${d === 0 ? "dziś!" : `za ${d} dni`}` : ""}</button>`;
+    }).join("");
+    const week = planCfg().week[weekdayIdx(key)];
     app.innerHTML = `
       <a class="back" href="#/">‹ Przedmioty</a>
-      <h1>📋 Plan na dziś</h1>
-      <p class="muted">${new Date().toLocaleDateString("pl-PL", { weekday: "long", day: "numeric", month: "long" })} · plan liczy się sam z dat egzaminów i Twoich postępów.</p>
-      ${buddy(text, doneN && doneN === tasks.length ? "happy" : "")}
+      <div class="plan-head">
+        <h1>📋 Plan na dziś</h1>
+        <a class="btn small" href="#/plan/tydzien">🗓️ Plan na tydzień</a>
+      </div>
+      <p class="muted">${new Date().toLocaleDateString("pl-PL", { weekday: "long", day: "numeric", month: "long" })}${total ? ` · zaplanowane ok. <strong>${total} min</strong>${left && left < total ? ` (zostało ok. ${left} min)` : ""}` : ""}</p>
+      ${buddy(text, doneN && doneN === tasks.length ? "happy" : low ? "comfort" : "")}
+      <div class="panel plan-setup">
+        <div class="plan-row"><strong>⏰ Ile mam dziś czasu?</strong>
+          <div class="chips">${TIME_CHOICES.map((m) => `<button class="chip${cfg.minutes === m ? " on" : ""}" data-action="plan-time" data-m="${m}">${m < 60 ? m + " min" : m / 60 + " h"}</button>`).join("")}</div>
+          <span class="muted small-note">${cfg.fromWeek ? `Z Twojego grafiku na ${PLAN_DAYS[weekdayIdx(key)]}: ${week} min.` : `Zmienione na dziś (grafik: ${week} min) · <button class="linkish" data-action="plan-time" data-m="week">wróć do grafiku</button>`}</span>
+        </div>
+        <div class="plan-row"><strong>💭 Jak się dziś czuję?</strong>
+          <div class="chips">${ENERGY.map((e) => `<button class="chip${cfg.energy === e.id ? " on" : ""}" data-action="plan-energy" data-e="${e.id}">${e.icon} ${e.name}</button>`).join("")}</div>
+          ${low ? `<span class="muted small-note">Lżejszy plan: mniej zadań, tylko fiszki, gry i krótkie quizy.</span>` : cfg.energy === "high" ? `<span class="muted small-note">Ambitniej: także pytania otwarte i próbne egzaminy.</span>` : ""}
+        </div>
+        <div class="plan-row"><strong>📚 Czego się dziś uczę?</strong>
+          <div class="chips">${subjChips}</div>
+          ${cfg.subjects.length && !cfg.chosen ? `<span class="muted small-note">Zaznaczone jak ostatnio – kliknij, żeby zmienić.</span>` : ""}
+        </div>
+      </div>
       ${tasks.length ? `<div class="plan-list">${tasks.map((t) => `
-        <div class="plan-item${t.done ? " plan-done" : ""}" style="--accent:${t.sub.color}">
+        <div class="plan-item${t.done ? " plan-done" : ""}${t.deadline ? " plan-deadline" : ""}" style="--accent:${t.sub ? t.sub.color : "var(--accent)"}">
           <button class="plan-check" data-action="plan-toggle" data-id="${esc(t.id)}" aria-label="${t.done ? "Odznacz" : "Oznacz jako zrobione"}">${t.done ? "✓" : ""}</button>
-          <a class="plan-main" href="${t.href}">
-            <span class="plan-text">${t.icon} ${esc(t.text)}</span>
+          ${t.href ? `<a class="plan-main" href="${t.href}">` : `<div class="plan-main">`}
+            <span class="plan-text">${t.icon} ${esc(t.text)}${t.deadline ? " <em>(termin)</em>" : ""}</span>
             ${t.goal ? `<span class="plan-prog"><span style="width:${Math.min(100, Math.round((t.progress / t.goal) * 100))}%"></span></span><span class="plan-sub">dziś: ${Math.min(t.progress, t.goal)} / ${t.goal}</span>` : ""}
-          </a>
+          ${t.href ? `</a>` : `</div>`}
+          <div class="plan-side">
+            ${t.min ? `<span class="plan-min">~${t.min} min</span>` : ""}
+            ${!t.done && t.min >= 5 ? `<button class="btn small plan-go" data-action="plan-start" data-id="${esc(t.id)}" title="Start z timerem">⏱ Start</button>` : ""}
+            ${t.my ? `<button class="plan-del" data-action="plan-del" data-id="${esc(t.my.id)}" aria-label="Usuń zadanie">✕</button>` : ""}
+          </div>
         </div>`).join("")}</div>` : ""}
-      ${ups.length ? `<h2>Do egzaminów</h2>
-      <div class="plan-exams">${ups.map(({ sub, exam }) => {
-        const left = toLearn(sub);
-        const quizTopics = sub.topics.filter((t) => (t.quiz || []).length);
-        const good = quizTopics.filter((t) => ((store.quiz[quizKey(sub, t.id)] || {}).best || 0) >= 80).length;
-        return `<a class="plan-exam" href="#/s/${sub.id}" style="--accent:${sub.color}">
-          <strong>${sub.icon} ${esc(sub.short)} – ${exam.days === 0 ? "dziś!" : exam.days === 1 ? "jutro" : `za ${exam.days} dni`}</strong>
-          <span>Do opanowania: ${left} ${plural(left, "fiszka", "fiszki", "fiszek")}${exam.days > 1 && left ? ` · ok. ${Math.ceil(left / (exam.days - 1))} dziennie` : ""}</span>
-          <span>Quizy na ≥ 80%: ${good} / ${quizTopics.length} tematów${sub.exam ? ` · próbne egzaminy: ${(store.tries[sub.id] || []).length}` : ""}</span>
-        </a>`;
-      }).join("")}</div>` : `<div class="empty"><p><strong>Brak dat egzaminów.</strong></p><p>Wejdź w przedmiot i ustaw datę egzaminu – wtedy plan rozłoży materiał na dni (z ostatnim dniem na powtórkę).</p></div>`}`;
+      ${planForm(key)}
+      <p class="muted small-note">⏱ Start włącza tryb skupienia na czas zadania i od razu otwiera zadanie. Za ukończoną sesję dostajesz 15 🐾.</p>
+      ${planWeekSettings()}`;
+  }
+  function planForm(key) {
+    return `<details class="panel plan-add"${(store.myTasks || []).length ? "" : ""}>
+        <summary><strong>➕ Dodaj własne zadanie albo termin</strong></summary>
+        <div class="plan-form">
+          <input class="plan-in" id="pt-text" type="text" maxlength="120" placeholder="np. przeczytać rozdział, oddać studium przypadku">
+          <label>Kiedy <input class="plan-in" id="pt-date" type="date" value="${key}"></label>
+          <label>Ile minut <input class="plan-in small" id="pt-min" type="number" min="0" max="600" step="5" value="15"></label>
+          <label class="plan-check-label"><input id="pt-deadline" type="checkbox"> 📌 to termin / zaliczenie</label>
+          <button class="btn primary" data-action="plan-add">Dodaj</button>
+        </div>
+      </details>`;
+  }
+  function planWeekSettings() {
+    const w = planCfg().week;
+    return `<details class="panel plan-weekset">
+        <summary><strong>⚙️ Mój grafik – ile mam czasu w każdy dzień</strong></summary>
+        <p class="muted small-note">To domyślny czas na naukę. W konkretny dzień możesz go zmienić u góry planu.</p>
+        <div class="plan-week-grid">${PLAN_DAYS.map((d, i) => `<label>${d}<input class="plan-in small" type="number" min="0" max="600" step="15" value="${w[i]}" data-action="plan-week" data-i="${i}"> min</label>`).join("")}</div>
+      </details>`;
+  }
+  function startPlanTask(id) {
+    const key = dayKey();
+    const t = genTasks(key, dayCfg(key)).find((x) => x.id === id);
+    if (!t) return;
+    if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { audioCtx = null; } }
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    const f = focusState;
+    f.work = Math.max(5, Math.min(90, t.min));
+    f.rest = f.work >= 45 ? 10 : 5;
+    f.phase = "focus";
+    f.end = Date.now() + f.work * 60000;
+    f.left = null;
+    saveFocus();
+    focusTick();
+    location.hash = t.href || "#/skupienie";
+  }
+  // widok tygodnia: od poniedziałku do niedzieli; przeszłe dni – co zrobione, przyszłe – terminy i propozycje
+  function viewPlanWeek(offset) {
+    document.title = "Plan na tydzień – nauka";
+    const today = dayKey();
+    const monday = shiftDay(today, -weekdayIdx(today) + offset * 7);
+    const deadlines = (key) => SUBJECTS.filter((s) => store.exams[s.id] === key).map((s) => `${s.icon} egzamin/zaliczenie: ${esc(s.short)}`)
+      .concat(myTasksOn(key).filter((t) => t.deadline).map((t) => `📌 ${esc(t.text)}`));
+    let sum = 0;
+    const days = PLAN_DAYS.map((name, i) => {
+      const key = shiftDay(monday, i);
+      const past = key < today;
+      const cfg = dayCfg(key);
+      const st = dayStats(key);
+      const dl = deadlines(key);
+      let body;
+      if (past) {
+        const doneMap = store.planDone[key] || {};
+        const doneTexts = Object.keys(doneMap).map((id) => (typeof doneMap[id] === "string" ? doneMap[id] : null)).filter(Boolean);
+        const myDone = myTasksOn(key).filter((t) => t.done).map((t) => t.text);
+        const focusMin = (store.focus.days || {})[key] || 0;
+        const items = doneTexts.concat(myDone);
+        body = `<div class="pw-stats">${st.n ? `✍️ ${st.n} ${plural(st.n, "odpowiedź", "odpowiedzi", "odpowiedzi")}` : ""}${focusMin ? ` · 🍅 ${focusMin} min skupienia` : ""}${goalMet(key) ? " · 🎯 cel dnia" : ""}</div>
+          ${items.length ? `<ul class="pw-list pw-past">${items.map((x) => `<li>✓ ${esc(x)}</li>`).join("")}</ul>` : st.n || focusMin ? "" : `<p class="muted small-note">Dzień odpoczynku 💤</p>`}`;
+      } else {
+        const tasks = genTasks(key, cfg);
+        const min = planMinutes(tasks);
+        sum += min;
+        body = `<div class="pw-stats">⏰ ${cfg.minutes} min wolnego${min ? ` · zaplanowane ~${min} min` : ""}</div>
+          ${tasks.filter((t) => !t.deadline).length ? (() => {
+            const list = tasks.filter((t) => !t.deadline);
+            const show = list.slice(0, 4);
+            return `<ul class="pw-list">${show.map((t) => `<li class="${t.done ? "pw-ok" : ""}">${t.done ? "✓" : t.icon} ${esc(t.text)}${t.min ? ` <span class="muted">(~${t.min} min)</span>` : ""}</li>`).join("")}${list.length > show.length ? `<li class="muted">…i jeszcze ${list.length - show.length}</li>` : ""}</ul>`;
+          })() : cfg.subjects.length ? `<p class="muted small-note">Brak zadań – wszystko opanowane 😽</p>` : `<p class="muted small-note">Przedmioty wybierzesz w planie danego dnia.</p>`}`;
+      }
+      return `<div class="pw-day${key === today ? " pw-today" : ""}${past ? " past" : ""}">
+          <div class="pw-top"><strong>${name}</strong> <span class="muted">${Number(key.slice(8))}.${key.slice(5, 7)}</span>${key === today ? ` <a class="chip on" href="#/plan">dziś</a>` : ""}</div>
+          ${dl.length ? `<div class="pw-deadlines">${dl.map((x) => `<span>${x}</span>`).join("")}</div>` : ""}
+          ${body}
+        </div>`;
+    }).join("");
+    const label = offset === 0 ? "Ten tydzień" : offset === 1 ? "Następny tydzień" : offset === -1 ? "Poprzedni tydzień" : `Tydzień od ${Number(monday.slice(8))}.${monday.slice(5, 7)}`;
+    app.innerHTML = `
+      <a class="back" href="#/plan">‹ Plan na dziś</a>
+      <h1>🗓️ Plan na tydzień</h1>
+      <div class="pw-nav">
+        <a class="btn small" href="#/plan/tydzien/${offset - 1}">‹</a>
+        <strong>${label}</strong>
+        <a class="btn small" href="#/plan/tydzien/${offset + 1}">›</a>
+      </div>
+      <p class="muted">Przyszłe dni: czas z Twojego grafiku, terminy i propozycje zadań (na podstawie przedmiotów wybranych ostatnio). Minione dni: co udało się zrobić.${sum ? ` Zaplanowane do końca tygodnia: ok. <strong>${sum >= 60 ? (sum / 60).toFixed(1).replace(".", ",") + " h" : sum + " min"}</strong>.` : ""}</p>
+      <div class="pw-grid">${days}</div>
+      ${planForm(today)}
+      ${planWeekSettings()}`;
+  }
+  function planAction(act, el) {
+    const key = dayKey();
+    if (act === "plan-time") {
+      if (el.dataset.m === "week") { const c = planCfg(); if (c.days[key]) delete c.days[key].minutes; saveStore(); }
+      else setDayCfg(key, { minutes: Number(el.dataset.m) });
+    } else if (act === "plan-energy") {
+      setDayCfg(key, { energy: el.dataset.e });
+    } else if (act === "plan-subject") {
+      const cur = dayCfg(key).subjects.slice();
+      const i = cur.indexOf(el.dataset.id);
+      if (i >= 0) cur.splice(i, 1); else cur.push(el.dataset.id);
+      setDayCfg(key, { subjects: cur });
+    } else if (act === "plan-toggle") {
+      const id = el.dataset.id;
+      if (id.startsWith("my:")) {
+        const t = (store.myTasks || []).find((x) => "my:" + x.id === id);
+        if (t) t.done = !t.done;
+      } else {
+        const done = store.planDone[key] = store.planDone[key] || {};
+        if (done[id]) delete done[id];
+        else { const t = genTasks(key, dayCfg(key)).find((x) => x.id === id); done[id] = t ? t.text : true; }
+      }
+      Object.keys(store.planDone).forEach((k) => { if (k < shiftDay(key, -30)) delete store.planDone[k]; });
+      saveStore();
+    } else if (act === "plan-add") {
+      const text = (document.getElementById("pt-text").value || "").trim();
+      if (!text) { document.getElementById("pt-text").focus(); return; }
+      const date = document.getElementById("pt-date").value || key;
+      const minutes = Math.max(0, Math.min(600, Number(document.getElementById("pt-min").value) || 0));
+      const deadline = document.getElementById("pt-deadline").checked;
+      store.myTasks = store.myTasks || [];
+      store.myTasks.push({ id: Date.now().toString(36), date, text, minutes: deadline ? 0 : minutes, deadline, done: false });
+      store.myTasks = store.myTasks.filter((t) => t.date >= shiftDay(key, -30));
+      saveStore();
+    } else if (act === "plan-del") {
+      if (!confirm("Usunąć to zadanie?")) return;
+      store.myTasks = (store.myTasks || []).filter((t) => t.id !== el.dataset.id);
+      saveStore();
+    } else if (act === "plan-start") {
+      return startPlanTask(el.dataset.id);
+    }
+    const m = location.hash.match(/^#\/plan\/tydzien\/?(-?\d+)?/);
+    if (m) viewPlanWeek(Number(m[1] || 0)); else viewPlan();
   }
 
   // ---------- co nowego ----------
@@ -3396,7 +3653,7 @@
   // ---------- zdarzenia ----------
   // ---------- kopia zapasowa ----------
   const BACKUP_APP = "nauka-drugi-rok";
-  const BACKUP_FIELDS = ["cards", "quiz", "exams", "pets", "days", "goal", "bestStreak", "marks", "open", "tries", "cats", "birthday", "focus", "games", "statex", "planDone", "challenge", "profile", "paws", "pawsTotal", "pet"];
+  const BACKUP_FIELDS = ["cards", "quiz", "exams", "pets", "days", "goal", "bestStreak", "marks", "open", "tries", "cats", "birthday", "focus", "games", "statex", "planDone", "planCfg", "myTasks", "challenge", "profile", "paws", "pawsTotal", "pet"];
 
   function hasProgress() {
     return Object.keys(store.cards).length + Object.keys(store.quiz).length + Object.keys(store.exams).length > 0;
@@ -3508,6 +3765,13 @@
     return parts[0] === "s" ? getSubject(parts[1]) : null;
   }
   app.addEventListener("change", (ev) => {
+    if (ev.target.matches('[data-action="plan-week"]')) {
+      planCfg().week[Number(ev.target.dataset.i)] = Math.max(0, Math.min(600, Number(ev.target.value) || 0));
+      saveStore();
+      const m = location.hash.match(/^#\/plan\/tydzien\/?(-?\d+)?/);
+      if (m) viewPlanWeek(Number(m[1] || 0)); else viewPlan();
+      return;
+    }
     if (ev.target.matches('[data-action="backup-import"]')) {
       if (ev.target.files && ev.target.files[0]) importBackup(ev.target.files[0]);
       return;
@@ -3593,15 +3857,8 @@
       focusAction(act, el);
       return;
     }
-    if (act === "plan-toggle") {
-      const today = dayKey();
-      const done = store.planDone[today] = store.planDone[today] || {};
-      if (done[el.dataset.id]) delete done[el.dataset.id];
-      else done[el.dataset.id] = true;
-      // stare dni planu nie są potrzebne
-      Object.keys(store.planDone).forEach((k) => { if (k < shiftDay(today, -14)) delete store.planDone[k]; });
-      saveStore();
-      viewPlan();
+    if (act && act.startsWith("plan-") && act !== "plan-week") {
+      planAction(act, el);
       return;
     }
     if (act === "openexam-start") {
@@ -3809,7 +4066,7 @@
     focusTick();
     if (parts[0] === "kotki") return viewAlbum();
     if (parts[0] === "skupienie") return viewFocus();
-    if (parts[0] === "plan") return viewPlan();
+    if (parts[0] === "plan") return parts[1] === "tydzien" ? viewPlanWeek(Number(parts[2]) || 0) : viewPlan();
     if (parts[0] === "nowosci") return viewChanges();
     if (parts[0] === "gry") return viewGamesAll();
     if (parts[0] === "kotek") { bath = null; return parts[1] === "sklep" ? viewShop() : viewPet(); }
