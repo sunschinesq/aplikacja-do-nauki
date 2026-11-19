@@ -95,6 +95,13 @@
         i++;
         continue;
       }
+      // ilustracja: ![podpis](img/plik.jpg)
+      const im = line.match(/^!\[(.*)\]\((img\/[\w.-]+)\)\s*$/);
+      if (im) {
+        html += `<figure class="note-fig"><img src="${esc(im[2])}" alt="${esc(im[1])}" loading="lazy"><figcaption>${inline(im[1])}</figcaption></figure>`;
+        i++;
+        continue;
+      }
       if (line.startsWith("> ")) {
         html += `<div class="callout">${inline(line.slice(2))}</div>`;
         i++;

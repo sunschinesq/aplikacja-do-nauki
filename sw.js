@@ -25,7 +25,8 @@ const FILES = [
   "data/angielski.js",
   "data/pytania-dodatkowe.js",
   "data/gry.js",
-  "data/zmiany.js"
+  "data/zmiany.js",
+  "img/ryc10-fft.jpg"
 ];
 
 self.addEventListener("install", (event) => {

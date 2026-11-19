@@ -1059,6 +1059,27 @@ Schemat dla każdej teorii: **1. osobowość i cecha → 2. jak działa (motyw /
   - składniki **peryferyjne**: **podstawy biologiczne** (jedyna przyczyna cech), **wpływy zewnętrzne**, **biografia obiektywna** (wszystko, co człowiek robi, myśli i czuje przez całe życie),
   - kierunek: biologia → tendencje podstawowe → (+ wpływy zewnętrzne) przystosowania → zachowanie; łączą to **procesy dynamiczne**.
 
+![Rycina 10. Funkcjonowanie systemu osobowości według FFT. Strzałki wskazują kierunek oddziaływań przyczynowych, które dokonują się poprzez procesy dynamiczne (McCrae i Costa, 1996).](img/ryc10-fft.jpg)
+
+**Rycina 10 – co jest w których „pudełkach”:**
+| Element | Co zawiera |
+|---|---|
+| **Podstawy biologiczne** | geny, mózg – jedyne źródło cech |
+| **Podstawowe tendencje** | Neurotyczność, Ekstrawertyczność, Otwartość, Ugodowość, Sumienność |
+| **Charakterystyczne przystosowania** | zjawiska uwarunkowane kulturowo, **dążenia osobiste**, **postawy** |
+| **Obraz siebie** (koncepcja siebie) | **schematy ja**, **mity osobiste** – szczególny rodzaj przystosowania (linie przerywane na rycinie) |
+| **Biografia obiektywna** | reakcje emocjonalne, przebieg kariery zawodowej, **zachowanie** |
+| **Wpływy zewnętrzne** | normy kulturowe, zdarzenia życiowe, sytuacje |
+
+**Strzałki (wszystkie działają przez procesy dynamiczne):**
+- podstawy biologiczne → podstawowe tendencje (**jedyna** strzałka do cech),
+- podstawowe tendencje → charakterystyczne przystosowania oraz → obraz siebie,
+- charakterystyczne przystosowania → biografia obiektywna, → obraz siebie i → same na siebie (pętla: jedne przystosowania zmieniają inne),
+- wpływy zewnętrzne ↔ biografia obiektywna (działają w obie strony) oraz wpływy zewnętrzne → charakterystyczne przystosowania,
+- biografia obiektywna → obraz siebie.
+
+> Uwaga na egzaminie! Na rycinie **żadna strzałka nie prowadzi od wpływów zewnętrznych ani od biografii do podstawowych tendencji** – cechy zależą tylko od biologii (cechy endogenne). Środowisko i kultura zmieniają **przystosowania**, a nie cechy.
+
 **3. Rozwój**
 - Teza o **stałości po 30. r.ż.**; James (1890): do 30. r.ż. charakter „utrwala się niczym odlew”.
 - **Średnie poziomy**: od dorastania do dorosłości **N, E i O spadają, a U i S rosną** (w wielu kulturach), ok. 1/6 SD na 10 lat, głównie **18–30 r.ż.**; po 30. r.ż. zmiany bardzo małe.
@@ -1121,7 +1142,14 @@ Schemat dla każdej teorii: **1. osobowość i cecha → 2. jak działa (motyw /
         ["Stałość rangowa cech (GZTS)", "r = 0,74 po 12 latach, 0,65 po 24 latach; u 40-latków mediana 0,83; ok. 60% wariancji przez dorosłość."],
         ["Roberts i DelVecchio (2000)", "Szczyt stałości cech dopiero ok. 50.–60. r.ż. – McCrae i Costa krytykują tę metaanalizę."],
         ["Stałość średnich poziomów vs stałość rangowa", "Średnie – czy grupa się przesuwa; rangowa – czy zachowujesz swoje miejsce w grupie."],
-        ["Pochodzenie cech wg FFT", "Cechy są endogenne – środowisko zmienia przystosowania, a nie cechy."]
+        ["Pochodzenie cech wg FFT", "Cechy są endogenne – środowisko zmienia przystosowania, a nie cechy."],
+        ["Rycina 10 (FFT): skąd wychodzi jedyna strzałka do podstawowych tendencji?", "Od podstaw biologicznych – środowisko nie wpływa na cechy (cechy endogenne)."],
+        ["Co zawierają charakterystyczne przystosowania (ryc. 10)?", "Zjawiska uwarunkowane kulturowo, dążenia osobiste, postawy."],
+        ["Co zawiera obraz siebie w FFT (ryc. 10)?", "Schematy ja i mity osobiste; to szczególny rodzaj przystosowania."],
+        ["Co zawiera biografia obiektywna (ryc. 10)?", "Reakcje emocjonalne, przebieg kariery zawodowej, zachowanie."],
+        ["Co zawierają wpływy zewnętrzne (ryc. 10)?", "Normy kulturowe, zdarzenia życiowe, sytuacje."],
+        ["Przez co dokonują się oddziaływania w systemie osobowości FFT?", "Przez procesy dynamiczne (strzałki wskazują kierunek oddziaływań przyczynowych)."],
+        ["Na co wpływają wpływy zewnętrzne w FFT (ryc. 10)?", "Na charakterystyczne przystosowania i na biografię obiektywną (z którą działają w obie strony), ale nie na cechy."]
       ],
       // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
       pairs: [
@@ -1180,7 +1208,11 @@ Schemat dla każdej teorii: **1. osobowość i cecha → 2. jak działa (motyw /
         { q: "Mischel (1968) twierdził, że cechy wyjaśniają:", o: ["tylko 5–10% zachowania", "ok. 50% zachowania", "całe zachowanie", "nic"], a: 0, e: "McCrae i Costa: tego należy się spodziewać – cechy działają probabilistycznie." },
         { q: "Stałość rangowa cech to:", o: ["zachowanie swojego miejsca w grupie", "brak zmian średnich w grupie", "stały nastrój", "stałe nawyki"], a: 0, e: "Rozróżniaj stałość średnich poziomów i stałość różnic indywidualnych." },
         { q: "Kto twierdził, że szczyt stałości cech przypada na 50.–60. r.ż.?", o: ["Roberts i DelVecchio", "McCrae i Costa", "James", "Epstein"], a: 0, e: "McCrae i Costa krytykują tę metaanalizę – według nich cechy stabilizują się ok. 30. r.ż." },
-        { q: "Wymiar P (psychotyzm) Eysenck dodał w roku:", o: ["1975", "1947", "1985", "1961"], a: 0, e: "PEN: psychotyzm, ekstrawersja, neurotyzm." }
+        { q: "Wymiar P (psychotyzm) Eysenck dodał w roku:", o: ["1975", "1947", "1985", "1961"], a: 0, e: "PEN: psychotyzm, ekstrawersja, neurotyzm." },
+        { q: "Na rycinie 10 (FFT) do podstawowych tendencji prowadzi strzałka tylko od:", o: ["podstaw biologicznych", "wpływów zewnętrznych", "biografii obiektywnej", "charakterystycznych przystosowań"], a: 0, e: "Cechy są endogenne – środowisko zmienia przystosowania, nie cechy." },
+        { q: "Schematy ja i mity osobiste to w FFT element:", o: ["obrazu siebie", "podstawowych tendencji", "biografii obiektywnej", "wpływów zewnętrznych"], a: 0, e: "Obraz siebie to szczególny rodzaj przystosowania." },
+        { q: "Normy kulturowe, zdarzenia życiowe i sytuacje to w FFT:", o: ["wpływy zewnętrzne", "charakterystyczne przystosowania", "podstawy biologiczne", "obraz siebie"], a: 0, e: "Działają na przystosowania i biografię obiektywną." },
+        { q: "Dążenia osobiste i postawy należą w FFT do:", o: ["charakterystycznych przystosowań", "podstawowych tendencji", "biografii obiektywnej", "podstaw biologicznych"], a: 0, e: "Razem ze zjawiskami uwarunkowanymi kulturowo." }
       ],
       open: [
         { q: "Czym różni się cecha kardynalna od centralnej?", a: "**Kardynalna** to jedna, dominująca dyspozycja, która przejawia się prawie w każdym zachowaniu (ma ją niewiele osób). **Centralne** to kilka (ok. 5–10) wyraźnych, łatwo zauważalnych cech, które dobrze opisują człowieka. Trzecia grupa to **wtórne** – najliczniejsze, rzadkie i wąskie (Allport)." },

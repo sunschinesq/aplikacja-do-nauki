@@ -1311,3 +1311,8 @@ button.back.linkish { border: 0; background: none; padding: 0; font: inherit; cu
 .pw-list li { margin: 2px 0; }
 .pw-list .pw-ok, .pw-list.pw-past li { color: var(--muted); }
 @media (max-width: 520px) { .plan-side { min-width: 64px; } }
+
+/* ilustracje w notatkach */
+.note-fig { margin: 14px 0; }
+.note-fig img { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); background: #fff; }
+.note-fig figcaption { margin-top: 6px; font-size: .85rem; color: var(--muted); }

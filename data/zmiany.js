@@ -2,6 +2,14 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-11-19e",
+    date: "19 listopada 2026",
+    items: [
+      "🗺️ W teoriach cech jest teraz rycina 10 – system osobowości według FFT (McCrae i Costa) – z omówieniem: co jest w każdym „pudełku”, dokąd prowadzą strzałki i ramka „Uwaga na egzaminie!” (do cech prowadzi strzałka tylko od biologii).",
+      "🃏 7 nowych fiszek i 4 pytania w quizie o rycinie. Notatki mogą mieć teraz ilustracje."
+    ]
+  },
+  {
     v: "2026-11-19d",
     date: "19 listopada 2026",
     items: [
