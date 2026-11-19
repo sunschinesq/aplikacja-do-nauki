@@ -2,6 +2,14 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-11-19b",
+    date: "19 listopada 2026",
+    items: [
+      "🔔 Teorie uczenia się uzupełnione o Twoją notatkę „Uczeniowe ujęcia osobowości”: klasyczny behawioryzm (Pawłow, Watson, Thorndike, Skinner) oraz Dollard i Miller w schemacie „osobowość – jak działa – rozwój”, z tabelą wzmocnień i kar, gradientami konfliktu i 4 krytycznymi sytuacjami dzieciństwa. Część o Bandurze została bez zmian.",
+      "🃏 34 nowe fiszki, 24 pary do gier (wcześniej temat nie miał żadnych), 13 pytań w quizie i 8 pytań otwartych (pytania kontrolne z notatki)."
+    ]
+  },
+  {
     v: "2026-11-19a",
     date: "19 listopada 2026",
     items: [

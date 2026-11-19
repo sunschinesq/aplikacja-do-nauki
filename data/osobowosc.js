@@ -13,6 +13,7 @@ window.SUBJECTS.push({
   openExam: { questions: 3, minutes: 45, note: "Pytania z listy zagadnień egzaminacyjnych (psychologia-osobowości-egzamin.pdf). Liczba pytań i czas są orientacyjne." },
   sources: [
     "psychologia-osobowości-egzamin.pdf (79 pytań egzaminacyjnych)",
+    "Uczeniowe_ujecia_osobowosci.pdf – klasyczny behawioryzm (Pawłow, Watson, Thorndike, Skinner) oraz Dollard i Miller w schemacie osobowość–działanie–rozwój",
     "Teorie_cech_notatka.pdf – Allport, Cattell, Eysenck, Wielka Piątka w schemacie cecha–działanie–rozwój (na podstawie McCrae i Costa, Osobowość dorosłego człowieka, 2005, notatek z kolosa i źródeł dodatkowych)",
     "Psychologia osobowości – wykłady.pdf",
     "to coś na kolosa osobowość.pdf",
@@ -653,18 +654,89 @@ Fazy (wg opracowania):
       id: "uczenie",
       title: "Teorie uczenia się: behawioryzm, Dollard i Miller, Bandura",
       notes: `
-## Klasyczny behawioryzm
-- Osobowość = zespół indywidualnych **wzorców zachowania nabytych w procesie uczenia się** (pojęcie osobowości nie jest tu właściwie potrzebne).
-- **Warunkowanie klasyczne** – bodziec neutralny zaczyna wywoływać reakcję odruchową.
-- **Warunkowanie instrumentalne** – zachowania nagradzane utrwalają się, karane zanikają.
-- Rozwój = uczenie się pod wpływem środowiska.
+Schemat: **1. osobowość (i jej „jednostka”) → 2. jak działa (motyw / dynamika → zachowanie) → 3. rozwój (stały czy zmienny)**.
+Źródła: **[kolos]** notatki „to coś na kolosa – osobowość” i „_osobowosc_kolos”; **[dod.]** źródła dodatkowe (opracowania podręcznikowe). Przed egzaminem warto sprawdzić definicje z lektury obowiązkowej: Dollard i Miller, s. 32–92.
+
+| | 1. Osobowość to… | 2. Jak działa? | 3. Rozwój |
+|---|---|---|---|
+| **Klasyczny behawioryzm** | suma wyuczonych **nawyków** / **repertuar zachowań**; bez struktur wewnętrznych | bodziec → reakcja; **konsekwencje** (wzmocnienie, kara) sterują zachowaniem | **zmienny**: historia wzmocnień przez całe życie |
+| **Dollard i Miller** | zespół **nawyków (S–R)**, wrodzonych i wyuczonych | **popęd → wskazówka → reakcja → nagroda** (redukcja popędu); konflikty | zmienny, ale **dzieciństwo krytyczne** (4 sytuacje); nerwica jest wyuczona |
+
+> Zapamiętaj: w ujęciach uczeniowych osobowość jest **wyuczona**. Skinner: patrzymy tylko na zachowanie i jego konsekwencje. Dollard i Miller: liczą się też **popędy i procesy wewnętrzne** (myśli, słowa) – tłumaczą pojęcia Freuda językiem uczenia się.
+> Skojarzenia: P-W-R-N – „**P**ani **W**anda **R**obi **N**aleśniki” (Popęd, Wskazówka, Reakcja, Nagroda). Sytuacje krytyczne: „**K**ot **C**zysty **S**ię **G**niewa” (Karmienie, Czystość, Seks, Gniew).
+
+## Klasyczny behawioryzm (Pawłow, Watson, Thorndike, Skinner)
+**1. Osobowość**
+- **Watson**: psychologia bada tylko **obserwowalne zachowanie**. Osobowość to **suma (system) wyuczonych nawyków** – powiązań bodziec–reakcja. Pojęcia „wewnętrzne” (cechy, ja, nieświadomość) są niepotrzebne.
+- **Skinner**: osobowość to **repertuar zachowań** wyuczonych przez konsekwencje. Wnętrze człowieka to **„czarna skrzynka”**; zamiast struktury – **analiza funkcjonalna**: jakie warunki środowiska kontrolują dane zachowanie?
+- Wspólne założenie: zachowanie, także nieprzystosowane, jest **wyuczone i można je oduczyć**. Najważniejsze jest **środowisko**.
+
+**2. Jak działa? Warunkowanie klasyczne (Pawłow, Watson)**
+- **Bodziec bezwarunkowy (BB**, np. jedzenie) wywołuje **reakcję bezwarunkową (RB**, np. ślinienie). Gdy **bodziec obojętny** (dzwonek) wiele razy pojawia się tuż przed BB, staje się **bodźcem warunkowym (BW)** i sam wywołuje **reakcję warunkową (RW)**.
+- **Wygaszanie** – BW bez BB, więc RW słabnie. **Samoistne odnowienie** – wygaszona reakcja po przerwie wraca. **Generalizacja** – reagujemy na bodźce podobne. **Różnicowanie** – reagujemy tylko na właściwy bodziec.
+- **Watson i Rayner (1920), „Mały Albert”**: lęk przed białym szczurem wyuczony przez łączenie go z głośnym hukiem; lęk **uogólnił się** na inne futrzane rzeczy → **emocje też są wyuczone**.
+
+**2. Jak działa? Warunkowanie instrumentalne (Thorndike, Skinner)**
+- **Thorndike – prawo efektu**: zachowania, po których następuje coś przyjemnego, utrwalają się; te, po których następuje coś przykrego, słabną.
+- **Skinner – warunkowanie sprawcze**: organizm sam **emituje** zachowanie, a jego **konsekwencje** decydują, czy się powtórzy.
+
+| | coś **DODAJEMY** | coś **ODBIERAMY** |
+|---|---|---|
+| zachowanie **ROŚNIE** | **wzmocnienie pozytywne** (pochwała, nagroda) | **wzmocnienie negatywne** (ustaje coś przykrego) |
+| zachowanie **MALEJE** | **kara pozytywna** (nagana) | **kara negatywna** (zabieramy telefon) |
+
+- **Rozkłady wzmocnień**: **ciągłe** (szybka nauka, szybkie wygaszanie) i **sporadyczne**: stałe/zmienne, **proporcjonalne** (co X reakcji) lub **interwałowe** (co X czasu). Najbardziej odporne na wygaszanie są rozkłady **zmienne** (np. automat do gier, powiadomienia w telefonie).
+- **Kształtowanie (shaping)** – nagradzamy kolejne przybliżenia do docelowego zachowania. **Wzmocnienie wtórne** – pieniądze, oceny: bodźce, które zyskały wartość przez skojarzenie z pierwotnymi. **Zachowanie przesądne** – przypadkowo wzmocnione zachowanie („szczęśliwy długopis” na egzamin).
+
+**3. Rozwój: stały czy zmienny?**
+- **Zmienny**: osobowość to efekt **historii wzmocnień**, a uczenie się trwa przez całe życie. Gdy zmienią się konsekwencje, zmieni się zachowanie.
+- **Watson**: „dajcie mi tuzin zdrowych niemowląt, a wychowam każde na kogo zechcę” – skrajny **determinizm środowiskowy**.
+- Zaburzenia też są wyuczone → terapia to **modyfikacja zachowania** (wygaszanie, wzmacnianie zachowań pożądanych, **systematyczna desensytyzacja Wolpego**).
+
+> Uwaga na egzaminie! **Wzmocnienie negatywne to NIE kara.** Wzmocnienie zawsze **zwiększa** zachowanie, „negatywne” znaczy tylko, że coś **odbieramy** (np. wyłączenie budzika wzmacnia wstawanie).
 
 ## Dollard i Miller
-- Osobowość to **konfiguracja nawyków** nabytych w procesie uczenia się.
-- Schemat uczenia się: **popęd → sygnał (wskazówka) → reakcja → wzmocnienie**.
-- Popędy **pierwotne** (fizjologiczne, np. ból, głód) i **wtórne** (wyuczone, np. lęk).
-- Nagradzane są reakcje, które redukują popęd.
-- Typy konfliktów: **dążenie–dążenie**, **unikanie–unikanie**, **dążenie–unikanie**, **podwójne dążenie–unikanie**.
+Teoria bodźca–reakcji łącząca teorię uczenia się **Hulla** z pojęciami **Freuda** i wpływem kultury. Książki: *Frustracja i agresja* (**1939**), *Uczenie się społeczne i naśladownictwo* (**1941**), *Osobowość i psychoterapia* (**1950**).
+
+**1. Osobowość**
+- Osobowość to **zespół wrodzonych i wyuczonych nawyków**; jako jednostki **S–O–R** mają charakter **dynamiczno-kognitywno-behawioralny**. Osobowość jest wynikiem interakcji bodźców zewnętrznych i reakcji wewnętrznych.
+- **Nawyk** – wyuczone powiązanie bodźca (wskazówki) z reakcją; główne pojęcie strukturalne teorii.
+- **Wyposażenie wrodzone**: odruchy, **wrodzona hierarchia reakcji** i **popędy pierwotne**.
+- **Popędy pierwotne** – biologiczne (głód, pragnienie, ból, seks). **Popędy wtórne** – nabyte, pośrednio służą zaspokajaniu pierwotnych; najważniejszy to **lęk (strach)** – „popęd wyuczony” (Miller).
+
+**2. Jak działa? Cztery podstawy uczenia się**
+„Aby się czegoś nauczyć, trzeba czegoś **chcieć**, coś **zauważyć**, coś **zrobić** i coś **dostać**.”
+
+| Element | Co to jest | Przykład |
+|---|---|---|
+| **Popęd** (chcieć) | silny bodziec, który pobudza do działania; pierwotny albo wtórny | głód |
+| **Wskazówka** (zauważyć) | bodziec, który wyznacza, kiedy, gdzie i jak zareagować | szyld piekarni |
+| **Reakcja** (zrobić) | zachowanie wybrane z hierarchii reakcji | wejście i kupno bułki |
+| **Nagroda** (dostać) | **redukcja popędu**, która wzmacnia związek wskazówka–reakcja | najedzenie się |
+
+- **Hierarchia reakcji** – na daną wskazówkę mamy reakcje bardziej i mniej prawdopodobne; uczenie się zmienia tę kolejność (hierarchia **początkowa → wynikowa**).
+- **Wyższe procesy psychiczne**: myśli i słowa działają jak **reakcje pośredniczące**, które same stają się wskazówkami → nazywanie, rozumowanie, planowanie. Język pozwala uogólniać i różnicować.
+- **Frustracja–agresja (1939)**: frustracja (zablokowanie celu) prowadzi do agresji; agresja może zostać **przemieszczona** na inny obiekt – w języku uczenia się to **generalizacja bodźca**.
+- **Naśladownictwo (1941)** też jest uczeniem się: ktoś inny staje się wskazówką, a naśladowanie zostaje nagrodzone.
+
+**2. Jak działa? Model konfliktu**
+- **dążenie–dążenie** – wybór między dwoma atrakcyjnymi celami (zwykle łatwy),
+- **unikanie–unikanie** – dwie nieprzyjemne opcje, chęć ucieczki od obu,
+- **dążenie–unikanie** – jeden cel jednocześnie przyciąga i odpycha,
+- **podwójne dążenie–unikanie** – dwa cele, a każdy ma plusy i minusy.
+- **Gradienty**: im bliżej celu, tym silniejsze i dążenie, i unikanie, ale **gradient unikania jest bardziej stromy**. Daleko od celu przeważa dążenie, blisko – unikanie; w punkcie przecięcia pojawia się **wahanie i lęk** (np. tydzień wcześniej „jasne, pójdę zapytać o poprawę!”, a pod drzwiami gabinetu – zawracasz).
+
+**3. Rozwój: stały czy zmienny?**
+- **Zmienny**: rozwój to uczenie się (nawyki, warunkowanie, frustracja, konflikty), ale **nawyki z dzieciństwa są najsilniejsze** i najtrudniej je zmienić.
+- **Cztery krytyczne sytuacje uczenia się w dzieciństwie** (rodzice mogą wywołać konflikty, karząc próby redukcji popędu):
+  - **karmienie** – dziecko zostawione z głodem może się uczyć apatii i lęku,
+  - **trening czystości** – zbyt szybki lub surowy uczy lęku i unikania,
+  - **wczesne wychowanie seksualne** – kara wiąże seksualność z lękiem,
+  - **gniew i lęk** – karanie złości uczy, że złość jest groźna.
+- **Nerwica** – wynik silnego, **nieświadomego konfliktu** wyuczonego w dzieciństwie. **Nieświadome** jest to, czego człowiek **nie nazwał** (nigdy nie zwerbalizował) albo co tłumi. **Objawy** to wyuczone reakcje unikania, które **obniżają lęk**, więc są nagradzane i się utrwalają.
+- **Psychoterapia** też jest uczeniem się: nazwać to, co nienazwane, odróżnić przeszłość od teraźniejszości, wygasić lęk w bezpiecznych warunkach.
+
+> Uwaga na egzaminie! **Skinner** nie zagląda do wnętrza i nie potrzebuje popędów. **Dollard i Miller** mają popędy (także wyuczony lęk), procesy pośredniczące i nieświadomość, bo „tłumaczą Freuda na język Hulla”: **przemieszczenie = generalizacja**, a **wyparcie = wyuczone „niemyślenie”**.
 
 ## Albert Bandura – teoria społeczno-poznawcza
 **Uczenie się przez obserwację (modelowanie)** – 4 procesy:
@@ -681,7 +753,7 @@ Fazy (wg opracowania):
 
 **Determinizm wzajemny** – osoba, środowisko i zachowanie wpływają na siebie nawzajem.
 
-> Na pamięć: Dollard i Miller = popęd, sygnał, reakcja, wzmocnienie. Bandura = uwaga, przechowywanie, wytwarzanie, motywacja.
+> Na pamięć: Dollard i Miller = popęd, wskazówka, reakcja, nagroda. Bandura = uwaga, przechowywanie, wytwarzanie, motywacja.
 `,
       flashcards: [
         ["Osobowość w behawioryzmie", "Zespół wzorców zachowania nabytych przez uczenie się (warunkowanie)."],
@@ -694,14 +766,97 @@ Fazy (wg opracowania):
         ["System Ja u Bandury", "Samoobserwacja, proces oceniania, reakcja na siebie – służą autoregulacji zachowania."],
         ["Poczucie skuteczności własnej", "Przekonanie, że potrafię skutecznie wykonać zachowanie potrzebne do uzyskania wyniku."],
         ["Oczekiwania skuteczności vs wyniku", "Skuteczności: „potrafię to zrobić”. Wyniku: „to zachowanie doprowadzi do efektu”."],
-        ["Determinizm wzajemny", "Osoba, środowisko i zachowanie wzajemnie na siebie wpływają."]
+        ["Determinizm wzajemny", "Osoba, środowisko i zachowanie wzajemnie na siebie wpływają."],
+        ["Osobowość wg Watsona", "Suma (system) wyuczonych nawyków – powiązań bodziec–reakcja; pojęcia wewnętrzne są niepotrzebne."],
+        ["Osobowość wg Skinnera", "Repertuar zachowań wyuczonych przez konsekwencje; wnętrze to „czarna skrzynka”."],
+        ["Analiza funkcjonalna (Skinner)", "Szukanie warunków środowiska, które kontrolują dane zachowanie."],
+        ["BB, RB, BW, RW", "Bodziec bezwarunkowy → reakcja bezwarunkowa; bodziec obojętny łączony z BB staje się bodźcem warunkowym, który wywołuje reakcję warunkową."],
+        ["Wygaszanie", "Bodziec warunkowy podawany bez bezwarunkowego – reakcja warunkowa słabnie."],
+        ["Samoistne odnowienie", "Wygaszona reakcja warunkowa wraca po przerwie."],
+        ["Generalizacja vs różnicowanie", "Generalizacja – reagujemy na bodźce podobne; różnicowanie – tylko na właściwy bodziec."],
+        ["„Mały Albert” (Watson i Rayner, 1920)", "Lęk przed białym szczurem wyuczony przez łączenie z hukiem; uogólnił się na futrzane rzeczy – emocje są wyuczone."],
+        ["Prawo efektu (Thorndike)", "Zachowania z przyjemnym skutkiem utrwalają się, z przykrym – słabną."],
+        ["Warunkowanie sprawcze (Skinner)", "Organizm sam emituje zachowanie, a konsekwencje decydują, czy się powtórzy."],
+        ["Wzmocnienie pozytywne vs negatywne", "Pozytywne – coś dodajemy (nagroda); negatywne – coś przykrego odbieramy. Oba zwiększają zachowanie."],
+        ["Kara pozytywna vs negatywna", "Pozytywna – coś dodajemy (nagana); negatywna – coś odbieramy (telefon). Obie zmniejszają zachowanie."],
+        ["Czy wzmocnienie negatywne to kara?", "Nie – wzmocnienie zawsze zwiększa zachowanie; „negatywne” znaczy, że coś odbieramy (np. wyłączenie budzika wzmacnia wstawanie)."],
+        ["Który rozkład wzmocnień najtrudniej wygasić?", "Zmienny (np. automat do gier, powiadomienia w telefonie)."],
+        ["Rozkład proporcjonalny vs interwałowy", "Proporcjonalny – nagroda co X reakcji; interwałowy – co X czasu."],
+        ["Kształtowanie (shaping)", "Nagradzanie kolejnych przybliżeń do docelowego zachowania."],
+        ["Wzmocnienie wtórne", "Bodziec, który zyskał wartość przez skojarzenie z pierwotnym (pieniądze, oceny)."],
+        ["Zachowanie przesądne (Skinner)", "Przypadkowo wzmocnione zachowanie, np. „szczęśliwy długopis” na egzamin."],
+        ["Determinizm środowiskowy Watsona", "„Dajcie mi tuzin zdrowych niemowląt, a wychowam każde na kogo zechcę.”"],
+        ["Systematyczna desensytyzacja", "Metoda Wolpego – terapia behawioralna wygaszająca lęk."],
+        ["Źródła teorii Dollarda i Millera", "Teoria uczenia się Hulla + pojęcia Freuda + wpływ kultury."],
+        ["Książki Dollarda i Millera", "Frustracja i agresja (1939), Uczenie się społeczne i naśladownictwo (1941), Osobowość i psychoterapia (1950)."],
+        ["Nawyk wg Dollarda i Millera", "Wyuczone powiązanie bodźca (wskazówki) z reakcją – główne pojęcie strukturalne."],
+        ["Wyposażenie wrodzone (Dollard i Miller)", "Odruchy, wrodzona hierarchia reakcji i popędy pierwotne."],
+        ["Najważniejszy popęd wtórny", "Lęk (strach) – popęd wyuczony (Miller)."],
+        ["Hierarchia reakcji", "Reakcje bardziej i mniej prawdopodobne na daną wskazówkę; uczenie się zmienia hierarchię początkową w wynikową."],
+        ["Reakcje pośredniczące", "Myśli i słowa, które same stają się wskazówkami – umożliwiają nazywanie, rozumowanie i planowanie."],
+        ["Hipoteza frustracja–agresja (1939)", "Zablokowanie celu prowadzi do agresji; przemieszczenie agresji = generalizacja bodźca."],
+        ["Gradienty dążenia i unikania", "Blisko celu oba rosną, ale gradient unikania jest bardziej stromy – blisko celu przeważa unikanie."],
+        ["4 krytyczne sytuacje uczenia się w dzieciństwie", "Karmienie, trening czystości, wczesne wychowanie seksualne, gniew i lęk."],
+        ["Nerwica wg Dollarda i Millera", "Wynik silnego, nieświadomego konfliktu wyuczonego w dzieciństwie; objawy to reakcje unikania obniżające lęk."],
+        ["Nieświadomość wg Dollarda i Millera", "To, czego człowiek nie nazwał (nie zwerbalizował) albo co tłumi."],
+        ["Psychoterapia wg Dollarda i Millera", "Uczenie się: nazwać nienazwane, odróżnić przeszłość od teraźniejszości, wygasić lęk."],
+        ["Wyparcie i przemieszczenie u Dollarda i Millera", "Wyparcie = wyuczone „niemyślenie”; przemieszczenie = generalizacja bodźca."]
+      ],
+      pairs: [
+        ["Watson", "osobowość = suma wyuczonych nawyków"],
+        ["Skinner", "repertuar zachowań, „czarna skrzynka”"],
+        ["Thorndike", "prawo efektu"],
+        ["Pawłow", "warunkowanie klasyczne"],
+        ["Mały Albert", "wyuczony lęk przed szczurem"],
+        ["Wygaszanie", "BW bez BB – reakcja słabnie"],
+        ["Samoistne odnowienie", "wygaszona reakcja wraca"],
+        ["Generalizacja", "reakcja na bodźce podobne"],
+        ["Wzmocnienie negatywne", "odbieramy coś przykrego"],
+        ["Kara negatywna", "odbieramy coś miłego"],
+        ["Rozkład zmienny", "najtrudniej wygasić"],
+        ["Shaping", "nagradzanie kolejnych przybliżeń"],
+        ["Wzmocnienie wtórne", "pieniądze, oceny"],
+        ["Zachowanie przesądne", "szczęśliwy długopis"],
+        ["Wolpe", "systematyczna desensytyzacja"],
+        ["Dollard i Miller", "Hull + Freud"],
+        ["Popęd wyuczony", "lęk"],
+        ["Nagroda wg Dollarda i Millera", "redukcja popędu"],
+        ["Reakcje pośredniczące", "myśli i słowa"],
+        ["Frustracja–agresja", "1939"],
+        ["Przemieszczenie", "generalizacja bodźca"],
+        ["Gradient unikania", "bardziej stromy"],
+        ["Nerwica", "nieświadomy wyuczony konflikt"],
+        ["Bandura", "modelowanie i self-efficacy"]
       ],
       quiz: [
         { q: "Popęd, sygnał, reakcja i wzmocnienie to elementy teorii:", o: ["Bandury", "Dollarda i Millera", "Rottera", "Skinnera"], a: 1, e: "Dollard i Miller połączyli psychoanalizę z teorią uczenia się." },
         { q: "Lęk jako popęd wyuczony to popęd:", o: ["pierwotny", "wtórny", "częściowy", "organizmalny"], a: 1, e: "Popędy wtórne są wyuczone." },
         { q: "Który proces modelowania polega na zakodowaniu zachowania w pamięci?", o: ["uwagi", "przechowywania", "wytwarzania", "motywacyjny"], a: 1, e: "Przechowywanie – symboliczne kodowanie." },
         { q: "Wybór między dwiema nieprzyjemnymi opcjami to konflikt:", o: ["dążenie–dążenie", "unikanie–unikanie", "dążenie–unikanie", "podwójne dążenie–unikanie"], a: 1, e: "Obie opcje odpychają → unikanie–unikanie." },
-        { q: "Determinizm wzajemny opisał:", o: ["Bandura", "Mischel", "Dollard", "Kelly"], a: 0, e: "Bandura: osoba ↔ środowisko ↔ zachowanie." }
+        { q: "Determinizm wzajemny opisał:", o: ["Bandura", "Mischel", "Dollard", "Kelly"], a: 0, e: "Bandura: osoba ↔ środowisko ↔ zachowanie." },
+        { q: "Wzmocnienie negatywne:", o: ["zwiększa zachowanie przez odebranie czegoś przykrego", "zmniejsza zachowanie przez karę", "to inaczej kara negatywna", "polega na dodaniu nagany"], a: 0, e: "Wzmocnienie zawsze zwiększa zachowanie (np. wyłączenie budzika wzmacnia wstawanie)." },
+        { q: "Zabranie telefonu za spóźnienie to:", o: ["kara negatywna", "kara pozytywna", "wzmocnienie negatywne", "wzmocnienie pozytywne"], a: 0, e: "Odbieramy coś miłego, a zachowanie ma maleć." },
+        { q: "Który rozkład wzmocnień jest najbardziej odporny na wygaszanie?", o: ["zmienny", "ciągły", "stały interwałowy", "brak wzmocnień"], a: 0, e: "Np. automat do gier – nagroda przychodzi „czasem”." },
+        { q: "Prawo efektu sformułował:", o: ["Thorndike", "Pawłow", "Watson", "Hull"], a: 0, e: "Skinner rozwinął je w warunkowanie sprawcze." },
+        { q: "Eksperyment z „Małym Albertem” pokazał, że:", o: ["emocje mogą być wyuczone", "lęk jest wrodzony", "kara nie działa", "dzieci naśladują dorosłych"], a: 0, e: "Watson i Rayner (1920) – lęk uogólnił się na futrzane rzeczy." },
+        { q: "Powrót wygaszonej reakcji po przerwie to:", o: ["samoistne odnowienie", "generalizacja", "różnicowanie", "kształtowanie"], a: 0, e: "Pojęcie z warunkowania klasycznego." },
+        { q: "„Szczęśliwy długopis” na egzamin to według Skinnera przykład:", o: ["zachowania przesądnego", "wzmocnienia wtórnego", "kształtowania", "generalizacji"], a: 0, e: "Przypadkowo wzmocnione zachowanie." },
+        { q: "Teoria Dollarda i Millera łączy teorię uczenia się:", o: ["Hulla z pojęciami Freuda", "Skinnera z teorią Junga", "Pawłowa z teorią Adlera", "Bandury z teorią Rogersa"], a: 0, e: "„Tłumaczą Freuda na język Hulla”." },
+        { q: "Nagroda według Dollarda i Millera to:", o: ["redukcja popędu", "każdy przyjemny bodziec", "pochwała społeczna", "wzmocnienie wtórne"], a: 0, e: "Redukcja popędu wzmacnia związek wskazówka–reakcja." },
+        { q: "Dlaczego blisko celu w konflikcie dążenie–unikanie przeważa unikanie?", o: ["gradient unikania jest bardziej stromy niż gradient dążenia", "dążenie słabnie w pobliżu celu", "popęd znika", "wskazówka przestaje działać"], a: 0, e: "W punkcie przecięcia gradientów pojawia się wahanie i lęk." },
+        { q: "Która sytuacja NIE należy do 4 krytycznych sytuacji uczenia się w dzieciństwie?", o: ["nauka czytania", "karmienie", "trening czystości", "gniew i lęk"], a: 0, e: "Cztery: karmienie, czystość, wczesne wychowanie seksualne, gniew i lęk." },
+        { q: "Przemieszczenie agresji w języku Dollarda i Millera to:", o: ["generalizacja bodźca", "wygaszanie", "redukcja popędu", "reakcja pośrednicząca"], a: 0, e: "Hipoteza frustracja–agresja (1939)." },
+        { q: "Nieświadome jest według Dollarda i Millera to, co:", o: ["nie zostało nazwane (zwerbalizowane) albo jest tłumione", "jest biologiczne", "pochodzi z nieświadomości zbiorowej", "jest wzmacniane ciągle"], a: 0, e: "Wyparcie = wyuczone „niemyślenie”." }
+      ],
+      open: [
+        { q: "Czym różni się warunkowanie klasyczne od instrumentalnego?", a: "W **klasycznym** (Pawłow, Watson) bodziec obojętny łączony z bezwarunkowym staje się **bodźcem warunkowym** i sam wywołuje reakcję (np. dzwonek → ślinienie); organizm reaguje biernie. W **instrumentalnym** (Thorndike, Skinner) organizm sam **emituje zachowanie**, a o jego powtórzeniu decydują **konsekwencje** (wzmocnienie lub kara) – prawo efektu, warunkowanie sprawcze." },
+        { q: "Czym różni się wzmocnienie negatywne od kary?", a: "**Wzmocnienie negatywne zwiększa** zachowanie przez **odebranie czegoś przykrego** (wyłączenie budzika wzmacnia wstawanie). **Kara zmniejsza** zachowanie: pozytywna – dodajemy coś przykrego (nagana), negatywna – odbieramy coś miłego (telefon)." },
+        { q: "Który rozkład wzmocnień najtrudniej wygasić i dlaczego?", a: "**Rozkład zmienny** (sporadyczny, nieprzewidywalny) – nagroda przychodzi „czasem”, więc brak nagrody nie sygnalizuje, że przestała przychodzić; zachowanie trwa długo (automat do gier, powiadomienia). Rozkład **ciągły** daje szybką naukę, ale i szybkie wygaszanie." },
+        { q: "Co Dollard i Miller rozumieją przez nawyk?", a: "**Nawyk** to wyuczone **powiązanie bodźca (wskazówki) z reakcją** – główne pojęcie strukturalne teorii. Osobowość to **zespół wrodzonych i wyuczonych nawyków** (jednostki S–O–R o charakterze dynamiczno-kognitywno-behawioralnym)." },
+        { q: "Wymień cztery podstawy uczenia się według Dollarda i Millera.", a: "**Popęd** (trzeba czegoś chcieć), **wskazówka** (coś zauważyć), **reakcja** (coś zrobić) i **nagroda** – **redukcja popędu** (coś dostać). Przykład: głód → szyld piekarni → kupno bułki → najedzenie się." },
+        { q: "Dlaczego blisko celu w konflikcie dążenie–unikanie przeważa unikanie?", a: "Bo **gradient unikania jest bardziej stromy** niż gradient dążenia: im bliżej celu, tym oba są silniejsze, ale unikanie rośnie szybciej. Daleko od celu przeważa dążenie, blisko – unikanie, a w punkcie przecięcia pojawia się **wahanie i lęk**." },
+        { q: "Jakie są cztery krytyczne sytuacje uczenia się w dzieciństwie?", a: "**Karmienie** (zostawienie z głodem uczy apatii i lęku), **trening czystości** (zbyt surowy uczy lęku i unikania), **wczesne wychowanie seksualne** (kara wiąże seksualność z lękiem), **gniew i lęk** (karanie złości uczy, że złość jest groźna). Rodzice, karząc próby redukcji popędu, wywołują konflikty." },
+        { q: "Jak Dollard i Miller wyjaśniają nerwicę i nieświadomość?", a: "**Nerwica** to wynik silnego, **nieświadomego konfliktu** wyuczonego w dzieciństwie. **Nieświadome** jest to, czego człowiek **nie nazwał** (nie zwerbalizował) albo co **tłumi** (wyparcie = wyuczone „niemyślenie”). **Objawy** to reakcje unikania, które **obniżają lęk**, więc są nagradzane i utrwalają się. Terapia to uczenie się: nazwanie, różnicowanie przeszłości od teraźniejszości, wygaszenie lęku." }
       ]
     },
     // ------------------------------------------------------------------
