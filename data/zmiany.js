@@ -2,6 +2,14 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-11-19f",
+    date: "19 listopada 2026",
+    items: [
+      "💭 Koncepcje poznawcze uzupełnione o Twoją notatkę o Kellym i Lewinie: tabela porównawcza, rodzaje konstruktów, postulat podstawowy i 11 twierdzeń, emocje jako zmiana konstruktów, test REP i terapia ustalonej roli (Kelly) oraz przestrzeń życiowa, napięcie a siła, wartościowość, lokomocja, efekt Zeigarnik, rozwój i regresja (Lewin). Epstein, Rotter i Mischel bez zmian.",
+      "🃏 34 nowe fiszki, 16 par, 12 pytań w quizie i 8 pytań otwartych (pytania kontrolne z notatki)."
+    ]
+  },
+  {
     v: "2026-11-19e",
     date: "19 listopada 2026",
     items: [

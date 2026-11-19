@@ -14,6 +14,7 @@ window.SUBJECTS.push({
   sources: [
     "psychologia-osobowości-egzamin.pdf (79 pytań egzaminacyjnych)",
     "Uczeniowe_ujecia_osobowosci.pdf – klasyczny behawioryzm (Pawłow, Watson, Thorndike, Skinner) oraz Dollard i Miller (na podstawie lektury Osobowość i psychoterapia, 1969, s. 32–92) w schemacie osobowość–działanie–rozwój",
+    "Kelly_Lewin.pdf – teoria konstruktów osobistych (Kelly) i teoria pola (Lewin) w schemacie struktura–dynamika–rozwój",
     "Teorie_cech_notatka.pdf – Allport, Cattell, Eysenck, Wielka Piątka w schemacie cecha–działanie–rozwój (na podstawie McCrae i Costa, Osobowość dorosłego człowieka, 2005, notatek z kolosa i źródeł dodatkowych)",
     "Psychologia osobowości – wykłady.pdf",
     "to coś na kolosa osobowość.pdf",
@@ -1371,19 +1372,85 @@ Schemat dla każdej teorii: **1. osobowość i cecha → 2. jak działa (motyw /
 - **Schemat poznawczy** – wiedza wyabstrahowana z konkretnych doświadczeń; służy do interpretowania nowych doświadczeń i formułowania reakcji. Szczególnie ważne są schematy społeczne (osób, cech, zdarzeń).
 - Pojęcia: **kategoria**, **schemat**, **prototyp** (najlepszy egzemplarz kategorii), **skrypt** (typowa sekwencja zdarzeń, np. w restauracji).
 
+## Kelly i Lewin – porównanie
+Schemat: **1. osobowość (struktura) → 2. jak działa (dynamika) → 3. rozwój**. Źródła: **[kolos]** notatki z kolosa; **[opr.]** „Psychologia osobowości – opracowane zagadnienia” (pyt. 34–35); **[HL]** notatki z Halla i Lindzeya (rozdz. 10, s. 391–425); **[Pervin]** notatki z Pervina; **[dod.]** źródła dodatkowe.
+
+| | 1. Osobowość to… | 2. Jak działa? | 3. Rozwój |
+|---|---|---|---|
+| **Kelly** | **system konstruktów osobistych**, przez które człowiek interpretuje świat | **przewidywanie zdarzeń**; konstrukty kierują procesami i wyborem | **zmienny**: konstrukty zmieniają się pod wpływem doświadczenia |
+| **Lewin** | osoba (O) w środowisku psychologicznym (Ś) = **przestrzeń życiowa** | potrzeby → **napięcie** → wartościowość i siły → **lokomocja** | **ciągły, bez stadiów**: różnicowanie, integracja, realność |
+
+> Zapamiętaj: obie teorie są **poznawcze i fenomenologiczne** – liczy się nie świat „obiektywny”, ale to, **jak jednostka go widzi**. Kelly: świat widziany przez konstrukty. Lewin: zachowanie wynika z przestrzeni życiowej **tu i teraz**.
+> Skojarzenie: **K**elly = **K**onstrukty. **L**ewin = **L**ife space (przestrzeń życiowa).
+> Uwaga na egzaminie! U Lewina **napięcie jest w osobie**, a **siła i wartościowość w środowisku** psychologicznym. Nie myl środowiska psychologicznego (jak je widzę) ze **światem fizycznym** (to, co jest poza przestrzenią życiową).
+
 ## George Kelly – teoria konstruktów osobistych
-- **Alternatywizm konstruktywny** – każdy rozumie świat na swój sposób; człowiek jako **naukowiec**.
-- **Konstrukty osobiste** pozwalają rozumieć siebie, innych i świat oraz tworzyć **antycypacje** (przewidywania).
-- Konstrukty są **dwubiegunowe** (np. życzliwy – chłodny), mają ograniczony zakres stosowalności.
-- Rodzaje: werbalne / niewerbalne (przedsłowne); **centralne (rdzeniowe)** / **peryferyjne**; system złożony / prosty; wykluczające, konstelacyjne, zdaniowe.
-- System konstruktów jest elastyczny, a zarazem stabilny.
-- **Lęk** = zdarzenia wykraczają poza zakres stosowalności naszych konstruktów.
+Teoria z **1955 r.**; Kelly był **klinicystą**, a teoria wyrosła z praktyki terapeutycznej.
+
+**1. Osobowość**
+- **Alternatywizm konstruktywny**: każdy rozumie świat na swój sposób, a każde zdarzenie można zinterpretować na wiele sposobów; nie ma jednej „obiektywnej” interpretacji – teorie (także naukowe) to tylko różne konstrukcje.
+- **Człowiek jako naukowiec**: stawia hipotezy o świecie, sprawdza je i poprawia; jest **zorientowany na przyszłość**. Ludzie są jednocześnie **wolni** (sami nadają znaczenie zdarzeniom) i **zdeterminowani** (nie wyjdą poza własne konstrukty).
+- **Osobowość** to **system konstruktów**, za pomocą których człowiek nadaje sens swojemu zachowaniu i światu.
+- **Konstrukt osobisty**: sposób, w jaki pewne rzeczy widzimy jako podobne do siebie i różne od innych. Powstaje z **co najmniej trzech elementów** (dwa podobne, jeden inny). Ma **biegun podobieństwa** i **biegun przeciwieństwa** – żeby kogoś zrozumieć, trzeba znać oba.
+- Konstrukty są **dwubiegunowe** i działają na zasadzie **„albo–albo”**, a nie jak kontinuum. Bieguny nie muszą być logicznymi przeciwieństwami („dawać – brać” albo „dawać – dostawać”).
+- Każdy konstrukt ma **zakres zastosowania** (inteligentny może być człowiek, nie drzewo) i **ognisko zastosowania** (obiekty, do których pasuje najlepiej).
+
+**Rodzaje konstruktów**
+| Podział | Rodzaje |
+|---|---|
+| wpływ na inne konstrukty | **wykluczające** (jak ktoś jest wrogiem, nic innego się nie liczy), **konstelacyjne** (jeden uruchamia inne; stereotyp), **zdaniowe** (otwarte, nie przesądzają o innych) |
+| znaczenie dla „ja” | **rdzenne** (podstawowe dla tożsamości, oporne na zmianę; ich zmiana zmienia cały system) i **peryferyczne** (łatwo się zmieniają) |
+| hierarchia | **nadrzędne** (ogólne, szeroki zakres, obejmują inne) i **podrzędne** (szczegółowe) |
+| świadomość | **słowne**, **przedsłowne** (powstały, zanim dziecko umiało mówić; zależność, ufność), **zanurzone** (jeden biegun mało dostępny; wg Pervina – kiedyś dało się je wyrazić słowami, a teraz biegun nie daje się zwerbalizować), **zawieszone** (element niedostępny po zmianie systemu) |
+| system jako całość | **złożony** (wiele powiązanych konstruktów, wiele poziomów) albo **prosty** (mało, niepowiązane) – złożoność poznawcza |
+
+**2. Jak działa?**
+- **Postulat podstawowy**: procesy człowieka są psychologicznie ukierunkowane przez sposób, w jaki **przewiduje (antycypuje) zdarzenia**. Motywacja **nie wymaga popędów** – człowiek po prostu jest aktywny i chce lepiej przewidywać.
+- **11 twierdzeń pochodnych**: konstrukcji (przewidujemy, interpretując **powtórzenia zdarzeń** – replikacja), indywidualności (ludzie różnią się konstruowaniem zdarzeń), organizacji (konstrukty tworzą **hierarchiczny system**), dychotomii (konstrukty są dwubiegunowe), wyboru (wybieramy biegun, który lepiej pozwala rozwinąć system), zakresu, doświadczenia (system zmienia się, gdy interpretujemy kolejne zdarzenia), modulacji (zmiana zależy od **przepuszczalności** konstruktów), fragmentacji (można używać niespójnych podsystemów), wspólnoty (podobne konstrukty = podobne doświadczenia) i **socjalności** (żeby wejść w rolę wobec kogoś, trzeba rozumieć jego konstrukty).
+- **Cykl O–P–K** (okrężność, prewencja, kontrola): rozważamy wiele konstruktów, wybieramy jeden kluczowy i decydujemy, który biegun wybrać – działamy.
+- Konstrukty wpływają na zachowanie: w sytuacjach rozumianych przez ten sam konstrukt zachowujemy się podobnie; konstrukty, którymi opisujemy innych, można zastosować do nas; różne konstrukty utrudniają porozumienie.
+
+**Emocje jako zmiana konstruktów**
+- **Lęk**: zdarzenia leżą **poza zakresem zastosowania** naszych konstruktów, więc nie umiemy ich przewidzieć.
+- **Zagrożenie**: świadomość, że zbliża się poważna zmiana w **rdzennych** konstruktach. **Wina**: poczucie utraty swojej **rdzennej roli**. **Wrogość**: **wymuszanie potwierdzenia** przewidywań, które już się nie sprawdziły.
+- Przykład: zawsze uważałaś, że „kto się dużo uczy, ten zdaje”. Uczysz się dużo i nie zdajesz – zdarzenie nie mieści się w konstrukcie → **lęk**. Jeśli konstrukt był rdzenny („jestem dobrą studentką”) → **zagrożenie**. To sygnał, że system konstruktów trzeba przebudować.
+
+**3. Rozwój**
+- **Zmienny**: system konstruktów zmienia się stopniowo, gdy człowiek interpretuje kolejne **repliki zdarzeń**; zachowanie zmienia się, gdy zmieni się system konstruktów.
+- Kelly **nie opisał stadiów** rozwoju. **Zdrowie** = konstrukty, które się sprawdzają i są otwarte na zmianę; **zaburzenie** = używanie konstruktów, które ciągle się nie sprawdzają.
+- **Test REP (Test Repertuaru Ról)**: 1) lista ok. 20–30 osób pełniących ważne role w Twoim życiu (**Lista Nazw Ról**), 2) wybierasz po **trzy** i mówisz, czym dwie są podobne, a trzecia różna – tak wyłaniają się konstrukty. Konstrukty, którymi opisujemy innych, odsłaniają naszą osobowość.
+- **Terapia ustalonej roli**: klient pisze autocharakterystykę, a potem przez kilka tygodni **gra rolę** osoby o innych konstruktach.
+
+> Uwaga na egzaminie! Konstrukt **nie jest kontinuum** (albo–albo). **Lęk u Kelly'ego** to nie popęd jak u Dollarda i Millera, ale **niemożność przewidzenia zdarzeń**. Kelly nie potrzebuje pojęcia motywacji – człowiek jest aktywny z natury.
 
 ## Kurt Lewin – teoria pola
-- **Przestrzeń życiowa (L)** = osoba (P) + środowisko psychologiczne (E); poza nią świat fizyczny.
-- Zachowanie = f(osoba, środowisko). Granice są przenikalne.
-- Potrzeba → **napięcie** w regionie wewnętrznym; obiekty mają **walencję** dodatnią (przyciągają) lub ujemną (odpychają).
-- Rozwój jest ciągły, nie stadialny.
+**Psychologia topologiczna**; Lewin wywodził się z **psychologii postaci**, a pojęcie **pola** zapożyczył z fizyki.
+
+**1. Osobowość (struktura)**
+- **Zachowanie jest funkcją osoby i środowiska: Z = f(O, Ś)** (ang. B = f(P, E)); osoba i środowisko są od siebie zależne.
+- **Pole** to ogół **współistniejących faktów**, pojmowanych jako wzajemnie od siebie zależne. Opis **topologiczny**: liczą się relacje (część–całość, powiązanie–brak powiązania), a nie wielkość czy kształt.
+- **Przestrzeń życiowa (L)** = **osoba (P)** otoczona **środowiskiem psychologicznym (E)** – cała rzeczywistość psychologiczna, ogół faktów, które mogą zdeterminować zachowanie w danej chwili. Poza nią jest **świat fizyczny** (nie-E: niepsychologiczne aspekty świata, także fakty społeczne). Fakt fizyczny **nie działa wprost** na osobę – musi najpierw zaistnieć w środowisku psychologicznym.
+- **Osoba** to odrębna całość oddzielona granicą. Dzieli się na **region percepcyjno-motoryczny** (kontakt ze światem) i **wewnętrzno-osobisty**, a ten na **komórki obwodowe i centralne**. Nie ma bezpośredniego kontaktu między regionem wewnętrzno-osobistym a środowiskiem.
+- **Regiony** reprezentują fakty: w osobie to **potrzeby** (każda w osobnej komórce), w środowisku **wartościowości** (każda w osobnym regionie). Im więcej regionów i połączeń, tym „bogatsza” osobowość.
+- **Granice** mają różną przenikalność i siłę. Stopień powiązania regionów zależy od: odległości, liczby granic, siły granic i cech powierzchniowych regionów (**płynne–sztywne**). Regiony osoby są powiązane, gdy mogą się komunikować; regiony środowiska – gdy osoba może się między nimi przemieszczać.
+
+**2. Jak działa? (dynamika)**
+- Osoba to złożony **system energetyczny**. **Energia psychiczna** uwalnia się, gdy system wychodzi z równowagi, bo w jednej części rośnie napięcie; gdy napięcie się wyrówna, system wraca do spoczynku.
+- **Napięcie** to stan regionu wewnętrzno-osobistego względem innych regionów. Wyrównywanie napięcia to **proces**: myślenie, przypominanie, spostrzeganie, działanie.
+- **Potrzeba** (= motyw, pragnienie, popęd, impuls) wzbudza napięcie: stan fizjologiczny (głód), pragnienie czegoś (posady) albo **zamiar** (pójścia na spotkanie). Potrzeby są w dużej mierze **społeczne**.
+- **Wartościowość (walencja)**: region, który może zredukować napięcie, ma wartościowość **dodatnią** (przyciąga); region, który napięcie wzbudza – **ujemną** (odpycha). Wartościowość tworzy **siłę (wektor)** w środowisku: **siła jest w środowisku, napięcie w osobie**.
+- **3 funkcje potrzeby**: 1) wyzwala energię i zwiększa napięcie w regionie wewnętrzno-osobistym, 2) nadaje **wartościowość** regionowi środowiska z obiektem, który ją zaspokoi, 3) wytwarza **siłę**, która popycha osobę w stronę tego obiektu.
+- **Przemieszczenie (lokomocja)**: ruch osoby między regionami środowiska (np. awans społeczny, zmiana pracy). Kierunek, odległość i siłę opisuje **przestrzeń hodologiczna** (hodologia = nauka o drogach). Zachowanie zależy też od **odległości psychologicznej** i siły innych wartościowości.
+- **Zdarzenie** to przemieszczenie lub komunikowanie się wynikające z interakcji faktów. Zasady: **powiązania**, **konkretności** (działa tylko to, co istnieje w danej chwili) i **współczesności**. Siły dynamiczne zmieniają granice, odległości i liczbę regionów – przestrzeń życiowa stale się **restrukturyzuje**.
+- **Efekt Zeigarnik**: zadania **przerwane** pamiętamy lepiej niż ukończone, bo napięcie zostaje niewyrównane.
+- **Konflikty** (Lewin opisał je pierwszy): dążenie–dążenie, unikanie–unikanie, dążenie–unikanie.
+- Przykład: dziecko idzie koło cukierni i widzi pączka → potrzeba → **napięcie** w regionie wewnętrzno-osobistym → region z pączkiem dostaje **wartościowość dodatnią** → powstała **siła** popycha dziecko w jego stronę (**lokomocja**).
+
+**3. Rozwój**
+- **Ciągły, bez stadiów**; wszystko wyjaśnia się teorią pola – zachowanie zależy od **obecnej** przestrzeni życiowej, a nie od przeszłości (**zasada współczesności**).
+- U niemowlęcia regiony łączy prosta wzajemna zależność; później pojawia się relacja **kierujący–kierowany**: region wewnętrzno-osobisty podporządkowuje sobie motorykę i wpływa na spostrzeganie, a przenikanie napięcia staje się selektywne.
+- Z wiekiem przestrzeń życiowa się **różnicuje** (więcej regionów), **integruje** (lepsza organizacja), rośnie odróżnianie **realności od nierealności** (marzeń) i wydłuża się **perspektywa czasowa**.
+- **Regresja** to zmiana odwrotna do rozwoju: **Barker, Dembo i Lewin (1941)** – sfrustrowane dzieci bawiły się mniej dojrzale, bo silne napięcie powoduje **odróżnicowanie** osoby.
 
 ## Seymour Epstein – CEST
 Dwa równoległe systemy przetwarzania informacji:
@@ -1424,7 +1491,41 @@ Planowanie i wybór działań · koordynacja i integracja działań · samokontr
         ["Od czego zależy zachowanie wg Rottera?", "Od oczekiwań (szansy realizacji celu) i wartości wzmocnienia (znaczenia celu)."],
         ["Wewnętrzne vs zewnętrzne umiejscowienie kontroli", "Wewnętrzne – efekty zależą ode mnie. Zewnętrzne – od innych, okoliczności, szczęścia."],
         ["Podpis behawioralny (Mischel i Shoda)", "Charakterystyczny dla osoby wzorzec zachowania w określonej klasie sytuacji („jeśli… to…”)."],
-        ["Główne funkcje osobowości", "Planowanie i wybór działań, koordynacja i integracja, samokontrola, funkcja obronna."]
+        ["Główne funkcje osobowości", "Planowanie i wybór działań, koordynacja i integracja, samokontrola, funkcja obronna."],
+        ["Kelly – kim był i kiedy powstała teoria?", "Klinicystą; teoria konstruktów osobistych (1955) wyrosła z praktyki terapeutycznej."],
+        ["Człowiek jako naukowiec (Kelly)", "Stawia hipotezy o świecie, sprawdza je i poprawia; jest zorientowany na przyszłość."],
+        ["Czy człowiek wg Kelly'ego jest wolny?", "Jest jednocześnie wolny (sam nadaje znaczenie zdarzeniom) i zdeterminowany (nie wyjdzie poza własne konstrukty)."],
+        ["Z czego powstaje konstrukt?", "Z co najmniej trzech elementów: dwa są podobne, jeden inny."],
+        ["Bieguny konstruktu", "Biegun podobieństwa i biegun przeciwieństwa; konstrukt działa na zasadzie albo–albo, nie jak kontinuum."],
+        ["Zakres vs ognisko zastosowania konstruktu", "Zakres – do czego konstrukt da się zastosować; ognisko – obiekty, do których pasuje najlepiej."],
+        ["Konstrukty wykluczające, konstelacyjne, zdaniowe", "Wykluczające – nic innego się nie liczy; konstelacyjne – jeden uruchamia inne (stereotyp); zdaniowe – otwarte."],
+        ["Konstrukty rdzenne vs peryferyczne", "Rdzenne – podstawowe dla tożsamości, oporne na zmianę; peryferyczne – łatwo się zmieniają."],
+        ["Konstrukty nadrzędne vs podrzędne", "Nadrzędne – ogólne, szeroki zakres, obejmują inne; podrzędne – szczegółowe."],
+        ["Konstrukty przedsłowne", "Powstały, zanim dziecko umiało mówić (np. zależność, ufność)."],
+        ["Konstrukty zanurzone i zawieszone", "Zanurzone – jeden biegun mało dostępny (nie daje się zwerbalizować); zawieszone – element niedostępny po zmianie systemu."],
+        ["Postulat podstawowy Kelly'ego", "Procesy człowieka są psychologicznie ukierunkowane przez sposób, w jaki przewiduje (antycypuje) zdarzenia."],
+        ["Czy Kelly potrzebuje popędów?", "Nie – człowiek jest aktywny z natury i chce lepiej przewidywać zdarzenia."],
+        ["Twierdzenie socjalności (Kelly)", "Żeby wejść w rolę wobec kogoś, trzeba rozumieć jego konstrukty."],
+        ["Twierdzenie modulacji (Kelly)", "Zmiana systemu konstruktów zależy od przepuszczalności konstruktów."],
+        ["Cykl O–P–K", "Okrężność, prewencja, kontrola: rozważamy wiele konstruktów, wybieramy kluczowy i jego biegun – działamy."],
+        ["Zagrożenie, wina i wrogość wg Kelly'ego", "Zagrożenie – zbliża się zmiana rdzennych konstruktów; wina – utrata rdzennej roli; wrogość – wymuszanie potwierdzenia nietrafnych przewidywań."],
+        ["Zdrowie i zaburzenie wg Kelly'ego", "Zdrowie – konstrukty sprawdzają się i są otwarte na zmianę; zaburzenie – ciągle używamy konstruktów, które się nie sprawdzają."],
+        ["Test REP", "Test Repertuaru Ról: lista ok. 20–30 osób z ważnych ról, porównywanie trójek (dwie podobne, trzecia inna) – wyłaniają się konstrukty."],
+        ["Terapia ustalonej roli", "Klient pisze autocharakterystykę, a potem przez kilka tygodni gra rolę osoby o innych konstruktach."],
+        ["Wzór Lewina", "Z = f(O, Ś) – zachowanie jest funkcją osoby i środowiska (B = f(P, E))."],
+        ["Pole (Lewin)", "Ogół współistniejących faktów, pojmowanych jako wzajemnie od siebie zależne; opis topologiczny."],
+        ["Świat fizyczny u Lewina", "To, co jest poza przestrzenią życiową; fakt fizyczny działa na osobę dopiero przez środowisko psychologiczne."],
+        ["Budowa osoby wg Lewina", "Region percepcyjno-motoryczny + wewnętrzno-osobisty (komórki obwodowe i centralne)."],
+        ["Od czego zależy powiązanie regionów (Lewin)?", "Od odległości, liczby i siły granic oraz płynności lub sztywności regionów."],
+        ["Napięcie vs siła (Lewin)", "Napięcie jest w osobie (region wewnętrzno-osobisty); siła (wektor) i wartościowość – w środowisku psychologicznym."],
+        ["Wartościowość dodatnia vs ujemna", "Dodatnia – region może zredukować napięcie (przyciąga); ujemna – wzbudza napięcie (odpycha)."],
+        ["3 funkcje potrzeby (Lewin)", "Wyzwala energię i napięcie, nadaje wartościowość regionowi z obiektem, wytwarza siłę popychającą ku obiektowi."],
+        ["Lokomocja (Lewin)", "Przemieszczenie osoby między regionami środowiska, np. awans, zmiana pracy."],
+        ["Przestrzeń hodologiczna", "Opis kierunku, odległości i siły przemieszczeń (hodologia = nauka o drogach)."],
+        ["Zasady konkretności i współczesności (Lewin)", "Działa tylko to, co istnieje w danej chwili; zachowanie zależy od obecnej przestrzeni życiowej, nie od przeszłości."],
+        ["Efekt Zeigarnik", "Zadania przerwane pamiętamy lepiej niż ukończone, bo napięcie zostaje niewyrównane."],
+        ["Rozwój wg Lewina", "Ciągły, bez stadiów: różnicowanie, integracja, odróżnianie realności od nierealności, wydłużanie perspektywy czasowej."],
+        ["Regresja (Barker, Dembo i Lewin, 1941)", "Sfrustrowane dzieci bawiły się mniej dojrzale – silne napięcie powoduje odróżnicowanie osoby."]
       ],
       // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
       pairs: [
@@ -1440,7 +1541,23 @@ Planowanie i wybór działań · koordynacja i integracja działań · samokontr
         ["System racjonalny (Epstein)", "świadomy, logiczny"],
         ["Wewnętrzne umiejscowienie kontroli", "efekty zależą ode mnie"],
         ["Zewnętrzne umiejscowienie kontroli", "efekty zależą od losu i innych"],
-        ["Podpis behawioralny", "wzorzec „jeśli… to…”"]
+        ["Podpis behawioralny", "wzorzec „jeśli… to…”"],
+        ["Alternatywizm konstruktywny", "świat można interpretować na wiele sposobów"],
+        ["Konstrukt", "≥3 elementy, dwa bieguny"],
+        ["Konstrukt rdzenny", "podstawowy dla tożsamości"],
+        ["Konstrukt konstelacyjny", "stereotyp"],
+        ["Konstrukt przedsłowny", "sprzed mowy"],
+        ["Test REP", "porównywanie trójek osób"],
+        ["Terapia ustalonej roli", "gra rolę innej osoby"],
+        ["Lęk wg Kelly'ego", "zdarzenie poza zakresem konstruktów"],
+        ["Wrogość wg Kelly'ego", "wymuszanie potwierdzenia"],
+        ["Z = f(O, Ś)", "wzór Lewina"],
+        ["Napięcie", "w osobie"],
+        ["Siła i wartościowość", "w środowisku psychologicznym"],
+        ["Lokomocja", "przemieszczenie między regionami"],
+        ["Hodologia", "nauka o drogach"],
+        ["Efekt Zeigarnik", "przerwane zadania pamiętamy lepiej"],
+        ["Barker, Dembo i Lewin", "regresja przy frustracji"]
       ],
       quiz: [
         { q: "Pojęcie umiejscowienia kontroli wprowadził:", o: ["Kelly", "Rotter", "Bandura", "Epstein"], a: 1, e: "Julian Rotter – LOC." },
@@ -1448,7 +1565,29 @@ Planowanie i wybór działań · koordynacja i integracja działań · samokontr
         { q: "Podpis behawioralny to pojęcie z teorii:", o: ["Mischela i Shody", "Epsteina", "Rottera", "Markus"], a: 0, e: "CAPS – wzorce „jeśli… to…”." },
         { q: "System doświadczeniowy i racjonalny wyróżnił:", o: ["Epstein", "Kelly", "Lewin", "Higgins"], a: 0, e: "CEST Epsteina." },
         { q: "Osoba przekonana, że jej sukces zależy od szczęścia, ma:", o: ["wewnętrzne LOC", "zewnętrzne LOC", "wysokie poczucie skuteczności", "silny konstrukt centralny"], a: 1, e: "Zewnętrzne umiejscowienie kontroli." },
-        { q: "Pojęcie walencji (dodatniej i ujemnej) pochodzi od:", o: ["Lewina", "Rottera", "Kelly'ego", "Bandury"], a: 0, e: "Teoria pola Lewina." }
+        { q: "Pojęcie walencji (dodatniej i ujemnej) pochodzi od:", o: ["Lewina", "Rottera", "Kelly'ego", "Bandury"], a: 0, e: "Teoria pola Lewina." },
+        { q: "Z ilu co najmniej elementów powstaje konstrukt osobisty?", o: ["z trzech", "z dwóch", "z jednego", "z pięciu"], a: 0, e: "Dwa podobne i jeden inny." },
+        { q: "Konstrukt osobisty według Kelly'ego działa:", o: ["na zasadzie albo–albo (dwubiegunowo)", "jak kontinuum", "jak popęd", "tylko nieświadomie"], a: 0, e: "Ma biegun podobieństwa i przeciwieństwa." },
+        { q: "Konstrukty podstawowe dla tożsamości, oporne na zmianę, to konstrukty:", o: ["rdzenne", "peryferyczne", "zdaniowe", "zawieszone"], a: 0, e: "Ich zmiana zmienia cały system." },
+        { q: "Postulat podstawowy Kelly'ego mówi, że procesy człowieka są ukierunkowane przez:", o: ["sposób, w jaki przewiduje zdarzenia", "redukcję popędów", "nieświadome konflikty", "wzmocnienia"], a: 0, e: "Człowiek jako naukowiec antycypuje zdarzenia." },
+        { q: "Wrogość według Kelly'ego to:", o: ["wymuszanie potwierdzenia przewidywań, które się nie sprawdziły", "popęd agresji", "zdarzenie poza zakresem konstruktów", "utrata rdzennej roli"], a: 0, e: "Lęk – poza zakresem; wina – utrata roli; zagrożenie – zmiana rdzennych konstruktów." },
+        { q: "Test REP polega na:", o: ["porównywaniu trójek osób z ważnych ról", "opowiadaniu historii do obrazków", "interpretacji plam atramentu", "kwestionariuszu cech"], a: 0, e: "Test Repertuaru Ról – wyłaniają się konstrukty." },
+        { q: "U Lewina napięcie znajduje się:", o: ["w osobie (regionie wewnętrzno-osobistym)", "w środowisku psychologicznym", "w świecie fizycznym", "w przestrzeni hodologicznej"], a: 0, e: "Siła i wartościowość są w środowisku." },
+        { q: "Region, który może zredukować napięcie, ma wartościowość:", o: ["dodatnią", "ujemną", "zerową", "hodologiczną"], a: 0, e: "Dodatnia przyciąga, ujemna odpycha." },
+        { q: "Przemieszczenie osoby między regionami środowiska to u Lewina:", o: ["lokomocja", "regresja", "różnicowanie", "replikacja"], a: 0, e: "Opisuje je przestrzeń hodologiczna." },
+        { q: "Efekt Zeigarnik polega na tym, że:", o: ["zadania przerwane pamiętamy lepiej niż ukończone", "zadania ukończone pamiętamy lepiej", "pamiętamy pierwsze informacje najlepiej", "zapominamy zadania przerwane"], a: 0, e: "Napięcie zostaje niewyrównane." },
+        { q: "Zasada współczesności Lewina oznacza, że zachowanie zależy od:", o: ["obecnej przestrzeni życiowej", "doświadczeń z dzieciństwa", "dziedziczności", "wyłącznie przyszłych celów"], a: 0, e: "Rozwój jest ciągły, bez stadiów." },
+        { q: "Barker, Dembo i Lewin (1941) pokazali, że frustracja u dzieci prowadzi do:", o: ["regresji – mniej dojrzałej zabawy", "agresji wobec rodziców", "lepszej koncentracji", "efektu Zeigarnik"], a: 0, e: "Silne napięcie powoduje odróżnicowanie osoby." }
+      ],
+      open: [
+        { q: "Co to jest alternatywizm konstruktywny?", a: "Założenie **Kelly'ego**, że każdy rozumie świat **na swój sposób**, a każde zdarzenie można zinterpretować na wiele sposobów – nie ma jednej „obiektywnej” interpretacji, a teorie (także naukowe) to tylko różne konstrukcje. Człowiek działa jak **naukowiec**: stawia hipotezy, sprawdza je i poprawia; jest jednocześnie wolny i zdeterminowany przez własne konstrukty." },
+        { q: "Z czego powstaje konstrukt i dlaczego ma dwa bieguny?", a: "Konstrukt powstaje z **co najmniej trzech elementów**: dwa widzimy jako **podobne**, trzeci jako **inny**. Dlatego ma **biegun podobieństwa** i **biegun przeciwieństwa** i działa na zasadzie **albo–albo**, a nie jak kontinuum. Żeby kogoś zrozumieć, trzeba znać oba bieguny (nie muszą być logicznymi przeciwieństwami). Konstrukt ma też **zakres** i **ognisko** zastosowania." },
+        { q: "Czym różnią się konstrukty rdzenne i peryferyczne?", a: "**Rdzenne** są podstawowe dla tożsamości („ja”), **oporne na zmianę**, a ich zmiana przebudowuje cały system (zbliżająca się zmiana rdzennych konstruktów to **zagrożenie**). **Peryferyczne** są mniej ważne dla „ja” i **łatwo się zmieniają**." },
+        { q: "Jak brzmi postulat podstawowy Kelly'ego?", a: "**Procesy człowieka są psychologicznie ukierunkowane przez sposób, w jaki przewiduje (antycypuje) zdarzenia.** Motywacja nie wymaga popędów – człowiek jest aktywny z natury. Postulat rozwija **11 twierdzeń pochodnych** (m.in. konstrukcji, indywidualności, organizacji, dychotomii, wyboru, doświadczenia, socjalności)." },
+        { q: "Jak Kelly rozumie lęk, a jak Dollard i Miller?", a: "**Kelly**: lęk to stan, gdy zdarzenia leżą **poza zakresem zastosowania** naszych konstruktów, więc **nie umiemy ich przewidzieć** – to nie popęd. **Dollard i Miller**: lęk (strach) to **popęd wyuczony** – motywuje, a jego redukcja działa jak wzmocnienie; lęk to strach o niejasnym źródle." },
+        { q: "Co to jest przestrzeń życiowa i z czego się składa?", a: "**Przestrzeń życiowa (L)** to cała rzeczywistość psychologiczna – ogół faktów, które mogą zdeterminować zachowanie w danej chwili. Składa się z **osoby (P)** (region percepcyjno-motoryczny i wewnętrzno-osobisty z komórkami obwodowymi i centralnymi) otoczonej **środowiskiem psychologicznym (E)** (regiony z wartościowościami). Poza nią jest **świat fizyczny**, który działa na osobę dopiero przez środowisko psychologiczne. **Z = f(O, Ś).**" },
+        { q: "Czym różni się napięcie od siły u Lewina?", a: "**Napięcie** jest **w osobie** – to stan regionu wewnętrzno-osobistego wzbudzony przez potrzebę. **Siła (wektor)** jest **w środowisku psychologicznym** – tworzy ją **wartościowość** regionu (dodatnia przyciąga, ujemna odpycha) i popycha osobę ku obiektowi (**lokomocja**). Przykład: dziecko widzi pączka – napięcie w nim, siła w regionie z pączkiem." },
+        { q: "Jak wygląda rozwój i regresja według Lewina?", a: "Rozwój jest **ciągły, bez stadiów** i wyjaśnia się go teorią pola (zasada **współczesności**). Z wiekiem przestrzeń życiowa się **różnicuje** (więcej regionów), **integruje**, rośnie odróżnianie **realności od nierealności** i wydłuża się **perspektywa czasowa**; pojawia się relacja kierujący–kierowany. **Regresja** to zmiana odwrotna: **Barker, Dembo i Lewin (1941)** – sfrustrowane dzieci bawiły się mniej dojrzale, bo silne napięcie powoduje **odróżnicowanie** osoby." }
       ]
     },
     // ------------------------------------------------------------------
