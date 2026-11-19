@@ -2,6 +2,14 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-11-19d",
+    date: "19 listopada 2026",
+    items: [
+      "🎓 Dwa nowe kotki psychologów w albumie: Iwan Pawłot (z brodą, dzwonkiem 🔔 i miską z kostką) – odblokujesz go 5 opanowanymi fiszkami o warunkowaniu klasycznym, oraz Albert Bandurek (z lalką Bobo 🤡) – za 4 opanowane fiszki o modelowaniu, self-efficacy i determinizmie wzajemnym.",
+      "🐱 Kotki psychologów wybrane jako Twój kotek zachowują teraz w pokoju swoje brody, okulary i rekwizyty."
+    ]
+  },
+  {
     v: "2026-11-19c",
     date: "19 listopada 2026",
     items: [
