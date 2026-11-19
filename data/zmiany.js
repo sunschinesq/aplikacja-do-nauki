@@ -2,6 +2,15 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-11-19a",
+    date: "19 listopada 2026",
+    items: [
+      "🧠 Teorie cech uzupełnione o Twoją notatkę: Allport, Cattell, Eysenck i Wielka Piątka w schemacie „cecha – jak działa – rozwój”, z tabelą porównawczą, ramkami „Uwaga na egzaminie!”, skojarzeniami i przykładami z życia.",
+      "➕ Nowości: autonomia perseweracyjna i proprialna, rozwój proprium, równanie specyfikacji i subsydiacja (Cattell), ARAS i układ limbiczny (Eysenck), teoria pięcioczynnikowa (FFT), stałość cech po 30. r.ż. i spór z Robertsem i DelVecchio.",
+      "🃏 40 nowych fiszek, 23 pary do gier, 12 pytań w quizie i 8 pytań otwartych (pytania kontrolne z notatki)."
+    ]
+  },
+  {
     v: "2026-11-16c",
     date: "16 listopada 2026",
     items: [

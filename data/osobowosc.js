@@ -13,6 +13,7 @@ window.SUBJECTS.push({
   openExam: { questions: 3, minutes: 45, note: "Pytania z listy zagadnień egzaminacyjnych (psychologia-osobowości-egzamin.pdf). Liczba pytań i czas są orientacyjne." },
   sources: [
     "psychologia-osobowości-egzamin.pdf (79 pytań egzaminacyjnych)",
+    "Teorie_cech_notatka.pdf – Allport, Cattell, Eysenck, Wielka Piątka w schemacie cecha–działanie–rozwój (na podstawie McCrae i Costa, Osobowość dorosłego człowieka, 2005, notatek z kolosa i źródeł dodatkowych)",
     "Psychologia osobowości – wykłady.pdf",
     "to coś na kolosa osobowość.pdf",
     "Jung_Adler_Sullivan_Erikson_notatka.pdf",
@@ -708,43 +709,131 @@ Fazy (wg opracowania):
       id: "cechy",
       title: "Teorie cech: Allport, Cattell, Eysenck, Wielka Piątka",
       notes: `
+Schemat dla każdej teorii: **1. osobowość i cecha → 2. jak działa (motyw / dynamika / cecha → zachowanie) → 3. rozwój (stały czy zmienny)**.
+Źródła: **[MC]** McCrae i Costa, *Osobowość dorosłego człowieka* (2005); **[kolos]** notatki „to coś na kolosa – osobowość”; **[dod.]** źródła dodatkowe (Feist i Feist, Boeree, encyklopedie).
+
+| | 1. Cecha to… | 2. Jak działa? | 3. Rozwój |
+|---|---|---|---|
+| **Allport** | realna struktura neuropsychiczna; kardynalne, centralne, wtórne | cecha = **motyw**, sama inicjuje zachowanie; autonomia funkcjonalna | **zmienny**: rozwój proprium, dorosły ≠ dziecko |
+| **Cattell** | **czynnik** z analizy czynnikowej; powierzchniowe vs źródłowe (16 PF) | R = f(S, P); ergi + sentymenty w sieci dynamicznej | częściowo dziedziczne (MAVA), częściowo uczenie się |
+| **Eysenck** | skupisko nawykowych reakcji; hierarchia aż do typów (P, E, N) | **biologia**: pobudzenie korowe (E), układ limbiczny (N) | **raczej stały**: silnie dziedziczny |
+| **Wielka Piątka** | wymiar różnic indywidualnych w spójnych wzorcach myśli, uczuć, działań | tendencje podstawowe → przystosowania → zachowanie | **stały po 30. r.ż.**, drobne zmiany średnich |
+
+> Zapamiętaj: Allport: cecha = realny **motyw**. Cattell: cecha = **czynnik** (16 PF). Eysenck: cecha = **biologia** (PEN). McCrae i Costa: cecha = **tendencja podstawowa**, stała po 30. r.ż. (5 czynników).
+
 ## Gordon Allport
-- Osobowość to **dynamiczna organizacja** wewnątrz jednostki tych systemów psychofizycznych, które determinują jej **unikalne przystosowanie** do środowiska.
-- **Proprium** – zamiast „Ja”: centralna struktura osobowości, świadome dążenia, plany, intencje. Rozwija się od dzieciństwa (Ja cielesne, poczucie ciągłości, poczucie własnej wartości → obraz siebie → Ja racjonalne → dążenia osobiste).
-- **Cecha** – struktura neuropsychiczna, która sprawia, że różne bodźce są funkcjonalnie równoważne i wywołują podobne zachowania. Cechy realnie istnieją.
-- **Cechy wspólne** (pozwalają porównywać ludzi) vs **indywidualne (dyspozycje)**:
-  - **kardynalne** – jedna dominująca, przejawia się prawie w każdym zachowaniu,
-  - **centralne** – kilka wyraźnych, łatwo zauważalnych,
-  - **wtórne** – najliczniejsze, ujawniają się rzadko i w wąskim zakresie sytuacji.
-- **Funkcjonalna autonomia motywów** – motyw może się usamodzielnić od pierwotnego źródła.
-- Motywacja **reaktywna** (redukcja napięcia) i **proaktywna** (wzbudzanie napięcia).
-- Dojrzała osobowość: poszerzone Ja, serdeczne kontakty, bezpieczeństwo emocjonalne i samoakceptacja, realizm, samoobiektywizacja, jednocząca filozofia życia.
+**1. Osobowość i cecha**
+- **Osobowość** to **dynamiczna organizacja** wewnątrz jednostki tych systemów psychofizycznych, które wyznaczają jej **unikalne przystosowanie** do środowiska (1937); w wersji z 1961 r.: „…jej charakterystyczne zachowanie i myślenie”.
+- **Cecha** to struktura neuropsychiczna, która sprawia, że wiele bodźców staje się **funkcjonalnie równoważnych**, i która inicjuje oraz ukierunkowuje równoważne formy zachowania adaptacyjnego i ekspresyjnego. Cechy **realnie istnieją** (podłoże neurofizjologiczne). Rozpoznajemy je po **częstotliwości, intensywności i zakresie sytuacji**.
+- **Cechy wspólne** – pozwalają porównywać ludzi i przewidywać zachowanie. **Dyspozycje osobiste (indywidualne)** – jakościowe:
+  - **kardynalne** – jedna, przejawia się prawie w każdym zachowaniu,
+  - **centralne** – kilka (ok. 5–10), łatwo je zauważyć,
+  - **wtórne** – najliczniejsze, rzadkie i wąskie.
+- Dyspozycje **motywacyjne** (same uruchamiają działanie) albo **stylistyczne** (decydują, *jak* działamy).
+- **Proprium** – centralna, „ciepła” część osobowości: to, co człowiek uważa za najważniejsze w sobie (zamiast słowa „ja”).
+- **Allport i Odbert (1936)**: ok. **18 000** określeń cech w słowniku, wybrali ok. **4000**. Podejście **idiograficzne**.
+
+**2. Jak działa? (motyw / dynamika / cecha → zachowanie)**
+- Cecha jest **dynamiczna**: motywuje i kieruje zachowaniem, a nie tylko je opisuje. Osobowość jest zdolna do **autoregulacji**.
+- **Intencje** – ambicje, aspiracje, nadzieje i plany; łączą energię biologiczną z osobistymi znaczeniami i kierują działanie ku przyszłości.
+- Motywacja **reaktywna** (redukcja napięcia, powrót do równowagi) i **proaktywna** (człowiek sam wzbudza napięcie, żeby się rozwijać). Dobra teoria motywacji uwzględnia aktualne motywy, oba rodzaje motywacji, plany i intencje oraz motywy unikalne.
+- **Autonomia funkcjonalna motywów** – dorosłe motywy uniezależniają się od pierwotnego źródła:
+  - **perseweracyjna** – nawyki trwają, choć nie służą już pierwotnemu celowi (np. sprawdzanie telefonu „bez powodu”),
+  - **proprialna** – motywy związane z proprium, nadają osobowości jedność (np. ktoś zaczął biegać, żeby schudnąć, a po latach biega, bo to kocha).
+
+**3. Rozwój: stały czy zmienny?**
+- Rozwija się **proprium**:
+  - **1–3 r.ż.** – poczucie cielesnego ja, tożsamości (ciągłości) i szacunku do siebie,
+  - **4–6 r.ż.** – rozszerzenie ja i obraz siebie,
+  - **6–12 r.ż.** – ja jako istota racjonalna (rozumie świat, radzi sobie z problemami),
+  - **od 12 r.ż.** – dążenia proprialne: plany, odległe cele, ideały.
+- **Dojrzały dorosły**: poszerzone ja, serdeczne relacje, bezpieczeństwo emocjonalne i samoakceptacja, realizm, **samoobiektywizacja** (wgląd i humor), jednocząca filozofia życia.
+- **Typy ludzi według wartości** (za Sprangerem): teoretyczny, ekonomiczny, estetyczny, społeczny, polityczny, religijny.
+
+> Uwaga na egzaminie! W notatkach z kolosa jest zdanie „cechy się nie zmieniają”. Bezpieczna odpowiedź: cechy są **względnie stałe**, ale osobowość jest **dynamiczna** – rozwija się proprium, a motywy się zmieniają (autonomia funkcjonalna). Dorosły nie jest „dużym dzieckiem” – między dzieciństwem a dorosłością jest **nieciągłość**.
+> Skojarzenie: K-C-W – „**K**ardynał **C**zyta **W**iersze” (kardynalne, centralne, wtórne).
 
 ## Raymond Cattell
-- Osobowość = zespół cech, wywnioskowanych z zachowania (analiza czynnikowa).
-- **Cechy powierzchniowe** (obserwowalne) vs **źródłowe** (ukryte, leżące u podłoża) – **16 czynników** (test 16PF).
-- Ze względu na pochodzenie: **konstytucjonalne** i **środowiskowe**.
-- Ze względu na rodzaj: **temperamentalne** („jak?”), **zdolnościowe** („jak dobrze?”), **dynamiczne** („dlaczego?”) – a wśród nich **ergi** (biologiczne popędy), **sentymenty** (wyuczone, społeczne; najważniejszy – sentyment Ja) i postawy.
+**1. Osobowość i cecha**
+- **Osobowość** to to, co pozwala **przewidzieć, co człowiek zrobi** w danej sytuacji (w notatkach z kolosa: zespół cech).
+- **Cecha** – struktura psychiczna **wywnioskowana z obserwowalnego zachowania**; wyjaśnia, dlaczego zachowanie jest regularne i spójne.
+- **Powierzchniowe** – to, co widać: skupiska zachowań, które występują razem. **Źródłowe** – ukryte, jednolite i trwałe **czynniki** z analizy czynnikowej.
+- Ze względu na pochodzenie: **konstytucjonalne** (wrodzone) i **środowiskowe**.
+- Ze względu na to, o co pytają: **temperamentalne** („jak?” – tempo, energia, wrażliwość), **zdolnościowe** („jak skutecznie?”), **dynamiczne** („dlaczego?” – motywacja).
+- Droga do **16 PF**: ok. 4000 słów → 35 wiązek → 12 czynników + 4 z kwestionariuszy (Cattell, Eber i Tatsuoka, 1970). Dane z trzech źródeł: **L** (życiorys), **Q** (kwestionariusze), **T** (testy obiektywne).
+
+**2. Jak działa?**
+- **Równanie specyfikacji**: **R = s1·T1 + s2·T2 + … + sn·Tn** – reakcja (R) to suma cech (T) pomnożonych przez **wagi sytuacyjne** (s). Cecha ważna w sytuacji = duża waga; bez znaczenia = waga 0.
+- **Sieć dynamiczna** (dynamic lattice):
+  - **postawy** – widoczna gotowość, żeby zrobić coś konkretnego wobec obiektu,
+  - **ergi** – **wrodzone**, biologiczne źródła dążeń (ciekawość, seks, głód, bezpieczeństwo, samoutwierdzanie),
+  - **sentymenty** – **nabyte** struktury motywacyjne skupione wokół obiektów (rodzina, praca, religia); najważniejszy **sentyment ja**, który integruje pozostałe.
+- **Subsydiacja**: postawy służą sentymentom, a sentymenty ergom – każde działanie ma pod sobą łańcuch celów (np. „chcę zdać egzamin” → sentyment „studia/kariera” → ergi bezpieczeństwa i ciekawości).
+- Zachowanie zależy od **cech i sytuacji**; skoro cechy są stałe, zachowanie w podobnych sytuacjach też jest stałe.
+
+**3. Rozwój**
+- W notatkach z kolosa: cechy są stałe. Cattell badał, ile w cechach dziedziczności, a ile środowiska (metoda **MAVA**); uwzględniał uczenie się klasyczne, instrumentalne i integracyjne.
+- 16 PF: mężczyźni zbadani dwa razy w odstępie 10 lat – **14 z 16 skal się nie zmieniło** (wzrost inteligencji i niezależności tłumaczony m.in. efektem ćwiczenia) [MC s. 90].
+
+> Uwaga na egzaminie! Częste pomyłki: cecha **powierzchniowa** (to, co widać) a **źródłowa** (przyczyna, czynnik); **erg** (wrodzony) a **sentyment** (nabyty). Cattell stosował **rotację ukośną** (czynniki mogą korelować) → dużo cech; Eysenck **ortogonalną** → mało cech.
 
 ## Hans Eysenck
-- Osobowość = względnie trwała organizacja **charakteru, temperamentu, intelektu i budowy fizycznej**.
-- Hierarchiczny model; trzy wymiary (**PEN**):
-  - **Psychotyczność** – egocentryzm, chłód, impulsywność, agresja, brak empatii, ale też twórczość,
-  - **Ekstrawersja–introwersja** – ekstrawertyk potrzebuje silnej stymulacji, introwertyk dobrze działa przy słabej,
-  - **Neurotyczność** – niestabilność emocjonalna vs zrównoważenie.
-- Cechy mają podłoże **biologiczne**.
+**1. Osobowość i cecha**
+- **Osobowość** – względnie trwała organizacja **charakteru, temperamentu, intelektu i właściwości fizycznych**, która wyznacza specyficzne sposoby przystosowania się do otoczenia.
+- **Cecha** – względnie stała dyspozycja, definiowana przez istotne **korelacje między różnymi zachowaniami nawykowymi**.
+- **Hierarchia**: reakcje specyficzne → reakcje nawykowe → cechy → **typy (supercechy)**.
+- Typy (wymiary) **PEN**:
+  - **N (neurotyzm)** – niepokój, niestabilność i wrażliwość vs spokój i odporność,
+  - **E (ekstrawersja)** – ekstrawertyk dobrze działa przy dużej stymulacji, introwertyk przy małej,
+  - **P (psychotyzm, dodany w 1975 r.)** – egocentryzm, chłód, impulsywność, agresja, mała empatia, ale też twórczość.
 
-## Wielka Piątka (Costa i McCrae)
+**2. Jak działa?**
+- Cechy działają przez **biologię**, a nie przez motywy; zachowanie wynika z typu i nasilenia wymiarów.
+- **E** wynika z poziomu **pobudzenia korowego**, które reguluje **układ siatkowaty (ARAS)**. Introwertyk ma **wyższe** pobudzenie bazowe, więc unika bodźców; ekstrawertyk **niższe**, więc ich szuka. Introwertycy łatwiej się warunkują.
+- **N** wynika z reaktywności **mózgowia trzewnego** (układ limbiczny, podwzgórze, autonomiczny układ nerwowy) – osoba neurotyczna silniej i dłużej reaguje na stres.
+- Eysenck łączył osobowość z chorobami (np. typ C z nowotworami) – te wyniki zostały później mocno **podważone**.
+- Przykład: w bibliotece introwertyk pracuje dobrze w ciszy (mózg i tak „rozbudzony”), ekstrawertyk włącza muzykę i idzie do kawiarni, żeby dojść do optymalnego pobudzenia.
+
+**3. Rozwój**
+- **Raczej stały**: wymiary są biologiczne i w dużej mierze **dziedziczne**. Zmieniać się mogą najwyżej **zachowania** (warunkowanie, terapia behawioralna), nie wymiar.
+
+> Skojarzenie: „Eysenck pisze **PEN**-em” – Psychotyzm, Ekstrawersja, Neurotyzm.
+
+## Wielka Piątka – McCrae i Costa
+**1. Osobowość i cecha**
+- **Cechy** to wymiary różnic indywidualnych pod względem tendencji do wykazywania **spójnych wzorców myślenia, uczuć i działań** (s. 40) – definicja **fenotypowa**: mówi, jak cechy rozpoznać, a nie skąd się biorą.
+- Każdy ma każdą cechę w jakimś stopniu, **rozkład normalny**; „typy” to tylko osoby ze skrajnymi wynikami.
+- Cecha to **nie nawyk** (wąskie, mechaniczne zachowanie) ani **nastrój** (przemija); bliżej jej do **motywu**, ale jest pojęciem szerszym (obejmuje też style i postawy).
+- **5 czynników**: **N**eurotyczność, **E**kstrawertyczność, **O**twartość na doświadczenie, **U**godowość, **S**umienność. W **NEO-PI-R** każdy ma **6 składników** (np. N: lęk, agresywna wrogość, depresyjność, nadmierny samokrytycyzm, impulsywność, nadwrażliwość).
+- **Historia**: **Tupes i Christal (1961)** – na 35 skalach Cattella 5 czynników zamiast 12 → **Norman (1963)** – „właściwa taksonomia” → **Goldberg (1981)** – potwierdzenie w słowniku. Costa i McCrae: najpierw **N, E, O** z 16 PF (1976), potem **U i S** → **NEO-PI (1985)**.
+- Nazwy Normana (z notatek z kolosa): **surgencja** (= E), ugodowość, sumienność, **stabilność emocjonalna** (odwrotność N), **kultura** (= O).
+
 | Czynnik | Co opisuje |
 |---|---|
 | **Neurotyczność** | niestabilność emocjonalna vs opanowanie |
-| **Ekstrawersja** | ilość i intensywność kontaktów, aktywność, potrzeba stymulacji |
+| **Ekstrawertyczność** | ilość i intensywność kontaktów, aktywność, potrzeba stymulacji |
 | **Otwartość na doświadczenie** | poszukiwanie nowości, tolerancja nieznanego |
 | **Ugodowość** | współczucie vs antagonizm w relacjach |
 | **Sumienność** | zorganizowanie, wytrwałość, motywacja do celu |
 
-Wersja leksykalna (Goldberg): surgencja, ugodowość, sumienność, stabilność emocjonalna, intelekt/kultura.
+**2. Jak działa?**
+- Cechy to **tendencje, a nie absolutne determinanty** – na zachowanie wpływają też rola, sytuacja, nastrój i nawyki.
+- Działają **probabilistycznie**: **Mischel (1968)** – cechy wyjaśniają tylko **5–10%** zachowania; McCrae i Costa: tego należy się spodziewać (serdeczność a uśmiech do obcego: r = 0,41).
+- Siłę cech widać po **uśrednieniu** wielu zachowań (**agregacja – Epstein, 1979**). **Fleeson (2001)**: zachowanie zmienia się z godziny na godzinę, ale średnia jest bardzo stała („latem zawsze gorąco, zimą zimno, choć każda pora roku ma szeroki zakres temperatur”).
+- **Teoria pięcioczynnikowa (FFT)** – system osobowości:
+  - składniki **centralne**: **tendencje podstawowe** (cechy, uniwersalny „surowiec”), **charakterystyczne przystosowania** (nawyki, umiejętności, przekonania, role – uwarunkowane kulturowo), **koncepcja siebie** (szczególne przystosowanie),
+  - składniki **peryferyjne**: **podstawy biologiczne** (jedyna przyczyna cech), **wpływy zewnętrzne**, **biografia obiektywna** (wszystko, co człowiek robi, myśli i czuje przez całe życie),
+  - kierunek: biologia → tendencje podstawowe → (+ wpływy zewnętrzne) przystosowania → zachowanie; łączą to **procesy dynamiczne**.
 
+**3. Rozwój**
+- Teza o **stałości po 30. r.ż.**; James (1890): do 30. r.ż. charakter „utrwala się niczym odlew”.
+- **Średnie poziomy**: od dorastania do dorosłości **N, E i O spadają, a U i S rosną** (w wielu kulturach), ok. 1/6 SD na 10 lat, głównie **18–30 r.ż.**; po 30. r.ż. zmiany bardzo małe.
+- **Stałość rangowa**: r = **0,74 po 12 latach** i **0,65 po 24 latach** (GZTS); u 40-latków mediana **0,83**, u 12–16-latków 0,38, u studentów 0,60; przez dorosłość zachowuje się ok. **60% wariancji**.
+- **Spór**: **Roberts i DelVecchio (2000)** – szczyt stałości dopiero ok. **50.–60. r.ż.**; McCrae i Costa krytykują tę metaanalizę.
+- Zmiana możliwa, ale nie „sama” – np. skuteczna psychoterapia, poważne doświadczenia, choroba Alzheimera.
+- Postulaty FFT o tendencjach podstawowych: **indywidualność**, **pochodzenie** (cechy są **endogenne** – środowisko ich nie kształtuje), **rozwój** (dojrzewają wewnętrznie), **struktura**. Środowisko zmienia **przystosowania**, a nie cechy.
+
+> Uwaga na egzaminie! Rozróżniaj **stałość średnich poziomów** (czy grupa się przesuwa) i **stałość różnic indywidualnych / rangową** (czy zachowujesz swoje miejsce w grupie). Osobowość może się zmieniać średnio, a mimo to pozostawać stała rangowo.
 > Na pamięć: OCEAN – Otwartość, Conscientiousness (sumienność), Ekstrawersja, Agreeableness (ugodowość), Neurotyczność.
 `,
       flashcards: [
@@ -758,7 +847,47 @@ Wersja leksykalna (Goldberg): surgencja, ugodowość, sumienność, stabilność
         ["Ekstrawertyk vs introwertyk wg Eysencka", "Ekstrawertyk dobrze działa przy silnej stymulacji i jej szuka; introwertyk – przy słabej."],
         ["Czynniki Wielkiej Piątki", "Neurotyczność, ekstrawersja, otwartość na doświadczenie, ugodowość, sumienność."],
         ["Sumienność w Wielkiej Piątce", "Stopień zorganizowania, wytrwałości i motywacji w działaniu ukierunkowanym na cel."],
-        ["Ugodowość w Wielkiej Piątce", "Jakość relacji z innymi: od współczucia do antagonizmu."]
+        ["Ugodowość w Wielkiej Piątce", "Jakość relacji z innymi: od współczucia do antagonizmu."],
+        ["Cecha wg Allporta", "Realna struktura neuropsychiczna, która sprawia, że wiele bodźców jest funkcjonalnie równoważnych, i inicjuje oraz ukierunkowuje równoważne formy zachowania."],
+        ["Po czym rozpoznajemy cechę wg Allporta?", "Po częstotliwości, intensywności i zakresie sytuacji, w których się pojawia."],
+        ["Cechy wspólne vs dyspozycje osobiste (Allport)", "Wspólne – pozwalają porównywać ludzi; dyspozycje osobiste – indywidualne, jakościowe (kardynalne, centralne, wtórne)."],
+        ["Dyspozycje motywacyjne vs stylistyczne (Allport)", "Motywacyjne same uruchamiają działanie; stylistyczne decydują, jak działamy."],
+        ["Allport i Odbert (1936)", "Ok. 18 000 określeń cech w słowniku, wybrali ok. 4000."],
+        ["Motywacja reaktywna vs proaktywna (Allport)", "Reaktywna – redukcja napięcia; proaktywna – człowiek sam wzbudza napięcie, żeby się rozwijać."],
+        ["Autonomia perseweracyjna vs proprialna", "Perseweracyjna – nawyki trwają, choć nie służą już pierwotnemu celowi; proprialna – motywy związane z proprium, nadają osobowości jedność."],
+        ["Rozwój proprium (Allport)", "1–3 r.ż. ja cielesne, tożsamość, szacunek do siebie; 4–6 r.ż. rozszerzenie ja, obraz siebie; 6–12 r.ż. ja racjonalne; od 12 r.ż. dążenia proprialne."],
+        ["Dojrzała osobowość wg Allporta", "Poszerzone ja, serdeczne relacje, bezpieczeństwo emocjonalne i samoakceptacja, realizm, samoobiektywizacja (wgląd i humor), jednocząca filozofia życia."],
+        ["Typy ludzi według wartości (Allport za Sprangerem)", "Teoretyczny, ekonomiczny, estetyczny, społeczny, polityczny, religijny."],
+        ["Czy cechy wg Allporta się zmieniają? (bezpieczna odpowiedź)", "Cechy są względnie stałe, ale osobowość jest dynamiczna: rozwija się proprium, motywy się zmieniają (autonomia funkcjonalna); dorosły ≠ duże dziecko."],
+        ["Osobowość wg Cattella", "To, co pozwala przewidzieć, co człowiek zrobi w danej sytuacji (zespół cech)."],
+        ["Cechy temperamentalne, zdolnościowe i dynamiczne (Cattell)", "Temperamentalne – „jak?”; zdolnościowe – „jak skutecznie?”; dynamiczne – „dlaczego?” (motywacja)."],
+        ["Droga do 16 PF", "Ok. 4000 słów → 35 wiązek → 12 czynników + 4 z kwestionariuszy (Cattell, Eber i Tatsuoka, 1970)."],
+        ["Dane L, Q i T (Cattell)", "L – życiorys, Q – kwestionariusze, T – testy obiektywne."],
+        ["Równanie specyfikacji (Cattell)", "R = s1·T1 + … + sn·Tn – reakcja to suma cech pomnożonych przez wagi sytuacyjne."],
+        ["Sieć dynamiczna (Cattell)", "Postawy służą sentymentom (nabytym), a sentymenty ergom (wrodzonym) – subsydiacja."],
+        ["Subsydiacja (Cattell)", "Postawy służą sentymentom, a sentymenty ergom – każde działanie ma pod sobą łańcuch celów."],
+        ["Metoda MAVA (Cattell)", "Badanie, ile w cechach jest dziedziczności, a ile środowiska."],
+        ["Stałość 16 PF po 10 latach", "14 z 16 skal się nie zmieniło."],
+        ["Rotacja ukośna vs ortogonalna", "Cattell – ukośna (czynniki mogą korelować) → dużo cech; Eysenck – ortogonalna → mało cech."],
+        ["Osobowość wg Eysencka", "Względnie trwała organizacja charakteru, temperamentu, intelektu i właściwości fizycznych."],
+        ["Hierarchia osobowości wg Eysencka", "Reakcje specyficzne → reakcje nawykowe → cechy → typy (supercechy)."],
+        ["Kiedy Eysenck dodał psychotyzm?", "W 1975 r."],
+        ["Biologiczne podłoże ekstrawersji (Eysenck)", "Poziom pobudzenia korowego regulowany przez układ siatkowaty (ARAS); introwertyk ma wyższe pobudzenie bazowe, więc unika bodźców."],
+        ["Biologiczne podłoże neurotyzmu (Eysenck)", "Reaktywność mózgowia trzewnego: układu limbicznego, podwzgórza i autonomicznego układu nerwowego."],
+        ["Cecha wg McCrae i Costy", "Wymiar różnic indywidualnych pod względem tendencji do spójnych wzorców myślenia, uczuć i działań (definicja fenotypowa)."],
+        ["Czym cecha różni się od nawyku i nastroju (McCrae i Costa)?", "Nawyk – wąskie, mechaniczne zachowanie; nastrój – przemija; cecha – szeroka, trwała tendencja, bliska motywowi."],
+        ["Historia Wielkiej Piątki", "Tupes i Christal (1961) → Norman (1963) → Goldberg (1981); Costa i McCrae: N, E, O (1976) → NEO-PI (1985)."],
+        ["Nazwy czynników Normana", "Surgencja (E), ugodowość, sumienność, stabilność emocjonalna (odwrotność N), kultura (O)."],
+        ["Ile składników ma każdy czynnik w NEO-PI-R?", "6 (np. N: lęk, agresywna wrogość, depresyjność, nadmierny samokrytycyzm, impulsywność, nadwrażliwość)."],
+        ["Mischel (1968) o cechach", "Cechy wyjaśniają tylko 5–10% zachowania – McCrae i Costa: tego należy się spodziewać, bo cechy działają probabilistycznie."],
+        ["Agregacja (Epstein, 1979)", "Siłę cech widać po uśrednieniu wielu zachowań, a nie w pojedynczym zachowaniu."],
+        ["Składniki centralne FFT", "Tendencje podstawowe, charakterystyczne przystosowania, koncepcja siebie."],
+        ["Składniki peryferyjne FFT", "Podstawy biologiczne, wpływy zewnętrzne, biografia obiektywna."],
+        ["Jak zmieniają się cechy między 18. a 30. r.ż.?", "N, E i O spadają, a U i S rosną (ok. 1/6 SD na 10 lat)."],
+        ["Stałość rangowa cech (GZTS)", "r = 0,74 po 12 latach, 0,65 po 24 latach; u 40-latków mediana 0,83; ok. 60% wariancji przez dorosłość."],
+        ["Roberts i DelVecchio (2000)", "Szczyt stałości cech dopiero ok. 50.–60. r.ż. – McCrae i Costa krytykują tę metaanalizę."],
+        ["Stałość średnich poziomów vs stałość rangowa", "Średnie – czy grupa się przesuwa; rangowa – czy zachowujesz swoje miejsce w grupie."],
+        ["Pochodzenie cech wg FFT", "Cechy są endogenne – środowisko zmienia przystosowania, a nie cechy."]
       ],
       // krótkie pary do gier (Gra w pary, Memory, Prawda czy fałsz, Wisielec)
       pairs: [
@@ -775,14 +904,59 @@ Wersja leksykalna (Goldberg): surgencja, ugodowość, sumienność, stabilność
         ["PEN (Eysenck)", "psychotyczność, ekstrawersja, neurotyczność"],
         ["Ekstrawertyk wg Eysencka", "szuka silnej stymulacji"],
         ["Sumienność", "zorganizowanie i wytrwałość"],
-        ["Ugodowość", "od współczucia do antagonizmu"]
+        ["Ugodowość", "od współczucia do antagonizmu"],
+        ["Dyspozycje stylistyczne", "decydują, jak działamy"],
+        ["Autonomia perseweracyjna", "nawyk bez pierwotnego celu"],
+        ["Autonomia proprialna", "motyw z proprium, daje jedność"],
+        ["Motywacja proaktywna", "sam wzbudza napięcie"],
+        ["Allport i Odbert (1936)", "18 000 określeń cech"],
+        ["Równanie specyfikacji", "R = Σ s·T (wagi sytuacyjne)"],
+        ["Subsydiacja", "postawy → sentymenty → ergi"],
+        ["Sentyment ja", "integruje pozostałe sentymenty"],
+        ["Dane L, Q, T", "życiorys, kwestionariusze, testy"],
+        ["MAVA", "dziedziczność vs środowisko"],
+        ["ARAS", "pobudzenie korowe – ekstrawersja"],
+        ["Mózgowie trzewne", "neurotyzm"],
+        ["Psychotyzm", "dodany w 1975 r."],
+        ["Tupes i Christal (1961)", "5 czynników na skalach Cattella"],
+        ["NEO-PI", "1985 – Costa i McCrae"],
+        ["Surgencja", "ekstrawersja u Normana"],
+        ["Mischel (1968)", "cechy wyjaśniają 5–10% zachowania"],
+        ["Epstein (1979)", "agregacja zachowań"],
+        ["Fleeson (2001)", "zmienne zachowanie, stała średnia"],
+        ["Tendencje podstawowe", "cechy – surowiec osobowości"],
+        ["Charakterystyczne przystosowania", "nawyki, role, przekonania"],
+        ["Roberts i DelVecchio", "szczyt stałości 50–60 lat"],
+        ["Stałość rangowa po 12 latach", "r = 0,74"]
       ],
       quiz: [
         { q: "Cecha, która przejawia się niemal w każdym zachowaniu człowieka (Allport), to cecha:", o: ["centralna", "kardynalna", "wtórna", "źródłowa"], a: 1, e: "Kardynalna = dominująca." },
         { q: "Test 16PF opracował:", o: ["Eysenck", "Allport", "Cattell", "Costa i McCrae"], a: 2, e: "Cattell – 16 cech źródłowych." },
         { q: "Który wymiar NIE należy do modelu PEN Eysencka?", o: ["psychotyczność", "ekstrawersja", "sumienność", "neurotyczność"], a: 2, e: "Sumienność to czynnik Wielkiej Piątki." },
         { q: "Pojęcie proprium wprowadził:", o: ["Allport", "Rogers", "Cattell", "Kelly"], a: 0, e: "Allport – proprium zamiast „Ja”." },
-        { q: "Poszukiwanie nowych doświadczeń i tolerancja nieznanego to:", o: ["ekstrawersja", "otwartość na doświadczenie", "ugodowość", "surgencja"], a: 1, e: "Otwartość na doświadczenie." }
+        { q: "Poszukiwanie nowych doświadczeń i tolerancja nieznanego to:", o: ["ekstrawersja", "otwartość na doświadczenie", "ugodowość", "surgencja"], a: 1, e: "Otwartość na doświadczenie." },
+        { q: "Codzienne sprawdzanie telefonu „bez powodu” to przykład autonomii funkcjonalnej:", o: ["perseweracyjnej", "proprialnej", "reaktywnej", "stylistycznej"], a: 0, e: "Perseweracyjna – nawyk trwa, choć nie służy pierwotnemu celowi." },
+        { q: "Równanie specyfikacji Cattella opisuje reakcję jako:", o: ["sumę cech pomnożonych przez wagi sytuacyjne", "iloczyn popędu i nawyku", "różnicę między ja realnym a idealnym", "sumę reakcji nawykowych"], a: 0, e: "R = s1·T1 + … + sn·Tn." },
+        { q: "Ergi według Cattella są:", o: ["wrodzone", "nabyte", "obserwowalne", "stylistyczne"], a: 0, e: "Sentymenty są nabyte; najważniejszy – sentyment ja." },
+        { q: "Introwertyk według Eysencka ma:", o: ["wyższe bazowe pobudzenie korowe, więc unika bodźców", "niższe pobudzenie korowe, więc szuka bodźców", "silniejszą reaktywność układu limbicznego", "niższą neurotyczność"], a: 0, e: "Pobudzenie reguluje układ siatkowaty (ARAS)." },
+        { q: "Neurotyzm Eysenck wiązał z reaktywnością:", o: ["mózgowia trzewnego (układu limbicznego)", "kory przedczołowej", "móżdżku", "układu siatkowatego"], a: 0, e: "E – pobudzenie korowe (ARAS); N – układ limbiczny." },
+        { q: "Kto (1961) znalazł 5 czynników na skalach Cattella?", o: ["Tupes i Christal", "Costa i McCrae", "Allport i Odbert", "Roberts i DelVecchio"], a: 0, e: "Potem Norman (1963) i Goldberg (1981)." },
+        { q: "Jak zmieniają się średnie poziomy cech między 18. a 30. r.ż.?", o: ["N, E i O spadają, U i S rosną", "wszystkie rosną", "wszystkie spadają", "N rośnie, reszta bez zmian"], a: 0, e: "Ok. 1/6 SD na 10 lat; po 30. r.ż. zmiany są bardzo małe." },
+        { q: "Według teorii pięcioczynnikowej środowisko zmienia:", o: ["charakterystyczne przystosowania, a nie cechy", "tendencje podstawowe", "podstawy biologiczne", "wyłącznie temperament"], a: 0, e: "Cechy są endogenne." },
+        { q: "Mischel (1968) twierdził, że cechy wyjaśniają:", o: ["tylko 5–10% zachowania", "ok. 50% zachowania", "całe zachowanie", "nic"], a: 0, e: "McCrae i Costa: tego należy się spodziewać – cechy działają probabilistycznie." },
+        { q: "Stałość rangowa cech to:", o: ["zachowanie swojego miejsca w grupie", "brak zmian średnich w grupie", "stały nastrój", "stałe nawyki"], a: 0, e: "Rozróżniaj stałość średnich poziomów i stałość różnic indywidualnych." },
+        { q: "Kto twierdził, że szczyt stałości cech przypada na 50.–60. r.ż.?", o: ["Roberts i DelVecchio", "McCrae i Costa", "James", "Epstein"], a: 0, e: "McCrae i Costa krytykują tę metaanalizę – według nich cechy stabilizują się ok. 30. r.ż." },
+        { q: "Wymiar P (psychotyzm) Eysenck dodał w roku:", o: ["1975", "1947", "1985", "1961"], a: 0, e: "PEN: psychotyzm, ekstrawersja, neurotyzm." }
+      ],
+      open: [
+        { q: "Czym różni się cecha kardynalna od centralnej?", a: "**Kardynalna** to jedna, dominująca dyspozycja, która przejawia się prawie w każdym zachowaniu (ma ją niewiele osób). **Centralne** to kilka (ok. 5–10) wyraźnych, łatwo zauważalnych cech, które dobrze opisują człowieka. Trzecia grupa to **wtórne** – najliczniejsze, rzadkie i wąskie (Allport)." },
+        { q: "Na czym polega autonomia funkcjonalna motywów?", a: "Dorosłe motywy **uniezależniają się od pierwotnego źródła** (Allport). **Perseweracyjna** – nawyki trwają, choć nie służą już pierwotnemu celowi (np. sprawdzanie telefonu bez powodu). **Proprialna** – motywy związane z proprium, nadające osobowości jedność (np. ktoś zaczął biegać, żeby schudnąć, a teraz biega, bo to kocha)." },
+        { q: "Czym różnią się cechy powierzchniowe i źródłowe?", a: "**Powierzchniowe** (Cattell) to to, co widać – skupiska zachowań występujących razem. **Źródłowe** to ukryte, jednolite i trwałe **czynniki** z analizy czynnikowej, które leżą u podłoża zachowania; Cattell wyróżnił ich 16 (**16 PF**)." },
+        { q: "Co opisuje równanie specyfikacji?", a: "Równanie Cattella **R = s1·T1 + s2·T2 + … + sn·Tn**: reakcja (R) jest sumą cech (T) pomnożonych przez **wagi sytuacyjne** (s). Gdy cecha jest ważna w danej sytuacji, waga jest duża; gdy nie ma znaczenia – zero. Zachowanie zależy więc od cech i sytuacji." },
+        { q: "Jak Eysenck wyjaśnia różnice między ekstrawertykiem a introwertykiem?", a: "Biologicznie – poziomem **pobudzenia korowego** regulowanego przez **układ siatkowaty (ARAS)**. Introwertyk ma **wyższe** pobudzenie bazowe, więc unika bodźców i dobrze działa przy słabej stymulacji; ekstrawertyk ma **niższe**, więc szuka bodźców, by dojść do optymalnego pobudzenia. Introwertycy łatwiej się warunkują." },
+        { q: "Dlaczego cechy słabo przewidują pojedyncze zachowanie, a dobrze średnie?", a: "Cechy to **tendencje**, a nie determinanty – na pojedyncze zachowanie wpływają też rola, sytuacja, nastrój i nawyki (**Mischel**: 5–10% wyjaśnionej wariancji). Siłę cech widać po **agregacji** (Epstein, 1979): uśrednienie wielu zachowań daje stały wynik (Fleeson, 2001 – zachowanie zmienia się z godziny na godzinę, ale średnia jest stała)." },
+        { q: "Jak zmieniają się N, E, O, U i S między 18. a 30. rokiem życia?", a: "**Neurotyczność, ekstrawertyczność i otwartość spadają**, a **ugodowość i sumienność rosną** – w wielu kulturach, ok. 1/6 odchylenia standardowego na 10 lat. Po 30. r.ż. zmiany są już bardzo małe (McCrae i Costa)." },
+        { q: "Czym różni się stałość średnich poziomów od stałości rangowej?", a: "**Stałość średnich poziomów** – czy cała grupa przesuwa się na wymiarze (np. spadek N z wiekiem). **Stałość rangowa (różnic indywidualnych)** – czy osoba zachowuje swoje miejsce względem innych (r = 0,74 po 12 latach, 0,83 u 40-latków). Osobowość może się zmieniać średnio, a mimo to pozostawać stała rangowo." }
       ]
     },
     // ------------------------------------------------------------------
