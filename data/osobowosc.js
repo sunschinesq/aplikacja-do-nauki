@@ -13,7 +13,7 @@ window.SUBJECTS.push({
   openExam: { questions: 3, minutes: 45, note: "Pytania z listy zagadnień egzaminacyjnych (psychologia-osobowości-egzamin.pdf). Liczba pytań i czas są orientacyjne." },
   sources: [
     "psychologia-osobowości-egzamin.pdf (79 pytań egzaminacyjnych)",
-    "Uczeniowe_ujecia_osobowosci.pdf – klasyczny behawioryzm (Pawłow, Watson, Thorndike, Skinner) oraz Dollard i Miller w schemacie osobowość–działanie–rozwój",
+    "Uczeniowe_ujecia_osobowosci.pdf – klasyczny behawioryzm (Pawłow, Watson, Thorndike, Skinner) oraz Dollard i Miller (na podstawie lektury Osobowość i psychoterapia, 1969, s. 32–92) w schemacie osobowość–działanie–rozwój",
     "Teorie_cech_notatka.pdf – Allport, Cattell, Eysenck, Wielka Piątka w schemacie cecha–działanie–rozwój (na podstawie McCrae i Costa, Osobowość dorosłego człowieka, 2005, notatek z kolosa i źródeł dodatkowych)",
     "Psychologia osobowości – wykłady.pdf",
     "to coś na kolosa osobowość.pdf",
@@ -655,15 +655,15 @@ Fazy (wg opracowania):
       title: "Teorie uczenia się: behawioryzm, Dollard i Miller, Bandura",
       notes: `
 Schemat: **1. osobowość (i jej „jednostka”) → 2. jak działa (motyw / dynamika → zachowanie) → 3. rozwój (stały czy zmienny)**.
-Źródła: **[kolos]** notatki „to coś na kolosa – osobowość” i „_osobowosc_kolos”; **[dod.]** źródła dodatkowe (opracowania podręcznikowe). Przed egzaminem warto sprawdzić definicje z lektury obowiązkowej: Dollard i Miller, s. 32–92.
+Źródła: **Dollard i Miller, *Osobowość i psychoterapia* (1969), s. 32–92** (Twoje zdjęcia, numery stron w tekście); **[kolos]** notatki „to coś na kolosa – osobowość” i „_osobowosc_kolos”; **[dod.]** źródła dodatkowe (opracowania podręcznikowe).
 
 | | 1. Osobowość to… | 2. Jak działa? | 3. Rozwój |
 |---|---|---|---|
 | **Klasyczny behawioryzm** | suma wyuczonych **nawyków** / **repertuar zachowań**; bez struktur wewnętrznych | bodziec → reakcja; **konsekwencje** (wzmocnienie, kara) sterują zachowaniem | **zmienny**: historia wzmocnień przez całe życie |
-| **Dollard i Miller** | zespół **nawyków (S–R)**, wrodzonych i wyuczonych | **popęd → wskazówka → reakcja → nagroda** (redukcja popędu); konflikty | zmienny, ale **dzieciństwo krytyczne** (4 sytuacje); nerwica jest wyuczona |
+| **Dollard i Miller** | zespół **nawyków (S–R)**, wrodzonych i wyuczonych | **popęd → sygnał → reakcja → wzmocnienie** (redukcja popędu); **strach jako popęd wyuczony** | zmienny, ale **dzieciństwo krytyczne** (4 sytuacje); nerwica jest wyuczona |
 
 > Zapamiętaj: w ujęciach uczeniowych osobowość jest **wyuczona**. Skinner: patrzymy tylko na zachowanie i jego konsekwencje. Dollard i Miller: liczą się też **popędy i procesy wewnętrzne** (myśli, słowa) – tłumaczą pojęcia Freuda językiem uczenia się.
-> Skojarzenia: P-W-R-N – „**P**ani **W**anda **R**obi **N**aleśniki” (Popęd, Wskazówka, Reakcja, Nagroda). Sytuacje krytyczne: „**K**ot **C**zysty **S**ię **G**niewa” (Karmienie, Czystość, Seks, Gniew).
+> Skojarzenia: P-R-S-W – „**P**ani **R**enata **S**maży **W**afle” (Popęd, Reakcja, Sygnał, Wzmocnienie – kolejność z lektury). Sytuacje krytyczne: „**K**ot **C**zysty **S**ię **G**niewa” (Karmienie, Czystość, Seks, Gniew).
 
 ## Klasyczny behawioryzm (Pawłow, Watson, Thorndike, Skinner)
 **1. Osobowość**
@@ -696,47 +696,76 @@ Schemat: **1. osobowość (i jej „jednostka”) → 2. jak działa (motyw / dy
 > Uwaga na egzaminie! **Wzmocnienie negatywne to NIE kara.** Wzmocnienie zawsze **zwiększa** zachowanie, „negatywne” znaczy tylko, że coś **odbieramy** (np. wyłączenie budzika wzmacnia wstawanie).
 
 ## Dollard i Miller
-Teoria bodźca–reakcji łącząca teorię uczenia się **Hulla** z pojęciami **Freuda** i wpływem kultury. Książki: *Frustracja i agresja* (**1939**), *Uczenie się społeczne i naśladownictwo* (**1941**), *Osobowość i psychoterapia* (**1950**).
+Teoria bodźca–reakcji: teoria uczenia się **Hulla** + pojęcia **Freuda** + kultura. Numery stron = *Osobowość i psychoterapia* (1969), rozdz. III–V, **s. 32–92** (lektura obowiązkowa). Lektura używa słów **sygnał** (nie „wskazówka”) i **wzmocnienie / nagroda**.
 
 **1. Osobowość**
-- Osobowość to **zespół wrodzonych i wyuczonych nawyków**; jako jednostki **S–O–R** mają charakter **dynamiczno-kognitywno-behawioralny**. Osobowość jest wynikiem interakcji bodźców zewnętrznych i reakcji wewnętrznych.
-- **Nawyk** – wyuczone powiązanie bodźca (wskazówki) z reakcją; główne pojęcie strukturalne teorii.
-- **Wyposażenie wrodzone**: odruchy, **wrodzona hierarchia reakcji** i **popędy pierwotne**.
-- **Popędy pierwotne** – biologiczne (głód, pragnienie, ból, seks). **Popędy wtórne** – nabyte, pośrednio służą zaspokajaniu pierwotnych; najważniejszy to **lęk (strach)** – „popęd wyuczony” (Miller).
+- **„Zachowanie ludzkie jest wyuczone”** – także lęk, poczucie winy, wstyd, symptomy i racjonalizacje. Nerwica to ich skrajna forma, a psychoterapia stwarza warunki, w których pacjent uczy się zachowań bardziej przystosowawczych i oducza neurotycznych (s. 32).
+- Osobowość to **zespół wrodzonych i wyuczonych nawyków** (jednostki S–O–R). **Nawyk** = wyuczony związek **sygnał–reakcja**; „wzmocnienie związku sygnał–reakcja stanowi **istotę procesów uczenia się**” (s. 36).
+- **Wyposażenie wrodzone**: popędy pierwotne i **początkowa hierarchia reakcji** (s. 41). Noworodek ma tylko popędy pierwotne (głód, pragnienie, ból, zimno); motywów dorosłego (pieniądze, ambicja, lęki, poczucie winy) uczy się w **socjalizacji** (s. 64).
+- **Różnice indywidualne**: każdy wyuczył się innych motywów i wartości, więc nie ma dwóch jednakowych ludzi. **„Siła ego”** to zdolność społecznie wyuczonych popędów do konkurowania z pierwotnymi (s. 65).
 
-**2. Jak działa? Cztery podstawy uczenia się**
-„Aby się czegoś nauczyć, trzeba czegoś **chcieć**, coś **zauważyć**, coś **zrobić** i coś **dostać**.”
+**2. Jak działa? Cztery czynniki uczenia się (rozdz. III)**
+Kolejność z lektury: **popęd, reakcja, sygnał, wzmocnienie** – w przybliżeniu motywacja, działanie/myślenie, bodziec, nagroda (s. 33). Eksperyment (Miller i Dollard, 1941): **sześcioletnia dziewczynka szuka cukierka** pod książką – w 1. próbie 210 s (37. książka), w 10. próbie już 2 s; błędy są stopniowo eliminowane (s. 34–35).
 
-| Element | Co to jest | Przykład |
+| Czynnik | Co mówi lektura | W eksperymencie |
 |---|---|---|
-| **Popęd** (chcieć) | silny bodziec, który pobudza do działania; pierwotny albo wtórny | głód |
-| **Wskazówka** (zauważyć) | bodziec, który wyznacza, kiedy, gdzie i jak zareagować | szyld piekarni |
-| **Reakcja** (zrobić) | zachowanie wybrane z hierarchii reakcji | wejście i kupno bułki |
-| **Nagroda** (dostać) | **redukcja popędu**, która wzmacnia związek wskazówka–reakcja | najedzenie się |
+| **Popęd** | „silne bodźce, które popychają do działania”; każdy bodziec może nim być, jeśli jest dość silny (s. 36). **Pierwotne** (wrodzone): ból, głód, pragnienie, zmęczenie, zimno, seks – siła zależy od deprywacji. **Wtórne** (wyuczone) powstają na podłożu pierwotnych i są ich „fasadą” (s. 37–38) | ochota na cukierek, chęć wykonania polecenia |
+| **Sygnał** | decyduje, „**kiedy** jednostka zareaguje, **gdzie** zareaguje i **jaką** wykona reakcję” (s. 38). Każdy bodziec ma **wartość popędu** (zależną od siły) i **wartość sygnału** (zależną od odrębności) (s. 40) | kolor, rozmiar, położenie książki |
+| **Reakcja** | zanim zostanie nagrodzona, musi **wystąpić** (s. 41); uczenie to też aranżowanie sytuacji, żeby padła pierwsza poprawna reakcja | wyjmowanie książek |
+| **Wzmocnienie** | zdarzenie, które zwiększa tendencję do powtórzenia reakcji (s. 44). Prawo: „**szybka redukcja siły intensywnego popędu działa jako wzmocnienie**” (s. 45) | znalezienie i zjedzenie cukierka |
 
-- **Hierarchia reakcji** – na daną wskazówkę mamy reakcje bardziej i mniej prawdopodobne; uczenie się zmienia tę kolejność (hierarchia **początkowa → wynikowa**).
-- **Wyższe procesy psychiczne**: myśli i słowa działają jak **reakcje pośredniczące**, które same stają się wskazówkami → nazywanie, rozumowanie, planowanie. Język pozwala uogólniać i różnicować.
-- **Frustracja–agresja (1939)**: frustracja (zablokowanie celu) prowadzi do agresji; agresja może zostać **przemieszczona** na inny obiekt – w języku uczenia się to **generalizacja bodźca**.
-- **Naśladownictwo (1941)** też jest uczeniem się: ktoś inny staje się wskazówką, a naśladowanie zostaje nagrodzone.
+- **Popęd a wzmocnienie** (s. 45): 1) szybka redukcja popędu = wzmocnienie, 2) **bez popędu wzmocnienie jest niemożliwe**, 3) po wzmocnieniu popęd słabnie – proces **samoograniczający** (najedzona dziewczynka przestaje szukać).
+- **Hierarchia reakcji**: reakcje uporządkowane według prawdopodobieństwa. Zasada „**temu, kto już ma, dać jeszcze więcej**” – częstą reakcję łatwo nagrodzić (s. 41). **Reakcja dominująca** – najbardziej prawdopodobna. Uczenie zmienia kolejność → **hierarchia wyuczona (resultant)**. Hierarchia ustalona przez dziedziczność to **hierarchia wrodzona** (dziecku łatwiej krzyczeć na widok łyżki z lekarstwem niż powiedzieć „Nie”) (s. 42).
+- Nowość uczenia się = **nowy związek sygnał–reakcja** albo nowa kombinacja starych reakcji (s. 42).
+- **Wywołanie pierwszej poprawnej reakcji** (s. 42–43): **próby i błędy** (najmniej skuteczne; zachowanie jest raczej **zmienne niż przypadkowe**), **język** (wskazówka słowna), **naśladowanie**, **kultura** jako „skarbnica rozwiązań” (Ford), **wgląd** i warunkowanie (dziecko cofa rękę od piecyka, zanim się oparzy).
+- **Sygnały**: zmiany, różnice i ich kierunek też są sygnałami; reakcja na kombinację bodźców to **strukturalizacja (patterning)**; samo zwracanie uwagi na sygnał jest reakcją wyuczoną (s. 40–41).
+- **Wyższe procesy psychiczne**: myśli to **reakcje sygnałotwórcze**, pośredniczące między sygnałami zewnętrznymi a jawną reakcją (s. 47). Wgląd, warunkowanie, naśladowanie i instrukcje słowne to różne sposoby wytwarzania reakcji, które potem podlegają tym samym prawom (s. 44).
+- **Wzmocnienie może być nieświadome**: **Greenspoon (1950)** mówił „mhm-hmm” po rzeczownikach w liczbie mnogiej – badani mówili ich coraz więcej, nie wiedząc dlaczego (s. 48).
+- **Dylemat skłaniający do uczenia się**: nowe uczenie zachodzi dopiero wtedy, gdy **dawne reakcje przestają być nagradzane** (s. 49–50) – dziecko, którego gesty matka zawsze rozumiała, nie uczyło się mówić.
+- Przykład: chłopiec nie nauczył się grać na fortepianie – mama krytykowała każdą próbę, a jedyną nagradzaną reakcją było **odejście od fortepianu** (ulga, redukcja lęku), więc to ono się utrwaliło (s. 48–49).
 
-**2. Jak działa? Model konfliktu**
-- **dążenie–dążenie** – wybór między dwoma atrakcyjnymi celami (zwykle łatwy),
-- **unikanie–unikanie** – dwie nieprzyjemne opcje, chęć ucieczki od obu,
-- **dążenie–unikanie** – jeden cel jednocześnie przyciąga i odpycha,
-- **podwójne dążenie–unikanie** – dwa cele, a każdy ma plusy i minusy.
-- **Gradienty**: im bliżej celu, tym silniejsze i dążenie, i unikanie, ale **gradient unikania jest bardziej stromy**. Daleko od celu przeważa dążenie, blisko – unikanie; w punkcie przecięcia pojawia się **wahanie i lęk** (np. tydzień wcześniej „jasne, pójdę zapytać o poprawę!”, a pod drzwiami gabinetu – zawracasz).
+**2. Jak działa? Ważne szczegóły uczenia się (rozdz. IV)**
+- **Wygaszanie**: reakcja powtarzana **bez wzmocnienia** stopniowo słabnie (s. 52). **To nie zapominanie**: zapominanie zachodzi, gdy reakcji się **nie wykonuje**, a wygaszanie – gdy się ją **wykonuje bez nagrody** (s. 53). **Opór na wygaszanie** rośnie przy większej liczbie nagród, silniejszym popędzie, większej nagrodzie i **częściowym wzmacnianiu** (rybak) (s. 53–54).
+- **„Samo powtórzenie nie wzmacnia nawyku”**, a nienagradzane powtórzenie go osłabia (s. 54). Przykłady **autonomii funkcjonalnej Allporta** to według autorów albo bardzo silne nawyki, albo nawyki podtrzymywane przez nierozpoznany popęd i nagrodę.
+- **Samorzutne odnowienie**: wygaszanie **hamuje** nawyk, a nie niszczy go, więc po przerwie wraca (s. 54–55). Nawyki wyeliminowane karą odnawiają się rzadziej niż wygaszone.
+- **Generalizacja**: skutki uczenia przenoszą się na podobne sytuacje; im mniej podobne, tym słabiej (**gradient generalizacji**). Dziecko pogryzione przez psa boi się innych zwierząt; pacjent generalizuje reakcje na terapeutę (s. 55–56). Silniejszy popęd podnosi cały gradient (s. 57).
+- **Różnicowanie**: nagradzamy reakcję na jeden układ sygnałów, a na podobny nie – koryguje nieprzystosowawcze generalizacje (s. 57).
+- **Gradient wzmocnienia**: nagroda **natychmiastowa** działa silniej niż opóźniona, a reakcje bliższe nagrodzie są silniej wzmacniane – głodny przyspiesza na ostatnim zakręcie przed domem, wybieramy krótszą drogę (s. 57–59). Bodźce symboliczne (pieniądze) i cele pośrednie wypełniają lukę do nagrody.
+- **Reakcja antycypacyjna**: reakcje bliskie nagrodzie przesuwają się na początek szeregu; może być przystosowawcza (cofnięcie ręki przed dotknięciem pieca, ślinienie na widok befsztyka) albo nie (strzelec mruga, zanim strzeli); jest **mimowolna** (s. 60–61). Szereg reakcji się **skraca**, a jedzenie to **reakcja spełniająca**.
+- Reakcje antycypacyjne służą też **porozumiewaniu się** (dziecko wyciąga ręce, gdy chce być wzięte na ręce; dwa szczury zastępują walkę gestami). Myśli i słowa łatwo stają się antycypacyjne, bo nie kolidują z innymi czynnościami (s. 62–63).
+
+**2. Jak działa? Wyuczone popędy i wzmocnienia (rozdz. V)**
+- **Strach to popęd wyuczony**. **Miller (1948)**: szczury dostawały wstrząs w **białym pomieszczeniu**, potem bały się go już bez wstrząsu; uczyły się nowych reakcji (obracanie kółka, naciskanie dźwigni), bo **ucieczka redukowała strach**. Gdy kółko przestało otwierać drzwi, ta reakcja wygasała i wracały próby i błędy (s. 65–69).
+- Strach podlega tym samym prawom co reakcje zewnętrzne i ma właściwości **i popędu, i sygnału** (s. 70). Jego fizjologiczne podłoże jest wrodzone, więc lepiej mówić, że strach jest **„wyuczalny”**, a reagowanie strachem na sygnał wcześniej neutralny to popęd wyuczony. Ludzie różnią się siłą strachu i łatwością jego wywołania (s. 70–71).
+- Strach jest **wyuczony**, bo wiąże się z wcześniej neutralnymi sygnałami; jest **popędem**, bo motywuje, a jego **redukcja działa jako wzmocnienie** (s. 69). **Lęk** to strach, którego źródło jest **niejasne** albo zaciemnione przez wyparcie (s. 65).
+- Strach bywa **silniejszy niż głód** i gra główną rolę w konfliktach prowadzących do nerwic (s. 72). Jest **bardzo odporny na wygaszanie** (szczury naciskały dźwignię setki razy bez wstrząsu), zwłaszcza gdy pacjent nie pamięta sytuacji, w której się go nauczył (s. 72–74).
+- **Kara działa przez strach**: myśl o karanej czynności wywołuje strach, a przerwanie czynności go redukuje i jest wzmacniane. **Kara opóźniona działa słabiej**. Gdy redukcja strachu wzmacnia samą karaną czynność, kara może ją nawet **nasilić** (s. 76).
+- **Funkcje strachu** (s. 77–78): 1) wywołuje **wrodzone reakcje** (znieruchomienie albo ucieczka); 2) jako **sygnał** wywołuje reakcje wyuczone wcześniej; 3) jako **popęd** motywuje próby i błędy, a jego redukcja wzmacnia nową reakcję; 4) gdy karane są reakcje redukujące inne popędy (agresję, seks), strach je **hamuje** → konflikt → objawy nerwicowe. Lekki strach może poprawiać sprawność (ok. 50% lotników).
+- **Reakcje hamujące strach** – reakcja z nim niezgodna, np. jedzenie: **Jones (1924)** przybliżała królika stopniowo do jedzącego dziecka i strach zniknął (s. 74).
+- **Strach jako sygnał**: słowo „boję się” przenosi reakcje na nowe sytuacje – **generalizacja wtórna (wyuczona)** (s. 75).
+- **Definicje** (s. 78): gdy neutralne sygnały zaczynają pełnić rolę popędów pierwotnych, mają wartość **popędu wyuczonego**; gdy pełnią rolę nagród pierwotnych – są **wtórnym wzmocnieniem (wyuczoną nagrodą)**. **Żetony** (Wolfe 1936, Cowles 1937) mają wartość, bo były powiązane z jedzeniem; nagrody wyuczone bez nagrody pierwotnej **wygasają** (s. 79).
+- **Nagrody wtórne**: pieniądze, żetony (szympansy wymieniające żetony na winogrona), **obietnice** – mechanizm „**nadziei**” (s. 80). Ucząc się wartości pieniędzy, dziecko zyskuje też nowy popęd: potrzebę pieniędzy (s. 81). **Gniew** to kolejny popęd „wyuczalny”.
+- **Uczenie modyfikuje gniew w 3 punktach**: z jakimi sygnałami łączy się gniew, jakie reakcje agresji są dozwolone w danej sytuacji i jak bodziec gniewu łączy się z agresją. **Frustracja** to zablokowanie celu przez innego osobnika albo przeszkodę fizyczną. Miejsce agresji w hierarchii reakcji zależy od wcześniejszych wzmocnień (u **Kwoma** dzieci atakują młodszych, a starszym ustępują), a redukcja gniewu działa jak wzmocnienie (s. 82–83).
+- **Inne popędy wyuczalne**: mdłości i obrzydzenie, podniecenie seksualne (podłoże fetyszyzmu, kulturowe standardy atrakcyjności), **apetyty** (uczymy się lubić piwo czy oliwki), częściowo wyuczona potrzeba ssania (s. 84–85).
+- Popędy wyuczone są często **ukierunkowane na cel** (dziecko czuje niepokój z dala od matki i uczy się do niej wracać); sygnałem jest **różnica** między stanem aktualnym a pożądanym (np. stan konta) (s. 85–86).
+- **Wrodzone a wyuczone** (s. 86–87): popędy **wyuczone słabną bez wzmocnienia** (pracownik, którego nikt nie nagradza, traci ambicję), a nagrody je wzmacniają (awans); **wrodzone nie wygasają**. Liczba popędów wyuczonych jest **praktycznie nieskończona**, a ten sam sygnał może wzbudzać różne (gniew i strach w różnych proporcjach).
+- **Strach jako składnik wielu popędów społecznych**: poczucia winy, wstydu, dumy, konformizmu, pragnienia pieniędzy i władzy – strach przed utratą miłości, krytyką, degradacją, porażką i nędzą (s. 88).
+- **Wyuczona towarzyskość**: niemowlę ma w 1. roku życia **ponad 2000 okazji** do skojarzenia matki z zaspokojeniem głodu, więc obecność ludzi staje się nagrodą; owce karmione butelką nie mają popędu stadnego (s. 90). Wyuczone są też potrzeba uznania, naśladowanie osób z prestiżem, duma, uczciwość (bywa sytuacyjna) (s. 90–91). **Sygnały względne** („awans”) motywują ruchliwość społeczną (s. 88–89).
+
+**2. Jak działa? Model konfliktu (spoza s. 32–92)**
+- **dążenie–dążenie** (dwa atrakcyjne cele, zwykle łatwy wybór), **unikanie–unikanie** (dwie nieprzyjemne opcje), **dążenie–unikanie** (jeden cel przyciąga i odpycha), **podwójne dążenie–unikanie** (dwa cele, każdy ma plusy i minusy).
+- **Gradienty**: im bliżej celu, tym silniejsze obie tendencje, ale **gradient unikania jest bardziej stromy** – daleko przeważa dążenie, pod drzwiami gabinetu przeważa ucieczka; w punkcie przecięcia – wahanie i lęk.
 
 **3. Rozwój: stały czy zmienny?**
-- **Zmienny**: rozwój to uczenie się (nawyki, warunkowanie, frustracja, konflikty), ale **nawyki z dzieciństwa są najsilniejsze** i najtrudniej je zmienić.
-- **Cztery krytyczne sytuacje uczenia się w dzieciństwie** (rodzice mogą wywołać konflikty, karząc próby redukcji popędu):
+- **Zmienny**: osobowość rozwija się przez uczenie się nawyków, popędów i nagród; są one tak trwałe i jednolite, **jak trwałe są warunki uczenia** (s. 89), więc różnią się między **kulturami i klasami społecznymi** (s. 91).
+- Ale **wczesne doświadczenia są bardzo ważne** (tysiące skojarzeń z matką, wyuczone lęki trudne do wygaszenia). Według dalszych rozdziałów krytyczne są **4 sytuacje**:
   - **karmienie** – dziecko zostawione z głodem może się uczyć apatii i lęku,
   - **trening czystości** – zbyt szybki lub surowy uczy lęku i unikania,
   - **wczesne wychowanie seksualne** – kara wiąże seksualność z lękiem,
   - **gniew i lęk** – karanie złości uczy, że złość jest groźna.
-- **Nerwica** – wynik silnego, **nieświadomego konfliktu** wyuczonego w dzieciństwie. **Nieświadome** jest to, czego człowiek **nie nazwał** (nigdy nie zwerbalizował) albo co tłumi. **Objawy** to wyuczone reakcje unikania, które **obniżają lęk**, więc są nagradzane i się utrwalają.
-- **Psychoterapia** też jest uczeniem się: nazwać to, co nienazwane, odróżnić przeszłość od teraźniejszości, wygasić lęk w bezpiecznych warunkach.
+- **Nerwica** to wyuczony, **nieświadomy konflikt**, w którym główną rolę gra **strach**, a **objawy redukują lęk** (więc są nagradzane i się utrwalają). Nieświadome jest to, czego człowiek nie nazwał albo co tłumi. **Terapia** to również uczenie się: wygaszanie strachu, różnicowanie bodźców, nazwanie tego, co nienazwane (s. 72, 75).
 
-> Uwaga na egzaminie! **Skinner** nie zagląda do wnętrza i nie potrzebuje popędów. **Dollard i Miller** mają popędy (także wyuczony lęk), procesy pośredniczące i nieświadomość, bo „tłumaczą Freuda na język Hulla”: **przemieszczenie = generalizacja**, a **wyparcie = wyuczone „niemyślenie”**.
+> Uwaga na egzaminie! Pułapki z lektury: **wygaszanie ≠ zapominanie**; **samo powtórzenie nie wzmacnia** nawyku; **bez popędu nie ma wzmocnienia**; **kara działa przez strach**; strach jest **jednocześnie wyuczony i jest popędem**. Różnica ze Skinnerem: Dollard i Miller mają **popędy**, myśli jako **reakcje sygnałotwórcze** i **nieświadomość** („tłumaczą Freuda na język Hulla”: przemieszczenie = generalizacja, wyparcie = wyuczone „niemyślenie”).
 
 ## Albert Bandura – teoria społeczno-poznawcza
 **Uczenie się przez obserwację (modelowanie)** – 4 procesy:
@@ -753,13 +782,13 @@ Teoria bodźca–reakcji łącząca teorię uczenia się **Hulla** z pojęciami 
 
 **Determinizm wzajemny** – osoba, środowisko i zachowanie wpływają na siebie nawzajem.
 
-> Na pamięć: Dollard i Miller = popęd, wskazówka, reakcja, nagroda. Bandura = uwaga, przechowywanie, wytwarzanie, motywacja.
+> Na pamięć: Dollard i Miller = popęd, reakcja, sygnał, wzmocnienie. Bandura = uwaga, przechowywanie, wytwarzanie, motywacja.
 `,
       flashcards: [
         ["Osobowość w behawioryzmie", "Zespół wzorców zachowania nabytych przez uczenie się (warunkowanie)."],
         ["Warunkowanie klasyczne vs instrumentalne", "Klasyczne: bodziec neutralny wywołuje reakcję odruchową. Instrumentalne: zachowania nagradzane się utrwalają, karane zanikają."],
         ["Czym jest osobowość dla Dollarda i Millera?", "Konfiguracją nawyków nabytych w procesie uczenia się."],
-        ["4 elementy uczenia się wg Dollarda i Millera", "Popęd, sygnał (wskazówka), reakcja, wzmocnienie."],
+        ["4 czynniki uczenia się wg Dollarda i Millera", "Popęd, reakcja, sygnał, wzmocnienie (kolejność z lektury, s. 33) – motywacja, działanie, bodziec, nagroda."],
         ["Popędy pierwotne vs wtórne", "Pierwotne – fizjologiczne (ból, głód). Wtórne – wyuczone (np. lęk)."],
         ["Typy konfliktów (Dollard i Miller)", "Dążenie–dążenie, unikanie–unikanie, dążenie–unikanie, podwójne dążenie–unikanie."],
         ["4 procesy modelowania (Bandura)", "Uwagi, przechowywania, wytwarzania (odtwarzania), motywacyjne."],
@@ -789,18 +818,49 @@ Teoria bodźca–reakcji łącząca teorię uczenia się **Hulla** z pojęciami 
         ["Systematyczna desensytyzacja", "Metoda Wolpego – terapia behawioralna wygaszająca lęk."],
         ["Źródła teorii Dollarda i Millera", "Teoria uczenia się Hulla + pojęcia Freuda + wpływ kultury."],
         ["Książki Dollarda i Millera", "Frustracja i agresja (1939), Uczenie się społeczne i naśladownictwo (1941), Osobowość i psychoterapia (1950)."],
-        ["Nawyk wg Dollarda i Millera", "Wyuczone powiązanie bodźca (wskazówki) z reakcją – główne pojęcie strukturalne."],
-        ["Wyposażenie wrodzone (Dollard i Miller)", "Odruchy, wrodzona hierarchia reakcji i popędy pierwotne."],
+        ["Nawyk wg Dollarda i Millera", "Wyuczony związek sygnał–reakcja; jego wzmocnienie to istota uczenia się (s. 36)."],
+        ["Wyposażenie wrodzone (Dollard i Miller)", "Popędy pierwotne i początkowa hierarchia reakcji (s. 41)."],
         ["Najważniejszy popęd wtórny", "Lęk (strach) – popęd wyuczony (Miller)."],
-        ["Hierarchia reakcji", "Reakcje bardziej i mniej prawdopodobne na daną wskazówkę; uczenie się zmienia hierarchię początkową w wynikową."],
-        ["Reakcje pośredniczące", "Myśli i słowa, które same stają się wskazówkami – umożliwiają nazywanie, rozumowanie i planowanie."],
+        ["Hierarchia reakcji", "Reakcje uporządkowane według prawdopodobieństwa; uczenie się zmienia hierarchię początkową w wyuczoną (resultant)."],
+        ["Reakcje sygnałotwórcze (pośredniczące)", "Myśli i słowa, które pośredniczą między sygnałami zewnętrznymi a jawną reakcją i same stają się sygnałami (s. 47)."],
         ["Hipoteza frustracja–agresja (1939)", "Zablokowanie celu prowadzi do agresji; przemieszczenie agresji = generalizacja bodźca."],
         ["Gradienty dążenia i unikania", "Blisko celu oba rosną, ale gradient unikania jest bardziej stromy – blisko celu przeważa unikanie."],
         ["4 krytyczne sytuacje uczenia się w dzieciństwie", "Karmienie, trening czystości, wczesne wychowanie seksualne, gniew i lęk."],
         ["Nerwica wg Dollarda i Millera", "Wynik silnego, nieświadomego konfliktu wyuczonego w dzieciństwie; objawy to reakcje unikania obniżające lęk."],
         ["Nieświadomość wg Dollarda i Millera", "To, czego człowiek nie nazwał (nie zwerbalizował) albo co tłumi."],
         ["Psychoterapia wg Dollarda i Millera", "Uczenie się: nazwać nienazwane, odróżnić przeszłość od teraźniejszości, wygasić lęk."],
-        ["Wyparcie i przemieszczenie u Dollarda i Millera", "Wyparcie = wyuczone „niemyślenie”; przemieszczenie = generalizacja bodźca."]
+        ["Wyparcie i przemieszczenie u Dollarda i Millera", "Wyparcie = wyuczone „niemyślenie”; przemieszczenie = generalizacja bodźca."],
+        ["„Zachowanie ludzkie jest wyuczone” (Dollard i Miller)", "Także lęk, poczucie winy, wstyd, symptomy i racjonalizacje; psychoterapia to warunki do uczenia się zachowań przystosowawczych (s. 32)."],
+        ["Eksperyment z cukierkiem (Miller i Dollard, 1941)", "Dziewczynka szuka cukierka pod książką: 210 s w 1. próbie, 2 s w 10. – błędy stopniowo eliminowane."],
+        ["Sygnał wg Dollarda i Millera", "Decyduje, kiedy jednostka zareaguje, gdzie zareaguje i jaką wykona reakcję (s. 38)."],
+        ["Wartość popędu vs wartość sygnału bodźca", "Wartość popędu zależy od siły bodźca, wartość sygnału – od jego odrębności (s. 40)."],
+        ["Prawo wzmocnienia (Dollard i Miller)", "„Szybka redukcja siły intensywnego popędu działa jako wzmocnienie” (s. 45)."],
+        ["Dlaczego proces wzmacniania jest samoograniczający?", "Po wzmocnieniu popęd słabnie, a bez popędu wzmocnienie jest niemożliwe – najedzona dziewczynka przestaje szukać."],
+        ["Reakcja dominująca", "Najbardziej prawdopodobna reakcja w hierarchii reakcji."],
+        ["Hierarchia wrodzona", "Kolejność reakcji ustalona przez dziedziczność – dziecku łatwiej krzyczeć na widok łyżki z lekarstwem niż powiedzieć „Nie”."],
+        ["Sposoby wywołania pierwszej poprawnej reakcji", "Próby i błędy, język, naśladowanie, kultura jako skarbnica rozwiązań, wgląd i warunkowanie (s. 42–43)."],
+        ["Strukturalizacja (patterning)", "Reagowanie na kombinację bodźców, a nie na pojedynczy bodziec (s. 40–41)."],
+        ["Greenspoon (1950)", "Mówił „mhm-hmm” po rzeczownikach w liczbie mnogiej – badani mówili ich więcej, nie wiedząc dlaczego: wzmocnienie może być nieświadome."],
+        ["Dylemat skłaniający do uczenia się", "Nowe uczenie zachodzi dopiero wtedy, gdy dawne reakcje przestają być nagradzane (s. 49–50)."],
+        ["Wygaszanie vs zapominanie", "Zapominanie – reakcji się nie wykonuje; wygaszanie – reakcję się wykonuje, ale bez nagrody (s. 53)."],
+        ["Co zwiększa opór na wygaszanie?", "Więcej nagród, silniejszy popęd, większa nagroda i częściowe wzmacnianie (rybak) (s. 53–54)."],
+        ["Czy samo powtórzenie wzmacnia nawyk?", "Nie – nienagradzane powtórzenie go osłabia (s. 54)."],
+        ["Samorzutne odnowienie (Dollard i Miller)", "Wygaszanie hamuje nawyk, a nie niszczy go, więc po przerwie wraca (s. 54–55)."],
+        ["Gradient generalizacji", "Im mniej podobna sytuacja, tym słabiej przenoszą się na nią skutki uczenia; silniejszy popęd podnosi cały gradient."],
+        ["Gradient wzmocnienia", "Nagroda natychmiastowa działa silniej niż opóźniona; reakcje bliższe nagrodzie są silniej wzmacniane (s. 57–59)."],
+        ["Reakcja antycypacyjna", "Mimowolne przesunięcie reakcji bliskich nagrodzie na początek szeregu, np. ślinienie na widok befsztyka (s. 60–61)."],
+        ["Eksperyment Millera (1948)", "Szczury dostawały wstrząs w białym pomieszczeniu, potem bały się go bez wstrząsu i uczyły się nowych reakcji (kółko, dźwignia), bo ucieczka redukowała strach."],
+        ["Dlaczego strach jest popędem wyuczonym?", "Wyuczony – wiąże się z wcześniej neutralnymi sygnałami; popęd – motywuje, a jego redukcja działa jako wzmocnienie (s. 69)."],
+        ["Strach a lęk (Dollard i Miller)", "Lęk to strach, którego źródło jest niejasne albo zaciemnione przez wyparcie (s. 65)."],
+        ["Jak działa kara według Dollarda i Millera?", "Przez strach: myśl o karanej czynności wywołuje strach, a przerwanie czynności go redukuje i jest wzmacniane; kara opóźniona działa słabiej (s. 76)."],
+        ["4 funkcje strachu", "Wywołuje wrodzone reakcje; jako sygnał wywołuje reakcje wyuczone; jako popęd motywuje próby i błędy; hamuje inne popędy → konflikt → nerwica (s. 77–78)."],
+        ["Jones (1924)", "Królika stopniowo przybliżano do jedzącego dziecka i strach zniknął – reakcja hamująca strach."],
+        ["Generalizacja wtórna (wyuczona)", "Słowo „boję się” przenosi reakcje strachu na nowe sytuacje (s. 75)."],
+        ["Wtórne wzmocnienie (wyuczona nagroda)", "Neutralny sygnał pełniący rolę nagrody pierwotnej, np. żetony, pieniądze, obietnice (mechanizm nadziei)."],
+        ["Uczenie modyfikuje gniew w 3 punktach", "Z jakimi sygnałami łączy się gniew, jakie reakcje agresji są dozwolone i jak bodziec gniewu łączy się z agresją (s. 82–83)."],
+        ["Popędy wyuczone vs wrodzone", "Wyuczone słabną bez wzmocnienia, a ich liczba jest praktycznie nieskończona; wrodzone nie wygasają (s. 86–87)."],
+        ["Wyuczona towarzyskość", "Niemowlę ma w 1. roku ponad 2000 okazji do skojarzenia matki z zaspokojeniem głodu, więc obecność ludzi staje się nagrodą (s. 90)."],
+        ["Siła ego (Dollard i Miller)", "Zdolność społecznie wyuczonych popędów do konkurowania z popędami pierwotnymi (s. 65)."]
       ],
       pairs: [
         ["Watson", "osobowość = suma wyuczonych nawyków"],
@@ -820,13 +880,21 @@ Teoria bodźca–reakcji łącząca teorię uczenia się **Hulla** z pojęciami 
         ["Wolpe", "systematyczna desensytyzacja"],
         ["Dollard i Miller", "Hull + Freud"],
         ["Popęd wyuczony", "lęk"],
-        ["Nagroda wg Dollarda i Millera", "redukcja popędu"],
+        ["Wzmocnienie wg Dollarda i Millera", "szybka redukcja popędu"],
         ["Reakcje pośredniczące", "myśli i słowa"],
         ["Frustracja–agresja", "1939"],
         ["Przemieszczenie", "generalizacja bodźca"],
         ["Gradient unikania", "bardziej stromy"],
         ["Nerwica", "nieświadomy wyuczony konflikt"],
-        ["Bandura", "modelowanie i self-efficacy"]
+        ["Bandura", "modelowanie i self-efficacy"],
+        ["Greenspoon (1950)", "nieświadome wzmocnienie „mhm-hmm”"],
+        ["Miller (1948)", "szczury i strach w białym pomieszczeniu"],
+        ["Jones (1924)", "królik i jedzące dziecko"],
+        ["Wygaszanie", "reakcja wykonywana bez nagrody"],
+        ["Zapominanie", "reakcja niewykonywana"],
+        ["Reakcja antycypacyjna", "ślinienie na widok befsztyka"],
+        ["Siła ego", "wyuczone popędy kontra pierwotne"],
+        ["Lęk", "strach o niejasnym źródle"]
       ],
       quiz: [
         { q: "Popęd, sygnał, reakcja i wzmocnienie to elementy teorii:", o: ["Bandury", "Dollarda i Millera", "Rottera", "Skinnera"], a: 1, e: "Dollard i Miller połączyli psychoanalizę z teorią uczenia się." },
@@ -842,21 +910,32 @@ Teoria bodźca–reakcji łącząca teorię uczenia się **Hulla** z pojęciami 
         { q: "Powrót wygaszonej reakcji po przerwie to:", o: ["samoistne odnowienie", "generalizacja", "różnicowanie", "kształtowanie"], a: 0, e: "Pojęcie z warunkowania klasycznego." },
         { q: "„Szczęśliwy długopis” na egzamin to według Skinnera przykład:", o: ["zachowania przesądnego", "wzmocnienia wtórnego", "kształtowania", "generalizacji"], a: 0, e: "Przypadkowo wzmocnione zachowanie." },
         { q: "Teoria Dollarda i Millera łączy teorię uczenia się:", o: ["Hulla z pojęciami Freuda", "Skinnera z teorią Junga", "Pawłowa z teorią Adlera", "Bandury z teorią Rogersa"], a: 0, e: "„Tłumaczą Freuda na język Hulla”." },
-        { q: "Nagroda według Dollarda i Millera to:", o: ["redukcja popędu", "każdy przyjemny bodziec", "pochwała społeczna", "wzmocnienie wtórne"], a: 0, e: "Redukcja popędu wzmacnia związek wskazówka–reakcja." },
-        { q: "Dlaczego blisko celu w konflikcie dążenie–unikanie przeważa unikanie?", o: ["gradient unikania jest bardziej stromy niż gradient dążenia", "dążenie słabnie w pobliżu celu", "popęd znika", "wskazówka przestaje działać"], a: 0, e: "W punkcie przecięcia gradientów pojawia się wahanie i lęk." },
+        { q: "Wzmocnienie według Dollarda i Millera to:", o: ["szybka redukcja siły intensywnego popędu", "każdy przyjemny bodziec", "pochwała społeczna", "samo powtórzenie reakcji"], a: 0, e: "Redukcja popędu wzmacnia związek sygnał–reakcja (s. 45)." },
+        { q: "Dlaczego blisko celu w konflikcie dążenie–unikanie przeważa unikanie?", o: ["gradient unikania jest bardziej stromy niż gradient dążenia", "dążenie słabnie w pobliżu celu", "popęd znika", "sygnał przestaje działać"], a: 0, e: "W punkcie przecięcia gradientów pojawia się wahanie i lęk." },
         { q: "Która sytuacja NIE należy do 4 krytycznych sytuacji uczenia się w dzieciństwie?", o: ["nauka czytania", "karmienie", "trening czystości", "gniew i lęk"], a: 0, e: "Cztery: karmienie, czystość, wczesne wychowanie seksualne, gniew i lęk." },
         { q: "Przemieszczenie agresji w języku Dollarda i Millera to:", o: ["generalizacja bodźca", "wygaszanie", "redukcja popędu", "reakcja pośrednicząca"], a: 0, e: "Hipoteza frustracja–agresja (1939)." },
-        { q: "Nieświadome jest według Dollarda i Millera to, co:", o: ["nie zostało nazwane (zwerbalizowane) albo jest tłumione", "jest biologiczne", "pochodzi z nieświadomości zbiorowej", "jest wzmacniane ciągle"], a: 0, e: "Wyparcie = wyuczone „niemyślenie”." }
+        { q: "Nieświadome jest według Dollarda i Millera to, co:", o: ["nie zostało nazwane (zwerbalizowane) albo jest tłumione", "jest biologiczne", "pochodzi z nieświadomości zbiorowej", "jest wzmacniane ciągle"], a: 0, e: "Wyparcie = wyuczone „niemyślenie”." },
+        { q: "Kolejność czterech czynników uczenia się w lekturze Dollarda i Millera to:", o: ["popęd, reakcja, sygnał, wzmocnienie", "sygnał, popęd, reakcja, nagroda", "reakcja, bodziec, popęd, kara", "popęd, nagroda, reakcja, sygnał"], a: 0, e: "S. 33 – w przybliżeniu motywacja, działanie, bodziec, nagroda." },
+        { q: "Wygaszanie różni się od zapominania tym, że:", o: ["przy wygaszaniu reakcja jest wykonywana bez nagrody, a przy zapominaniu nie jest wykonywana", "wygaszanie jest trwałe, a zapominanie nie", "wygaszanie dotyczy tylko zwierząt", "nie ma między nimi różnicy"], a: 0, e: "S. 53; wygaszony nawyk może samorzutnie odnowić się po przerwie." },
+        { q: "Co według Dollarda i Millera dzieje się z nawykiem przy samym powtarzaniu bez nagrody?", o: ["słabnie", "wzmacnia się", "nie zmienia się", "staje się autonomiczny"], a: 0, e: "„Samo powtórzenie nie wzmacnia nawyku” (s. 54)." },
+        { q: "Eksperyment Millera (1948) ze szczurami w białym pomieszczeniu pokazał, że:", o: ["strach jest popędem wyuczonym, a jego redukcja wzmacnia nowe reakcje", "szczury nie uczą się po wstrząsie", "kara zawsze wygasza zachowanie", "głód jest silniejszy niż strach"], a: 0, e: "Szczury uczyły się obracać kółko i naciskać dźwignię, bo ucieczka redukowała strach." },
+        { q: "Lęk według Dollarda i Millera to:", o: ["strach o niejasnym źródle albo zaciemnionym przez wyparcie", "każdy wrodzony popęd", "kara opóźniona", "reakcja antycypacyjna"], a: 0, e: "S. 65." },
+        { q: "Według Dollarda i Millera kara działa:", o: ["przez strach – przerwanie karanej czynności redukuje strach i jest wzmacniane", "bezpośrednio niszcząc nawyk", "tylko wtedy, gdy jest opóźniona", "przez wygaszanie"], a: 0, e: "Kara opóźniona działa słabiej; może nawet nasilić karaną czynność (s. 76)." },
+        { q: "Greenspoon (1950) pokazał, że:", o: ["wzmocnienie może działać nieświadomie", "strach jest wrodzony", "sygnały nie mają znaczenia", "naśladowanie nie jest uczeniem się"], a: 0, e: "„Mhm-hmm” po rzeczownikach w liczbie mnogiej zwiększało ich liczbę." },
+        { q: "Nagroda natychmiastowa działa silniej niż opóźniona – to:", o: ["gradient wzmocnienia", "gradient generalizacji", "gradient unikania", "dylemat uczenia się"], a: 0, e: "Dlatego głodny przyspiesza na ostatnim zakręcie przed domem (s. 57–59)." },
+        { q: "Popędy wyuczone w odróżnieniu od wrodzonych:", o: ["słabną bez wzmocnienia", "nigdy nie wygasają", "są nieliczne", "nie mogą być nagradzane"], a: 0, e: "Pracownik, którego nikt nie nagradza, traci ambicję (s. 86–87)." }
       ],
       open: [
         { q: "Czym różni się warunkowanie klasyczne od instrumentalnego?", a: "W **klasycznym** (Pawłow, Watson) bodziec obojętny łączony z bezwarunkowym staje się **bodźcem warunkowym** i sam wywołuje reakcję (np. dzwonek → ślinienie); organizm reaguje biernie. W **instrumentalnym** (Thorndike, Skinner) organizm sam **emituje zachowanie**, a o jego powtórzeniu decydują **konsekwencje** (wzmocnienie lub kara) – prawo efektu, warunkowanie sprawcze." },
         { q: "Czym różni się wzmocnienie negatywne od kary?", a: "**Wzmocnienie negatywne zwiększa** zachowanie przez **odebranie czegoś przykrego** (wyłączenie budzika wzmacnia wstawanie). **Kara zmniejsza** zachowanie: pozytywna – dodajemy coś przykrego (nagana), negatywna – odbieramy coś miłego (telefon)." },
         { q: "Który rozkład wzmocnień najtrudniej wygasić i dlaczego?", a: "**Rozkład zmienny** (sporadyczny, nieprzewidywalny) – nagroda przychodzi „czasem”, więc brak nagrody nie sygnalizuje, że przestała przychodzić; zachowanie trwa długo (automat do gier, powiadomienia). Rozkład **ciągły** daje szybką naukę, ale i szybkie wygaszanie." },
-        { q: "Co Dollard i Miller rozumieją przez nawyk?", a: "**Nawyk** to wyuczone **powiązanie bodźca (wskazówki) z reakcją** – główne pojęcie strukturalne teorii. Osobowość to **zespół wrodzonych i wyuczonych nawyków** (jednostki S–O–R o charakterze dynamiczno-kognitywno-behawioralnym)." },
-        { q: "Wymień cztery podstawy uczenia się według Dollarda i Millera.", a: "**Popęd** (trzeba czegoś chcieć), **wskazówka** (coś zauważyć), **reakcja** (coś zrobić) i **nagroda** – **redukcja popędu** (coś dostać). Przykład: głód → szyld piekarni → kupno bułki → najedzenie się." },
+        { q: "Co Dollard i Miller rozumieją przez nawyk?", a: "**Nawyk** to wyuczony **związek sygnał–reakcja**; „wzmocnienie związku sygnał–reakcja stanowi **istotę procesów uczenia się**” (s. 36). Osobowość to **zespół wrodzonych i wyuczonych nawyków** (jednostki S–O–R). Wrodzone są tylko popędy pierwotne i początkowa hierarchia reakcji – resztę (motywy, wartości, lęki) człowiek nabywa w socjalizacji, dlatego nie ma dwóch jednakowych ludzi." },
+        { q: "Wymień cztery czynniki uczenia się i powiedz, dlaczego bez popędu nie ma wzmocnienia.", a: "Kolejność z lektury: **popęd** (silny bodziec popychający do działania), **reakcja** (musi wystąpić, zanim zostanie nagrodzona), **sygnał** (decyduje, kiedy, gdzie i jaka reakcja), **wzmocnienie** (s. 33). Eksperyment: dziewczynka szukająca cukierka pod książką – 210 s w 1. próbie, 2 s w 10. **Wzmocnienie to szybka redukcja siły intensywnego popędu** (s. 45), więc **bez popędu nie ma czego redukować** – wzmocnienie jest niemożliwe. Po wzmocnieniu popęd słabnie, więc proces jest samoograniczający (najedzona dziewczynka przestaje szukać)." },
         { q: "Dlaczego blisko celu w konflikcie dążenie–unikanie przeważa unikanie?", a: "Bo **gradient unikania jest bardziej stromy** niż gradient dążenia: im bliżej celu, tym oba są silniejsze, ale unikanie rośnie szybciej. Daleko od celu przeważa dążenie, blisko – unikanie, a w punkcie przecięcia pojawia się **wahanie i lęk**." },
         { q: "Jakie są cztery krytyczne sytuacje uczenia się w dzieciństwie?", a: "**Karmienie** (zostawienie z głodem uczy apatii i lęku), **trening czystości** (zbyt surowy uczy lęku i unikania), **wczesne wychowanie seksualne** (kara wiąże seksualność z lękiem), **gniew i lęk** (karanie złości uczy, że złość jest groźna). Rodzice, karząc próby redukcji popędu, wywołują konflikty." },
-        { q: "Jak Dollard i Miller wyjaśniają nerwicę i nieświadomość?", a: "**Nerwica** to wynik silnego, **nieświadomego konfliktu** wyuczonego w dzieciństwie. **Nieświadome** jest to, czego człowiek **nie nazwał** (nie zwerbalizował) albo co **tłumi** (wyparcie = wyuczone „niemyślenie”). **Objawy** to reakcje unikania, które **obniżają lęk**, więc są nagradzane i utrwalają się. Terapia to uczenie się: nazwanie, różnicowanie przeszłości od teraźniejszości, wygaszenie lęku." }
+        { q: "Jak Dollard i Miller wyjaśniają nerwicę i nieświadomość?", a: "**Nerwica** to wynik silnego, **nieświadomego konfliktu** wyuczonego w dzieciństwie. **Nieświadome** jest to, czego człowiek **nie nazwał** (nie zwerbalizował) albo co **tłumi** (wyparcie = wyuczone „niemyślenie”). **Objawy** to reakcje unikania, które **obniżają lęk**, więc są nagradzane i utrwalają się. Terapia to uczenie się: nazwanie, różnicowanie przeszłości od teraźniejszości, wygaszenie lęku." },
+        { q: "Czym różni się wygaszanie od zapominania?", a: "**Zapominanie** zachodzi, gdy reakcji się **nie wykonuje**; **wygaszanie** – gdy reakcję się **wykonuje, ale bez wzmocnienia**, więc stopniowo słabnie (s. 52–53). Wygaszanie **hamuje** nawyk, a nie niszczy go, dlatego po przerwie może wystąpić **samorzutne odnowienie**. Opór na wygaszanie rośnie przy większej liczbie nagród, silniejszym popędzie, większej nagrodzie i częściowym wzmacnianiu." },
+        { q: "Dlaczego strach jest popędem wyuczonym (eksperyment Millera)?", a: "**Miller (1948)**: szczury dostawały wstrząs w białym pomieszczeniu, a potem bały się go już bez wstrząsu i uczyły się nowych reakcji (obracanie kółka, naciskanie dźwigni), bo **ucieczka redukowała strach**. Strach jest więc **wyuczony** (wiąże się z wcześniej neutralnymi sygnałami) i jest **popędem** (motywuje, a jego **redukcja działa jako wzmocnienie**). Jest bardzo odporny na wygaszanie i gra główną rolę w konfliktach prowadzących do nerwic." }
       ]
     },
     // ------------------------------------------------------------------

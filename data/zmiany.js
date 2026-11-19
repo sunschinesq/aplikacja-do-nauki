@@ -2,6 +2,14 @@
 // Nowy wpis dopisuj NA GÓRZE listy; „v” musi być unikalne i rosnące (data + litera, np. "2026-10-29b").
 window.CHANGELOG = [
   {
+    v: "2026-11-19c",
+    date: "19 listopada 2026",
+    items: [
+      "📚 Dollard i Miller w nowej wersji – według lektury „Osobowość i psychoterapia” (s. 32–92) z numerami stron: 4 czynniki w kolejności z lektury (popęd, reakcja, sygnał, wzmocnienie – „Pani Renata Smaży Wafle”), eksperyment z cukierkiem, wygaszanie ≠ zapominanie, gradienty, reakcja antycypacyjna, strach jako popęd wyuczony (Miller 1948), funkcje strachu, nagrody wtórne i wyuczona towarzyskość.",
+      "🃏 31 nowych fiszek, 8 par, 9 pytań w quizie i 2 nowe pytania otwarte (wygaszanie a zapominanie, strach jako popęd wyuczony)."
+    ]
+  },
+  {
     v: "2026-11-19b",
     date: "19 listopada 2026",
     items: [
